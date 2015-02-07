@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C7CED0561A86B9DA00A4DCC3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CED0551A86B9DA00A4DCC3 /* main.m */; };
+		C7CED0591A86B9DA00A4DCC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CED0581A86B9DA00A4DCC3 /* AppDelegate.m */; };
+		C7CED05C1A86B9DA00A4DCC3 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CED05B1A86B9DA00A4DCC3 /* GameScene.m */; };
+		C7CED05E1A86B9DA00A4DCC3 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C7CED05D1A86B9DA00A4DCC3 /* GameScene.sks */; };
+		C7CED0611A86B9DA00A4DCC3 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CED0601A86B9DA00A4DCC3 /* GameViewController.m */; };
+		C7CED0641A86B9DA00A4DCC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7CED0621A86B9DA00A4DCC3 /* Main.storyboard */; };
+		C7CED0661A86B9DA00A4DCC3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7CED0651A86B9DA00A4DCC3 /* Images.xcassets */; };
+		C7CED0691A86B9DA00A4DCC3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7CED0671A86B9DA00A4DCC3 /* LaunchScreen.xib */; };
+		C7CED0751A86B9DA00A4DCC3 /* The_Write_TrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CED0741A86B9DA00A4DCC3 /* The_Write_TrackTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7CED06F1A86B9DA00A4DCC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7CED0481A86B9DA00A4DCC3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7CED04F1A86B9DA00A4DCC3;
+			remoteInfo = "The Write Track";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C7CED0501A86B9DA00A4DCC3 /* The Write Track.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Write Track.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CED0541A86B9DA00A4DCC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7CED0551A86B9DA00A4DCC3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C7CED0571A86B9DA00A4DCC3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C7CED0581A86B9DA00A4DCC3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C7CED05A1A86B9DA00A4DCC3 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		C7CED05B1A86B9DA00A4DCC3 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		C7CED05D1A86B9DA00A4DCC3 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		C7CED05F1A86B9DA00A4DCC3 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		C7CED0601A86B9DA00A4DCC3 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		C7CED0631A86B9DA00A4DCC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C7CED0651A86B9DA00A4DCC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C7CED0681A86B9DA00A4DCC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		C7CED06E1A86B9DA00A4DCC3 /* The Write TrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Write TrackTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CED0731A86B9DA00A4DCC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7CED0741A86B9DA00A4DCC3 /* The_Write_TrackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = The_Write_TrackTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C7CED04D1A86B9DA00A4DCC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7CED06B1A86B9DA00A4DCC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C7CED0471A86B9DA00A4DCC3 = {
+			isa = PBXGroup;
+			children = (
+				C7CED0521A86B9DA00A4DCC3 /* The Write Track */,
+				C7CED0711A86B9DA00A4DCC3 /* The Write TrackTests */,
+				C7CED0511A86B9DA00A4DCC3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C7CED0511A86B9DA00A4DCC3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7CED0501A86B9DA00A4DCC3 /* The Write Track.app */,
+				C7CED06E1A86B9DA00A4DCC3 /* The Write TrackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C7CED0521A86B9DA00A4DCC3 /* The Write Track */ = {
+			isa = PBXGroup;
+			children = (
+				C7CED0571A86B9DA00A4DCC3 /* AppDelegate.h */,
+				C7CED0581A86B9DA00A4DCC3 /* AppDelegate.m */,
+				C7CED05A1A86B9DA00A4DCC3 /* GameScene.h */,
+				C7CED05B1A86B9DA00A4DCC3 /* GameScene.m */,
+				C7CED05D1A86B9DA00A4DCC3 /* GameScene.sks */,
+				C7CED05F1A86B9DA00A4DCC3 /* GameViewController.h */,
+				C7CED0601A86B9DA00A4DCC3 /* GameViewController.m */,
+				C7CED0621A86B9DA00A4DCC3 /* Main.storyboard */,
+				C7CED0651A86B9DA00A4DCC3 /* Images.xcassets */,
+				C7CED0671A86B9DA00A4DCC3 /* LaunchScreen.xib */,
+				C7CED0531A86B9DA00A4DCC3 /* Supporting Files */,
+			);
+			path = "The Write Track";
+			sourceTree = "<group>";
+		};
+		C7CED0531A86B9DA00A4DCC3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C7CED0541A86B9DA00A4DCC3 /* Info.plist */,
+				C7CED0551A86B9DA00A4DCC3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C7CED0711A86B9DA00A4DCC3 /* The Write TrackTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7CED0741A86B9DA00A4DCC3 /* The_Write_TrackTests.m */,
+				C7CED0721A86B9DA00A4DCC3 /* Supporting Files */,
+			);
+			path = "The Write TrackTests";
+			sourceTree = "<group>";
+		};
+		C7CED0721A86B9DA00A4DCC3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C7CED0731A86B9DA00A4DCC3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C7CED04F1A86B9DA00A4DCC3 /* The Write Track */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "The Write Track" */;
+			buildPhases = (
+				C7CED04C1A86B9DA00A4DCC3 /* Sources */,
+				C7CED04D1A86B9DA00A4DCC3 /* Frameworks */,
+				C7CED04E1A86B9DA00A4DCC3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "The Write Track";
+			productName = "The Write Track";
+			productReference = C7CED0501A86B9DA00A4DCC3 /* The Write Track.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C7CED06D1A86B9DA00A4DCC3 /* The Write TrackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "The Write TrackTests" */;
+			buildPhases = (
+				C7CED06A1A86B9DA00A4DCC3 /* Sources */,
+				C7CED06B1A86B9DA00A4DCC3 /* Frameworks */,
+				C7CED06C1A86B9DA00A4DCC3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */,
+			);
+			name = "The Write TrackTests";
+			productName = "The Write TrackTests";
+			productReference = C7CED06E1A86B9DA00A4DCC3 /* The Write TrackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C7CED0481A86B9DA00A4DCC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Mitch Clutter";
+				TargetAttributes = {
+					C7CED04F1A86B9DA00A4DCC3 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					C7CED06D1A86B9DA00A4DCC3 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = C7CED04F1A86B9DA00A4DCC3;
+					};
+				};
+			};
+			buildConfigurationList = C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "The Write Track" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C7CED0471A86B9DA00A4DCC3;
+			productRefGroup = C7CED0511A86B9DA00A4DCC3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7CED04F1A86B9DA00A4DCC3 /* The Write Track */,
+				C7CED06D1A86B9DA00A4DCC3 /* The Write TrackTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7CED04E1A86B9DA00A4DCC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7CED0691A86B9DA00A4DCC3 /* LaunchScreen.xib in Resources */,
+				C7CED0661A86B9DA00A4DCC3 /* Images.xcassets in Resources */,
+				C7CED05E1A86B9DA00A4DCC3 /* GameScene.sks in Resources */,
+				C7CED0641A86B9DA00A4DCC3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7CED06C1A86B9DA00A4DCC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C7CED04C1A86B9DA00A4DCC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7CED0611A86B9DA00A4DCC3 /* GameViewController.m in Sources */,
+				C7CED0591A86B9DA00A4DCC3 /* AppDelegate.m in Sources */,
+				C7CED05C1A86B9DA00A4DCC3 /* GameScene.m in Sources */,
+				C7CED0561A86B9DA00A4DCC3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7CED06A1A86B9DA00A4DCC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7CED0751A86B9DA00A4DCC3 /* The_Write_TrackTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7CED04F1A86B9DA00A4DCC3 /* The Write Track */;
+			targetProxy = C7CED06F1A86B9DA00A4DCC3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C7CED0621A86B9DA00A4DCC3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7CED0631A86B9DA00A4DCC3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C7CED0671A86B9DA00A4DCC3 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7CED0681A86B9DA00A4DCC3 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C7CED0761A86B9DA00A4DCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C7CED0771A86B9DA00A4DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C7CED0791A86B9DA00A4DCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "The Write Track/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C7CED07A1A86B9DA00A4DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "The Write Track/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		C7CED07C1A86B9DA00A4DCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "The Write TrackTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/The Write Track.app/The Write Track";
+			};
+			name = Debug;
+		};
+		C7CED07D1A86B9DA00A4DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "The Write TrackTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/The Write Track.app/The Write Track";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "The Write Track" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7CED0761A86B9DA00A4DCC3 /* Debug */,
+				C7CED0771A86B9DA00A4DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "The Write Track" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7CED0791A86B9DA00A4DCC3 /* Debug */,
+				C7CED07A1A86B9DA00A4DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "The Write TrackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7CED07C1A86B9DA00A4DCC3 /* Debug */,
+				C7CED07D1A86B9DA00A4DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C7CED0481A86B9DA00A4DCC3 /* Project object */;
+}

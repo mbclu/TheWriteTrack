@@ -1,16 +1,9 @@
 # README #
 
-This README describes some basic aspects of the project and will probably not ever be up to date.
-
-### What is this repository for? ###
+This is a repository for a mobile application being developed as part of the Pillar Technology Speed2App contest.
+The basic idea for the application is that a child will be inspired to learn to write through and interactive and fun environment.
 
 This is a spelling a writing app for children that will allow them to use their finger to make a train travel around a track
 * Version = 1.0
-
-### How do I get set up? ###
-
-* Download Xcode
-
-### Who do I talk to? ###
 
 Author: Mitch Clutter

@@ -11,9 +11,7 @@
 @implementation GameScene
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
-    /* Retrieve scene file path from the application bundle */
     NSString *nodePath = [[NSBundle mainBundle] pathForResource:file ofType:@"sks"];
-    /* Unarchive the file to an SKScene object */
     NSData *data = [NSData dataWithContentsOfFile:nodePath
                                           options:NSDataReadingMappedIfSafe
                                             error:nil];
@@ -29,18 +27,16 @@
     /* Setup your scene here */
     [self setHelloWorldLabel:[SKLabelNode labelNodeWithFontNamed:@"Chalkduster"]];
     
-    [self helloWorldLabel].text = @"Hello, World!";
+    [self helloWorldLabel].text = @"Hello Writers!";
     [self helloWorldLabel].fontSize = 65;
     [self helloWorldLabel].position = CGPointMake(CGRectGetMidX(self.frame),
                                    CGRectGetMidY(self.frame));
-    [self helloWorldLabel].name = @"helloWorldLabel";
     
     [self addChild:[self helloWorldLabel]];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
-    
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         

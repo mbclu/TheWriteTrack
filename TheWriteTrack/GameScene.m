@@ -10,16 +10,32 @@
 
 @implementation GameScene
 
++ (instancetype)unarchiveFromFile:(NSString *)file {
+    /* Retrieve scene file path from the application bundle */
+    NSString *nodePath = [[NSBundle mainBundle] pathForResource:file ofType:@"sks"];
+    /* Unarchive the file to an SKScene object */
+    NSData *data = [NSData dataWithContentsOfFile:nodePath
+                                          options:NSDataReadingMappedIfSafe
+                                            error:nil];
+    NSKeyedUnarchiver *arch = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    [arch setClass:self forClassName:@"SKScene"];
+    GameScene *scene = [arch decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+    [arch finishDecoding];
+    
+    return scene;
+}
+
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
-    SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    [self setHelloWorldLabel:[SKLabelNode labelNodeWithFontNamed:@"Chalkduster"]];
     
-    myLabel.text = @"Hello, World!";
-    myLabel.fontSize = 65;
-    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+    [self helloWorldLabel].text = @"Hello, World!";
+    [self helloWorldLabel].fontSize = 65;
+    [self helloWorldLabel].position = CGPointMake(CGRectGetMidX(self.frame),
                                    CGRectGetMidY(self.frame));
+    [self helloWorldLabel].name = @"helloWorldLabel";
     
-    [self addChild:myLabel];
+    [self addChild:[self helloWorldLabel]];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

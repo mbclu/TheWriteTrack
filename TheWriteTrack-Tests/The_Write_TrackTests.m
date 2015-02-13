@@ -13,11 +13,19 @@
 
 @interface The_Write_TrackTests : XCTestCase
 
+/* Note that the common purpose of these tests was to learn how to access basic/"global" components
+ of the application */
+
+@property id<UIApplicationDelegate> app;
+@property UIViewController* viewController;
+
 @end
 
 @implementation The_Write_TrackTests
 
 - (void)setUp {
+    [self setApp:[UIApplication sharedApplication].delegate];
+    [self setViewController:[[self app] window].rootViewController];
     [super setUp];
 }
 
@@ -26,7 +34,17 @@
 }
 
 - (void)testAppHasANonNilAppDelegate {
-    XCTAssertNotEqual([UIApplication sharedApplication].delegate, (id <UIApplicationDelegate>)nil);
+    XCTAssertNotNil([UIApplication sharedApplication].delegate);
+}
+
+- (void)testAppHasANonNilGameViewController {
+    XCTAssertNotNil([[self app] window].rootViewController);
+}
+
+- (void)testAppHasAVisibleView {
+    XCTAssertTrue([[self viewController] isKindOfClass:[GameViewController class]]);
+    XCTAssertNotNil([self viewController].view);
+    XCTAssertFalse([[self viewController].view isHidden]);
 }
 
 @end

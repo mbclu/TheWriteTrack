@@ -10,4 +10,8 @@
 
 @interface GameScene : SKScene
 
+@property (readwrite) SKLabelNode *helloWorldLabel;
+
++ (instancetype)unarchiveFromFile:(NSString *)file;
+
 @end

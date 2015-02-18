@@ -1,1 +1,5 @@
-OnTheWriteTrack.xcodeproj/xcuserdata/*
+build/
+xcuserdata/ 
+theWriteTrack.spritebuilder/
+theWriteTrack.corona/
+images/raw/

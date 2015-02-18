@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "../TheWriteTrack/GameScene.h"
 #import "../TheWriteTrack/GameViewController.h"
 
-@interface The_Write_TrackTests : XCTestCase
+@interface TheWriteTrackTests : XCTestCase
 
 /* Note that the common purpose of these tests was to learn how to access basic/"global" components
  of the application */
@@ -21,7 +20,7 @@
 
 @end
 
-@implementation The_Write_TrackTests
+@implementation TheWriteTrackTests
 
 - (void)setUp {
     [self setApp:[UIApplication sharedApplication].delegate];

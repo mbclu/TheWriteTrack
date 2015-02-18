@@ -1,13 +1,13 @@
 //
-//  _BaseTrack.m
+//  _BaseTrack.h
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 2/11/15.
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "_BaseTrack.h"
+#import <SpriteKit/SpriteKit.h>
 
-@implementation _BaseTrack
+@interface _BaseTrackScene : SKScene
 
 @end

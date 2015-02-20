@@ -29,7 +29,7 @@
         rockyBackground.name = @"_BaseBackground";
         [self addChild:rockyBackground];
         
-        SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:@"_BaseTrain"];
+        SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:@"MagicTrain"];
         train.position = CGPointMake(self.size.width / 2.0f, self.size.height / 2.0f);
         train.name = @"_BaseTrain";
         [self addChild:train];

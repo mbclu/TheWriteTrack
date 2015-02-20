@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7387B891A97E3DD0086EC94 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C7387B881A97E3DD0086EC94 /* Train.m */; };
+		C7387B8D1A97E4F20086EC94 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7387B8C1A97E4F20086EC94 /* TrainTests.m */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
@@ -31,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C7387B871A97E3DD0086EC94 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = SOURCE_ROOT; };
+		C7387B881A97E3DD0086EC94 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = SOURCE_ROOT; };
+		C7387B8C1A97E4F20086EC94 /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTests.m; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
@@ -69,6 +74,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7387B8A1A97E3FD0086EC94 /* Train */ = {
+			isa = PBXGroup;
+			children = (
+				C7387B8C1A97E4F20086EC94 /* TrainTests.m */,
+			);
+			name = Train;
+			sourceTree = "<group>";
+		};
+		C7387B8B1A97E4060086EC94 /* Train */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Train;
+			sourceTree = "<group>";
+		};
 		C7C4B8A61A8C2494009FA11B /* Tracks */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,14 +129,17 @@
 		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXGroup;
 			children = (
-				C7C4B8A61A8C2494009FA11B /* Tracks */,
-				C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */,
+				C7387B8B1A97E4060086EC94 /* Train */,
 				C7D081791A8A312700DE5ECC /* AppDelegate.h */,
 				C7D081731A8A312700DE5ECC /* AppDelegate.m */,
 				C7D0817C1A8A312700DE5ECC /* GameViewController.h */,
 				C7D0817D1A8A312700DE5ECC /* GameViewController.m */,
 				C7D0817E1A8A312700DE5ECC /* Images.xcassets */,
+				C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */,
 				C7CED0531A86B9DA00A4DCC3 /* Supporting Files */,
+				C7C4B8A61A8C2494009FA11B /* Tracks */,
+				C7387B871A97E3DD0086EC94 /* Train.h */,
+				C7387B881A97E3DD0086EC94 /* Train.m */,
 			);
 			name = TheWriteTrack;
 			path = "The Write Track";
@@ -134,6 +157,7 @@
 		C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C7387B8A1A97E3FD0086EC94 /* Train */,
 				C7C4B8AB1A8C2C87009FA11B /* Track-Tests */,
 				C7D0818C1A8A315A00DE5ECC /* TheWriteTrackTests.m */,
 				C7CED0721A86B9DA00A4DCC3 /* Supporting Files */,
@@ -254,6 +278,7 @@
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
+				C7387B891A97E3DD0086EC94 /* Train.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7387B8D1A97E4F20086EC94 /* TrainTests.m in Sources */,
 				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,
 				C7D0818E1A8A315A00DE5ECC /* TheWriteTrackTests.m in Sources */,
 			);

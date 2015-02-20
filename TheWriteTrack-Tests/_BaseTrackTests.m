@@ -12,7 +12,8 @@
 @interface _BaseTrackTests : XCTestCase
 
 @property SKView* skView;
-@property SKSpriteNode* skNode;
+@property SKSpriteNode* backgroundNode;
+@property SKSpriteNode* trainNode;
 
 @end
 
@@ -22,7 +23,8 @@
 - (void)setUp {
     [super setUp];
     [self setSkView:(SKView*)[UIApplication sharedApplication].delegate.window.rootViewController.view];
-    [self setSkNode:(SKSpriteNode*)[[_skView scene] childNodeWithName:@"_BaseBackground"]];
+    [self setBackgroundNode:(SKSpriteNode*)[[_skView scene] childNodeWithName:@"_BaseBackground"]];
+    [self setTrainNode:(SKSpriteNode*)[[_skView scene] childNodeWithName:@"_BaseTrain"]];
 }
 
 - (void)tearDown {
@@ -38,12 +40,16 @@
 }
 
 - (void)testThatTheBaseSceneIsComprisedOfARockyBackground {
-    XCTAssertNotNil([self skNode]);
+    XCTAssertNotNil([self backgroundNode]);
 }
 
 - (void)testThatTheBaseSceneBackgroundIsAnchoredAtZero {
-    XCTAssertEqual([self skNode].anchorPoint.x, CGPointZero.x, @"Actual x: %f != Expected x: %f", [self skNode].anchorPoint.x, CGPointZero.x);
-    XCTAssertEqual([self skNode].anchorPoint.y, CGPointZero.y, @"Actual y: %f != Expected y: %f", [self skNode].anchorPoint.y, CGPointZero.y);
+    XCTAssertEqual([self backgroundNode].anchorPoint.x, CGPointZero.x, @"Actual x: %f != Expected x: %f", [self backgroundNode].anchorPoint.x, CGPointZero.x);
+    XCTAssertEqual([self backgroundNode].anchorPoint.y, CGPointZero.y, @"Actual y: %f != Expected y: %f", [self backgroundNode].anchorPoint.y, CGPointZero.y);
+}
+
+- (void)testThatTheBaseSceneHasATrainOnIt {
+    XCTAssertNotNil([self trainNode]);
 }
 
 @end

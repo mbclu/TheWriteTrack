@@ -1,5 +1,6 @@
 build/
 xcuserdata/ 
+xcshareddata/
 theWriteTrack.spritebuilder/
 theWriteTrack.corona/
 images/raw/

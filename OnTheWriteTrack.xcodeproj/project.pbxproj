@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C7387B891A97E3DD0086EC94 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C7387B881A97E3DD0086EC94 /* Train.m */; };
 		C7387B8D1A97E4F20086EC94 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7387B8C1A97E4F20086EC94 /* TrainTests.m */; };
+		C7387B8F1A999B370086EC94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7387B8E1A999B370086EC94 /* Main.storyboard */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
@@ -36,6 +37,7 @@
 		C7387B871A97E3DD0086EC94 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = SOURCE_ROOT; };
 		C7387B881A97E3DD0086EC94 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = SOURCE_ROOT; };
 		C7387B8C1A97E4F20086EC94 /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTests.m; sourceTree = SOURCE_ROOT; };
+		C7387B8E1A999B370086EC94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
@@ -129,15 +131,16 @@
 		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXGroup;
 			children = (
-				C7387B8B1A97E4060086EC94 /* Train */,
 				C7D081791A8A312700DE5ECC /* AppDelegate.h */,
 				C7D081731A8A312700DE5ECC /* AppDelegate.m */,
 				C7D0817C1A8A312700DE5ECC /* GameViewController.h */,
 				C7D0817D1A8A312700DE5ECC /* GameViewController.m */,
 				C7D0817E1A8A312700DE5ECC /* Images.xcassets */,
 				C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */,
+				C7387B8E1A999B370086EC94 /* Main.storyboard */,
 				C7CED0531A86B9DA00A4DCC3 /* Supporting Files */,
 				C7C4B8A61A8C2494009FA11B /* Tracks */,
+				C7387B8B1A97E4060086EC94 /* Train */,
 				C7387B871A97E3DD0086EC94 /* Train.h */,
 				C7387B881A97E3DD0086EC94 /* Train.m */,
 			);
@@ -255,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */,
+				C7387B8F1A999B370086EC94 /* Main.storyboard in Resources */,
 				C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */,
 				C7D081901A8A31F000DE5ECC /* Default-568h@2x.png in Resources */,
 			);

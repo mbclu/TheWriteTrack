@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "Train.h"
 
 @interface TrainTests : XCTestCase
 
@@ -23,8 +24,22 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    XCTAssert(YES, @"Pass");
+- (void)testThatTheTrainMovesAt80PointsPerSecond {
+    NSInteger expectedSpeed = 80;
+    Train* theTrain = [[Train alloc] init];
+    NSInteger actualSpeed = [theTrain pointsPerSecond];
+    XCTAssertEqual(actualSpeed, expectedSpeed, @"The train is moving at speed :%ld points per second, when it should be moving at %ld points per second", actualSpeed, expectedSpeed);
+}
+
+- (void)testThatTheTrainCanBeInitializedWithAnImage {
+    XCTAssertNoThrow([[Train alloc] initWithImageNamed:@"_BaseTrain"], @"Initializing the train with an image should not throw an exception");
+}
+
+- (void)testThatWhenInitializedWithAnImageNameTheVelocityIsStill80PointsPerSecond {
+    NSInteger expectedSpeed = 80;
+    Train* theTrain = [[Train alloc] initWithImageNamed:@"_BaseTrain"];
+    NSInteger actualSpeed = [theTrain pointsPerSecond];
+    XCTAssertEqual(actualSpeed, expectedSpeed, @"The train is moving at speed :%ld points per second, when it should be moving at %ld points per second", actualSpeed, expectedSpeed);
 }
 
 @end

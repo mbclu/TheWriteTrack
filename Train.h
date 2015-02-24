@@ -10,4 +10,9 @@
 
 @interface Train : SKSpriteNode
 
+@property (readonly) NSInteger pointsPerSecond;
+
+- (void)addPointToMove:(CGPoint)point;
+- (void)move:(NSNumber *)dt;
+
 @end

@@ -11,6 +11,9 @@ This is a spelling a writing app for children that will allow them to use their 
 * jenkins
 * bitbucket
 
+### Frameworks ###
+* SpriteKit
+
 ## Version ##
 1.0
 

@@ -46,9 +46,10 @@
     [theTrain addPointToMove:expectedPoint];
     NSMutableArray* waypoints = [theTrain wayPoints];
     XCTAssertEqual([waypoints count], 1);
-    CGPoint* actualPoint = (__bridge CGPoint *)([waypoints objectAtIndex:0]);
-    XCTAssertEqual((*actualPoint).x, expectedPoint.x);
-    XCTAssertEqual((*actualPoint).y, expectedPoint.y);
+    NSValue* point = [waypoints objectAtIndex:0];
+    CGPoint actualPoint = [point CGPointValue];
+    XCTAssertEqual(expectedPoint.x, (actualPoint).x);
+    XCTAssertEqual(expectedPoint.y, (actualPoint).y);
 }
 
 @end

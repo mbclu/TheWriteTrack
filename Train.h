@@ -11,6 +11,8 @@
 @interface Train : SKSpriteNode
 
 @property (readonly) NSInteger pointsPerSecond;
+@property NSMutableArray *wayPoints;
+@property CGPoint velocity;
 
 - (void)addPointToMove:(CGPoint)point;
 - (void)move:(NSNumber *)dt;

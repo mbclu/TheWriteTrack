@@ -14,32 +14,41 @@
 
 @end
 
-@implementation TrainTests
+@implementation TrainTests {
+    Train* theTrain;
+}
 
 - (void)setUp {
     [super setUp];
+    theTrain = [[Train alloc] initWithImageNamed:@"_BaseTrain"];
 }
 
 - (void)tearDown {
     [super tearDown];
 }
 
-- (void)testThatTheTrainMovesAt80PointsPerSecond {
-    NSInteger expectedSpeed = 80;
-    Train* theTrain = [[Train alloc] init];
-    NSInteger actualSpeed = [theTrain pointsPerSecond];
-    XCTAssertEqual(actualSpeed, expectedSpeed, @"The train is moving at speed :%ld points per second, when it should be moving at %ld points per second", actualSpeed, expectedSpeed);
-}
-
 - (void)testThatTheTrainCanBeInitializedWithAnImage {
     XCTAssertNoThrow([[Train alloc] initWithImageNamed:@"_BaseTrain"], @"Initializing the train with an image should not throw an exception");
 }
 
-- (void)testThatWhenInitializedWithAnImageNameTheVelocityIsStill80PointsPerSecond {
+- (void)testThatWhenInitializedWithAnImageNameTheVelocityIs80PointsPerSecond {
     NSInteger expectedSpeed = 80;
-    Train* theTrain = [[Train alloc] initWithImageNamed:@"_BaseTrain"];
     NSInteger actualSpeed = [theTrain pointsPerSecond];
     XCTAssertEqual(actualSpeed, expectedSpeed, @"The train is moving at speed :%ld points per second, when it should be moving at %ld points per second", actualSpeed, expectedSpeed);
+}
+
+- (void)testThatTheTrainStartsWithZeroWayPoints {
+    XCTAssertEqual([theTrain wayPoints].count, 0);
+}
+
+- (void)testThatAPointCanBeAddedToTheMove {
+    CGPoint expectedPoint = CGPointMake(2.9, 1.4);
+    [theTrain addPointToMove:expectedPoint];
+    NSMutableArray* waypoints = [theTrain wayPoints];
+    XCTAssertEqual([waypoints count], 1);
+    CGPoint* actualPoint = (__bridge CGPoint *)([waypoints objectAtIndex:0]);
+    XCTAssertEqual((*actualPoint).x, expectedPoint.x);
+    XCTAssertEqual((*actualPoint).y, expectedPoint.y);
 }
 
 @end

@@ -15,6 +15,5 @@
 @property CGPoint velocity;
 
 - (void)addPointToMove:(CGPoint)point;
-- (void)move:(NSNumber *)dt;
 
 @end

@@ -29,29 +29,4 @@ static const int POINTS_PER_SECOND = 80;
     [wayPoints addObject:[NSValue valueWithCGPoint:point]];
 }
 
-- (void)move:(NSNumber *)dt {
-    CGPoint currentPosition = self.position;
-    CGPoint newPosition;
-    
-    if([wayPoints count] > 0) {
-        CGPoint targetPoint = [[wayPoints firstObject] CGPointValue];
-        
-        //1
-        CGPoint offset = CGPointMake(targetPoint.x - currentPosition.x, targetPoint.y - currentPosition.y);
-        CGFloat length = sqrtf(offset.x * offset.x + offset.y * offset.y);
-        CGPoint direction = CGPointMake(offset.x / length, offset.y / length);
-        velocity = CGPointMake(direction.x * POINTS_PER_SECOND, direction.y * POINTS_PER_SECOND);
-        
-        //2
-        newPosition = CGPointMake(currentPosition.x + velocity.x * [dt doubleValue],
-                                  currentPosition.y + velocity.y * [dt doubleValue]);
-        self.position = newPosition;
-        
-        //3
-        if(CGRectContainsPoint(self.frame, targetPoint)) {
-            [wayPoints removeObjectAtIndex:0];
-        }
-    }
-}
-
 @end

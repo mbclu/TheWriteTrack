@@ -14,6 +14,8 @@
 		C7387B8D1A97E4F20086EC94 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7387B8C1A97E4F20086EC94 /* TrainTests.m */; };
 		C7387B8F1A999B370086EC94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7387B8E1A999B370086EC94 /* Main.storyboard */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
+		C78C6F811AA2BFFB0077DE74 /* exampleTextRender.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F801AA2BFFB0077DE74 /* exampleTextRender.m */; };
+		C78C6F841AA2D1ED0077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F831AA2D1ED0077DE74 /* LetterView.m */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
@@ -47,6 +49,9 @@
 		C7387B8C1A97E4F20086EC94 /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTests.m; sourceTree = SOURCE_ROOT; };
 		C7387B8E1A999B370086EC94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = SOURCE_ROOT; };
 		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C78C6F801AA2BFFB0077DE74 /* exampleTextRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = exampleTextRender.m; sourceTree = SOURCE_ROOT; };
+		C78C6F821AA2D1ED0077DE74 /* LetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetterView.h; sourceTree = SOURCE_ROOT; };
+		C78C6F831AA2D1ED0077DE74 /* LetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetterView.m; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
@@ -109,6 +114,8 @@
 				C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */,
 				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,
 				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
+				C78C6F821AA2D1ED0077DE74 /* LetterView.h */,
+				C78C6F831AA2D1ED0077DE74 /* LetterView.m */,
 			);
 			name = Tracks;
 			sourceTree = "<group>";
@@ -189,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D0818B1A8A315A00DE5ECC /* Info.plist */,
+				C78C6F801AA2BFFB0077DE74 /* exampleTextRender.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -297,7 +305,9 @@
 			files = (
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
+				C78C6F841AA2D1ED0077DE74 /* LetterView.m in Sources */,
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
+				C78C6F811AA2BFFB0077DE74 /* exampleTextRender.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
 				C7387B891A97E3DD0086EC94 /* Train.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,

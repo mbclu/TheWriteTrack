@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LetterView.h"
 
-@interface GameViewController : UIViewController
+@interface GameViewController : UIViewController {
+}
+
+@property(nonatomic, retain) LetterView *letterView;
 
 @end

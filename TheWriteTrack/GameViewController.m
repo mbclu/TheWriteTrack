@@ -14,6 +14,15 @@
 @end
 
 @implementation GameViewController
+@synthesize letterView;
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.letterView = [[LetterView alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
+    self.letterView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.letterView];
+}
 
 - (void)viewWillLayoutSubviews
 {
@@ -54,7 +63,8 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (BOOL)prefersStatusBarHidden {
+- (BOOL)prefersStatusBarHidden
+{
     return YES;
 }
 

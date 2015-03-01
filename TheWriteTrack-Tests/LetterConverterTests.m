@@ -25,11 +25,11 @@
 }
 
 - (void)testGivenANonAlphaCharacterThenNoPathIsReturned {
-    XCTAssertNil((CGPathRef)[LetterConverter pathFromFirstCharOfStringRef:@"#"]);
+    XCTAssertNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"#"]);
 }
 
 - (void)testGivenAnAlphaCharacterThenNoPathIsReturned {
-    XCTAssertNotNil((CGPathRef)[LetterConverter pathFromFirstCharOfStringRef:@"A"]);
+    XCTAssertNotNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"A"]);
 }
 
 @end

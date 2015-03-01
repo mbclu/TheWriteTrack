@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "../TheWriteTrack/_BaseTrackScene.h"
 #import <XCTest/XCTest.h>
+#import "_BaseTrackScene.h"
 
 @interface _BaseTrackTests : XCTestCase
 

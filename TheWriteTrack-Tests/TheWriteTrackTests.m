@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "../TheWriteTrack/GameViewController.h"
+#import "GameViewController.h"
 
 @interface TheWriteTrackTests : XCTestCase
 

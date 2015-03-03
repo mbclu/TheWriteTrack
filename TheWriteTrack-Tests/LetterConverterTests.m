@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "LetterConverter.h"
@@ -30,6 +31,15 @@
 
 - (void)testGivenAnAlphaCharacterThenNoPathIsReturned {
     XCTAssertNotNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"A"]);
+}
+
+- (void)testGivenNoDataANilAttributedStringIsReturned {
+    XCTAssertNil((__strong id)[LetterConverter createAttributedStringRef]);
+}
+
+- (void)testThatTheLetterConverterUsesVerdanaFontAsDefault {
+    LetterConverter *lc = [[LetterConverter alloc] init];
+    XCTAssertEqualObjects([lc namedFont], (CFStringRef)@"Verdana");
 }
 
 @end

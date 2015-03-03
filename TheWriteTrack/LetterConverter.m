@@ -10,8 +10,16 @@
 
 @implementation LetterConverter
 
-+ (CGPathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef {
-    CGPathRef path = Nil;
+@synthesize namedFont;
+
+- (instancetype) init {
+    self = [super init];
+    [self setNamedFont:(CFStringRef)@"Verdana"];
+    return self;
+}
+
++ (CGMutablePathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef {
+    CGMutablePathRef path = Nil;
     
     unichar firstChar = [[stringRef uppercaseString] characterAtIndex:0];
     
@@ -29,6 +37,11 @@
     }
     
     return path;
+}
+
++ (CFAttributedStringRef)createAttributedStringRef {
+    CFAttributedStringRef stringRef = nil;
+    return stringRef;
 }
 
 @end

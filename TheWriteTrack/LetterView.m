@@ -7,27 +7,29 @@
 //
 
 #import "LetterView.h"
+#import "LetterConverter.h"
 
 @implementation LetterView
 
 - (void) drawRect:(CGRect)rect {
-    //    CGPathRef path = [LetterConverter pathFromFirstCharOfStringRef:@"A"];
+    CGMutablePathRef letterPath = [LetterConverter pathFromFirstCharOfStringRef:@"A"];
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 50, 50);
-    CGPathAddLineToPoint(path, NULL, 200, 200);
+//    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(letterPath, NULL, 50, 50);
+//    CGPathAddLineToPoint(letterPath, NULL, 200, 200);
     
-    CGPathRef thickPath = CGPathCreateCopyByStrokingPath(path, NULL, 10, kCGLineCapButt, kCGLineJoinBevel, 0);
-    CGContextAddPath(context, thickPath);
+//    CGPathRef thickPath = CGPathCreateCopyByStrokingPath(letterPath, NULL, 10, kCGLineCapButt, kCGLineJoinBevel, 0);
+//    CGContextAddPath(context, thickPath);
     
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
-    CGContextSetLineWidth(context, 3);
+    CGContextSetLineWidth(context, 10);
     CGContextDrawPath(context, kCGPathFillStroke);
     
-    CGPathRelease(thickPath);
-    CGPathRelease(path);
+//    CGPathRelease(thickPath);
+    CGPathRelease(letterPath);
 }
 
 @end

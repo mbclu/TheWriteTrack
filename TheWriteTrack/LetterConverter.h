@@ -12,6 +12,9 @@
 
 @interface LetterConverter : NSObject
 
-+ (CGPathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
+@property CFStringRef namedFont;
+
++ (CGMutablePathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
++ (CFAttributedStringRef)createAttributedStringRef;
 
 @end

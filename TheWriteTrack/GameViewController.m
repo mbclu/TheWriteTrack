@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     self.letterView = [[LetterView alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
-    self.letterView.backgroundColor = [UIColor redColor];
+//    self.letterView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.letterView];
 }
 

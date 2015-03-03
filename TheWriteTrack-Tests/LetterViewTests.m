@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+#import <GameViewController.h>
 
 @interface LetterViewTests : XCTestCase
 
@@ -17,24 +19,20 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testThatTheLetterIsMovedToTheCenterOfTheView {
+    GameViewController *controller = [[GameViewController alloc] init];
+    id mockView = OCMClassMock([LetterView class]);
+    
+    CGMutablePathRef path;
+    OCMStub([mockView drawRect:CGRectMake(0, 0, 0, 0)]).andReturn(path);
+    
+    // Notably this test has no assert right now....
 }
 
 @end

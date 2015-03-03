@@ -7,14 +7,17 @@
 //
 
 #import "LetterConverter.h"
+#import <UIKit/UIKit.h>
 
 @implementation LetterConverter
 
 @synthesize namedFont;
+@synthesize fontSize;
 
 - (instancetype) init {
     self = [super init];
     [self setNamedFont:(CFStringRef)@"Verdana"];
+    [self setFontSize:1.0];
     return self;
 }
 
@@ -41,6 +44,7 @@
 
 + (CFAttributedStringRef)createAttributedStringRef {
     CFAttributedStringRef stringRef = nil;
+//    UIFont* font = [UIFont fontWithName:<#(NSString *)#> size:<#(CGFloat)#> fontWithName:];
     return stringRef;
 }
 

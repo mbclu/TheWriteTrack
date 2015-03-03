@@ -16,9 +16,13 @@
 @end
 
 @implementation LetterConverterTests
+{
+    LetterConverter *letterConverter;
+}
 
 - (void)setUp {
     [super setUp];
+    letterConverter = [[LetterConverter alloc] init];
 }
 
 - (void)tearDown {
@@ -38,8 +42,11 @@
 }
 
 - (void)testThatTheLetterConverterUsesVerdanaFontAsDefault {
-    LetterConverter *lc = [[LetterConverter alloc] init];
-    XCTAssertEqualObjects([lc namedFont], (CFStringRef)@"Verdana");
+    XCTAssertEqualObjects((CFStringRef)[letterConverter namedFont], (CFStringRef)@"Verdana");
+}
+
+- (void)testThatTheDefaultFontSizeIsOnePixel {
+    XCTAssertEqual([letterConverter fontSize], 1.0);
 }
 
 @end

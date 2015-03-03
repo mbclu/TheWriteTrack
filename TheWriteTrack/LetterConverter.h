@@ -13,6 +13,7 @@
 @interface LetterConverter : NSObject
 
 @property CFStringRef namedFont;
+@property CGFloat fontSize;
 
 + (CGMutablePathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
 + (CFAttributedStringRef)createAttributedStringRef;

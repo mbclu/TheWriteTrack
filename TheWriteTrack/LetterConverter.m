@@ -42,9 +42,9 @@
     return path;
 }
 
-+ (CFAttributedStringRef)createAttributedStringRef {
+- (CFAttributedStringRef)createAttributedStringRef {
     CFAttributedStringRef stringRef = nil;
-//    UIFont* font = [UIFont fontWithName:<#(NSString *)#> size:<#(CGFloat)#> fontWithName:];
+    UIFont* font = [UIFont fontWithName:[self namedFont] size:[self fontSize]];
     return stringRef;
 }
 

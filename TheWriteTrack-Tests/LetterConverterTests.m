@@ -7,6 +7,7 @@
 //
 
 #import <CoreGraphics/CoreGraphics.h>
+#import <OCMock/OCMock.h>
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "LetterConverter.h"
@@ -38,7 +39,7 @@
 }
 
 - (void)testGivenNoDataANilAttributedStringIsReturned {
-    XCTAssertNil((__strong id)[LetterConverter createAttributedStringRef]);
+    XCTAssertNil((__strong id)[letterConverter createAttributedStringRef]);
 }
 
 - (void)testThatTheLetterConverterUsesVerdanaFontAsDefault {
@@ -47,6 +48,12 @@
 
 - (void)testThatTheDefaultFontSizeIsOnePixel {
     XCTAssertEqual([letterConverter fontSize], 1.0);
+}
+
+- (void)testThatAUIFontIsCreatedFromTheDefaultFontTypeAndFontSize {
+    id mockUIFont = OCMClassMock([UIFont class]);
+    [letterConverter createAttributedStringRef];
+    OCMVerify([mockUIFont fontWithName:[letterConverter namedFont] size:[letterConverter fontSize]]);
 }
 
 @end

@@ -16,6 +16,6 @@
 @property CGFloat fontSize;
 
 + (CGMutablePathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
-+ (CFAttributedStringRef)createAttributedStringRef;
+- (CFAttributedStringRef)createAttributedStringRef;
 
 @end

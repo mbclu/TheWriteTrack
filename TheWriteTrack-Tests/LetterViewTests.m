@@ -25,14 +25,18 @@
     [super tearDown];
 }
 
-- (void)testThatTheLetterIsMovedToTheCenterOfTheView {
+- (void)testThatTheLetterViewIsASubviewOfTheGameController {
     GameViewController *controller = [[GameViewController alloc] init];
-    id mockView = OCMClassMock([LetterView class]);
-    
-    CGMutablePathRef path;
-    OCMStub([mockView drawRect:CGRectMake(0, 0, 0, 0)]).andReturn(path);
-    
-    // Notably this test has no assert right now....
+    XCTAssertTrue([[[[controller view] subviews] objectAtIndex:0] isKindOfClass:[LetterView class]]);
+}
+
+- (void)testThatTheLetterViewIsDrawnInTheRect {
+    GameViewController *controller = [[GameViewController alloc] init];
+    LetterView* view = [[[controller view] subviews] objectAtIndex:0];
+    XCTAssertEqualWithAccuracy([view frame].origin.x, 100, 1);
+    XCTAssertEqualWithAccuracy([view frame].origin.y, 50, 1);
+    XCTAssertEqualWithAccuracy([view frame].size.height, 50, 1);
+    XCTAssertEqualWithAccuracy([view frame].size.width, 50, 1);
 }
 
 @end

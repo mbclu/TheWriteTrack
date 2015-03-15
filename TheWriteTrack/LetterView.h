@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreText/CoreText.h>
 
-@interface LetterView : UIView
+@interface LetterView : UIView {
+    NSAttributedString *attrString;
+}
+
+@property (strong) IBOutlet NSAttributedString *attrString;
 
 @end

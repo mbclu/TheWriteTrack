@@ -39,21 +39,40 @@
 }
 
 - (void)testGivenNoDataANilAttributedStringIsReturned {
-    XCTAssertNil((__strong id)[letterConverter createAttributedStringRef]);
+    NSString* nilString;
+    XCTAssertNil((__strong id)[LetterConverter createAttributedStringRef:nilString]);
 }
 
 - (void)testThatTheLetterConverterUsesVerdanaFontAsDefault {
-    XCTAssertEqualObjects((CFStringRef)[letterConverter namedFont], (CFStringRef)@"Verdana");
+    XCTAssertEqualObjects(NAMED_FONT, @"Verdana");
 }
 
 - (void)testThatTheDefaultFontSizeIsOnePixel {
-    XCTAssertEqual([letterConverter fontSize], 1.0);
+    XCTAssertEqual(FONT_SIZE, 1.0);
 }
 
 - (void)testThatAUIFontIsCreatedFromTheDefaultFontTypeAndFontSize {
     id mockUIFont = OCMClassMock([UIFont class]);
-    [letterConverter createAttributedStringRef];
-    OCMVerify([mockUIFont fontWithName:[letterConverter namedFont] size:[letterConverter fontSize]]);
+    [LetterConverter createAttributedStringRef:@"A"];
+    OCMVerify([mockUIFont fontWithName:NAMED_FONT size:FONT_SIZE]);
+}
+
+- (void)testThatAZeroIntegerIsUsedForTheAttributeDictionary {
+    id mockNumber = OCMClassMock([NSNumber class]);
+    [LetterConverter createAttributedStringRef:@"a"];
+    OCMVerify([mockNumber numberWithInteger:0]);
+}
+
+- (void)testThatGivenTheLetter_A_AsAStringThenAnAtrributedStringWithLetter_A_IsReturned {
+    CFAttributedStringRef actualRef = [LetterConverter createAttributedStringRef:@"A"];
+    XCTAssertNotNil((__bridge NSAttributedString*)actualRef);
+    XCTAssertEqualObjects([(__bridge NSAttributedString*)actualRef string], @"A");
+}
+
+- (void)testThatGivenTheLetter_B_AsAStringThenAnAtrributedStringWithLetter_B_IsReturned {
+    CFAttributedStringRef actualRef = [LetterConverter createAttributedStringRef:@"B"];
+    XCTAssertNotNil((__bridge NSAttributedString*)actualRef);
+    XCTAssertEqualObjects([(__bridge NSAttributedString*)actualRef string], @"B");
 }
 
 @end

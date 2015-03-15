@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "_BaseTrackScene.h"
+#import "LetterView.h"
 
 @implementation SKScene (Unarchive)
 
@@ -19,15 +20,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.letterView = [[LetterView alloc] initWithFrame:CGRectMake(100.0, 100.0, 50.0, 50.0)];
-//    self.letterView.backgroundColor = [UIColor redColor];
+    
+    self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"Verdana", 72.0f, NULL);
+    NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
+                                    (id)[[UIColor blueColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
+                                    (id)[[UIColor redColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
+                                    (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
+                                    nil];
+    
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"Hello World" attributes:attrDictionary];
+    
+    [self.letterView setAttrString:attrString];
+    
+    self.letterView.backgroundColor = [UIColor clearColor];
+    
     [self.view addSubview:self.letterView];
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
+ 
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     if (!skView.scene) {

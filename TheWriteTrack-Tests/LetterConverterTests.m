@@ -18,17 +18,49 @@
 
 @implementation LetterConverterTests
 {
+    NSString *nonNilString;
     LetterConverter *letterConverter;
 }
 
 - (void)setUp {
     [super setUp];
+    nonNilString = @"NonNilString";
     letterConverter = [[LetterConverter alloc] init];
 }
 
 - (void)tearDown {
     [super tearDown];
 }
+
+/// Attributed String Creation
+
+- (void)testThatGivenNoDataANilAttributedStringIsReturned {
+    NSString* nilString;
+    XCTAssertNil([LetterConverter createAttributedString:nilString]);
+}
+
+- (void)testThatGivenANonNullStringANonNullAttributedStringIsReturned {
+    XCTAssertNotNil([LetterConverter createAttributedString:nonNilString]);
+}
+
+- (void)testThatTheLetterConverterUsesVerdanaFont {
+    XCTAssertEqualObjects(NAMED_FONT, @"Verdana");
+    NSAttributedString *attrString = [LetterConverter createAttributedString:nonNilString];
+    CTFontRef fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    CFStringRef stringRef = CTFontCopyFullName(fontRef);
+    XCTAssertEqualObjects((__bridge NSString *)stringRef, NAMED_FONT);
+}
+
+- (void)testThatTheFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
+    CGFloat expectedSize = 325;
+    CGFloat accuracy = 1.0;
+    NSAttributedString *attrString = [LetterConverter createAttributedString:nonNilString];
+    CTFontRef fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    CGFloat size = CTFontGetSize(fontRef);
+    XCTAssertEqualWithAccuracy(size, expectedSize, accuracy);
+}
+
+/// Path Creation
 
 - (void)testGivenANonAlphaCharacterThenNoPathIsReturned {
     XCTAssertNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"#"]);
@@ -37,20 +69,7 @@
 - (void)testGivenAnAlphaCharacterThenNoPathIsReturned {
     XCTAssertNotNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"A"]);
 }
-
-- (void)testGivenNoDataANilAttributedStringIsReturned {
-    NSString* nilString;
-    XCTAssertNil((__strong id)[LetterConverter createAttributedStringRef:nilString]);
-}
-
-- (void)testThatTheLetterConverterUsesVerdanaFontAsDefault {
-    XCTAssertEqualObjects(NAMED_FONT, @"Verdana");
-}
-
-- (void)testThatTheDefaultFontSizeIsOnePixel {
-    XCTAssertEqual(FONT_SIZE, 1.0);
-}
-
+/*
 - (void)testThatAUIFontIsCreatedFromTheDefaultFontTypeAndFontSize {
     id mockUIFont = OCMClassMock([UIFont class]);
     [LetterConverter createAttributedStringRef:@"A"];
@@ -74,5 +93,5 @@
     XCTAssertNotNil((__bridge NSAttributedString*)actualRef);
     XCTAssertEqualObjects([(__bridge NSAttributedString*)actualRef string], @"B");
 }
-
+*/
 @end

@@ -23,7 +23,7 @@
     
     self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"Verdana", 72.0f, NULL);
+    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"Verdana", 325.0, NULL);
     NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                     (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
                                     (id)[[UIColor blueColor] CGColor], (NSString *)kCTForegroundColorAttributeName,

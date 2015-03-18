@@ -11,6 +11,8 @@
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
 		C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
+		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
+		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
 		C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7584A071AA3A9F600D92D6A /* TrainTests.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
 		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
@@ -46,6 +48,9 @@
 		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
 		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; };
 		C710AB661A9ECCFD002E7B79 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
+		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
+		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; };
 		C7584A071AA3A9F600D92D6A /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = "TheWriteTrack-Tests/TrainTests.m"; sourceTree = SOURCE_ROOT; };
 		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterViewTests.m; path = "TheWriteTrack-Tests/LetterViewTests.m"; sourceTree = SOURCE_ROOT; };
@@ -108,6 +113,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C73700131AB7D49A0035C4A3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,
+				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
+				C73700141AB7D4E40035C4A3 /* LayoutMath.h */,
+				C73700151AB7D4E40035C4A3 /* LayoutMath.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		C73700171AB7D5530035C4A3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
+				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		C7387B8B1A97E4060086EC94 /* Train */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,8 +157,6 @@
 				C78C6F881AA3A6570077DE74 /* LetterView.m */,
 				C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */,
 				C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */,
-				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,
-				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
 			);
 			name = Tracks;
 			sourceTree = "<group>";
@@ -142,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */,
-				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
 				C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */,
 			);
 			name = "Track-Tests";
@@ -175,6 +197,7 @@
 		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXGroup;
 			children = (
+				C73700131AB7D49A0035C4A3 /* Common */,
 				C7D0817E1A8A312700DE5ECC /* Images.xcassets */,
 				C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */,
 				C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */,
@@ -202,6 +225,7 @@
 		C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C73700171AB7D5530035C4A3 /* Common */,
 				C7D0818C1A8A315A00DE5ECC /* TheWriteTrackTests.m */,
 				C7584A061AA3A9DB00D92D6A /* Train-Tests */,
 				C7C4B8AB1A8C2C87009FA11B /* Track-Tests */,
@@ -363,6 +387,7 @@
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
+				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
+				C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */,
 				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,
 				C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */,

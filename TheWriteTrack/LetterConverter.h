@@ -10,12 +10,11 @@
 #import <CoreText/CoreText.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-#define NAMED_FONT @"Verdana"
-#define FONT_SIZE 1.0
+#define NAMED_FONT              @"Verdana"
 
 @interface LetterConverter : NSObject
 
++ (NSAttributedString *)createAttributedString:(NSString *)string;
 + (CGPathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
-+ (CFAttributedStringRef)createAttributedStringRef:(NSString *)string;
 
 @end

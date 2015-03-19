@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import "_BaseTrackScene.h"
 #import "LetterView.h"
+#import "LetterConverter.h"
 
 @implementation SKScene (Unarchive)
 
@@ -23,17 +24,7 @@
     
     self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"Verdana", 325.0, NULL);
-    NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
-                                    (id)[[UIColor blueColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
-                                    (id)[[UIColor redColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
-                                    (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
-                                    nil];
-    
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"Hello World" attributes:attrDictionary];
-    
-    [self.letterView setAttrString:attrString];
+    [self.letterView setAttrString:[LetterConverter createAttributedString:@"Hello World"]];
     
     self.letterView.backgroundColor = [UIColor clearColor];
     

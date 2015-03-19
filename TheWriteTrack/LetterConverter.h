@@ -14,7 +14,7 @@
 
 @interface LetterConverter : NSObject
 
-+ (NSAttributedString *)createAttributedString:(NSString *)string;
++ (NSAttributedString *)createAttributedString:(NSString *)attributelessString;
 + (CGPathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
 
 @end

@@ -12,9 +12,9 @@
 
 @implementation LetterConverter
 
-+ (NSAttributedString *)createAttributedString:(NSString *)string {
++ (NSAttributedString *)createAttributedString:(NSString *)attributelessString {
     NSAttributedString *attrString = nil;
-    if (string != (id)[NSNull null] && string.length != 0) {
+    if (attributelessString != (id)[NSNull null] && attributelessString.length != 0) {
         
         CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"Verdana", [LayoutMath maximumViableFontSize], NULL);
         NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -24,7 +24,7 @@
 //                                        (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
                                         nil];
         
-        attrString = [[NSAttributedString alloc] initWithString:@"Hello World" attributes:attrDictionary];
+        attrString = [[NSAttributedString alloc] initWithString:[attributelessString substringWithRange:NSMakeRange(0, 1)] attributes:attrDictionary];
         
         //CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)NAMED_FONT, FONT_SIZE, NULL);
         //        UIFont* font = [UIFont fontWithName:NAMED_FONT size:FONT_SIZE];

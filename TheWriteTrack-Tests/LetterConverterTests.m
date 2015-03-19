@@ -20,12 +20,16 @@
 {
     NSString *nonNilString;
     LetterConverter *letterConverter;
+    NSAttributedString *attrString;
+    CTFontRef fontRef;
 }
 
 - (void)setUp {
     [super setUp];
     nonNilString = @"NonNilString";
     letterConverter = [[LetterConverter alloc] init];
+    attrString = [LetterConverter createAttributedString:nonNilString];
+    fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
 }
 
 - (void)tearDown {
@@ -45,8 +49,6 @@
 
 - (void)testThatTheLetterConverterUsesVerdanaFont {
     XCTAssertEqualObjects(NAMED_FONT, @"Verdana");
-    NSAttributedString *attrString = [LetterConverter createAttributedString:nonNilString];
-    CTFontRef fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CFStringRef stringRef = CTFontCopyFullName(fontRef);
     XCTAssertEqualObjects((__bridge NSString *)stringRef, NAMED_FONT);
 }
@@ -54,10 +56,12 @@
 - (void)testThatTheFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
     CGFloat expectedSize = 325;
     CGFloat accuracy = 1.0;
-    NSAttributedString *attrString = [LetterConverter createAttributedString:nonNilString];
-    CTFontRef fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CGFloat size = CTFontGetSize(fontRef);
     XCTAssertEqualWithAccuracy(size, expectedSize, accuracy);
+}
+
+- (void)testThatTheLetterConverterUsesOnlyTheFirstCharacterOfTheGivenString {
+    XCTAssertEqualObjects(attrString.string, @"N");
 }
 
 /// Path Creation

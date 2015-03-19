@@ -10,7 +10,7 @@
 #import <OCMock/OCMock.h>
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "LetterConverter.h"
+#import "../TheWriteTrack/LetterConverter.h"
 
 @interface LetterConverterTests : XCTestCase
 

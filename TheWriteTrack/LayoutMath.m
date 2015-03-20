@@ -11,6 +11,10 @@
 
 @implementation LayoutMath
 
+/*
+ With OS X v10.4 and later, you can find out the rectangle required to lay out an attributed string using the method, boundingRectWithSize:options:. 
+ Again, there is an analogous method to determine the rectangle required to render an NSString object, given a set of attributes—boundingRectWithSize:options:attributes:.
+ */
 + (CGFloat)sizeOfSmallerDimension
 {
     CGFloat size = [[UIScreen mainScreen] bounds].size.width;

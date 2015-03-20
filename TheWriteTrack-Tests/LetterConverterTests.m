@@ -64,6 +64,21 @@
     XCTAssertEqualObjects(attrString.string, @"N");
 }
 
+- (void)testThatTheFontForegroundColorIsTransparent {
+    UIColor *color = [attrString attribute:(NSString *)kCTForegroundColorAttributeName atIndex:0 effectiveRange:nil];
+    XCTAssertEqualObjects(color, (id)[[UIColor clearColor] CGColor]);
+}
+
+- (void)testThatTheFontStrokeColorIsBrown {
+    UIColor *color = [attrString attribute:(NSString *)kCTStrokeColorAttributeName atIndex:0 effectiveRange:nil];
+    XCTAssertEqualObjects(color, (id)[[UIColor brownColor] CGColor]);
+}
+
+- (void)testThatTheFontStrokeIsSizeMinusThree {
+    NSNumber *number = [attrString attribute:(NSString *)kCTStrokeWidthAttributeName atIndex:0 effectiveRange:nil];
+    XCTAssertEqualObjects(number, (id)[NSNumber numberWithFloat:-3.0]);
+}
+
 /// Path Creation
 
 - (void)testGivenANonAlphaCharacterThenNoPathIsReturned {

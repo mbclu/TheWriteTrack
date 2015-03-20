@@ -16,12 +16,12 @@
     NSAttributedString *attrString = nil;
     if (attributelessString != (id)[NSNull null] && attributelessString.length != 0) {
         
-        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)@"Verdana", [LayoutMath maximumViableFontSize], NULL);
+        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
         NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
-//                                        (id)[[UIColor blueColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
-//                                        (id)[[UIColor redColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
-//                                        (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
+                                        (id)[[UIColor clearColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
+                                        (id)[[UIColor brownColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
+                                        (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
                                         nil];
         
         attrString = [[NSAttributedString alloc] initWithString:[attributelessString substringWithRange:NSMakeRange(0, 1)] attributes:attrDictionary];

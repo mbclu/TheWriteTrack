@@ -32,6 +32,13 @@
     return attrString;
 }
 
++ (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index {
+    CFRange glyphRange = CFRangeMake(index, 1);
+    CGGlyph glyph;
+    CTRunGetGlyphs(run, glyphRange, &glyph);
+    return glyph;
+}
+
 + (void)addLetterFromFont:(CTFontRef)font andGlyph:(CGGlyph)glyph toPoint:(CGPoint)position ofPath:(CGMutablePathRef)path {
     if ((__bridge UIBezierPath *)path == nil)
     {
@@ -74,15 +81,16 @@
              CTRunGetPositions(run, thisGlyphRange, &position);
              
              [LetterConverter addLetterFromFont:runFont andGlyph:glyph toPoint:position ofPath:letters];
-             // Get PATH of outline
-             {
-                 CGPathRef letter = CTFontCreatePathForGlyph(runFont, glyph, NULL);
-                 CGAffineTransform t = CGAffineTransformMakeTranslation(position.x, position.y);
-                 CGPathAddPath(letters, &t, letter);
-                 CGPathRelease(letter);
-             }
+//             // Get PATH of outline
+//             {
+//                 CGPathRef letter = CTFontCreatePathForGlyph(runFont, glyph, NULL);
+//                 CGAffineTransform t = CGAffineTransformMakeTranslation(position.x, position.y);
+//                 CGPathAddPath(letters, &t, letter);
+//                 CGPathRelease(letter);
+//             }
          }
     }
+    
     CFRelease(line);
      
     UIBezierPath *path = [UIBezierPath bezierPath];

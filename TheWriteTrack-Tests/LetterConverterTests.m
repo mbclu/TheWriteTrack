@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "../TheWriteTrack/LetterConverter.h"
+#import "../TheWriteTrack/LayoutMath.h"
 
 @interface LetterConverterTests : XCTestCase
 
@@ -85,12 +86,25 @@
     XCTAssertNil([LetterConverter pathFromAttributedString:nil]);
 }
 
-- (void)testThatGivenANilPathAnExcpetionIsThrown {
+- (void)testThatGivenANilPathWhenAGlyphIsAddedThenAnExcpetionIsThrown {
     CTFontRef font;
     CGGlyph glyph;
     CGPoint point;
     CGMutablePathRef path = nil;
     XCTAssertThrows([LetterConverter addLetterFromFont:font andGlyph:glyph toPoint:point ofPath:path]);
+}
+
+- (void)testThatGivenAGlyphRunThenASingleGlyphIsReturned {
+    CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
+    CFArrayRef runArray = CTLineGetGlyphRuns(line);
+    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
+    CGGlyph glyph = [LetterConverter getSingleGlyphInRun:run atIndex:0];
+    
+    CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
+    CGGlyph expectedGlyph;
+    UniChar characters[] = { [@"N" characterAtIndex:0] };
+    CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
+    XCTAssertEqual(glyph, expectedGlyph);
 }
 
 - (void)testGivenANonAlphaCharacterThenNoPathIsReturned {

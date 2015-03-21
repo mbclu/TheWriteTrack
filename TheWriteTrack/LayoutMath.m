@@ -28,7 +28,7 @@
 
 + (CGFloat)maximumViableFontSize
 {
-    return [LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING;
+    return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING) / [UIScreen mainScreen].scale;
 }
 
 @end

@@ -520,7 +520,10 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TheWriteTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-l\"Pods-OCMock\"";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"Pods-OCMock\"",
+				);
 				PRODUCT_NAME = OnTheWriteTrack;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -535,7 +538,10 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TheWriteTrack/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-l\"Pods-OCMock\"";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"Pods-OCMock\"",
+				);
 				PRODUCT_NAME = OnTheWriteTrack;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

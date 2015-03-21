@@ -54,7 +54,7 @@
 }
 
 - (void)testThatTheFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
-    CGFloat expectedSize = 325;
+    CGFloat expectedSize = 163;
     CGFloat accuracy = 1.0;
     CGFloat size = CTFontGetSize(fontRef);
     XCTAssertEqualWithAccuracy(size, expectedSize, accuracy);
@@ -80,6 +80,18 @@
 }
 
 /// Path Creation
+
+- (void)testThatWhenTheAttributedStringIsNilThenThePathIsNil {
+    XCTAssertNil([LetterConverter pathFromAttributedString:nil]);
+}
+
+- (void)testThatGivenANilPathAnExcpetionIsThrown {
+    CTFontRef font;
+    CGGlyph glyph;
+    CGPoint point;
+    CGMutablePathRef path = nil;
+    XCTAssertThrows([LetterConverter addLetterFromFont:font andGlyph:glyph toPoint:point ofPath:path]);
+}
 
 - (void)testGivenANonAlphaCharacterThenNoPathIsReturned {
     XCTAssertNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"#"]);

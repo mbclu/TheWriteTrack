@@ -11,8 +11,10 @@
 
 @interface LetterView : UIView {
     NSAttributedString *attrString;
+    NSAttributedString *attrStringRails;
 }
 
 @property (strong) IBOutlet NSAttributedString *attrString;
+@property (strong) IBOutlet NSAttributedString *attrStringRails;
 
 @end

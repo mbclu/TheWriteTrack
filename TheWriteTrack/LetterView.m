@@ -12,6 +12,7 @@
 @implementation LetterView
 
 @synthesize attrString;
+@synthesize attrStringRails;
 
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,10 +34,11 @@
         CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
         
         // Set text position and draw the line into the graphic context
-        CGContextSetTextPosition(context, 30.0, 100.0);
+//        CGContextSetTextPosition(context, 30.0, 100.0);
         CTLineDraw(line, context);
         CFRelease(line);
     }
+
     /*
     CFAttributedStringRef cfStringRef = [LetterConverter createAttributedStringRef:@"A"];
     CTLineRef line = CTLineCreateWithAttributedString(cfStringRef);

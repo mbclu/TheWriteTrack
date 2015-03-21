@@ -47,11 +47,11 @@
 /// @TODO - really need to make this more robust for other devices / screen resolutions
 /* UIScreen returns a value in points, similar to printer points or font size points, with
  * the exception that points are 1:1 for non-retina diplays and 1:2 for retina displays */
-- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBe325Or50LessThanTheSmallerScreenDimension {
+- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBe325Or50LessThanHalfTheSmallerScreenDimension {
     [[UIDevice currentDevice] setValue:
      [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
                                 forKey:@"orientation"];
-    CGFloat expectedSize = 325.0;
+    CGFloat expectedSize = 163.0;
     CGFloat accuracy = 1.0;
     XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, accuracy);
 }

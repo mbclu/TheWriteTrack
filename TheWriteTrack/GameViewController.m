@@ -24,9 +24,7 @@
     
     self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    [self.letterView setAttrString:[LetterConverter createAttributedString:@"Hello World"]];
-    
-    self.letterView.backgroundColor = [UIColor clearColor];
+    [self.letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
     
     [self.view addSubview:self.letterView];
 }

@@ -16,7 +16,7 @@
 
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-//    attrString = [[NSAttributedString alloc] init];
+    self.backgroundColor = [UIColor clearColor];
     return self;
 }
 
@@ -33,6 +33,7 @@
         
         CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
         
+        [LetterConverter pathFromAttributedString:attrString];
         // Set text position and draw the line into the graphic context
 //        CGContextSetTextPosition(context, 30.0, 100.0);
         CTLineDraw(line, context);

@@ -95,7 +95,8 @@
     [path appendPath:[UIBezierPath bezierPathWithCGPath:letterPath]];
      
     CGPathRelease(letterPath);
-    return nil;
+    
+    return path;
 }
 
 @end

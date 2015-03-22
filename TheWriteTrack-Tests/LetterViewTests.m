@@ -30,9 +30,8 @@
     [super tearDown];
 }
 
-// This may be a good candidate to move to the game view controller tests or an integration test
-- (void)testThatTheLetterViewIsASubviewOfTheGameController {
-    XCTAssertTrue([letterview isKindOfClass:[LetterView class]]);
+- (void)testThatTheLetterViewHasAClearBackground {
+    XCTAssertEqualObjects(letterview.backgroundColor, [UIColor clearColor]);
 }
 
 //- (void)testThatTheLetterViewIsCreatedInTheMiddleOfTheScreen {

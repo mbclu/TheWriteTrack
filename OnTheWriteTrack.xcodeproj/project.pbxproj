@@ -22,6 +22,7 @@
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
+		C7D067EC1ABF829500C50F1E /* GameViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D067EB1ABF829500C50F1E /* GameViewControllerTests.m */; };
 		C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D081731A8A312700DE5ECC /* AppDelegate.m */; };
 		C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
 		C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
@@ -66,6 +67,7 @@
 		C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackTests.m; path = "TheWriteTrack-Tests/_BaseTrackTests.m"; sourceTree = SOURCE_ROOT; };
 		C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheWriteTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7D067EB1ABF829500C50F1E /* GameViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameViewControllerTests.m; path = "TheWriteTrack-Tests/GameViewControllerTests.m"; sourceTree = SOURCE_ROOT; };
 		C7D081731A8A312700DE5ECC /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TheWriteTrack/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		C7D081791A8A312700DE5ECC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TheWriteTrack/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		C7D0817C1A8A312700DE5ECC /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewController.h; path = TheWriteTrack/GameViewController.h; sourceTree = SOURCE_ROOT; };
@@ -240,6 +242,7 @@
 				C7584A061AA3A9DB00D92D6A /* Train-Tests */,
 				C7C4B8AB1A8C2C87009FA11B /* Track-Tests */,
 				C7CED0721A86B9DA00A4DCC3 /* Supporting Files */,
+				C7D067EB1ABF829500C50F1E /* GameViewControllerTests.m */,
 			);
 			name = "TheWriteTrack-Tests";
 			path = "The Write TrackTests";
@@ -410,6 +413,7 @@
 				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,
 				C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */,
+				C7D067EC1ABF829500C50F1E /* GameViewControllerTests.m in Sources */,
 				C7D0818E1A8A315A00DE5ECC /* TheWriteTrackTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

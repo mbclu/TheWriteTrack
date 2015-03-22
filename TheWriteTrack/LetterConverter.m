@@ -39,6 +39,13 @@
     return glyph;
 }
 
++ (CGPoint)getSinglePositionInRun:(CTRunRef)run atIndex:(CFIndex)index {
+    CFRange glyphRange = CFRangeMake(index, 1);
+    CGPoint position;
+    CTRunGetPositions(run, glyphRange, &position);
+    return position;
+}
+
 + (void)addLetterFromFont:(CTFontRef)font andGlyph:(CGGlyph)glyph toPoint:(CGPoint)position ofPath:(CGMutablePathRef)path {
     if ((__bridge UIBezierPath *)path == nil)
     {

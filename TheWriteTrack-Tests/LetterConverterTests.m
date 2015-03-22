@@ -94,17 +94,34 @@
     XCTAssertThrows([LetterConverter addLetterFromFont:font andGlyph:glyph toPoint:point ofPath:path]);
 }
 
-- (void)testThatGivenAGlyphRunThenASingleGlyphIsReturned {
+- (void)testThatWhenARunFromALineIsEvxaminedAtIndex0ThenASingleGlyphIsReturned {
+    // Expected Setup
+    CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
+    CGGlyph expectedGlyph;
+    UniChar characters[] = { [@"N" characterAtIndex:0] };
+    CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
+    
+    // Actual Setup
     CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
     CFArrayRef runArray = CTLineGetGlyphRuns(line);
     CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
     CGGlyph glyph = [LetterConverter getSingleGlyphInRun:run atIndex:0];
     
-    CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
-    CGGlyph expectedGlyph;
-    UniChar characters[] = { [@"N" characterAtIndex:0] };
-    CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
     XCTAssertEqual(glyph, expectedGlyph);
+}
+
+- (void)testThatWhenARunFromALineIsExaminedAtIndex0ThenASinglePositionAtOriginIsReturned {
+    // Expected Setup
+    CGPoint expectedPoint = CGPointMake(0.0, 0.0);
+    
+    // Actual Setup
+    CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
+    CFArrayRef runArray = CTLineGetGlyphRuns(line);
+    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
+    CGPoint point = [LetterConverter getSinglePositionInRun:run atIndex:0];
+
+    XCTAssertEqual(point.x, expectedPoint.x);
+    XCTAssertEqual(point.y, expectedPoint.y);
 }
 
 - (void)testGivenANonAlphaCharacterThenNoPathIsReturned {

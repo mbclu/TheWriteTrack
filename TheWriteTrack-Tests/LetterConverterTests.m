@@ -124,36 +124,4 @@
     XCTAssertEqual(point.y, expectedPoint.y);
 }
 
-- (void)testGivenANonAlphaCharacterThenNoPathIsReturned {
-    XCTAssertNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"#"]);
-}
-
-- (void)testGivenAnAlphaCharacterThenNoPathIsReturned {
-    XCTAssertNotNil((__strong id)[LetterConverter pathFromFirstCharOfStringRef:@"A"]);
-}
-/*
-- (void)testThatAUIFontIsCreatedFromTheDefaultFontTypeAndFontSize {
-    id mockUIFont = OCMClassMock([UIFont class]);
-    [LetterConverter createAttributedStringRef:@"A"];
-    OCMVerify([mockUIFont fontWithName:NAMED_FONT size:FONT_SIZE]);
-}
-
-- (void)testThatAZeroIntegerIsUsedForTheAttributeDictionary {
-    id mockNumber = OCMClassMock([NSNumber class]);
-    [LetterConverter createAttributedStringRef:@"a"];
-    OCMVerify([mockNumber numberWithInteger:0]);
-}
-
-- (void)testThatGivenTheLetter_A_AsAStringThenAnAtrributedStringWithLetter_A_IsReturned {
-    CFAttributedStringRef actualRef = [LetterConverter createAttributedStringRef:@"A"];
-    XCTAssertNotNil((__bridge NSAttributedString*)actualRef);
-    XCTAssertEqualObjects([(__bridge NSAttributedString*)actualRef string], @"A");
-}
-
-- (void)testThatGivenTheLetter_B_AsAStringThenAnAtrributedStringWithLetter_B_IsReturned {
-    CFAttributedStringRef actualRef = [LetterConverter createAttributedStringRef:@"B"];
-    XCTAssertNotNil((__bridge NSAttributedString*)actualRef);
-    XCTAssertEqualObjects([(__bridge NSAttributedString*)actualRef string], @"B");
-}
-*/
 @end

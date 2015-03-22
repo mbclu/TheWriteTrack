@@ -20,6 +20,5 @@
 + (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index;
 + (CGPoint)getSinglePositionInRun:(CTRunRef)run atIndex:(CFIndex)index;
 + (void)addLetterFromFont:(CTFontRef)font andGlyph:(CGGlyph)glyph toPoint:(CGPoint)position ofPath:(CGMutablePathRef)path;
-+ (CGPathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef;
 
 @end

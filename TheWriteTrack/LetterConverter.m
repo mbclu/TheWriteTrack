@@ -49,7 +49,7 @@
 + (void)addLetterFromFont:(CTFontRef)font andGlyph:(CGGlyph)glyph toPoint:(CGPoint)position ofPath:(CGMutablePathRef)path {
     if ((__bridge UIBezierPath *)path == nil)
     {
-        [NSException raise:@"Nil Path used in addLetterFrom..." format:@""];
+        [NSException raise:@"InvalidLinePathException" format:@"Nil Path used in addLetterFrom..."];
     }
     CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
     CGAffineTransform transform = CGAffineTransformMakeTranslation(position.x, position.y);
@@ -62,72 +62,40 @@
         return nil;
     }
     
-     // Create path from text
-     // See: http://www.codeproject.com/KB/iPhone/Glyph.aspx
-     // License: The Code Project Open License (CPOL) 1.02 http://www.codeproject.com/info/cpol10.aspx
-     CGMutablePathRef letters = CGPathCreateMutable();
-     
-     CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
-     CFArrayRef runArray = CTLineGetGlyphRuns(line);
-     
-     // for each RUN
-     for (CFIndex runIndex = 0; runIndex < CFArrayGetCount(runArray); runIndex++)
-     {
-         // Get FONT for this run
-         CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, runIndex);
-         CTFontRef runFont = CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
-         
-         // for each GLYPH in run
-         for (CFIndex runGlyphIndex = 0; runGlyphIndex < CTRunGetGlyphCount(run); runGlyphIndex++)
-         {
-             // get Glyph & Glyph-data
-             CFRange thisGlyphRange = CFRangeMake(runGlyphIndex, 1);
-             CGGlyph glyph;
-             CGPoint position;
-             CTRunGetGlyphs(run, thisGlyphRange, &glyph);
-             CTRunGetPositions(run, thisGlyphRange, &position);
-             
-             [LetterConverter addLetterFromFont:runFont andGlyph:glyph toPoint:position ofPath:letters];
-//             // Get PATH of outline
-//             {
-//                 CGPathRef letter = CTFontCreatePathForGlyph(runFont, glyph, NULL);
-//                 CGAffineTransform t = CGAffineTransformMakeTranslation(position.x, position.y);
-//                 CGPathAddPath(letters, &t, letter);
-//                 CGPathRelease(letter);
-//             }
-         }
+    // Create path from text
+    // See: http://www.codeproject.com/KB/iPhone/Glyph.aspx
+    // License: The Code Project Open License (CPOL) 1.02 http://www.codeproject.com/info/cpol10.aspx
+    // - refactored by me.
+    CGMutablePathRef letterPath = CGPathCreateMutable();
+
+    CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
+    CFArrayRef runArray = CTLineGetGlyphRuns(line);
+
+    // for each RUN
+    for (CFIndex runIndex = 0; runIndex < CFArrayGetCount(runArray); runIndex++)
+    {
+        // Get FONT for this run
+        CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, runIndex);
+        CTFontRef runFont = CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
+
+        // for each GLYPH in run
+        for (CFIndex runGlyphIndex = 0; runGlyphIndex < CTRunGetGlyphCount(run); runGlyphIndex++)
+        {
+            [LetterConverter addLetterFromFont:runFont
+                andGlyph:[LetterConverter getSingleGlyphInRun:run atIndex:runGlyphIndex]
+                toPoint:[LetterConverter getSinglePositionInRun:run atIndex:runGlyphIndex]
+                ofPath:letterPath];
+        }
     }
     
     CFRelease(line);
      
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointZero];
-    [path appendPath:[UIBezierPath bezierPathWithCGPath:letters]];
+    [path appendPath:[UIBezierPath bezierPathWithCGPath:letterPath]];
      
-    CGPathRelease(letters);
+    CGPathRelease(letterPath);
     return nil;
-}
-
-+ (CGPathRef)pathFromFirstCharOfStringRef:(NSString *)stringRef {
-    CGPathRef path = Nil;
-    
-    unichar firstChar = [[stringRef uppercaseString] characterAtIndex:0];
-    
-    if (firstChar >= 'A' && firstChar <= 'Z')
-    {
-        CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, 1, NULL);
-        UniChar *character = (UniChar *)malloc(sizeof(UniChar));
-        CGGlyph *glyph = (CGGlyph *)malloc(sizeof(CGGlyph));
-        CTFontGetGlyphsForCharacters(font, character, glyph, 1);
-        
-        path = CTFontCreatePathForGlyph(font, *glyph, NULL);
-        
-        CFRelease(font);
-        free(character);
-        free(glyph);
-    }
-    
-    return path;
 }
 
 @end

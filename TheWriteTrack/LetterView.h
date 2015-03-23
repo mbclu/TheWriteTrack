@@ -17,4 +17,6 @@
 @property (strong) IBOutlet NSAttributedString *attrString;
 @property (strong) IBOutlet NSAttributedString *attrStringRails;
 
+- (void) drawRailInContext:(CGContextRef)context;
+
 @end

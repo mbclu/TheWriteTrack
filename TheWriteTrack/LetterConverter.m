@@ -57,7 +57,7 @@
     CGPathRelease(letter);
 }
 
-+ (UIBezierPath *)pathFromAttributedString:(NSAttributedString *)attrString {
++ (CGMutablePathRef)pathFromAttributedString:(NSAttributedString *)attrString {
     if (attrString == nil) {
         return nil;
     }
@@ -89,14 +89,8 @@
     }
     
     CFRelease(line);
-     
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointZero];
-    [path appendPath:[UIBezierPath bezierPathWithCGPath:letterPath]];
-     
-    CGPathRelease(letterPath);
     
-    return path;
+    return letterPath;
 }
 
 @end

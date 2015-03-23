@@ -34,26 +34,8 @@
     XCTAssertEqualObjects(letterview.backgroundColor, [UIColor clearColor]);
 }
 
-//- (void)testThatTheLetterViewIsCreatedInTheMiddleOfTheScreen {
-//    id mockView = OCMClassMock([LetterView class]);
-//    [[mockView expect] initWithFrame:[UIScreen mainScreen].bounds];
-//    [gvc viewDidLoad];
-//    OCMVerifyAll(mockView);
-//}
-
-//- (void)testThatDrawRectIsCalledWithARectangleInTheMiddleOfTheScreen {
-//    id mockView = OCMClassMock([LetterView class]);
-//    [[[mockView expect] ignoringNonObjectArgs] drawRect:[UIScreen mainScreen].bounds];
-//    OCMVerifyAll(mockView);
-//}
-
-//- (void)testThatTheLetterViewIsDrawnInTheRect {
-//    GameViewController *controller = [[GameViewController alloc] init];
-//    LetterView* view = [[[controller view] subviews] objectAtIndex:0];
-//    XCTAssertEqualWithAccuracy([view frame].origin.x, 100, 1);
-//    XCTAssertEqualWithAccuracy([view frame].origin.y, 50, 1);
-//    XCTAssertEqualWithAccuracy([view frame].size.height, 50, 1);
-//    XCTAssertEqualWithAccuracy([view frame].size.width, 50, 1);
-//}
+- (void)testThatWhenTheRailIsDrawThenTheContextUsesTheIdentityTransformAsItsMatrix {
+    // Check out this blog post: http://eng.wealthfront.com/2014/03/unit-testing-drawrect.html
+}
 
 @end

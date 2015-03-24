@@ -17,6 +17,7 @@
 @property (strong) IBOutlet NSAttributedString *attrString;
 @property (strong) IBOutlet NSAttributedString *attrStringRails;
 
+- (UIBezierPath *) createBezierPath;
 - (void) drawRailInContext:(CGContextRef)context;
 
 @end

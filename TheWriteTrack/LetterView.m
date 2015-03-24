@@ -20,6 +20,10 @@
     return self;
 }
 
+- (UIBezierPath *) createBezierPath {
+    return [[UIBezierPath alloc] init];
+}
+
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     
@@ -33,7 +37,8 @@
         
 //        CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
         
-        CGMutablePathRef railPath = [LetterConverter pathFromAttributedString:attrString];
+        CGMutablePathRef railPath = (__bridge CGMutablePathRef)[self createBezierPath];
+        /*CGMutablePathRef*/ railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
         CGPathMoveToPoint(railPath, nil, 0.0, 0.0); /* THIS WILL NEED SOME MORE LOGIC */
         CGContextAddPath(context, railPath);
         CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.400 alpha:1.000].CGColor);

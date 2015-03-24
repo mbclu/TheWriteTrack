@@ -17,19 +17,36 @@
 @end
 
 @implementation LetterViewTests {
-    GameViewController *gvc;
-    LetterView *letterview;
+    LetterView *letterView;
     NSMutableArray *paths;
+    CGColorSpaceRef colorSpace;
+    CGContextRef context;
 }
 
 - (void)setUp {
     [super setUp];
-    gvc = [[GameViewController alloc] init];
-    letterview = [[[gvc view] subviews] objectAtIndex:0];
     paths = [[NSMutableArray alloc] init];
+    letterView = [[LetterView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
+    
+    // Added this content according to blog post: http://eng.wealthfront.com/2014/03/unit-testing-drawrect.html
+    CGFloat scaleFactor = [[UIScreen mainScreen] scale];
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    context = CGBitmapContextCreate(NULL,
+                                    letterView.bounds.size.width * scaleFactor,
+                                    letterView.bounds.size.height * scaleFactor,
+                                    8,
+                                    letterView.bounds.size.width * scaleFactor * 4,
+                                    colorSpace,
+                                    (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    UIGraphicsPushContext(context);
 }
 
 - (void)tearDown {
+    // Clean up from blog post
+    UIGraphicsPopContext();
+    CFRelease(colorSpace);
+    CFRelease(context);
     [super tearDown];
 }
 
@@ -40,44 +57,20 @@
 }
 
 - (void)testThatTheLetterViewHasAClearBackground {
-    XCTAssertEqualObjects(letterview.backgroundColor, [UIColor clearColor]);
+    XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
+}
+
+- (void)testDrawRect {
+    id mockLetterView = [OCMockObject partialMockForObject:letterView];
+    [[[mockLetterView expect] andCall:@selector(fakeCreatePath) onObject:self] createBezierPath];
+    
+    [letterView drawRect:letterView.bounds];
+    
+    OCMVerifyAll(mockLetterView);
 }
 
 - (void)testThatWhenTheRailIsDrawThenTheContextUsesTheIdentityTransformAsItsMatrix {
     XCTAssertTrue(NO);
-}
-
-- (void)testDrawRect {
-    // Class Setup
-    LetterView *lv = [[LetterView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    [lv setAttrString:[LetterConverter createAttributedString:@"A"]];
-    
-    // Added this content according to blog post: http://eng.wealthfront.com/2014/03/unit-testing-drawrect.html
-    CGFloat scaleFactor = [[UIScreen mainScreen] scale];
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGRect bounds = lv.bounds;
-    CGContextRef context = CGBitmapContextCreate(NULL,
-                                                 bounds.size.width * scaleFactor,
-                                                 bounds.size.height * scaleFactor,
-                                                 8,
-                                                 bounds.size.width * scaleFactor * 4,
-                                                 colorSpace,
-                                                 (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
-    UIGraphicsPushContext(context);
-
-    // Mock setup
-    id mockLetterView = [OCMockObject partialMockForObject:lv];
-    [[[mockLetterView expect] andCall:@selector(fakeCreatePath) onObject:self] createBezierPath];
-    
-    // Method invocation
-    [lv drawRect:lv.bounds];
-    
-    OCMVerifyAll(mockLetterView);
-    
-    // Clean up from blog post
-    UIGraphicsPopContext();
-    CFRelease(colorSpace);
-    CFRelease(context);
 }
 
 @end

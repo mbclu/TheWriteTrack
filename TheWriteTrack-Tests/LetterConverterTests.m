@@ -83,7 +83,7 @@
 /// Path Creation
 
 - (void)testThatWhenTheAttributedStringIsNilThenThePathIsNil {
-    XCTAssertNil([LetterConverter pathFromAttributedString:nil]);
+    XCTAssertNil((__bridge UIBezierPath *)[LetterConverter pathFromAttributedString:nil]);
 }
 
 - (void)testThatGivenANilPathWhenAGlyphIsAddedThenAnExcpetionIsThrown {
@@ -110,18 +110,17 @@
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
-- (void)testThatWhenARunFromALineIsExaminedAtIndex0ThenASinglePositionAtOriginIsReturned {
-    // Expected Setup
-    CGPoint expectedPoint = CGPointMake(0.0, 0.0);
+- (void)testThatLettersArePlacedAtTheCenterOfTheScreen {
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
+                                forKey:@"orientation"];
     
-    // Actual Setup
-    CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
-    CFArrayRef runArray = CTLineGetGlyphRuns(line);
-    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
-    CGPoint point = [LetterConverter getSinglePositionInRun:run atIndex:0];
+    CGMutablePathRef path = CGPathCreateMutable();
+    path = [LetterConverter pathFromAttributedString:[LetterConverter createAttributedString:@"A"]];
+    CGPoint point = CGPathGetCurrentPoint(path);
 
-    XCTAssertEqual(point.x, expectedPoint.x);
-    XCTAssertEqual(point.y, expectedPoint.y);
+    XCTAssertEqualWithAccuracy(point.x, [LayoutMath centerX], 1.0);
+    XCTAssertEqualWithAccuracy(point.y, [LayoutMath centerY], 1.0);
 }
 
 @end

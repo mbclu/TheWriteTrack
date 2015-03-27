@@ -8,6 +8,7 @@
 
 #import "LetterView.h"
 #import "LetterConverter.h"
+#import "LayoutMath.h"
 
 @implementation LetterView
 
@@ -24,34 +25,40 @@
     return [[UIBezierPath alloc] init];
 }
 
+- (void)setupContextForHumanReadableText:(CGContextRef)context {
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+}
+
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     
     if (attrString != nil) {
         CGContextRef context = UIGraphicsGetCurrentContext();
         
-        // Flip the co-ordinate system
-        CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-        CGContextTranslateCTM(context, 0, self.bounds.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
-        
-//        CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
+        [self setupContextForHumanReadableText:context];
         
         CGMutablePathRef railPath = (__bridge CGMutablePathRef)[self createBezierPath];
-        /*CGMutablePathRef*/ railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
-        CGPathMoveToPoint(railPath, nil, 0.0, 0.0); /* THIS WILL NEED SOME MORE LOGIC */
+        railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
+//        [self movePathToCenter:railPath];
         CGContextAddPath(context, railPath);
-        CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.400 alpha:1.000].CGColor);
-        CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-        CGContextSetLineWidth(context, 10);
-        CGContextDrawPath(context, kCGPathFillStroke);
+        
+        [self drawRailInContext:context];
         
         CGPathRelease(railPath);
     }
 }
 
 - (void) drawRailInContext:(CGContextRef)context {
-    
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.400 alpha:1.000].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+    CGContextSetLineWidth(context, 10);
+    CGContextDrawPath(context, kCGPathFillStroke);
+}
+
+- (void) movePathToCenter:(CGMutablePathRef)path {
+    CGPathMoveToPoint(path, nil, [LayoutMath centerX], [LayoutMath centerY]);
 }
 
 @end

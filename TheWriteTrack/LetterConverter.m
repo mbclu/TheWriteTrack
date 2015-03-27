@@ -52,7 +52,7 @@
         [NSException raise:@"InvalidLinePathException" format:@"Nil Path used in addLetterFrom..."];
     }
     CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
-    CGAffineTransform transform = CGAffineTransformMakeTranslation(position.x, position.y);
+    CGAffineTransform transform = CGAffineTransformMakeTranslation([LayoutMath centerX], [LayoutMath centerY]);
     CGPathAddPath(path, &transform, letter);
     CGPathRelease(letter);
 }

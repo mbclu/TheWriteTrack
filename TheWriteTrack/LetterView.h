@@ -19,5 +19,6 @@
 
 - (UIBezierPath *) createBezierPath;
 - (void) drawRailInContext:(CGContextRef)context;
+- (void) movePathToCenter:(CGMutablePathRef)path;
 
 @end

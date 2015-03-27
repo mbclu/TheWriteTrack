@@ -12,12 +12,42 @@
 
 @interface LayoutMathTests : XCTestCase
 
+@property CGFloat defaultAccuracy;
+@property id startingOrientation;
+
 @end
 
 @implementation LayoutMathTests
 
+@synthesize defaultAccuracy;
+@synthesize startingOrientation;
+
 - (void)setUp {
     [super setUp];
+    defaultAccuracy = 1.0;
+    startingOrientation = [[UIDevice currentDevice] valueForKey:@"orientation"];
+}
+
+- (void)tearDown {
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: (NSInteger)startingOrientation]
+                                forKey:@"orientation"];
+    [super tearDown];
+}
+
+@end
+
+@interface LayoutMathTests_Portrait : LayoutMathTests
+
+@end
+
+@implementation LayoutMathTests_Portrait
+
+- (void)setUp {
+    [super setUp];
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
+                                forKey:@"orientation"];
 }
 
 - (void)tearDown {
@@ -25,35 +55,61 @@
 }
 
 - (void)testThatGivenAPortraitLayoutTheSmallerOfWidthOrHeightIsFoundToBeHeight {
-    [[UIDevice currentDevice] setValue:
-     [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
-                                forKey:@"orientation"];
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
-    XCTAssertEqual([LayoutMath sizeOfSmallerDimension], height);
+    XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, super.defaultAccuracy);
 }
 
-- (void)testThatGivenALandscapeLayoutTheSmallerOfWidthOrHeightIsFoundToBeWidth {
+- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBe325Or50LessThanHalfTheSmallerScreenDimension {
+    CGFloat expectedSize = 163.0;
+    XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, super.defaultAccuracy);
+}
+
+- (void)testThatGivenAPortraitOrientationThenTheCenterXValueIsHalfTheHeight {
+    CGFloat expectedX = [UIScreen mainScreen].bounds.size.height / 2;
+    XCTAssertEqualWithAccuracy([LayoutMath centerX], expectedX, super.defaultAccuracy);
+}
+
+- (void)testThatGivenAPortraitOrientationThenTheCenterYValueIsHalfTheWidth {
+    CGFloat expectedY = [UIScreen mainScreen].bounds.size.width / 2;
+    XCTAssertEqualWithAccuracy([LayoutMath centerY], expectedY, super.defaultAccuracy);
+}
+
+@end
+
+@interface LayoutMathTests_Landscape : LayoutMathTests
+
+@end
+
+@implementation LayoutMathTests_Landscape
+
+- (void)setUp {
+    [super setUp];
     [[UIDevice currentDevice] setValue:
      [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
                                 forKey:@"orientation"];
+}
+
+- (void)tearDown {
+    [super tearDown];
+}
+
+- (void)testThatGivenALandscapeLayoutTheSmallerOfWidthOrHeightIsFoundToBeWidth {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
-    XCTAssertEqual([LayoutMath sizeOfSmallerDimension], width);
+    XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], width, super.defaultAccuracy);
 }
 
-/// @TODO - really need to make this more robust for other devices / screen resolutions
-/* UIScreen returns a value in points, similar to printer points or font size points, with
- * the exception that points are 1:1 for non-retina diplays and 1:2 for retina displays */
-- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBe325Or50LessThanHalfTheSmallerScreenDimension {
-    [[UIDevice currentDevice] setValue:
-     [NSNumber numberWithInteger: UIInterfaceOrientationPortrait]
-                                forKey:@"orientation"];
-    CGFloat expectedSize = 163.0;
-    CGFloat accuracy = 1.0;
-    XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, accuracy);
+- (void)testThatGivenALandscapeOrientationThenTheCenterXValueIsHalfTheWidth {
+    CGFloat expectedX = [UIScreen mainScreen].bounds.size.width / 2;
+    XCTAssertEqualWithAccuracy([LayoutMath centerX], expectedX, super.defaultAccuracy);
+}
+
+- (void)testThatGivenALandscapeOrientationThenTheCenterYValueIsHalfTheHeight {
+    CGFloat expectedY = [UIScreen mainScreen].bounds.size.height / 2;
+    XCTAssertEqualWithAccuracy([LayoutMath centerY], expectedY, super.defaultAccuracy);
 }
 
 @end

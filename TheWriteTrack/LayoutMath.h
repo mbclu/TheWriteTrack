@@ -18,5 +18,7 @@
 
 + (CGFloat)sizeOfSmallerDimension;
 + (CGFloat)maximumViableFontSize;
++ (CGFloat)centerX;
++ (CGFloat)centerY;
 
 @end

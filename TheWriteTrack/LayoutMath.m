@@ -31,4 +31,25 @@
     return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING) / [UIScreen mainScreen].scale;
 }
 
++ (CGFloat)centerX
+{
+    CGFloat center = [[UIScreen mainScreen] bounds].size.width / 2.0;
+    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+    if (UIDeviceOrientationIsPortrait(deviceOrientation))
+    {
+        center = [[UIScreen mainScreen] bounds].size.height / 2.0;
+    }
+    return center;
+}
+
++ (CGFloat)centerY {
+    CGFloat center = [[UIScreen mainScreen] bounds].size.height / 2.0;
+    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+    if (UIDeviceOrientationIsPortrait(deviceOrientation))
+    {
+        center = [[UIScreen mainScreen] bounds].size.width / 2.0;
+    }
+    return center;
+}
+
 @end

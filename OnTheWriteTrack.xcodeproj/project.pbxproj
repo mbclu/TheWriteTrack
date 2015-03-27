@@ -32,6 +32,7 @@
 		C7D081921A8A322A00DE5ECC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7D081911A8A322A00DE5ECC /* Info.plist */; };
 		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
 		C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */; };
+		C7D3C54D1AC24DA6004328CD /* TestPathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D3C54C1AC24DA6004328CD /* TestPathUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		C7D081911A8A322A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TheWriteTrack/Info.plist; sourceTree = SOURCE_ROOT; };
 		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
+		C7D3C54B1AC24DA6004328CD /* TestPathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestPathUtils.h; path = "TheWriteTrack-Tests/TestPathUtils.h"; sourceTree = SOURCE_ROOT; };
+		C7D3C54C1AC24DA6004328CD /* TestPathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestPathUtils.m; path = "TheWriteTrack-Tests/TestPathUtils.m"; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -141,6 +144,8 @@
 			children = (
 				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
 				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
+				C7D3C54B1AC24DA6004328CD /* TestPathUtils.h */,
+				C7D3C54C1AC24DA6004328CD /* TestPathUtils.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
+				C7D3C54D1AC24DA6004328CD /* TestPathUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

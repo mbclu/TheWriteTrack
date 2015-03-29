@@ -39,20 +39,15 @@
     return glyph;
 }
 
-+ (CGPoint)getSinglePositionInRun:(CTRunRef)run atIndex:(CFIndex)index {
-    CFRange glyphRange = CFRangeMake(index, 1);
-    CGPoint position;
-    CTRunGetPositions(run, glyphRange, &position);
-    return position;
-}
-
-+ (void)addLetterFromFont:(CTFontRef)font andGlyph:(CGGlyph)glyph toPoint:(CGPoint)position ofPath:(CGMutablePathRef)path {
++ (void)addToCenterOfScreenLetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
     if ((__bridge UIBezierPath *)path == nil)
     {
         [NSException raise:@"InvalidLinePathException" format:@"Nil Path used in addLetterFrom..."];
     }
     CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
-    CGAffineTransform transform = CGAffineTransformMakeTranslation([LayoutMath centerX], [LayoutMath centerY]);
+    CGRect bounds = CGPathGetPathBoundingBox(letter);
+    CGAffineTransform transform = CGAffineTransformMakeTranslation([LayoutMath findStartingXValueForRect:bounds],
+                                                                   [LayoutMath findStartingYValueForRect:bounds]);
     CGPathAddPath(path, &transform, letter);
     CGPathRelease(letter);
 }
@@ -81,10 +76,9 @@
         // for each GLYPH in run
         for (CFIndex runGlyphIndex = 0; runGlyphIndex < CTRunGetGlyphCount(run); runGlyphIndex++)
         {
-            [LetterConverter addLetterFromFont:runFont
-                andGlyph:[LetterConverter getSingleGlyphInRun:run atIndex:runGlyphIndex]
-                toPoint:[LetterConverter getSinglePositionInRun:run atIndex:runGlyphIndex]
-                ofPath:letterPath];
+            [LetterConverter addToCenterOfScreenLetterPath:letterPath
+                                                  WithFont:runFont
+                                                  AndGlyph:[LetterConverter getSingleGlyphInRun:run atIndex:runGlyphIndex]];
         }
     }
     

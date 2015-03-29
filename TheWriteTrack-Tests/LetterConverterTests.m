@@ -55,7 +55,7 @@
 }
 
 - (void)testThatTheFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
-    CGFloat expectedSize = 163;
+    CGFloat expectedSize = 325.0;
     CGFloat accuracy = 1.0;
     CGFloat size = CTFontGetSize(fontRef);
     XCTAssertEqualWithAccuracy(size, expectedSize, accuracy);
@@ -89,9 +89,8 @@
 - (void)testThatGivenANilPathWhenAGlyphIsAddedThenAnExcpetionIsThrown {
     CTFontRef font;
     CGGlyph glyph;
-    CGPoint point;
     CGMutablePathRef path = nil;
-    XCTAssertThrows([LetterConverter addLetterFromFont:font andGlyph:glyph toPoint:point ofPath:path]);
+    XCTAssertThrows([LetterConverter addToCenterOfScreenLetterPath:path WithFont:font AndGlyph:glyph]);
 }
 
 - (void)testThatWhenARunFromALineIsEvxaminedAtIndex0ThenASingleGlyphIsReturned {
@@ -111,16 +110,10 @@
 }
 
 - (void)testThatLettersArePlacedAtTheCenterOfTheScreen {
-    [[UIDevice currentDevice] setValue:
-     [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
-                                forKey:@"orientation"];
-    
     CGMutablePathRef path = CGPathCreateMutable();
-    path = [LetterConverter pathFromAttributedString:[LetterConverter createAttributedString:@"A"]];
-    CGPoint point = CGPathGetCurrentPoint(path);
-
-    XCTAssertEqualWithAccuracy(point.x, [LayoutMath centerX], 1.0);
-    XCTAssertEqualWithAccuracy(point.y, [LayoutMath centerY], 1.0);
+    path = [LetterConverter pathFromAttributedString:attrString];
+    CGPathRelease(path);
+    XCTAssertTrue(false);
 }
 
 @end

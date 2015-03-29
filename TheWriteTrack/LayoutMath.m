@@ -17,18 +17,16 @@
  */
 + (CGFloat)sizeOfSmallerDimension
 {
-    CGFloat size = [[UIScreen mainScreen] bounds].size.width;
-    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
-    if (UIDeviceOrientationIsPortrait(deviceOrientation))
-    {
-        size = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat size = [UIScreen mainScreen].bounds.size.width;
+    if (size > [UIScreen mainScreen].bounds.size.height) {
+        size = [UIScreen mainScreen].bounds.size.height;
     }
     return size;
 }
 
 + (CGFloat)maximumViableFontSize
 {
-    return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING) / [UIScreen mainScreen].scale;
+    return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING);
 }
 
 + (CGFloat)centerX
@@ -50,6 +48,16 @@
         center = [[UIScreen mainScreen] bounds].size.width / 2.0;
     }
     return center;
+}
+
++ (CGFloat)findStartingXValueForRect:(CGRect)pathBounds {
+    CGFloat x = ([UIScreen mainScreen].bounds.size.width - pathBounds.size.width) / 2;
+    return x;
+}
+
++ (CGFloat)findStartingYValueForRect:(CGRect)pathBounds {
+    CGFloat y = ([UIScreen mainScreen].bounds.size.height - pathBounds.size.height) / 2;
+    return y;
 }
 
 @end

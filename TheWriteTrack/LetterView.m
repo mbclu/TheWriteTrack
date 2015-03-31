@@ -31,6 +31,13 @@
     CGContextScaleCTM(context, 1.0, -1.0);
 }
 
+- (CGMutablePathRef)createPathInContext:(CGContextRef)context {
+    CGMutablePathRef railPath = (__bridge CGMutablePathRef)[self createBezierPath];
+    railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
+    CGContextAddPath(context, railPath);
+    return railPath;
+}
+
 - (void) drawRect:(CGRect)rect {
     [super drawRect:rect];
     
@@ -39,10 +46,8 @@
         
         [self setupContextForHumanReadableText:context];
         
-        CGMutablePathRef railPath = (__bridge CGMutablePathRef)[self createBezierPath];
-        railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
-//        [self movePathToCenter:railPath];
-        CGContextAddPath(context, railPath);
+        CGMutablePathRef railPath;
+        railPath = [self createPathInContext:context];
         
         [self drawRailInContext:context];
         

@@ -19,6 +19,8 @@
 
 - (UIBezierPath *) createBezierPath;
 - (void) drawRailInContext:(CGContextRef)context;
+- (void) setupContextForHumanReadableText:(CGContextRef)context;
 - (void) movePathToCenter:(CGMutablePathRef)path;
+- (CGMutablePathRef) createPathInContext:(CGContextRef)context;
 
 @end

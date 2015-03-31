@@ -14,6 +14,7 @@
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
 		C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7584A071AA3A9F600D92D6A /* TrainTests.m */; };
+		C77DF2EC1AC88FE1002A6251 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C77DF2EB1AC88FE1002A6251 /* PathInfo.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
 		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
 		C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
@@ -32,7 +33,6 @@
 		C7D081921A8A322A00DE5ECC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7D081911A8A322A00DE5ECC /* Info.plist */; };
 		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
 		C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */; };
-		C7D3C54D1AC24DA6004328CD /* TestPathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D3C54C1AC24DA6004328CD /* TestPathUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +55,8 @@
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
 		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; };
 		C7584A071AA3A9F600D92D6A /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = "TheWriteTrack-Tests/TrainTests.m"; sourceTree = SOURCE_ROOT; };
+		C77DF2EB1AC88FE1002A6251 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = "TheWriteTrack-Tests/PathInfo.m"; sourceTree = SOURCE_ROOT; };
+		C77DF2ED1AC9BC62002A6251 /* PathInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PathInfo.h; path = TheWriteTrack/PathInfo.h; sourceTree = SOURCE_ROOT; };
 		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterViewTests.m; path = "TheWriteTrack-Tests/LetterViewTests.m"; sourceTree = SOURCE_ROOT; };
 		C78C6F871AA3A6570077DE74 /* LetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterView.h; path = TheWriteTrack/LetterView.h; sourceTree = SOURCE_ROOT; };
@@ -81,8 +83,6 @@
 		C7D081911A8A322A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TheWriteTrack/Info.plist; sourceTree = SOURCE_ROOT; };
 		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
-		C7D3C54B1AC24DA6004328CD /* TestPathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestPathUtils.h; path = "TheWriteTrack-Tests/TestPathUtils.h"; sourceTree = SOURCE_ROOT; };
-		C7D3C54C1AC24DA6004328CD /* TestPathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestPathUtils.m; path = "TheWriteTrack-Tests/TestPathUtils.m"; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,8 +144,6 @@
 			children = (
 				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
 				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
-				C7D3C54B1AC24DA6004328CD /* TestPathUtils.h */,
-				C7D3C54C1AC24DA6004328CD /* TestPathUtils.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -165,6 +163,15 @@
 				C7584A071AA3A9F600D92D6A /* TrainTests.m */,
 			);
 			name = "Train-Tests";
+			sourceTree = "<group>";
+		};
+		C77DF2EA1AC88FA8002A6251 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C77DF2EB1AC88FE1002A6251 /* PathInfo.m */,
+				C77DF2ED1AC9BC62002A6251 /* PathInfo.h */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		C7C4B8A61A8C2494009FA11B /* Tracks */ = {
@@ -242,6 +249,7 @@
 		C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C77DF2EA1AC88FA8002A6251 /* Utils */,
 				C73700171AB7D5530035C4A3 /* Common */,
 				C7D0818C1A8A315A00DE5ECC /* TheWriteTrackTests.m */,
 				C7584A061AA3A9DB00D92D6A /* Train-Tests */,
@@ -401,12 +409,12 @@
 				C78C6F8C1AA3A6790077DE74 /* Train.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
+				C77DF2EC1AC88FE1002A6251 /* PathInfo.m in Sources */,
 				C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */,
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
-				C7D3C54D1AC24DA6004328CD /* TestPathUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

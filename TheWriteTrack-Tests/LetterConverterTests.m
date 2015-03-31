@@ -12,6 +12,7 @@
 #import <XCTest/XCTest.h>
 #import "../TheWriteTrack/LetterConverter.h"
 #import "../TheWriteTrack/LayoutMath.h"
+#import "PathInfo.h"
 
 @interface LetterConverterTests : XCTestCase
 
@@ -107,13 +108,6 @@
     CGGlyph glyph = [LetterConverter getSingleGlyphInRun:run atIndex:0];
     
     XCTAssertEqual(glyph, expectedGlyph);
-}
-
-- (void)testThatLettersArePlacedAtTheCenterOfTheScreen {
-    CGMutablePathRef path = CGPathCreateMutable();
-    path = [LetterConverter pathFromAttributedString:attrString];
-    CGPathRelease(path);
-    XCTAssertTrue(false);
 }
 
 @end

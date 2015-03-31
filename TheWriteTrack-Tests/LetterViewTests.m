@@ -11,7 +11,7 @@
 #import <OCMock/OCMock.h>
 #import "LetterView.h"
 #import "LetterConverter.h"
-#import "TestPathUtils.h"
+#import "PathInfo.h"
 
 @interface LetterViewTests : XCTestCase
 
@@ -51,61 +51,21 @@
     CFRelease(context);
     [super tearDown];
 }
-//
-//- (CGMutablePathRef)fakeCreatePath {
-//    UIBezierPath *p = [[UIBezierPath alloc] init];
-//    CGMutablePathRef pRef = [LetterConverter pathFromAttributedString:[LetterConverter createAttributedString:@"A"]];
-//    p = (__bridge UIBezierPath *)pRef;
-//    [paths addObject:p];
-//    return p;
-//}
 
 - (void)testThatTheLetterViewHasAClearBackground {
     XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
 }
 
-//- (void)testThatDrawRectCreatesABezierPath {
-//    id mockLetterView = [OCMockObject partialMockForObject:letterView];
-//    [[[mockLetterView expect] andCall:@selector(fakeCreatePath) onObject:self] createBezierPath];
-//    
-//    [letterView drawRect:letterView.bounds];
-//    
-//    OCMVerifyAll(mockLetterView);
-//}
-
-/*
-#define AssertPathElementMatchesElement(EXPECTED, ACTUAL) STAssertTrue([EXPECTED isEqual:ACTUAL], @"Element mismatch:\n%@\n%@", EXPECTED, ACTUAL)
-#define AssertPathElementsMatchElements(EXPECTED, ACTUAL) \
-({ \
-STAssertTrue([EXPECTED isKindOfClass:[NSArray class]], @"EXPECTED must be an NSArray: %@", EXPECTED); \
-STAssertTrue([ACTUAL isKindOfClass:[NSArray class]], @"ACTUAL must be an NSArray: %@", ACTUAL); \
-STAssertTrue(EXPECTED.count == ACTUAL.count, @"Wrong number of elements: %lu / %lu", (unsigned long)EXPECTED.count, (unsigned long)ACTUAL.count); \
-for (NSUInteger i=0; i < EXPECTED.count; i++) { \
-AssertPathElementMatchesElement([EXPECTED objectAtIndex:i], [ACTUAL objectAtIndex:i]); \
-} \
-})
-
-- (void)testDrawRectCreatesTheCorrectPath {
-    id mockLetterView = [OCMockObject partialMockForObject:letterView];
-    [[[mockLetterView expect] andCall:@selector(fakeCreatePath) onObject:self] createBezierPath];
-
-    [letterView drawRect:letterView.bounds];
-    OCMVerifyAll(mockLetterView);
-    
-//    NSLog(letterView.attrString.string);
-    
-    NSArray *elements = [TestPathUtils createArrayOfElementsInPath:paths[0]];
-    
-    NSArray *expectedElements = @[[TestPathElement pathElementWithType:kCGPathElementMoveToPoint
-                                                                points:@[[NSValue valueWithCGPoint:CGPointMake(0.0f, 84.0f)]]],
-                                  [TestPathElement pathElementWithType:kCGPathElementAddLineToPoint
-                                                                points:@[[NSValue valueWithCGPoint:CGPointMake(11.0f, 76.333328f)]]]
-                                  ];
-    XCTAssertEqualObjects(elements[0], expectedElements[0]);
+- (void)printThePointsInTheLetter_A {
+    [letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
+    CGPathRef path = [letterView createPathInContext:context];
+    PrintPath(path);
 }
 
-- (void)testThatWhenTheRailIsDrawThenTheContextUsesTheIdentityTransformAsItsMatrix {
-    XCTAssertTrue(NO);
+- (void)printThePointsInTheLetter_B {
+    [letterView setAttrString:[LetterConverter createAttributedString:@"B"]];
+    CGPathRef path = [letterView createPathInContext:context];
+    PrintPath(path);
 }
-*/
+
 @end

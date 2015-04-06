@@ -60,4 +60,10 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     XCTAssertEqual(scene.scaleMode , SKSceneScaleModeAspectFill);
 }
 
+- (void)testThatInitAndSceneWithAreTheSameThing {
+    SKScene *initWith = [[_BaseTrackScene alloc] initWithSize:CGSizeMake(100, 100)];
+    SKScene *sceneWith = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
+    XCTAssertEqualObjects(initWith, sceneWith);
+}
+
 @end

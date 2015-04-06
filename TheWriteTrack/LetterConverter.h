@@ -18,7 +18,6 @@
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString;
 + (CGMutablePathRef)pathFromAttributedString:(NSAttributedString *)attrString;
 + (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index;
-+ (CGPoint)getSinglePositionInRun:(CTRunRef)run atIndex:(CFIndex)index;
 + (void)addToCenterOfScreenLetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph;
 
 @end

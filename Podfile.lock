@@ -1,10 +1,23 @@
 PODS:
+  - CocoaLumberjack (2.0.0):
+    - CocoaLumberjack/Default (= 2.0.0)
+    - CocoaLumberjack/Extensions (= 2.0.0)
+  - CocoaLumberjack/Core (2.0.0)
+  - CocoaLumberjack/Default (2.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.0):
+    - CocoaLumberjack/Default
   - OCMock (3.1.2)
+  - SPYTestLog (0.0.3)
 
 DEPENDENCIES:
+  - CocoaLumberjack
   - OCMock
+  - SPYTestLog
 
 SPEC CHECKSUMS:
-  OCMock: ecdd510b73ef397f2f97274785c1e87fd147c49f
+  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
+  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  SPYTestLog: 5b240fc34b2436dd34579f371cd3dc3e50a84f9c
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.35.0

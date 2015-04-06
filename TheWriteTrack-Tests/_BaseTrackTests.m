@@ -8,6 +8,9 @@
 
 #import <XCTest/XCTest.h>
 #import "_BaseTrackScene.h"
+#import "CocoaLumberjack.h"
+
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface _BaseTrackTests : XCTestCase
 
@@ -44,12 +47,17 @@
 }
 
 - (void)testThatTheBaseSceneBackgroundIsAnchoredAtZero {
-    XCTAssertEqual([self backgroundNode].anchorPoint.x, CGPointZero.x, @"Actual x: %f != Expected x: %f", [self backgroundNode].anchorPoint.x, CGPointZero.x);
-    XCTAssertEqual([self backgroundNode].anchorPoint.y, CGPointZero.y, @"Actual y: %f != Expected y: %f", [self backgroundNode].anchorPoint.y, CGPointZero.y);
+    XCTAssertEqual([self backgroundNode].anchorPoint.x, CGPointZero.x);
+    XCTAssertEqual([self backgroundNode].anchorPoint.y, CGPointZero.y);
 }
 
 - (void)testThatTheBaseSceneHasATrainOnIt {
     XCTAssertNotNil([self trainNode]);
+}
+
+- (void)testThatTheSceneUsesTheFillAspectScaleMode {
+    SKScene *scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
+    XCTAssertEqual(scene.scaleMode , SKSceneScaleModeAspectFill);
 }
 
 @end

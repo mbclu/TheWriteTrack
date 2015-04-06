@@ -6,36 +6,22 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "GameViewController.h"
-#import "LetterView.h"
+#import "_BaseTrackScene.h"
 
 @interface GameViewControllerTests : XCTestCase
 
 @end
 
-@implementation GameViewControllerTests {
-    GameViewController *gvc;
-    LetterView *letterview;
-}
+@implementation GameViewControllerTests
 
 - (void)setUp {
     [super setUp];
-    gvc = [[GameViewController alloc] init];
-    letterview = [[[gvc view] subviews] objectAtIndex:0];
 }
 
 - (void)tearDown {
     [super tearDown];
-}
-
-- (void)testThatTheLetterViewIsASubviewOfTheGameController {
-    XCTAssertTrue([letterview isKindOfClass:[LetterView class]]);
-}
-
-- (void)testThatTheFirstLetterViewLoadedIsForTheLetterA {
-    XCTAssertEqualObjects([letterview attrString].string, @"A");
 }
 
 @end

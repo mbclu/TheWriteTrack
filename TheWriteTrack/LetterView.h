@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <SpriteKit/SpriteKit.h>
 #import <CoreText/CoreText.h>
 
-@interface LetterView : UIView {
+@interface LetterView : SKView {
     NSAttributedString *attrString;
     NSAttributedString *attrStringRails;
 }
@@ -17,7 +17,6 @@
 @property (strong) IBOutlet NSAttributedString *attrString;
 @property (strong) IBOutlet NSAttributedString *attrStringRails;
 
-- (UIBezierPath *) createBezierPath;
 - (void) drawRailInContext:(CGContextRef)context;
 - (void) setupContextForHumanReadableText:(CGContextRef)context;
 - (void) movePathToCenter:(CGMutablePathRef)path;

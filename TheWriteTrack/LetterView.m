@@ -21,10 +21,6 @@
     return self;
 }
 
-- (UIBezierPath *) createBezierPath {
-    return [[UIBezierPath alloc] init];
-}
-
 - (void)setupContextForHumanReadableText:(CGContextRef)context {
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);
@@ -32,7 +28,7 @@
 }
 
 - (CGMutablePathRef)createPathInContext:(CGContextRef)context {
-    CGMutablePathRef railPath = (__bridge CGMutablePathRef)[self createBezierPath];
+    CGMutablePathRef railPath = CGPathCreateMutable();
     railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
     CGContextAddPath(context, railPath);
     return railPath;

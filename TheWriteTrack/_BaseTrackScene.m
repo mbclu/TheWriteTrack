@@ -11,6 +11,7 @@
 @implementation _BaseTrackScene
 
 -(void)didMoveToView:(SKView *)view {
+    [super didMoveToView:view];
     /* Setup your scene here */
 }
 
@@ -24,6 +25,8 @@
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        [self setScaleMode:SKSceneScaleModeAspectFill];
+        
         SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:@"RockyBackground"];
         rockyBackground.anchorPoint = CGPointZero;
         rockyBackground.name = @"_BaseBackground";

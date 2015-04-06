@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CocoaLumberjack.h"
 
 @interface AppDelegate ()
 
@@ -15,8 +16,27 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (void)EnableLumberjackWithColors {
     // Override point for customization after application launch.
+    // CocoaLumberjack
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    // XcodeColors
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+
+    // Custom Colors
+    UIColor *yellow = [UIColor colorWithRed:211.0f/255.0f green:225.0f/255.0f blue:38.0f/255.0f alpha:1.0];
+    UIColor *peach = [UIColor colorWithRed:246.0f/255.0f green:178.0f/255.0f blue:107.0f/255.0f alpha:1.0];
+    UIColor *violet = [UIColor colorWithRed:142.0f/255.0f green:124.0f/255.0f blue:195.0f/255.0f alpha:1.0];
+    UIColor *grey = [UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:1.0];
+    [[DDTTYLogger sharedInstance] setForegroundColor:yellow backgroundColor:nil forFlag:DDLogFlagWarning];
+    [[DDTTYLogger sharedInstance] setForegroundColor:grey backgroundColor:nil forFlag:DDLogFlagInfo];
+    [[DDTTYLogger sharedInstance] setForegroundColor:violet backgroundColor:nil forFlag:DDLogFlagDebug];
+    [[DDTTYLogger sharedInstance] setForegroundColor:peach backgroundColor:nil forFlag:DDLogFlagVerbose];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self EnableLumberjackWithColors];
     return YES;
 }
 

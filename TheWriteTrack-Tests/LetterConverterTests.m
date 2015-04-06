@@ -10,8 +10,8 @@
 #import <OCMock/OCMock.h>
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "../TheWriteTrack/LetterConverter.h"
-#import "../TheWriteTrack/LayoutMath.h"
+#import "LetterConverter.h"
+#import "LayoutMath.h"
 #import "PathInfo.h"
 
 @interface LetterConverterTests : XCTestCase

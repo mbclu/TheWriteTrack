@@ -12,8 +12,8 @@
 #include <Foundation/Foundation.h>
 #include <CoreGraphics/CoreGraphics.h>
 
-static void PrintPathElement(void* info, const CGPathElement* element);
-static void PrintElementType(const CGPathElement* element);
+void PrintPathElement(void* info, const CGPathElement* element);
+void PrintElementType(const CGPathElement* element);
 void PrintPath(CGPathRef path);
 
 #endif

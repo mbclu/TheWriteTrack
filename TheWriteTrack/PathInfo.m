@@ -8,15 +8,18 @@
 
 #import "PathInfo.h"
 #import <UIKit/UIKit.h>
+#import "CocoaLumberjack.h"
 
-static void PrintPathElement(void* info, const CGPathElement* element)
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
+void PrintPathElement(void* info, const CGPathElement* element)
 {
     PrintElementType(element);
 }
 
-static void PrintElementType(const CGPathElement* element)
+void PrintElementType(const CGPathElement* element)
 {
-    NSString *pointsString = nil;
+    NSString *pointsString = @"";
     NSString *typeString = nil;
     
     switch (element->type) {
@@ -56,18 +59,18 @@ static void PrintElementType(const CGPathElement* element)
         }
             
         case kCGPathElementCloseSubpath:
-            typeString = @"CloseSubpath";
+            typeString = @"\tCloseSubpath";
             break;
             
         default:
             typeString = @"--Unknown-Element-Type--";
             break;
     }
-    NSLog(@"%@ %@", pointsString, typeString);
+    DDLogVerbose(@"%@ %@", pointsString, typeString);
 }
 
 void PrintPath(CGPathRef path)
 {
-    NSLog(@"CGPathRef: <%p>\n", path);
+    DDLogDebug(@"CGPathRef: <%p>", path);
     CGPathApply(path, nil, PrintPathElement);
 }

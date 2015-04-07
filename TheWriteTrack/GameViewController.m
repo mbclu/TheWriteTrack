@@ -27,11 +27,13 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 {
     [super viewDidLoad];
     
-    self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    /* Need to add some integration tests around these and the order... 
+     Adding the letterView was covering up the baseBackground even though
+     the background was visible and presented */
     
-    [self.letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
-    
-    [self.view addSubview:self.letterView];
+//    self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    [self.letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
+//    [self.view addSubview:self.letterView];
 
 #ifdef DEBUG
     [self addDebugPrintPathButton];

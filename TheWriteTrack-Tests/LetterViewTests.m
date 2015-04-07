@@ -56,16 +56,4 @@
     XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
 }
 
-- (void)printThePointsInTheLetter_A {
-    [letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
-    CGPathRef path = [letterView createPathInContext:context];
-    PrintPath(path);
-}
-
-- (void)printThePointsInTheLetter_B {
-    [letterView setAttrString:[LetterConverter createAttributedString:@"B"]];
-    CGPathRef path = [letterView createPathInContext:context];
-    PrintPath(path);
-}
-
 @end

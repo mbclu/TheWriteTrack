@@ -31,6 +31,15 @@
     [super tearDown];
 }
 
+
+- (void)testAppHasANonNilAppDelegate {
+    XCTAssertNotNil([UIApplication sharedApplication].delegate);
+}
+
+- (void)testAppHasANonNilGameViewController {
+    XCTAssertNotNil(gvc);
+}
+
 - (void)testThatTheGVCPresentsThe_BaseBackground_Scene {
     SKScene *_BaseBackgroundScene = [[_BaseTrackScene alloc] initWithSize:[UIScreen mainScreen].bounds.size];
     SKSpriteNode *expectedNode = (SKSpriteNode*)[_BaseBackgroundScene childNodeWithName:@"_BaseBackground"];

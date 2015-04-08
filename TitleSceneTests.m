@@ -7,8 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "TitleScene.h"
 
-@interface TitleSceneTests : XCTestCase
+@interface TitleSceneTests : XCTestCase {
+    TitleScene *scene;
+}
 
 @end
 
@@ -16,24 +19,26 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testThatTheTitleSceneScaleModeIsConfiguredToFill {
+    XCTAssertEqual([scene scaleMode], SKSceneScaleModeAspectFill);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testThatTheTitleSceneLoadsTheTitleBackground {
+    SKSpriteNode *expectedNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
+    XCTAssertNotNil(expectedNode);
+}
+
+- (void)testThatTheTitleBackgroundIsAnchoredAtZeroXZeroY {
+    SKSpriteNode *expectedNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
+    XCTAssertEqual(expectedNode.anchorPoint.x, 0);
+    XCTAssertEqual(expectedNode.anchorPoint.y, 0);
 }
 
 @end

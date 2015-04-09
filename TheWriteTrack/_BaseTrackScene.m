@@ -29,7 +29,7 @@
         
         SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:@"RockyBackground"];
         rockyBackground.anchorPoint = CGPointZero;
-        rockyBackground.name = @"_BaseBackground";
+        rockyBackground.name = @"RockyBackground";
         [self addChild:rockyBackground];
         
         SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:@"MagicTrain"];

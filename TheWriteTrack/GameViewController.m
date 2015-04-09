@@ -7,12 +7,10 @@
 //
 
 #import "GameViewController.h"
-#import "_BaseTrackScene.h"
-#import "LetterView.h"
-#import "LetterConverter.h"
+#import "TitleScene.h"
 #import "PathInfo.h"
-#import "A.h"
 #import "CocoaLumberjack.h"
+#import "LetterConverter.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
@@ -27,14 +25,6 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 {
     [super viewDidLoad];
     
-    /* Need to add some integration tests around these and the order... 
-     Adding the letterView was covering up the baseBackground even though
-     the background was visible and presented */
-    
-//    self.letterView = [[LetterView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    [self.letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
-//    [self.view addSubview:self.letterView];
-
 #ifdef DEBUG
     [self addDebugPrintPathButton];
 #endif
@@ -46,11 +36,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
     SKView * skView = (SKView *)self.view;
     if (!skView.scene) {
-//        A *a = [A sceneWithSize:skView.bounds.size];
-//        a.scaleMode = SKSceneScaleModeAspectFill;
-//        [skView presentScene:a];
-        _BaseTrackScene *trackScene = [_BaseTrackScene sceneWithSize:skView.bounds.size];
-        [skView presentScene:trackScene];
+        TitleScene *titleScene = [TitleScene sceneWithSize:skView.bounds.size];
+        [skView presentScene:titleScene];
     }
 }
 

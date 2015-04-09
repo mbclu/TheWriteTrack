@@ -12,47 +12,32 @@
 
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
-@interface _BaseTrackTests : XCTestCase
-
-@property SKView* skView;
-@property SKSpriteNode* backgroundNode;
-@property SKSpriteNode* trainNode;
+@interface _BaseTrackTests : XCTestCase {
+    _BaseTrackScene *scene;
+    SKSpriteNode *rockyBackground;
+}
 
 @end
 
 @implementation _BaseTrackTests
 
-
 - (void)setUp {
     [super setUp];
-    [self setSkView:(SKView*)[UIApplication sharedApplication].delegate.window.rootViewController.view];
-    [self setBackgroundNode:(SKSpriteNode*)[[_skView scene] childNodeWithName:@"_BaseBackground"]];
-    [self setTrainNode:(SKSpriteNode*)[[_skView scene] childNodeWithName:@"_BaseTrain"]];
+    scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
+    rockyBackground = [scene childNodeWithName:@"RockyBackground"];
 }
 
 - (void)tearDown {
     [super tearDown];
 }
 
-- (void)testThatTheBaseSceneDoesNotShowFPS {
-    XCTAssertFalse([[self skView] showsFPS]);
-}
-
-- (void)testThatTheBaseSceneDoesNotTheNumberOfNodes {
-    XCTAssertFalse([[self skView] showsNodeCount]);
-}
-
 - (void)testThatTheBaseSceneIsComprisedOfARockyBackground {
-    XCTAssertNotNil([self backgroundNode]);
+    XCTAssertNotNil(rockyBackground);
 }
 
 - (void)testThatTheBaseSceneBackgroundIsAnchoredAtZero {
-    XCTAssertEqual([self backgroundNode].anchorPoint.x, CGPointZero.x);
-    XCTAssertEqual([self backgroundNode].anchorPoint.y, CGPointZero.y);
-}
-
-- (void)testThatTheBaseSceneHasATrainOnIt {
-    XCTAssertNotNil([self trainNode]);
+    XCTAssertEqual(rockyBackground.anchorPoint.x, CGPointZero.x);
+    XCTAssertEqual(rockyBackground.anchorPoint.y, CGPointZero.y);
 }
 
 - (void)testThatTheSceneUsesTheFillAspectScaleMode {

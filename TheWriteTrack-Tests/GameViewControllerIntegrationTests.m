@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "GameViewController.h"
 #import "LetterView.h"
-#import "_BaseTrackScene.h"
+#import "TitleScene.h"
 
 @interface GameViewControllerIntegrationTests : XCTestCase
 
@@ -18,13 +18,13 @@
 
 @implementation GameViewControllerIntegrationTests {
     GameViewController *gvc;
-    SKSpriteNode *baseBackgroundNode;
+    SKSpriteNode *titleBackground;
 }
 
 - (void)setUp {
     [super setUp];
     gvc = (GameViewController*)[UIApplication sharedApplication].delegate.window.rootViewController;
-    baseBackgroundNode = (SKSpriteNode*)[(SKScene*)[(SKView*)gvc.view scene] childNodeWithName:@"_BaseBackground"];
+    titleBackground = (SKSpriteNode*)[(SKScene*)[(SKView*)gvc.view scene] childNodeWithName:@"TitleBackground"];
 }
 
 - (void)tearDown {
@@ -40,20 +40,16 @@
     XCTAssertNotNil(gvc);
 }
 
-- (void)testThatTheGVCPresentsThe_BaseBackground_Scene {
-    SKScene *_BaseBackgroundScene = [[_BaseTrackScene alloc] initWithSize:[UIScreen mainScreen].bounds.size];
-    SKSpriteNode *expectedNode = (SKSpriteNode*)[_BaseBackgroundScene childNodeWithName:@"_BaseBackground"];
-    XCTAssertEqualObjects(baseBackgroundNode, expectedNode);
+- (void)testThatTheGameViewControllerPresentsTheTitleScene {
+    SKScene *titleScene = [[TitleScene alloc] initWithSize:[UIScreen mainScreen].bounds.size];
+    SKSpriteNode *expectedNode = (SKSpriteNode*)[titleScene childNodeWithName:@"TitleBackground"];
+    XCTAssertEqualObjects(titleBackground, expectedNode);
 }
 
-- (void)testThatTheBackgroundSceneIsPresentedTheSameSizeAsTheMainScreen {
+- (void)testThatTheTitleBackgroundSceneIsPresentedTheSameSizeAsTheMainScreen {
     CGSize expectedSize = [UIScreen mainScreen].bounds.size;
-    XCTAssertEqual(baseBackgroundNode.size.height, expectedSize.height);
-    XCTAssertEqual(baseBackgroundNode.size.width, expectedSize.width);
-}
-
-- (void)testThatTheBaseBackgroundIsNotHidden {
-    XCTAssertFalse(baseBackgroundNode.isHidden);
+    XCTAssertEqual(titleBackground.size.height, expectedSize.height);
+    XCTAssertEqual(titleBackground.size.width, expectedSize.width);
 }
 
 @end

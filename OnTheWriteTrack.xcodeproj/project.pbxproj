@@ -164,13 +164,13 @@
 			name = "Common-Tests";
 			sourceTree = "<group>";
 		};
-		C7387B8B1A97E4060086EC94 /* Train */ = {
+		C7387B8B1A97E4060086EC94 /* Trains */ = {
 			isa = PBXGroup;
 			children = (
 				C78C6F8A1AA3A6790077DE74 /* Train.h */,
 				C78C6F8B1AA3A6790077DE74 /* Train.m */,
 			);
-			name = Train;
+			name = Trains;
 			sourceTree = "<group>";
 		};
 		C7584A061AA3A9DB00D92D6A /* Train-Tests */ = {
@@ -251,7 +251,7 @@
 				C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */,
 				C7CED0531A86B9DA00A4DCC3 /* Supporting Files */,
 				C7C4B8A61A8C2494009FA11B /* Tracks */,
-				C7387B8B1A97E4060086EC94 /* Train */,
+				C7387B8B1A97E4060086EC94 /* Trains */,
 				C77DF2EA1AC88FA8002A6251 /* Utils */,
 			);
 			name = TheWriteTrack;

@@ -8,15 +8,32 @@
 
 #import "TitleScene.h"
 
+#define TITLE_BACKGROUND @"TitleBackground"
+#define TITLE_TRAIN @"TitleTrain"
+
 @implementation TitleScene
+
+- (void)addBackground {
+    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:TITLE_BACKGROUND];
+    background.name = TITLE_BACKGROUND;
+    background.anchorPoint = CGPointZero;
+    background.zPosition = 0;
+    [self addChild:background];
+}
+
+- (void)addTrain {
+    SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:TITLE_TRAIN];
+    train.name = TITLE_TRAIN;
+    train.anchorPoint = CGPointZero;
+    train.zPosition = 1;
+    [self addChild:train];
+}
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self setScaleMode:SKSceneScaleModeAspectFill];
-        SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"TitleBackground"];
-        background.name = @"TitleBackground";
-        background.anchorPoint = CGPointZero;
-        [self addChild:background];
+        [self addBackground];
+        [self addTrain];
     }
     return self;
 }

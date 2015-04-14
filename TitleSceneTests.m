@@ -11,6 +11,8 @@
 
 @interface TitleSceneTests : XCTestCase {
     TitleScene *scene;
+    SKSpriteNode *backgroundNode;
+    SKSpriteNode *trainNode;
 }
 
 @end
@@ -20,6 +22,8 @@
 - (void)setUp {
     [super setUp];
     scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
+    backgroundNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
+    trainNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleTrain"];
 }
 
 - (void)tearDown {
@@ -31,14 +35,25 @@
 }
 
 - (void)testThatTheTitleSceneLoadsTheTitleBackground {
-    SKSpriteNode *expectedNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
-    XCTAssertNotNil(expectedNode);
+    XCTAssertNotNil(backgroundNode);
 }
 
 - (void)testThatTheTitleBackgroundIsAnchoredAtZeroXZeroY {
-    SKSpriteNode *expectedNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
-    XCTAssertEqual(expectedNode.anchorPoint.x, 0);
-    XCTAssertEqual(expectedNode.anchorPoint.y, 0);
+    XCTAssertEqual(backgroundNode.anchorPoint.x, 0);
+    XCTAssertEqual(backgroundNode.anchorPoint.y, 0);
+}
+
+- (void)testThatTheTitleTrainIsLoadedOnTheTitleScene {
+    XCTAssertNotNil(trainNode);
+}
+
+- (void)testThatTheTitleTrainIsAnchoredAtAPoint {
+    XCTAssertEqual(trainNode.anchorPoint.x, 0);
+    XCTAssertEqual(trainNode.anchorPoint.y, 0);
+}
+
+- (void)testThatTheTrainIsLoadedOnTopOfTheBackground {
+    XCTAssertGreaterThan(trainNode.zPosition, backgroundNode.zPosition);
 }
 
 @end

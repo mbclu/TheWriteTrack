@@ -8,6 +8,8 @@
 
 #import "_BaseTrackScene.h"
 
+#define ROCKY_BACKGROUND @"RockyBackground"
+
 @implementation _BaseTrackScene
 
 -(void)didMoveToView:(SKView *)view {
@@ -27,9 +29,9 @@
     if (self = [super initWithSize:size]) {
         [self setScaleMode:SKSceneScaleModeAspectFill];
         
-        SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:@"RockyBackground"];
+        SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:ROCKY_BACKGROUND];
         rockyBackground.anchorPoint = CGPointZero;
-        rockyBackground.name = @"RockyBackground";
+        rockyBackground.name = ROCKY_BACKGROUND;
         [self addChild:rockyBackground];
         
         SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:@"MagicTrain"];

@@ -7,9 +7,9 @@
 //
 
 #import "TitleScene.h"
+#import "Train.h"
 
 #define TITLE_BACKGROUND @"TitleBackground"
-#define TITLE_TRAIN @"TitleTrain"
 
 @implementation TitleScene
 
@@ -22,8 +22,8 @@
 }
 
 - (void)addTrain {
-    SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:TITLE_TRAIN];
-    train.name = TITLE_TRAIN;
+    Train *train = [Train spriteNodeWithImageNamed:TITLE_TRAIN_IMAGE_NAME];
+    train.name = TRAIN_NODE;
     train.anchorPoint = CGPointZero;
     train.zPosition = 1;
     [self addChild:train];

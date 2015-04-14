@@ -7,6 +7,9 @@
 //
 
 #import "Train.h"
+#import "CocoaLumberjack.h"
+
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 static const int POINTS_PER_SECOND = 80;
 

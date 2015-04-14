@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "TitleScene.h"
+#import "Train.h"
 
 @interface TitleSceneTests : XCTestCase {
     TitleScene *scene;
@@ -23,7 +24,7 @@
     [super setUp];
     scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
     backgroundNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
-    trainNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleTrain"];
+    trainNode = (SKSpriteNode*)[scene childNodeWithName:TRAIN_NODE];
 }
 
 - (void)tearDown {

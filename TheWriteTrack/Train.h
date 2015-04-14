@@ -8,6 +8,11 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+#define TITLE_TRAIN_IMAGE_NAME @"TitleTrain"
+#define MAGIC_TRAIN_IMAGE_NAME @"MagicTrain"
+
+#define TRAIN_NODE @"Train"
+
 @interface Train : SKSpriteNode
 
 @property (readonly) NSInteger pointsPerSecond;

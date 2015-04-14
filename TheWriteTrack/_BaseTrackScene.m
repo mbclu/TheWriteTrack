@@ -7,6 +7,7 @@
 //
 
 #import "_BaseTrackScene.h"
+#import "Train.h"
 
 #define ROCKY_BACKGROUND @"RockyBackground"
 
@@ -34,7 +35,7 @@
         rockyBackground.name = ROCKY_BACKGROUND;
         [self addChild:rockyBackground];
         
-        SKSpriteNode *train = [SKSpriteNode spriteNodeWithImageNamed:@"MagicTrain"];
+        Train *train = [Train spriteNodeWithImageNamed:MAGIC_TRAIN_IMAGE_NAME];
         train.position = CGPointMake(self.size.width / 2.0f, self.size.height / 2.0f);
         train.name = @"_BaseTrain";
         [self addChild:train];

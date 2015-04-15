@@ -57,4 +57,9 @@
     XCTAssertGreaterThan(trainNode.zPosition, backgroundNode.zPosition);
 }
 
+- (void)testThatTheTrainStartsAtPoint123x148y {
+    XCTAssertEqualWithAccuracy(trainNode.position.x, 123, 1.0);
+    XCTAssertEqualWithAccuracy(trainNode.position.y, 138, 1.0);
+}
+
 @end

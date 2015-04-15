@@ -10,4 +10,9 @@
 
 @interface TitleScene : SKScene
 
+typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
+    TitleBackgroundZOrder,
+    TitleTrainZOrder
+};
+
 @end

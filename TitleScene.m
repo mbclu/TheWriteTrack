@@ -11,6 +11,7 @@
 #import "CocoaLumberjack.h"
 
 #define TITLE_BACKGROUND @"TitleBackground"
+#define TITLE_FOREGROUND @"TitleForeground"
 
 @implementation TitleScene
 
@@ -31,11 +32,20 @@
     [self addChild:train];
 }
 
+- (void)addForeground {
+    SKSpriteNode *foreground = [SKSpriteNode spriteNodeWithImageNamed:TITLE_FOREGROUND];
+    foreground.name = TITLE_FOREGROUND;
+    foreground.anchorPoint = CGPointZero;
+    foreground.zPosition = TitleForegroundZOrder;
+    [self addChild:foreground];
+}
+
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
         [self addTrain];
+        [self addForeground];
     }
     return self;
 }

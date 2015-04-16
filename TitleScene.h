@@ -12,7 +12,8 @@
 
 typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
     TitleBackgroundZOrder,
-    TitleTrainZOrder
+    TitleTrainZOrder,
+    TitleForegroundZOrder
 };
 
 @end

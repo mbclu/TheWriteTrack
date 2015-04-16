@@ -13,6 +13,7 @@
 @interface TitleSceneTests : XCTestCase {
     TitleScene *scene;
     SKSpriteNode *backgroundNode;
+    SKSpriteNode *foregroundNode;
     SKSpriteNode *trainNode;
 }
 
@@ -24,6 +25,7 @@
     [super setUp];
     scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
     backgroundNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
+    foregroundNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleForeground"];
     trainNode = (SKSpriteNode*)[scene childNodeWithName:TRAIN_NODE];
 }
 
@@ -60,6 +62,19 @@
 - (void)testThatTheTrainStartsAtPoint123x148y {
     XCTAssertEqualWithAccuracy(trainNode.position.x, 123, 1.0);
     XCTAssertEqualWithAccuracy(trainNode.position.y, 138, 1.0);
+}
+
+- (void)testThatTheTitleSceneLoadsTheForeground {
+    XCTAssertNotNil(foregroundNode);
+}
+
+- (void)testThatTheTitleForegroundIsAnchoredAtZero {
+    XCTAssertEqual(foregroundNode.anchorPoint.x, 0);
+    XCTAssertEqual(foregroundNode.anchorPoint.y, 0);
+}
+
+- (void)testThatTheTitleForegroundIsLoadedOnTopOfTheTrain {
+    XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
 }
 
 @end

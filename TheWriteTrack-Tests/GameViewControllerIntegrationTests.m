@@ -18,13 +18,13 @@
 
 @implementation GameViewControllerIntegrationTests {
     GameViewController *gvc;
-    SKSpriteNode *titleBackground;
+    SKView *titleView;
 }
 
 - (void)setUp {
     [super setUp];
     gvc = (GameViewController*)[UIApplication sharedApplication].delegate.window.rootViewController;
-    titleBackground = (SKSpriteNode*)[(SKScene*)[(SKView*)gvc.view scene] childNodeWithName:@"TitleBackground"];
+    titleView = (SKView*)gvc.view;
 }
 
 - (void)tearDown {
@@ -41,15 +41,14 @@
 }
 
 - (void)testThatTheGameViewControllerPresentsTheTitleScene {
-    SKScene *titleScene = [[TitleScene alloc] initWithSize:[UIScreen mainScreen].bounds.size];
-    SKSpriteNode *expectedNode = (SKSpriteNode*)[titleScene childNodeWithName:@"TitleBackground"];
-    XCTAssertEqualObjects(titleBackground, expectedNode);
+    SKScene *expectedScene = [TitleScene sceneWithSize:[titleView scene].size];
+    XCTAssertEqualObjects([titleView scene], expectedScene);
 }
 
-- (void)testThatTheTitleBackgroundSceneIsPresentedTheSameSizeAsTheMainScreen {
+- (void)testThatTheTitleSceneIsPresentedTheSameSizeAsTheMainScreen {
     CGSize expectedSize = [UIScreen mainScreen].bounds.size;
-    XCTAssertEqual(titleBackground.size.height, expectedSize.height);
-    XCTAssertEqual(titleBackground.size.width, expectedSize.width);
+    XCTAssertEqual([titleView frame].size.height, expectedSize.height);
+    XCTAssertEqual([titleView frame].size.width, expectedSize.width);
 }
 
 @end

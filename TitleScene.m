@@ -10,18 +10,16 @@
 #import "Train.h"
 #import "CocoaLumberjack.h"
 
-#define TITLE_BACKGROUND @"TitleBackground"
-#define TITLE_FOREGROUND @"TitleForeground"
-
 @implementation TitleScene
 
 - (void)AddNodeWithName:(NSString*)name AndImageNamed:(NSString*)imageName AndZOrder:(NSInteger)zOrder {
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:imageName];
-    background.name = name;
-    background.accessibilityLabel = name;
-    background.anchorPoint = CGPointZero;
-    background.zPosition = zOrder;
-    [self addChild:background];
+    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:imageName];
+    node.name = name;
+    node.isAccessibilityElement = YES;
+    node.accessibilityLabel = name;
+    node.anchorPoint = CGPointZero;
+    node.zPosition = zOrder;
+    [self addChild:node];
 }
 
 - (void)addBackground {
@@ -39,6 +37,8 @@
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        self.isAccessibilityElement = YES;
+        self.accessibilityLabel = TITLE_LABEL;
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
         [self addTrain];

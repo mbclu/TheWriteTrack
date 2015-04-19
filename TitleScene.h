@@ -7,6 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+ 
+#define TITLE_LABEL @"titleScene"
+#define TITLE_BACKGROUND @"titleBackground"
+#define TITLE_FOREGROUND @"titleForeground"
 
 @interface TitleScene : SKScene
 

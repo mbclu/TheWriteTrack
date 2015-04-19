@@ -24,8 +24,8 @@
 - (void)setUp {
     [super setUp];
     scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
-    backgroundNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleBackground"];
-    foregroundNode = (SKSpriteNode*)[scene childNodeWithName:@"TitleForeground"];
+    backgroundNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_BACKGROUND];
+    foregroundNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_FOREGROUND];
     trainNode = (SKSpriteNode*)[scene childNodeWithName:TRAIN_NODE];
 }
 

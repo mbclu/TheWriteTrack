@@ -1,0 +1,766 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		33F0F7F8451C437A96FC1B51 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
+		9B4DB71D8E2CAB13BE5077EC /* libPods-OnTheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */; };
+		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
+		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
+		C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
+		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
+		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
+		C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7584A071AA3A9F600D92D6A /* TrainTests.m */; };
+		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
+		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
+		C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
+		C78C6F8C1AA3A6790077DE74 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F8B1AA3A6790077DE74 /* Train.m */; };
+		C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
+		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
+		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
+		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
+		C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D081731A8A312700DE5ECC /* AppDelegate.m */; };
+		C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
+		C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
+		C7D081881A8A312700DE5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
+		C7D081901A8A31F000DE5ECC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7D0818F1A8A31F000DE5ECC /* Default-568h@2x.png */; };
+		C7D081921A8A322A00DE5ECC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7D081911A8A322A00DE5ECC /* Info.plist */; };
+		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
+		C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */; };
+		C7DB850B1AD48AA40026972B /* TitleSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DB850A1AD48AA40026972B /* TitleSceneTests.m */; };
+		C7DB850E1AD48ABB0026972B /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DB850D1AD48ABB0026972B /* TitleScene.m */; };
+		C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */; };
+		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
+		C7FDF20F1ACB6D0C0094BBE9 /* A.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20E1ACB6D0C0094BBE9 /* A.m */; };
+		C7FDF2121ACB6E3B0094BBE9 /* ATests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF2111ACB6E3B0094BBE9 /* ATests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7CED06F1A86B9DA00A4DCC3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7CED0481A86B9DA00A4DCC3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7CED04F1A86B9DA00A4DCC3;
+			remoteInfo = "The Write Track";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OnTheWriteTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.release.xcconfig"; sourceTree = "<group>"; };
+		C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C710AB611A9ECA43002E7B79 /* LetterConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterConverter.h; path = TheWriteTrack/LetterConverter.h; sourceTree = SOURCE_ROOT; };
+		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
+		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; };
+		C710AB661A9ECCFD002E7B79 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
+		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
+		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; };
+		C7584A071AA3A9F600D92D6A /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = "TheWriteTrack-Tests/TrainTests.m"; sourceTree = SOURCE_ROOT; };
+		C77DF2ED1AC9BC62002A6251 /* PathInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PathInfo.h; path = TheWriteTrack/PathInfo.h; sourceTree = SOURCE_ROOT; };
+		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterViewTests.m; path = "TheWriteTrack-Tests/LetterViewTests.m"; sourceTree = SOURCE_ROOT; };
+		C78C6F871AA3A6570077DE74 /* LetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterView.h; path = TheWriteTrack/LetterView.h; sourceTree = SOURCE_ROOT; };
+		C78C6F881AA3A6570077DE74 /* LetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterView.m; path = TheWriteTrack/LetterView.m; sourceTree = SOURCE_ROOT; };
+		C78C6F8A1AA3A6790077DE74 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Train.h; path = TheWriteTrack/Train.h; sourceTree = SOURCE_ROOT; };
+		C78C6F8B1AA3A6790077DE74 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Train.m; path = TheWriteTrack/Train.m; sourceTree = SOURCE_ROOT; };
+		C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = TheWriteTrack/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
+		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
+		C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackTests.m; path = "TheWriteTrack-Tests/_BaseTrackTests.m"; sourceTree = SOURCE_ROOT; };
+		C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheWriteTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7D081731A8A312700DE5ECC /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TheWriteTrack/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		C7D081791A8A312700DE5ECC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TheWriteTrack/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		C7D0817C1A8A312700DE5ECC /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewController.h; path = TheWriteTrack/GameViewController.h; sourceTree = SOURCE_ROOT; };
+		C7D0817D1A8A312700DE5ECC /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameViewController.m; path = TheWriteTrack/GameViewController.m; sourceTree = SOURCE_ROOT; };
+		C7D0817E1A8A312700DE5ECC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TheWriteTrack/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		C7D0817F1A8A312700DE5ECC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TheWriteTrack/main.m; sourceTree = SOURCE_ROOT; };
+		C7D0818B1A8A315A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "TheWriteTrack-Tests/Info.plist"; sourceTree = SOURCE_ROOT; };
+		C7D0818F1A8A31F000DE5ECC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C7D081911A8A322A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TheWriteTrack/Info.plist; sourceTree = SOURCE_ROOT; };
+		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
+		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
+		C7DB850A1AD48AA40026972B /* TitleSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleSceneTests.m; sourceTree = SOURCE_ROOT; };
+		C7DB850C1AD48ABB0026972B /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = SOURCE_ROOT; };
+		C7DB850D1AD48ABB0026972B /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = SOURCE_ROOT; };
+		C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameViewControllerIntegrationTests.m; path = "TheWriteTrack-Tests/GameViewControllerIntegrationTests.m"; sourceTree = SOURCE_ROOT; };
+		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
+		C7FDF20D1ACB6D0C0094BBE9 /* A.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = A.h; path = TheWriteTrack/A.h; sourceTree = SOURCE_ROOT; };
+		C7FDF20E1ACB6D0C0094BBE9 /* A.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = A.m; path = TheWriteTrack/A.m; sourceTree = SOURCE_ROOT; };
+		C7FDF2111ACB6E3B0094BBE9 /* ATests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATests.m; path = "TheWriteTrack-Tests/ATests.m"; sourceTree = SOURCE_ROOT; };
+		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C7CED04D1A86B9DA00A4DCC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */,
+				C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */,
+				C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */,
+				33F0F7F8451C437A96FC1B51 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7CED06B1A86B9DA00A4DCC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */,
+				9B4DB71D8E2CAB13BE5077EC /* libPods-OnTheWriteTrackTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		011576BBE50EDA8894D40229 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */,
+				CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */,
+				76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */,
+				A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9DA64499BB4D4962B0368B47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */,
+				CCE25A996CEA4B7C8B7FBC33 /* libPods.a */,
+				2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C73700131AB7D49A0035C4A3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,
+				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
+				C73700141AB7D4E40035C4A3 /* LayoutMath.h */,
+				C73700151AB7D4E40035C4A3 /* LayoutMath.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		C73700171AB7D5530035C4A3 /* Common-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
+				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
+			);
+			name = "Common-Tests";
+			sourceTree = "<group>";
+		};
+		C7387B8B1A97E4060086EC94 /* Trains */ = {
+			isa = PBXGroup;
+			children = (
+				C78C6F8A1AA3A6790077DE74 /* Train.h */,
+				C78C6F8B1AA3A6790077DE74 /* Train.m */,
+			);
+			name = Trains;
+			sourceTree = "<group>";
+		};
+		C7584A061AA3A9DB00D92D6A /* Train-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7584A071AA3A9F600D92D6A /* TrainTests.m */,
+			);
+			name = "Train-Tests";
+			sourceTree = "<group>";
+		};
+		C77DF2EA1AC88FA8002A6251 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */,
+				C77DF2ED1AC9BC62002A6251 /* PathInfo.h */,
+			);
+			name = Utils;
+			path = "The Write TrackTests";
+			sourceTree = SOURCE_ROOT;
+		};
+		C7C4B8A61A8C2494009FA11B /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				C7FDF20C1ACB6AEC0094BBE9 /* Letters */,
+				C78C6F871AA3A6570077DE74 /* LetterView.h */,
+				C78C6F881AA3A6570077DE74 /* LetterView.m */,
+				C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */,
+				C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */,
+			);
+			name = Tracks;
+			sourceTree = "<group>";
+		};
+		C7C4B8AB1A8C2C87009FA11B /* Track-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7FDF2101ACB6DCD0094BBE9 /* Letter-Tests */,
+				C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */,
+				C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */,
+			);
+			name = "Track-Tests";
+			sourceTree = "<group>";
+		};
+		C7CED0471A86B9DA00A4DCC3 = {
+			isa = PBXGroup;
+			children = (
+				C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */,
+				C710AB661A9ECCFD002E7B79 /* CoreText.framework */,
+				C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */,
+				C7D0818F1A8A31F000DE5ECC /* Default-568h@2x.png */,
+				C7CED0511A86B9DA00A4DCC3 /* Products */,
+				C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */,
+				C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */,
+				9DA64499BB4D4962B0368B47 /* Frameworks */,
+				011576BBE50EDA8894D40229 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		C7CED0511A86B9DA00A4DCC3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */,
+				C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
+			isa = PBXGroup;
+			children = (
+				C7DB85081AD48A620026972B /* Title */,
+				C7D081791A8A312700DE5ECC /* AppDelegate.h */,
+				C7D081731A8A312700DE5ECC /* AppDelegate.m */,
+				C73700131AB7D49A0035C4A3 /* Common */,
+				C7D0817C1A8A312700DE5ECC /* GameViewController.h */,
+				C7D0817D1A8A312700DE5ECC /* GameViewController.m */,
+				C7D0817E1A8A312700DE5ECC /* Images.xcassets */,
+				C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */,
+				C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */,
+				C7CED0531A86B9DA00A4DCC3 /* Supporting Files */,
+				C7C4B8A61A8C2494009FA11B /* Tracks */,
+				C7387B8B1A97E4060086EC94 /* Trains */,
+				C77DF2EA1AC88FA8002A6251 /* Utils */,
+			);
+			name = TheWriteTrack;
+			path = "The Write Track";
+			sourceTree = "<group>";
+		};
+		C7CED0531A86B9DA00A4DCC3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C7D081911A8A322A00DE5ECC /* Info.plist */,
+				C7D0817F1A8A312700DE5ECC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7DB85091AD48A770026972B /* Title-Tests */,
+				C7F09F511ACCEEEE00B53F66 /* Integration-Tests */,
+				C73700171AB7D5530035C4A3 /* Common-Tests */,
+				C7584A061AA3A9DB00D92D6A /* Train-Tests */,
+				C7C4B8AB1A8C2C87009FA11B /* Track-Tests */,
+				C7CED0721A86B9DA00A4DCC3 /* Supporting Files */,
+			);
+			name = "TheWriteTrack-Tests";
+			path = "The Write TrackTests";
+			sourceTree = "<group>";
+		};
+		C7CED0721A86B9DA00A4DCC3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C7D0818B1A8A315A00DE5ECC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C7DB85081AD48A620026972B /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				C7DB850C1AD48ABB0026972B /* TitleScene.h */,
+				C7DB850D1AD48ABB0026972B /* TitleScene.m */,
+			);
+			name = Title;
+			sourceTree = "<group>";
+		};
+		C7DB85091AD48A770026972B /* Title-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7DB850A1AD48AA40026972B /* TitleSceneTests.m */,
+			);
+			name = "Title-Tests";
+			sourceTree = "<group>";
+		};
+		C7F09F511ACCEEEE00B53F66 /* Integration-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */,
+			);
+			name = "Integration-Tests";
+			sourceTree = "<group>";
+		};
+		C7FDF20C1ACB6AEC0094BBE9 /* Letters */ = {
+			isa = PBXGroup;
+			children = (
+				C7FDF20D1ACB6D0C0094BBE9 /* A.h */,
+				C7FDF20E1ACB6D0C0094BBE9 /* A.m */,
+			);
+			name = Letters;
+			sourceTree = "<group>";
+		};
+		C7FDF2101ACB6DCD0094BBE9 /* Letter-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C7FDF2111ACB6E3B0094BBE9 /* ATests.m */,
+			);
+			name = "Letter-Tests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack" */;
+			buildPhases = (
+				AA627B92010C4CC291E769EF /* Check Pods Manifest.lock */,
+				C7CED04C1A86B9DA00A4DCC3 /* Sources */,
+				C7CED04D1A86B9DA00A4DCC3 /* Frameworks */,
+				C7CED04E1A86B9DA00A4DCC3 /* Resources */,
+				6619CAACEF444BC28D2DE667 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OnTheWriteTrack;
+			productName = "The Write Track";
+			productReference = C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C7CED06D1A86B9DA00A4DCC3 /* OnTheWriteTrackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrackTests" */;
+			buildPhases = (
+				C474C894CF940B7CD52F048B /* Check Pods Manifest.lock */,
+				C7CED06A1A86B9DA00A4DCC3 /* Sources */,
+				C7CED06B1A86B9DA00A4DCC3 /* Frameworks */,
+				C7CED06C1A86B9DA00A4DCC3 /* Resources */,
+				01D4C9779932DC8125E9E2E0 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */,
+			);
+			name = OnTheWriteTrackTests;
+			productName = "The Write TrackTests";
+			productReference = C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C7CED0481A86B9DA00A4DCC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Mitch Clutter";
+				TargetAttributes = {
+					C7CED04F1A86B9DA00A4DCC3 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					C7CED06D1A86B9DA00A4DCC3 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = C7CED04F1A86B9DA00A4DCC3;
+					};
+				};
+			};
+			buildConfigurationList = C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "OnTheWriteTrack" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C7CED0471A86B9DA00A4DCC3;
+			productRefGroup = C7CED0511A86B9DA00A4DCC3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */,
+				C7CED06D1A86B9DA00A4DCC3 /* OnTheWriteTrackTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7CED04E1A86B9DA00A4DCC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */,
+				C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */,
+				C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */,
+				C7D081901A8A31F000DE5ECC /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7CED06C1A86B9DA00A4DCC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7D081921A8A322A00DE5ECC /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01D4C9779932DC8125E9E2E0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6619CAACEF444BC28D2DE667 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA627B92010C4CC291E769EF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C474C894CF940B7CD52F048B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C7CED04C1A86B9DA00A4DCC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7DB850E1AD48ABB0026972B /* TitleScene.m in Sources */,
+				C78C6F8C1AA3A6790077DE74 /* Train.m in Sources */,
+				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
+				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
+				C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */,
+				C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */,
+				C7FDF20F1ACB6D0C0094BBE9 /* A.m in Sources */,
+				C7D081881A8A312700DE5ECC /* main.m in Sources */,
+				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
+				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
+				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7CED06A1A86B9DA00A4DCC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
+				C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */,
+				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,
+				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,
+				C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */,
+				C7DB850B1AD48AA40026972B /* TitleSceneTests.m in Sources */,
+				C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */,
+				C7FDF2121ACB6E3B0094BBE9 /* ATests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */;
+			targetProxy = C7CED06F1A86B9DA00A4DCC3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C7CED0761A86B9DA00A4DCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C7CED0771A86B9DA00A4DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C7CED0791A86B9DA00A4DCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = TheWriteTrack/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"Pods-OCMock\"",
+				);
+				PRODUCT_NAME = OnTheWriteTrack;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		C7CED07A1A86B9DA00A4DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = TheWriteTrack/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"Pods-OCMock\"",
+				);
+				PRODUCT_NAME = OnTheWriteTrack;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		C7CED07C1A86B9DA00A4DCC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "TheWriteTrack-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
+				PRODUCT_NAME = OnTheWriteTrackTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheWriteTrack.app/OnTheWriteTrack";
+				USER_HEADER_SEARCH_PATHS = "\"/Users/clutter/projects/theWriteTrack/TheWriteTrack\" \"/Users/clutter/projects/theWriteTrack/Pods/Headers\"/**";
+			};
+			name = Debug;
+		};
+		C7CED07D1A86B9DA00A4DCC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "TheWriteTrack-Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
+				PRODUCT_NAME = OnTheWriteTrackTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheWriteTrack.app/OnTheWriteTrack";
+				USER_HEADER_SEARCH_PATHS = "\"/Users/clutter/projects/theWriteTrack/TheWriteTrack\" \"/Users/clutter/projects/theWriteTrack/Pods/Headers\"/**";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "OnTheWriteTrack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7CED0761A86B9DA00A4DCC3 /* Debug */,
+				C7CED0771A86B9DA00A4DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7CED0791A86B9DA00A4DCC3 /* Debug */,
+				C7CED07A1A86B9DA00A4DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7CED07C1A86B9DA00A4DCC3 /* Debug */,
+				C7CED07D1A86B9DA00A4DCC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C7CED0481A86B9DA00A4DCC3 /* Project object */;
+}

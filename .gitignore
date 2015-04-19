@@ -1,7 +1,26 @@
+#xcode
 build/
 xcuserdata/ 
 xcshareddata/
-theWriteTrack.spritebuilder/
-theWriteTrack.corona/
-images/raw/
+
+# cocoapads
 Pods/
+
+# sprite builder
+theWriteTrack.spritebuilder/
+
+# corona project
+theWriteTrack.corona/
+
+# raw image files before conversion to assets
+images/raw
+
+# irb
+.irb-history
+
+# Calabash / Cucumber
+rerun/
+reports/
+screenshots/
+screenshot*.png
+test-servers/

@@ -15,29 +15,26 @@
 
 @implementation TitleScene
 
-- (void)addBackground {
-    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:TITLE_BACKGROUND];
-    background.name = TITLE_BACKGROUND;
+- (void)AddNodeWithName:(NSString*)name AndImageNamed:(NSString*)imageName AndZOrder:(NSInteger)zOrder {
+    SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:imageName];
+    background.name = name;
+    background.accessibilityLabel = name;
     background.anchorPoint = CGPointZero;
-    background.zPosition = TitleBackgroundZOrder;
+    background.zPosition = zOrder;
     [self addChild:background];
 }
 
+- (void)addBackground {
+    [self AddNodeWithName:TITLE_BACKGROUND AndImageNamed:TITLE_BACKGROUND AndZOrder:TitleBackgroundZOrder];
+}
+
 - (void)addTrain {
-    Train *train = [Train spriteNodeWithImageNamed:TITLE_TRAIN_IMAGE_NAME];
-    train.name = TRAIN_NODE;
-    train.anchorPoint = CGPointZero;
-    train.zPosition = TitleTrainZOrder;
-    train.position = CGPointMake(123, 138);
-    [self addChild:train];
+    [self AddNodeWithName:TRAIN_NODE AndImageNamed:TITLE_TRAIN_IMAGE_NAME AndZOrder:TitleTrainZOrder];
+    [self childNodeWithName:TRAIN_NODE].position = CGPointMake(123, 138);
 }
 
 - (void)addForeground {
-    SKSpriteNode *foreground = [SKSpriteNode spriteNodeWithImageNamed:TITLE_FOREGROUND];
-    foreground.name = TITLE_FOREGROUND;
-    foreground.anchorPoint = CGPointZero;
-    foreground.zPosition = TitleForegroundZOrder;
-    [self addChild:foreground];
+    [self AddNodeWithName:TITLE_FOREGROUND AndImageNamed:TITLE_FOREGROUND AndZOrder:TitleForegroundZOrder];
 }
 
 -(instancetype)initWithSize:(CGSize)size {

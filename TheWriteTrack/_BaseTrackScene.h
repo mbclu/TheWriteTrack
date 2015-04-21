@@ -8,6 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+#define ROCKY_BACKGROUND @"RockyBackground"
+
 @interface _BaseTrackScene : SKScene
 
 @end

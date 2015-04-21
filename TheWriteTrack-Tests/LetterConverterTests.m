@@ -13,6 +13,7 @@
 #import "LetterConverter.h"
 #import "LayoutMath.h"
 #import "PathInfo.h"
+#import "CocoaLumberjack.h"
 
 @interface LetterConverterTests : XCTestCase
 
@@ -59,6 +60,7 @@
     CGFloat expectedSize = 325.0;
     CGFloat accuracy = 1.0;
     CGFloat size = CTFontGetSize(fontRef);
+    DDLogDebug(@"MAIN SCREEN SIZE: <%f, %f>", [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     XCTAssertEqualWithAccuracy(size, expectedSize, accuracy);
 }
 

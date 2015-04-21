@@ -12,8 +12,6 @@
 #import "LetterConverter.h"
 #import "CocoaLumberjack.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelInfo;
-
 @interface LayoutMathTests : XCTestCase
 @property CGFloat defaultAccuracy;
 @property id startingOrientation;
@@ -129,7 +127,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, super.defaultAccuracy);
 }
 
-- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBe325Or50LessThanHalfTheSmallerScreenDimension {
+- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBeThreeHundredTwentyFiveOrFiftyLessThanHalfTheSmallerScreenDimension {
     CGFloat expectedSize = 325.0;
     XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, super.defaultAccuracy);
 }

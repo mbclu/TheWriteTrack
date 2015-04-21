@@ -31,7 +31,7 @@
 }
 
 - (void)testThatAUsesTheRockyBackground {
-    SKNode *background = [a childNodeWithName:@"RockyBackground"];
+    SKNode *background = [a childNodeWithName:ROCKY_BACKGROUND];
     XCTAssertNotNil(background);
 }
 

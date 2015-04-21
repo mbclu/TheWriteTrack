@@ -41,8 +41,8 @@
 }
 
 - (void)testThatTheGameViewControllerPresentsTheTitleScene {
-    SKScene *expectedScene = [TitleScene sceneWithSize:[titleView scene].size];
-    XCTAssertEqualObjects([titleView scene], expectedScene);
+    XCTAssertEqualObjects([titleView scene].name, TITLE_SCENE,
+                          @"Name mismsatch: %@ != %@", [titleView scene].name, TITLE_SCENE);
 }
 
 - (void)testThatTheTitleSceneIsPresentedTheSameSizeAsTheMainScreen {

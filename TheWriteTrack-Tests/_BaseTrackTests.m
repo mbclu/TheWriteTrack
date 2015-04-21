@@ -10,8 +10,6 @@
 #import "_BaseTrackScene.h"
 #import "CocoaLumberjack.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-
 @interface _BaseTrackTests : XCTestCase {
     _BaseTrackScene *scene;
     SKSpriteNode *rockyBackground;
@@ -24,7 +22,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (void)setUp {
     [super setUp];
     scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
-    rockyBackground = [scene childNodeWithName:@"RockyBackground"];
+    rockyBackground = (SKSpriteNode*)[scene childNodeWithName:ROCKY_BACKGROUND];
 }
 
 - (void)tearDown {
@@ -41,14 +39,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (void)testThatTheSceneUsesTheFillAspectScaleMode {
-    SKScene *scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
     XCTAssertEqual(scene.scaleMode , SKSceneScaleModeAspectFill);
-}
-
-- (void)testThatInitAndSceneWithAreTheSameThing {
-    SKScene *initWith = [[_BaseTrackScene alloc] initWithSize:CGSizeMake(100, 100)];
-    SKScene *sceneWith = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
-    XCTAssertEqualObjects(initWith, sceneWith);
 }
 
 @end

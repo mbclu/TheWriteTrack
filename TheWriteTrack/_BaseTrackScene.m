@@ -9,8 +9,6 @@
 #import "_BaseTrackScene.h"
 #import "Train.h"
 
-#define ROCKY_BACKGROUND @"RockyBackground"
-
 @implementation _BaseTrackScene
 
 -(void)didMoveToView:(SKView *)view {
@@ -35,7 +33,7 @@
         rockyBackground.name = ROCKY_BACKGROUND;
         [self addChild:rockyBackground];
         
-        Train *train = [Train spriteNodeWithImageNamed:MAGIC_TRAIN_IMAGE_NAME];
+        Train *train = [Train spriteNodeWithImageNamed:MAGIC_TRAIN];
         train.position = CGPointMake(self.size.width / 2.0f, self.size.height / 2.0f);
         train.name = @"_BaseTrain";
         [self addChild:train];

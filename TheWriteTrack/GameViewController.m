@@ -26,7 +26,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     [super viewDidLoad];
     
 #ifdef DEBUG
-    [self addDebugPrintPathButton];
+//    [self addDebugPrintPathButton];
 #endif
 }
 
@@ -34,7 +34,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 {
     [super viewWillLayoutSubviews];
 
-    SKView * skView = (SKView *)self.view;
+    SKView *skView = (SKView *)self.view;
     if (!skView.scene) {
         TitleScene *titleScene = [TitleScene sceneWithSize:skView.bounds.size];
         [skView presentScene:titleScene];

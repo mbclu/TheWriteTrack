@@ -26,7 +26,7 @@
     scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
     backgroundNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_BACKGROUND];
     foregroundNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_FOREGROUND];
-    trainNode = (SKSpriteNode*)[scene childNodeWithName:TRAIN_NODE];
+    trainNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_TRAIN];
 }
 
 - (void)tearDown {
@@ -75,6 +75,12 @@
 
 - (void)testThatTheTitleForegroundIsLoadedOnTopOfTheTrain {
     XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
+}
+
+- (void)testThatTheTitleTrainHasAnActionToMoveOffOfTheScreen {
+    SKAction *action = [trainNode actionForKey:ACTION_EXIT_SCENE_RIGHT];
+    XCTAssertNotNil(action);
+//    XCTAssertNotNil([trainNode actionForKey:@"actionMoveOffScreenRight"]);
 }
 
 @end

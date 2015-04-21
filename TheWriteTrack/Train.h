@@ -8,10 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-#define TITLE_TRAIN_IMAGE_NAME @"titleTrain"
-#define MAGIC_TRAIN_IMAGE_NAME @"magicTrain"
-
-#define TRAIN_NODE @"train"
+#define TITLE_TRAIN @"TitleTrain"
+#define MAGIC_TRAIN @"MagicTrain"
 
 @interface Train : SKSpriteNode
 

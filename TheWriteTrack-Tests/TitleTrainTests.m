@@ -31,4 +31,14 @@
     XCTAssertEqualObjects(train.name, TITLE_TRAIN);
 }
 
+- (void)testThatTheTitleTrainStartsAtTheCorrectPosition {
+    TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
+    XCTAssertEqual(train.position.x, TITLE_TRAIN_START_POSITION.x);
+    XCTAssertEqual(train.position.y, TITLE_TRAIN_START_POSITION.y);
+}
+
+- (void)testThatTheTitleTrainHasAnActionToMoveAcrossTheScreenAndExitRight {
+    
+}
+
 @end

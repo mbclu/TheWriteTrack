@@ -13,6 +13,7 @@
 - (instancetype) initWithImageNamed:(NSString *)name {
     self = [super initWithImageNamed:name];
     self.name = TITLE_TRAIN;
+    self.position = TITLE_TRAIN_START_POSITION;
     return self;
 }
 

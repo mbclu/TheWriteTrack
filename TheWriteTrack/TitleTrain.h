@@ -8,7 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-#define TITLE_TRAIN @"TitleTrain"
+#define TITLE_TRAIN                 @"TitleTrain"
+#define TITLE_TRAIN_START_POSITION  CGPointMake(123, 138)
 
 @interface TitleTrain : SKSpriteNode
 

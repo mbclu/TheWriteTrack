@@ -12,7 +12,6 @@
 
 #define TRAIN_MOVE_DURATION         6
 #define TRAIN_MOVE_END_Y_POSITION   132
-#define TRAIN_START_POSITION        CGPointMake(123, 138)
 
 @implementation TitleScene
 
@@ -37,7 +36,7 @@
 - (void)addTrain {
     [self AddNodeWithImageNamed:TITLE_TRAIN AndZOrder:TitleTrainZOrder];
     SKSpriteNode *train = (SKSpriteNode *)[self childNodeWithName:TITLE_TRAIN];
-    train.position = TRAIN_START_POSITION;
+    train.position = TITLE_TRAIN_START_POSITION;
     [train runAction:[self createExitSceneRightActionForTrain:train] withKey:ACTION_EXIT_SCENE_RIGHT];
 }
 

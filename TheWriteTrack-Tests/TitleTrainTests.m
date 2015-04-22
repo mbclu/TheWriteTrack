@@ -53,4 +53,10 @@
     XCTAssertEqual(exitRightAction.duration, 8);
 }
 
+- (void)testThatTheTitleTrainCreatesTheLetter_T_WithTheOrangeSmokeEmitter {
+//    XCTAssertEqual(<#expression1#>, <#expression2, ...#>)
+    // First Spike out applying emitter to a path
+//    XCTAssertEqual(exitRightAction.duration, 8);
+}
+
 @end

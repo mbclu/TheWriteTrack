@@ -10,12 +10,6 @@
 
 @implementation TitleTrain
 
-//- (SKAction*)createExitSceneRightActionForTrain:(SKSpriteNode*)train {
-//    CGFloat nodeMovePositionX = [self size].width + train.size.width;
-//    SKAction * actionMove = [SKAction moveTo:CGPointMake(nodeMovePositionX, TRAIN_MOVE_END_Y_POSITION) duration:TRAIN_MOVE_DURATION];
-//    return actionMove;
-//}
-
 - (instancetype) initWithImageNamed:(NSString *)name {
     self = [super initWithImageNamed:name];
     self.name = TITLE_TRAIN;

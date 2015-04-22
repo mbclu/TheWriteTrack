@@ -9,6 +9,7 @@
 #import "TitleScene.h"
 #import "TitleTrain.h"
 #import "CocoaLumberjack.h"
+#import "LetterConverter.h"
 
 @implementation TitleScene
 
@@ -36,12 +37,34 @@
 }
 
 - (SKEmitterNode *)spikeTrainSmokeEmitter {
-    NSString *orangeSmokePath = [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"];
-    SKEmitterNode *orangeSmokeEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:orangeSmokePath];
-    orangeSmokeEmitter.position = CGPointMake(100, 100);
+    SKEmitterNode *orangeSmokeEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                                         [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"]];
+    TitleTrain *train = [self childNodeWithName:TITLE_TRAIN];
+//    orangeSmokeEmitter.position = CGPointMake(train.size.width - 10, train.size.height);
+    orangeSmokeEmitter.position = CGPointMake(0, 0);
+    NSAttributedString *attrString = [LetterConverter createAttributedString:@"T"];
+    CGPathRef pathRef = [LetterConverter pathFromAttributedString:attrString];
+    SKAction *followTrack = [SKAction followPath:pathRef asOffset:NO orientToPath:YES duration:1.0];
+    SKAction *forever = [SKAction repeatActionForever:followTrack];
+    orangeSmokeEmitter.particleAction = forever;
+//    [orangeSmokeEmitter runAction:forever];
+    
+//    [train addChild:orangeSmokeEmitter];
     [self addChild:orangeSmokeEmitter];
     return orangeSmokeEmitter;
 }
+
+//- (SKEmitterNode *)spike_LetterT_SmokeEmitter {
+//    SKEmitterNode *orangeSmokeEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+//                                         [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"]];
+//    NSAttributedString *str = [LetterConverter createAttributedString:@"T"];
+//    CGPathRef path = [LetterConverter pathFromAttributedString:str];
+//    [orangeSmokeEmitter
+//    TitleTrain *train = [self childNodeWithName:TITLE_TRAIN];
+//    orangeSmokeEmitter.position = CGPointMake(train.size.width - 10, train.size.height);
+//    [train addChild:orangeSmokeEmitter];
+//    return orangeSmokeEmitter;
+//}
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -50,6 +73,7 @@
         [self addBackground];
         [self addTrain];
         [self addForeground];
+        [self spikeTrainSmokeEmitter];
     }
     return self;
 }

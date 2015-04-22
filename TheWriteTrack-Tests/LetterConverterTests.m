@@ -112,4 +112,11 @@
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
+//- (void)testThat______AFontSizeCanBeSpecified {
+//    CTFontRef font;
+//    CGGlyph glyph;
+//    CGMutablePathRef path = nil;
+//    XCTAssertThrows([LetterConverter addToCenterOfScreenLetterPath:path WithFont:font AndGlyph:glyph]);
+//}
+
 @end

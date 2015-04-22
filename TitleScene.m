@@ -10,21 +10,12 @@
 #import "TitleTrain.h"
 #import "CocoaLumberjack.h"
 
-#define TRAIN_MOVE_DURATION         6
-#define TRAIN_MOVE_END_Y_POSITION   132
-
 @implementation TitleScene
 
 - (void) anchorNode:(SKSpriteNode*)node atZeroAndZPosition:(NSInteger)zPosition {
     node.anchorPoint = CGPointZero;
     node.zPosition = zPosition;
     [self addChild:node];
-}
-
-- (SKAction*)createExitSceneRightActionForTrain:(SKSpriteNode*)train {
-    CGFloat nodeMovePositionX = [self size].width + train.size.width;
-    SKAction * actionMove = [SKAction moveTo:CGPointMake(nodeMovePositionX, TRAIN_MOVE_END_Y_POSITION) duration:TRAIN_MOVE_DURATION];
-    return actionMove;
 }
 
 - (void)addBackground {
@@ -36,7 +27,6 @@
 - (void)addTrain {
     TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
     [self anchorNode:train atZeroAndZPosition:TitleTrainZOrder];
-    [train runAction:[self createExitSceneRightActionForTrain:train] withKey:ACTION_EXIT_SCENE_RIGHT];
 }
 
 - (void)addForeground {

@@ -77,10 +77,4 @@
     XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
 }
 
-- (void)testThatTheTitleTrainHasAnActionToMoveOffOfTheScreen {
-    SKAction *action = [trainNode actionForKey:ACTION_EXIT_SCENE_RIGHT];
-    XCTAssertNotNil(action);
-//    XCTAssertNotNil([trainNode actionForKey:@"actionMoveOffScreenRight"]);
-}
-
 @end

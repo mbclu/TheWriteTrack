@@ -7,7 +7,6 @@
 //
 
 #import "_BaseTrackScene.h"
-#import "Train.h"
 
 @implementation _BaseTrackScene
 
@@ -32,11 +31,6 @@
         rockyBackground.anchorPoint = CGPointZero;
         rockyBackground.name = ROCKY_BACKGROUND;
         [self addChild:rockyBackground];
-        
-        Train *train = [Train spriteNodeWithImageNamed:MAGIC_TRAIN];
-        train.position = CGPointMake(self.size.width / 2.0f, self.size.height / 2.0f);
-        train.name = @"_BaseTrain";
-        [self addChild:train];
     }
     return self;
 }

@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "TitleScene.h"
-#import "Train.h"
+#import "TitleTrain.h"
 
 @interface TitleSceneTests : XCTestCase {
     TitleScene *scene;

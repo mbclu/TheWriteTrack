@@ -7,7 +7,7 @@
 //
 
 #import "TitleScene.h"
-#import "Train.h"
+#import "TitleTrain.h"
 #import "CocoaLumberjack.h"
 
 #define TRAIN_MOVE_DURATION         6
@@ -43,6 +43,14 @@
 
 - (void)addForeground {
     [self AddNodeWithImageNamed:TITLE_FOREGROUND AndZOrder:TitleForegroundZOrder];
+}
+
+- (SKEmitterNode *)spikeTrainSmokeEmitter {
+    NSString *orangeSmokePath = [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"];
+    SKEmitterNode *orangeSmokeEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:orangeSmokePath];
+    orangeSmokeEmitter.position = CGPointMake(100, 100);
+    [self addChild:orangeSmokeEmitter];
+    return orangeSmokeEmitter;
 }
 
 -(instancetype)initWithSize:(CGSize)size {

@@ -15,9 +15,9 @@
 
 @interface TitleScene : SKScene
 
-@property (nonatomic) SKSpriteNode *train;
-@property (nonatomic) SKSpriteNode *background;
-@property (nonatomic) SKSpriteNode *foreground;
+//@property (nonatomic) SKSpriteNode *train;
+//@property (nonatomic) SKSpriteNode *background;
+//@property (nonatomic) SKSpriteNode *foreground;
 
 typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
     TitleBackgroundZOrder,

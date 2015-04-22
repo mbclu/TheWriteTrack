@@ -15,11 +15,9 @@
 
 @implementation TitleScene
 
-- (void)AddNodeWithImageNamed:(NSString*)imageName AndZOrder:(NSInteger)zOrder {
-    SKSpriteNode *node = [[SKSpriteNode alloc] initWithImageNamed:imageName];
-    node.name = imageName;
+- (void) anchorNode:(SKSpriteNode*)node atZeroAndZPosition:(NSInteger)zPosition {
     node.anchorPoint = CGPointZero;
-    node.zPosition = zOrder;
+    node.zPosition = zPosition;
     [self addChild:node];
 }
 
@@ -30,18 +28,21 @@
 }
 
 - (void)addBackground {
-    [self AddNodeWithImageNamed:TITLE_BACKGROUND AndZOrder:TitleBackgroundZOrder];
+    SKSpriteNode *background = [[SKSpriteNode alloc] initWithImageNamed:TITLE_BACKGROUND];
+    background.name = TITLE_BACKGROUND;
+    [self anchorNode:background atZeroAndZPosition:TitleBackgroundZOrder];
 }
 
 - (void)addTrain {
-    [self AddNodeWithImageNamed:TITLE_TRAIN AndZOrder:TitleTrainZOrder];
-    SKSpriteNode *train = (SKSpriteNode *)[self childNodeWithName:TITLE_TRAIN];
-    train.position = TITLE_TRAIN_START_POSITION;
+    TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
+    [self anchorNode:train atZeroAndZPosition:TitleTrainZOrder];
     [train runAction:[self createExitSceneRightActionForTrain:train] withKey:ACTION_EXIT_SCENE_RIGHT];
 }
 
 - (void)addForeground {
-    [self AddNodeWithImageNamed:TITLE_FOREGROUND AndZOrder:TitleForegroundZOrder];
+    SKSpriteNode *foreground = [[SKSpriteNode alloc] initWithImageNamed:TITLE_FOREGROUND];
+    foreground.name = TITLE_FOREGROUND;
+    [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
 - (SKEmitterNode *)spikeTrainSmokeEmitter {

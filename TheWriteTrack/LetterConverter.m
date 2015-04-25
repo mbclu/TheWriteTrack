@@ -13,10 +13,14 @@
 @implementation LetterConverter
 
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString {
+    return [self createAttributedString:attributelessString WithFontSizeInPoints:[LayoutMath maximumViableFontSize]];
+}
+
++ (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize {
     NSAttributedString *attrString = nil;
     if (attributelessString != (id)[NSNull null] && attributelessString.length != 0)
     {
-        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
+        CTFontRef fontRef = CTFontCreateWithName((CFStringRef)NAMED_FONT, pointSize, NULL);
         
         NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
@@ -39,20 +43,27 @@
     return glyph;
 }
 
-+ (void)addToCenterOfScreenLetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
++ (void)addToLocation:(CGPoint)location LetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
     if ((__bridge UIBezierPath *)path == nil)
     {
         [NSException raise:@"InvalidLinePathException" format:@"Nil Path used in addLetterFrom..."];
     }
     CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
     CGRect bounds = CGPathGetPathBoundingBox(letter);
-    CGAffineTransform transform = CGAffineTransformMakeTranslation([LayoutMath findStartingXValueForRect:bounds],
-                                                                   [LayoutMath findStartingYValueForRect:bounds]);
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(location.x, location.y);
     CGPathAddPath(path, &transform, letter);
     CGPathRelease(letter);
 }
 
-+ (CGMutablePathRef)pathFromAttributedString:(NSAttributedString *)attrString {
++ (CGPoint)originAtCenterForFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
+    CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
+    CGRect bounds = CGPathGetPathBoundingBox(letter);
+    CGPoint origin = CGPointMake([LayoutMath findStartingXValueForRect:bounds],
+                                 [LayoutMath findStartingYValueForRect:bounds]);
+    return origin;
+}
+
++ (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString {
     if (attrString == nil) {
         return nil;
     }
@@ -66,25 +77,33 @@
     CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
     CFArrayRef runArray = CTLineGetGlyphRuns(line);
 
-    // for each RUN
     for (CFIndex runIndex = 0; runIndex < CFArrayGetCount(runArray); runIndex++)
     {
-        // Get FONT for this run
         CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, runIndex);
         CTFontRef runFont = CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
 
-        // for each GLYPH in run
         for (CFIndex runGlyphIndex = 0; runGlyphIndex < CTRunGetGlyphCount(run); runGlyphIndex++)
         {
-            [LetterConverter addToCenterOfScreenLetterPath:letterPath
-                                                  WithFont:runFont
-                                                  AndGlyph:[LetterConverter getSingleGlyphInRun:run atIndex:runGlyphIndex]];
+            CGGlyph glyph = [self getSingleGlyphInRun:run atIndex:runGlyphIndex];
+            [self addToLocation:location
+             LetterPath:letterPath
+             WithFont:runFont
+             AndGlyph:glyph];
         }
     }
     
     CFRelease(line);
     
     return letterPath;
+}
+
++ (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString {
+    return [self createPathAtLocation:CGPointZero UsingAttrString:attrString];
+}
+
++ (CGPathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size {
+    NSAttributedString *attrString = [self createAttributedString:string WithFontSizeInPoints:size];
+    return [self createPathAtZeroUsingAttrString:attrString];
 }
 
 @end

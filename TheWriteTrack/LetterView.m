@@ -29,7 +29,7 @@
 
 - (CGMutablePathRef)createPathInContext:(CGContextRef)context {
     CGMutablePathRef railPath = CGPathCreateMutable();
-    railPath = (CGMutablePathRef)[LetterConverter pathFromAttributedString:attrString];
+    railPath = (CGMutablePathRef)[LetterConverter createPathAtZeroUsingAttrString:attrString];
     CGContextAddPath(context, railPath);
     return railPath;
 }

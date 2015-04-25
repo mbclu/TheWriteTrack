@@ -22,17 +22,17 @@
 @implementation LetterConverterTests
 {
     NSString *nonNilString;
-    LetterConverter *letterConverter;
     NSAttributedString *attrString;
     CTFontRef fontRef;
+    CGFloat defaultAccuracy;
 }
 
 - (void)setUp {
     [super setUp];
     nonNilString = @"NonNilString";
-    letterConverter = [[LetterConverter alloc] init];
     attrString = [LetterConverter createAttributedString:nonNilString];
     fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    defaultAccuracy = 1.0;
 }
 
 - (void)tearDown {
@@ -56,12 +56,10 @@
     XCTAssertEqualObjects((__bridge NSString *)stringRef, NAMED_FONT);
 }
 
-- (void)testThatTheFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
+- (void)testThatTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
     CGFloat expectedSize = 325.0;
-    CGFloat accuracy = 1.0;
     CGFloat size = CTFontGetSize(fontRef);
-    DDLogDebug(@"MAIN SCREEN SIZE: <%f, %f>", [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-    XCTAssertEqualWithAccuracy(size, expectedSize, accuracy);
+    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
 }
 
 - (void)testThatTheLetterConverterUsesOnlyTheFirstCharacterOfTheGivenString {
@@ -86,17 +84,10 @@
 /// Path Creation
 
 - (void)testThatWhenTheAttributedStringIsNilThenThePathIsNil {
-    XCTAssertNil((__bridge UIBezierPath *)[LetterConverter pathFromAttributedString:nil]);
+    XCTAssertNil((__bridge UIBezierPath *)[LetterConverter createPathAtZeroUsingAttrString:nil]);
 }
 
-- (void)testThatGivenANilPathWhenAGlyphIsAddedThenAnExcpetionIsThrown {
-    CTFontRef font;
-    CGGlyph glyph;
-    CGMutablePathRef path = nil;
-    XCTAssertThrows([LetterConverter addToCenterOfScreenLetterPath:path WithFont:font AndGlyph:glyph]);
-}
-
-- (void)testThatWhenARunFromALineIsEvxaminedAtIndex0ThenASingleGlyphIsReturned {
+- (void)testThatWhenARunFromALineIsExaminedAtIndexZeroThenASingleGlyphIsReturned {
     // Expected Setup
     CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
     CGGlyph expectedGlyph;
@@ -112,11 +103,32 @@
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
-//- (void)testThat______AFontSizeCanBeSpecified {
-//    CTFontRef font;
-//    CGGlyph glyph;
-//    CGMutablePathRef path = nil;
-//    XCTAssertThrows([LetterConverter addToCenterOfScreenLetterPath:path WithFont:font AndGlyph:glyph]);
-//}
+- (void)testThatWhenAFontSizeIsSuppliedThenItIsUsed {
+    CGFloat expectedSize = 40.0;
+    
+    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:expectedSize];
+    fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    CGFloat size = CTFontGetSize(fontRef);
+
+    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
+}
+
+- (void)testThatWhenAStringAndASizeAreProvidedThenAPathIsProvidedDirectly {
+    CGFloat expectedSize = 40.0;
+    CGPathRef path = [LetterConverter createPathFromString:@"A" AndSize:expectedSize];
+
+    XCTAssertFalse(CGPathIsEmpty(path));
+}
+
+- (void)testThatWhenAStartingPositionIsGivenToTheLetterConverterThenItIsUsed {
+    CGPoint startingPoint = CGPointMake(15, 50);
+
+    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:100];
+    CGPathRef path = [LetterConverter createPathAtLocation:startingPoint UsingAttrString:attrString];
+    CGRect fontBoundingBox = CGPathGetBoundingBox(path);
+    
+    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.x, startingPoint.x, 1.3);
+    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.y, startingPoint.y, 1.3);
+}
 
 @end

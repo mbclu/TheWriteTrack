@@ -50,7 +50,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 - (void)testThatGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingXValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
     CGMutablePathRef path = CGPathCreateMutable();
-    path = [LetterConverter pathFromAttributedString:[LetterConverter createAttributedString:stringForTest]];
+    path = [LetterConverter createPathAtLocation:CGPointZero UsingAttrString:[LetterConverter createAttributedString:stringForTest]];
     CGRect bounds;
     bounds = printBoundingBoxForLetter(path, stringForTest);
     CGFloat expectedX = ([UIScreen mainScreen].bounds.size.width - bounds.size.width) / 2;
@@ -60,7 +60,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 - (void)testThatGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingYValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
     CGMutablePathRef path = CGPathCreateMutable();
-    path = [LetterConverter pathFromAttributedString:[LetterConverter createAttributedString:stringForTest]];
+    path = [LetterConverter createPathAtZeroUsingAttrString:[LetterConverter createAttributedString:stringForTest]];
     CGRect bounds;
     bounds = printBoundingBoxForLetter(path, stringForTest);
     CGFloat expectedY = ([UIScreen mainScreen].bounds.size.height - bounds.size.height) / 2;

@@ -79,7 +79,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 -(void)buttonPressed {
-    PrintPath([LetterConverter pathFromAttributedString:[self.letterView attrString]]);
+    PrintPath(([LetterConverter createPathAtZeroUsingAttrString:[self.letterView attrString]]));
     DDLogInfo(@"Button Pressed!");
 }
 #endif

@@ -41,9 +41,12 @@
                                          [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"]];
     TitleTrain *train = [self childNodeWithName:TITLE_TRAIN];
 //    orangeSmokeEmitter.position = CGPointMake(train.size.width - 10, train.size.height);
-    orangeSmokeEmitter.position = CGPointMake(0, 0);
-    NSAttributedString *attrString = [LetterConverter createAttributedString:@"T"];
-    CGPathRef pathRef = [LetterConverter pathFromAttributedString:attrString];
+//    orangeSmokeEmitter.position = CGPointMake(0, 0);
+    orangeSmokeEmitter.position = CGPointMake(-270, 110);
+
+    CGPathRef pathRef = [LetterConverter createPathFromString:@"Writing Track" AndSize:100];
+//    NSAttributedString *attrString = [LetterConverter createAttributedString:@"Write"];
+//    CGPathRef pathRef = [LetterConverter pathFromAttributedString:attrString];
     SKAction *followTrack = [SKAction followPath:pathRef asOffset:NO orientToPath:YES duration:1.0];
     SKAction *forever = [SKAction repeatActionForever:followTrack];
     orangeSmokeEmitter.particleAction = forever;

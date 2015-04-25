@@ -16,8 +16,10 @@
 @interface LetterConverter : NSObject
 
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString;
-+ (CGMutablePathRef)pathFromAttributedString:(NSAttributedString *)attrString;
++ (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize;
++ (CGPathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size;
 + (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index;
-+ (void)addToCenterOfScreenLetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph;
++ (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString;
++ (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString;
 
 @end

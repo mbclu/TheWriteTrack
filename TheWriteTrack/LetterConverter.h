@@ -17,9 +17,12 @@
 
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString;
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize;
-+ (CGPathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size;
-+ (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index;
+
++ (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size;
 + (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString;
 + (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString;
+
++ (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index;
+
 
 @end

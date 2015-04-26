@@ -41,29 +41,15 @@
 
 /// Attributed String Creation
 
-- (void)testThatGivenNoDataANilAttributedStringIsReturned {
-    NSString* nilString;
-    XCTAssertNil([LetterConverter createAttributedString:nilString]);
-}
-
-- (void)testThatGivenANonNullStringANonNullAttributedStringIsReturned {
-    XCTAssertNotNil([LetterConverter createAttributedString:nonNilString]);
-}
-
-- (void)testThatTheLetterConverterUsesVerdanaFont {
-    XCTAssertEqualObjects(NAMED_FONT, @"Verdana");
+- (void)testThatTheDefaultFontTypeIsVerdana {
     CFStringRef stringRef = CTFontCopyFullName(fontRef);
-    XCTAssertEqualObjects((__bridge NSString *)stringRef, NAMED_FONT);
+    XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
 }
 
 - (void)testThatTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
     CGFloat expectedSize = 325.0;
     CGFloat size = CTFontGetSize(fontRef);
     XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
-}
-
-- (void)testThatTheLetterConverterUsesOnlyTheFirstCharacterOfTheGivenString {
-    XCTAssertEqualObjects(attrString.string, @"N");
 }
 
 - (void)testThatTheFontForegroundColorIsTransparent {
@@ -103,15 +89,15 @@
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
-- (void)testThatWhenAFontSizeIsSuppliedThenItIsUsed {
-    CGFloat expectedSize = 40.0;
-    
-    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:expectedSize];
-    fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
-    CGFloat size = CTFontGetSize(fontRef);
-
-    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
-}
+//- (void)testThatWhenAFontSizeIsSuppliedThenItIsUsed {
+//    CGFloat expectedSize = 40.0;
+//    
+//    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:expectedSize];
+//    fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+//    CGFloat size = CTFontGetSize(fontRef);
+//
+//    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
+//}
 
 - (void)testThatWhenAStringAndASizeAreProvidedThenAPathIsProvidedDirectly {
     CGFloat expectedSize = 40.0;
@@ -120,15 +106,15 @@
     XCTAssertFalse(CGPathIsEmpty(path));
 }
 
-- (void)testThatWhenAStartingPositionIsGivenToTheLetterConverterThenItIsUsed {
-    CGPoint startingPoint = CGPointMake(15, 50);
-
-    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:100];
-    CGPathRef path = [LetterConverter createPathAtLocation:startingPoint UsingAttrString:attrString];
-    CGRect fontBoundingBox = CGPathGetBoundingBox(path);
-    
-    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.x, startingPoint.x, 1.3);
-    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.y, startingPoint.y, 1.3);
-}
+//- (void)testThatWhenAStartingPositionIsGivenToTheLetterConverterThenItIsUsed {
+//    CGPoint startingPoint = CGPointMake(15, 50);
+//
+//    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:100];
+//    CGPathRef path = [LetterConverter createPathAtLocation:startingPoint UsingAttrString:attrString];
+//    CGRect fontBoundingBox = CGPathGetBoundingBox(path);
+//    
+//    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.x, startingPoint.x, 1.3);
+//    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.y, startingPoint.y, 1.3);
+//}
 
 @end

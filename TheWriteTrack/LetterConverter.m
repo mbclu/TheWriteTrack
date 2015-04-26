@@ -101,7 +101,7 @@
     return [self createPathAtLocation:CGPointZero UsingAttrString:attrString];
 }
 
-+ (CGPathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size {
++ (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size {
     NSAttributedString *attrString = [self createAttributedString:string WithFontSizeInPoints:size];
     return [self createPathAtZeroUsingAttrString:attrString];
 }

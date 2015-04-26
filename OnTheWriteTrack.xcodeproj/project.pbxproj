@@ -35,6 +35,8 @@
 		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
 		C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
 		C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
+		C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
+		C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
@@ -98,6 +100,9 @@
 		C78C6F871AA3A6570077DE74 /* LetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterView.h; path = TheWriteTrack/LetterView.h; sourceTree = SOURCE_ROOT; };
 		C78C6F881AA3A6570077DE74 /* LetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterView.m; path = TheWriteTrack/LetterView.m; sourceTree = SOURCE_ROOT; };
 		C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = TheWriteTrack/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttributedStringPath.h; path = TheWriteTrack/AttributedStringPath.h; sourceTree = SOURCE_ROOT; };
+		C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPath.m; path = TheWriteTrack/AttributedStringPath.m; sourceTree = SOURCE_ROOT; };
+		C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPathTests.m; path = "TheWriteTrack-Tests/AttributedStringPathTests.m"; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
@@ -196,6 +201,8 @@
 				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
 				C73700141AB7D4E40035C4A3 /* LayoutMath.h */,
 				C73700151AB7D4E40035C4A3 /* LayoutMath.m */,
+				C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */,
+				C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 			children = (
 				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
 				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
+				C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */,
 			);
 			name = "Common-Tests";
 			sourceTree = "<group>";
@@ -615,6 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7DB850E1AD48ABB0026972B /* TitleScene.m in Sources */,
+				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
 				C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */,
@@ -634,6 +643,7 @@
 			files = (
 				C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */,
 				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
+				C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */,
 				C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */,
 				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,

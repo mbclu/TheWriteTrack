@@ -53,10 +53,20 @@
     XCTAssertEqual(exitRightAction.duration, 8);
 }
 
-- (void)testThatTheTitleTrainCreatesTheLetter_T_WithTheOrangeSmokeEmitter {
-//    XCTAssertEqual(<#expression1#>, <#expression2, ...#>)
-    // First Spike out applying emitter to a path
-//    XCTAssertEqual(exitRightAction.duration, 8);
+- (void)testThatASmokeEmitterCanBeCreatedWithTheOrangeSmokePng {
+    SKEmitterNode *emitter = [TitleTrain createTrainSmokeEmitter];
+    SKTexture *texture = [SKTexture textureWithImageNamed:@"OrangeSmoke.png"];
+    XCTAssertEqual(emitter.particleTexture.size.height, texture.size.height);
+    XCTAssertEqual(emitter.particleTexture.size.width, texture.size.width);
+}
+
+- (void)testThatWhenAppliedAtALocationThenTheTrainHasAChildSmokeEmitter {
+    CGFloat xPoint = 10;
+    CGFloat yPoint = 20;
+    [train applySmokeEmitterAtPosition:CGPointMake(xPoint, yPoint)];
+    SKEmitterNode *emitter = (SKEmitterNode *)[train childNodeWithName:ORANGE_SMOKE];
+    XCTAssertEqual(emitter.position.x, xPoint);
+    XCTAssertEqual(emitter.position.y, yPoint);
 }
 
 @end

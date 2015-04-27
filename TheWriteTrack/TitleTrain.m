@@ -10,7 +10,7 @@
 
 @implementation TitleTrain
 
-- (instancetype) initWithImageNamed:(NSString *)name {
+- (instancetype)initWithImageNamed:(NSString *)name {
     self = [super initWithImageNamed:name];
     self.name = TITLE_TRAIN;
     self.position = TITLE_TRAIN_START_POSITION;
@@ -18,6 +18,19 @@
     SKAction *exitStageRight = [SKAction moveTo:exitEndPosition duration:EXIT_DURATION];
     [self runAction:exitStageRight withKey:EXIT_SCENE_RIGHT];
     return self;
+}
+
+- (void)applySmokeEmitterAtPosition:(CGPoint)position {
+    SKEmitterNode *emitter = [TitleTrain createTrainSmokeEmitter];
+    emitter.name = ORANGE_SMOKE;
+    emitter.position = position;
+    [self addChild:emitter];
+}
+
++ (SKEmitterNode *)createTrainSmokeEmitter {
+    SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                              [[NSBundle mainBundle] pathForResource:ORANGE_SMOKE ofType:@"sks"]];
+    return emitter;
 }
 
 @end

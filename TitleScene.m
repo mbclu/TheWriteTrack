@@ -10,6 +10,7 @@
 #import "TitleTrain.h"
 #import "CocoaLumberjack.h"
 #import "LetterConverter.h"
+#import "AttributedStringPath.h"
 
 @implementation TitleScene
 
@@ -27,6 +28,7 @@
 
 - (void)addTrain {
     TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
+    [train applySmokeEmitterAtPosition:CGPointMake(train.size.width - 10, train.size.height - 5)];
     [self anchorNode:train atZeroAndZPosition:TitleTrainZOrder];
 }
 
@@ -36,38 +38,20 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (SKEmitterNode *)spikeTrainSmokeEmitter {
-    SKEmitterNode *orangeSmokeEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+- (SKEmitterNode *)addTitleString {
+    SKEmitterNode *titleStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                          [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"]];
-    TitleTrain *train = [self childNodeWithName:TITLE_TRAIN];
-//    orangeSmokeEmitter.position = CGPointMake(train.size.width - 10, train.size.height);
-//    orangeSmokeEmitter.position = CGPointMake(0, 0);
-    orangeSmokeEmitter.position = CGPointMake(-270, 110);
-
-    CGPathRef pathRef = [LetterConverter createPathFromString:@"Writing Track" AndSize:100];
-//    NSAttributedString *attrString = [LetterConverter createAttributedString:@"Write"];
-//    CGPathRef pathRef = [LetterConverter pathFromAttributedString:attrString];
-    SKAction *followTrack = [SKAction followPath:pathRef asOffset:NO orientToPath:YES duration:1.0];
-    SKAction *forever = [SKAction repeatActionForever:followTrack];
-    orangeSmokeEmitter.particleAction = forever;
-//    [orangeSmokeEmitter runAction:forever];
+    titleStringEmitter.name = TITLE_STRING_EMITTER;
     
-//    [train addChild:orangeSmokeEmitter];
-    [self addChild:orangeSmokeEmitter];
-    return orangeSmokeEmitter;
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@"Anything"];
+    SKAction *followTitleString = [SKAction followPath:stringPath.path speed:1.0];
+    SKAction *repeatForever = [SKAction repeatActionForever:followTitleString];
+    titleStringEmitter.particleAction = repeatForever;
+    
+    [self addChild:titleStringEmitter];
+    
+    return titleStringEmitter;
 }
-
-//- (SKEmitterNode *)spike_LetterT_SmokeEmitter {
-//    SKEmitterNode *orangeSmokeEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-//                                         [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"]];
-//    NSAttributedString *str = [LetterConverter createAttributedString:@"T"];
-//    CGPathRef path = [LetterConverter pathFromAttributedString:str];
-//    [orangeSmokeEmitter
-//    TitleTrain *train = [self childNodeWithName:TITLE_TRAIN];
-//    orangeSmokeEmitter.position = CGPointMake(train.size.width - 10, train.size.height);
-//    [train addChild:orangeSmokeEmitter];
-//    return orangeSmokeEmitter;
-//}
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -76,7 +60,7 @@
         [self addBackground];
         [self addTrain];
         [self addForeground];
-        [self spikeTrainSmokeEmitter];
+        [self addTitleString];
     }
     return self;
 }

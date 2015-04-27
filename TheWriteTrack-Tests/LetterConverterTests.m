@@ -52,6 +52,16 @@
     XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
 }
 
+- (void)testThatWhenAFontSizeIsSuppliedItIsUsedForTheAttributedStrign {
+    CGFloat expectedSize = 40.0;
+
+    attrString = [LetterConverter createAttributedString:nonNilString WithFontSizeInPoints:expectedSize];
+    fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    CGFloat size = CTFontGetSize(fontRef);
+
+    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
+}
+
 - (void)testThatTheFontForegroundColorIsTransparent {
     UIColor *color = [attrString attribute:(NSString *)kCTForegroundColorAttributeName atIndex:0 effectiveRange:nil];
     XCTAssertEqualObjects(color, (id)[[UIColor clearColor] CGColor]);
@@ -87,23 +97,6 @@
     CGGlyph glyph = [LetterConverter getSingleGlyphInRun:run atIndex:0];
     
     XCTAssertEqual(glyph, expectedGlyph);
-}
-
-//- (void)testThatWhenAFontSizeIsSuppliedThenItIsUsed {
-//    CGFloat expectedSize = 40.0;
-//    
-//    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:expectedSize];
-//    fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
-//    CGFloat size = CTFontGetSize(fontRef);
-//
-//    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
-//}
-
-- (void)testThatWhenAStringAndASizeAreProvidedThenAPathIsProvidedDirectly {
-    CGFloat expectedSize = 40.0;
-    CGPathRef path = [LetterConverter createPathFromString:@"A" AndSize:expectedSize];
-
-    XCTAssertFalse(CGPathIsEmpty(path));
 }
 
 //- (void)testThatWhenAStartingPositionIsGivenToTheLetterConverterThenItIsUsed {

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <CoreText/CoreText.h>
+#import <OCMock/OCMock.h>
 
 #define EXPECTED_STRING_FOR_INVALID_USAGE   @"?"
 
@@ -59,9 +60,10 @@
     XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
 }
 
-- (void)testThatANonNilPathIsReturned {
+- (void)testThatANonNilNonEmptyPathIsReturned {
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@""];
     XCTAssertNotNil(stringPath.path);
+    XCTAssertFalse(CGPathIsEmpty(stringPath.path));
 }
 
 @end

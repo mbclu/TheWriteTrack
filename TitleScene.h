@@ -11,6 +11,7 @@
 #define TITLE_SCENE @"TitleScene"
 #define TITLE_BACKGROUND @"TitleBackground"
 #define TITLE_FOREGROUND @"TitleForeground"
+#define TITLE_STRING_EMITTER @"TitleStringEmitter"
 
 @interface TitleScene : SKScene
 

@@ -9,12 +9,15 @@
 #import <XCTest/XCTest.h>
 #import "TitleScene.h"
 #import "TitleTrain.h"
+#import "AttributedStringPath.h"
+#import "CocoaLumberjack.h"
 
 @interface TitleSceneTests : XCTestCase {
     TitleScene *scene;
     SKSpriteNode *backgroundNode;
     SKSpriteNode *foregroundNode;
     SKSpriteNode *trainNode;
+    SKEmitterNode *titleNode;
 }
 
 @end
@@ -24,9 +27,10 @@
 - (void)setUp {
     [super setUp];
     scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
-    backgroundNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_BACKGROUND];
-    foregroundNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_FOREGROUND];
-    trainNode = (SKSpriteNode*)[scene childNodeWithName:TITLE_TRAIN];
+    backgroundNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_BACKGROUND];
+    foregroundNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_FOREGROUND];
+    trainNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_TRAIN];
+    titleNode = (SKEmitterNode *)[scene childNodeWithName:TITLE_STRING_EMITTER];
 }
 
 - (void)tearDown {
@@ -75,6 +79,34 @@
 
 - (void)testThatTheTitleForegroundIsLoadedOnTopOfTheTrain {
     XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
+}
+
+- (void)testThatTheTitleStringIsCreatedOutOfAParticleEmitter {
+    XCTAssertNotNil(titleNode);
+}
+
+- (void)testThatTheTitleStringEmitterIsLocatedAtPointZeroZero {
+    XCTAssertEqual(titleNode.position.x, 0);
+    XCTAssertEqual(titleNode.position.y, 0);
+}
+
+- (void)testThatTheTitleStringEmitterRepeatsAnAction {
+    XCTAssertNotNil(titleNode.particleAction);
+    XCTAssertNotEqual([titleNode.particleAction.description rangeOfString:@"<SKRepeat:"].location, NSNotFound);
+}
+
+- (void)testThatTheTitleTrainHasAnOrangeSmokeEmitter {
+    XCTAssertNotNil([trainNode childNodeWithName:ORANGE_SMOKE]);
+}
+
+- (void)testThatTheTitleTrainSmokeIsAtFivePixelsDownFromTheTopCornerOfTheTrain {
+    SKEmitterNode *smoke = (SKEmitterNode *)[trainNode childNodeWithName:ORANGE_SMOKE];
+    XCTAssertEqual(smoke.position.y, trainNode.size.height - 5);
+}
+
+- (void)testThatTheTitleTrainSmokeIsAtTenPixelsLeftOfTheRightSideOfTheTrain {
+    SKEmitterNode *smoke = (SKEmitterNode *)[trainNode childNodeWithName:ORANGE_SMOKE];
+    XCTAssertEqual(smoke.position.x, trainNode.size.width - 10);
 }
 
 @end

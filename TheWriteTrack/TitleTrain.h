@@ -13,7 +13,12 @@
 #define EXIT_SCENE_RIGHT            @"actionExitSceneRight"
 #define EXIT_DURATION               8
 #define EXIT_RIGHT_END_Y_POSITION   132
+#define TITLE_TRAIN_SMOKE           @"TitleTrainSmoke"
+#define ORANGE_SMOKE                @"OrangeSmoke"
 
 @interface TitleTrain : SKSpriteNode
+
++ (SKEmitterNode *)createTrainSmokeEmitter;
+- (void)applySmokeEmitterAtPosition:(CGPoint)position;
 
 @end

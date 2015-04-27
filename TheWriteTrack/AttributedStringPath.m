@@ -7,7 +7,6 @@
 //
 
 #import "AttributedStringPath.h"
-#import "LetterConverter.h"
 
 @implementation AttributedStringPath
 
@@ -18,10 +17,9 @@
         (NSNotFound == [str rangeOfCharacterFromSet:NSCharacterSet.letterCharacterSet].location)) {
         str = @"?";
     }
-    [self setAttributedString:[LetterConverter createAttributedString:str]];
 
-    CGPathRef pathRef = CGPathCreateMutable();
-    [self setPath:pathRef];
+    [self setAttributedString:[LetterConverter createAttributedString:str]];
+    [self setPath:[LetterConverter createPathAtZeroUsingAttrString:_attributedString]];
     
     return self;
 }

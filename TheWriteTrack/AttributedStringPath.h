@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#import "LetterConverter.h"
+
 @interface AttributedStringPath : NSObject
 
 @property (nonatomic, retain) NSAttributedString *attributedString;

@@ -15,7 +15,6 @@
 
 @interface LetterConverter : NSObject
 
-+ (NSAttributedString *)createAttributedString:(NSString *)attributelessString;
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize;
 
 + (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size;

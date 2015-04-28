@@ -12,8 +12,6 @@
 #import "CocoaLumberjack.h"
 #import "LetterConverter.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-
 @implementation SKScene (Unarchive)
 
 @end
@@ -36,7 +34,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
     SKView *skView = (SKView *)self.view;
     if (!skView.scene) {
-        TitleScene *titleScene = [TitleScene sceneWithSize:skView.bounds.size];
+        TitleScene *titleScene = [[TitleScene alloc] initWithSize:skView.bounds.size];
         [skView presentScene:titleScene];
     }
 }

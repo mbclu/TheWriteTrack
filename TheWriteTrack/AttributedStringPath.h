@@ -18,6 +18,5 @@
 
 - (instancetype)initWithString:(NSString *)str;
 - (instancetype)initWithString:(NSString *)str andSize:(CGFloat)size;
-- (instancetype)initWithString:(NSString *)str andLocation:(CGPoint)location;
 
 @end

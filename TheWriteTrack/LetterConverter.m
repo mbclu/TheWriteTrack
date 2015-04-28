@@ -12,10 +12,6 @@
 
 @implementation LetterConverter
 
-+ (NSAttributedString *)createAttributedString:(NSString *)attributelessString {
-    return [self createAttributedString:attributelessString WithFontSizeInPoints:[LayoutMath maximumViableFontSize]];
-}
-
 + (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize {
     NSAttributedString *attrString = nil;
     if (attributelessString != (id)[NSNull null] && attributelessString.length != 0)

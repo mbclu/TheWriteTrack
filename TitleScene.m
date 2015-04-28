@@ -10,6 +10,7 @@
 #import "TitleTrain.h"
 #import "CocoaLumberjack.h"
 #import "AttributedStringPath.h"
+#import "LayoutMath.h"
 
 @implementation TitleScene
 
@@ -38,32 +39,38 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (SKEmitterNode *)addTitleString {
+- (SKEmitterNode *)addTitleString:(AttributedStringPath *)pathToFollow {
     SKEmitterNode *titleStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                         [[NSBundle mainBundle] pathForResource:ORANGE_SMOKE ofType:@"sks"]];
-    titleStringEmitter.name = TITLE_STRING_EMITTER;
+                                         [[NSBundle mainBundle] pathForResource:TITLE_STRING_SMOKE ofType:@"sks"]];
+    titleStringEmitter.name = TITLE_STRING_SMOKE;
     
-    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@"A" andSize:100];
-    CGPathMoveToPoint(stringPath.path, nil, 200, 150);
-    SKAction *followTitleString = [SKAction followPath:stringPath.path asOffset:NO orientToPath:YES duration:2.5];
+    CGPoint moveLocation = [LayoutMath originForUpperLeftPlacementOfPath:pathToFollow.path];
+    titleStringEmitter.position = moveLocation;
+    
+    SKAction *followTitleString = [SKAction followPath:pathToFollow.path asOffset:NO orientToPath:YES duration:2.5];
     SKAction *repeatForever = [SKAction repeatActionForever:followTitleString];
     titleStringEmitter.particleAction = repeatForever;
-    titleStringEmitter.zPosition = 100;
     
     [self addChild:titleStringEmitter];
     
     return titleStringEmitter;
 }
 
--(instancetype)initWithSize:(CGSize)size {
+- (instancetype)initWithSize:(CGSize)size andStringPath:(AttributedStringPath *)stringPath {
     if (self = [super initWithSize:size]) {
         [self setName:TITLE_SCENE];
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
         [self addTrain];
         [self addForeground];
-        [self addTitleString];
+        [self addTitleString:stringPath];
     }
+    return self;
+}
+
+- (instancetype)initWithSize:(CGSize)size {
+    self = [self initWithSize:size
+                andStringPath:[[AttributedStringPath alloc] initWithString:TITLE andSize:100]];
     return self;
 }
 

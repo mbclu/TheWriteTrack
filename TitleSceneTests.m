@@ -18,6 +18,7 @@
     SKSpriteNode *foregroundNode;
     SKSpriteNode *trainNode;
     SKEmitterNode *titleNode;
+    SKEmitterNode *smokeNode;
 }
 
 @end
@@ -30,7 +31,8 @@
     backgroundNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_BACKGROUND];
     foregroundNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_FOREGROUND];
     trainNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_TRAIN];
-    titleNode = (SKEmitterNode *)[scene childNodeWithName:TITLE_STRING_EMITTER];
+    titleNode = (SKEmitterNode *)[scene childNodeWithName:TITLE_STRING_SMOKE];
+    smokeNode = (SKEmitterNode *)[trainNode childNodeWithName:ORANGE_SMOKE];
 }
 
 - (void)tearDown {
@@ -85,11 +87,6 @@
     XCTAssertNotNil(titleNode);
 }
 
-- (void)testThatTheTitleStringEmitterIsLocatedAtPointZeroZero {
-    XCTAssertEqual(titleNode.position.x, 0);
-    XCTAssertEqual(titleNode.position.y, 0);
-}
-
 - (void)testThatTheTitleStringEmitterRepeatsAnAction {
     XCTAssertNotNil(titleNode.particleAction);
     XCTAssertNotEqual([titleNode.particleAction.description rangeOfString:@"<SKRepeat:"].location, NSNotFound);
@@ -100,13 +97,21 @@
 }
 
 - (void)testThatTheTitleTrainSmokeIsAtFivePixelsDownFromTheTopCornerOfTheTrain {
-    SKEmitterNode *smoke = (SKEmitterNode *)[trainNode childNodeWithName:ORANGE_SMOKE];
-    XCTAssertEqual(smoke.position.y, trainNode.size.height - 5);
+    XCTAssertEqual(smokeNode.position.y, trainNode.size.height - 5);
 }
 
 - (void)testThatTheTitleTrainSmokeIsAtTenPixelsLeftOfTheRightSideOfTheTrain {
-    SKEmitterNode *smoke = (SKEmitterNode *)[trainNode childNodeWithName:ORANGE_SMOKE];
-    XCTAssertEqual(smoke.position.x, trainNode.size.width - 10);
+    XCTAssertEqual(smokeNode.position.x, trainNode.size.width - 10);
+}
+
+- (void)testThatTheTitleStringEmitterStartsAtTheUpperLeftCorner {
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:TITLE];
+    CGRect stringPathBounds = CGPathGetPathBoundingBox(stringPath.path);
+    CGFloat originX = 0;
+    CGFloat originY = scene.frame.size.height - stringPathBounds.size.height;
+    
+    XCTAssertEqualWithAccuracy(titleNode.position.x, originX, 0.1);
+    XCTAssertEqualWithAccuracy(titleNode.position.y, originY, 0.1);
 }
 
 @end

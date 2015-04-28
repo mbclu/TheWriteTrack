@@ -7,6 +7,7 @@
 //
 
 #import "AttributedStringPath.h"
+#import "LayoutMath.h"
 
 @implementation AttributedStringPath
 
@@ -24,31 +25,8 @@
     return self;
 }
 
-- (instancetype)initWithString:(NSString *)str andLocation:(CGPoint)location {
-    self = [super init];
-    
-    if ((str == nil) ||
-        (NSNotFound == [str rangeOfCharacterFromSet:NSCharacterSet.letterCharacterSet].location)) {
-        str = @"?";
-    }
-    
-    [self setAttributedString:[LetterConverter createAttributedString:str]];
-    [self setPath:[LetterConverter createPathAtLocation:location UsingAttrString:self.attributedString]];
-    
-    return self;
-}
-
 - (instancetype)initWithString:(NSString *)str {
-    self = [super init];
-
-    if ((str == nil) ||
-        (NSNotFound == [str rangeOfCharacterFromSet:NSCharacterSet.letterCharacterSet].location)) {
-        str = @"?";
-    }
-
-    [self setAttributedString:[LetterConverter createAttributedString:str]];
-    [self setPath:[LetterConverter createPathAtZeroUsingAttrString:self.attributedString]];
-    
+    self = [self initWithString:str andSize:[LayoutMath maximumViableFontSize]];
     return self;
 }
 

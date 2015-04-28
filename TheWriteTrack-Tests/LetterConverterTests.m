@@ -39,7 +39,7 @@ void getFirstGlyphAndPositionFromAttrString(NSAttributedString *attrString,
 - (void)setUp {
     [super setUp];
     nonNilString = @"NonNilString";
-    attrString = [LetterConverter createAttributedString:nonNilString];
+    attrString = [LetterConverter createAttributedString:nonNilString WithFontSizeInPoints:100];
     fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     defaultAccuracy = 1.0;
 }
@@ -53,12 +53,6 @@ void getFirstGlyphAndPositionFromAttrString(NSAttributedString *attrString,
 - (void)testThatTheDefaultFontTypeIsVerdana {
     CFStringRef stringRef = CTFontCopyFullName(fontRef);
     XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
-}
-
-- (void)testThatTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
-    CGFloat expectedSize = 325.0;
-    CGFloat size = CTFontGetSize(fontRef);
-    XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
 }
 
 - (void)testThatWhenAFontSizeIsSuppliedItIsUsedForTheAttributedString {

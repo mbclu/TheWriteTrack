@@ -77,4 +77,15 @@
     XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
 }
 
+- (void)testThatTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
+    CGFloat expectedSize = 325.0;
+    
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@""];
+
+    CTFontRef fontRef = (__bridge CTFontRef)[stringPath.attributedString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    CGFloat size = CTFontGetSize(fontRef);
+    
+    XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
+}
+
 @end

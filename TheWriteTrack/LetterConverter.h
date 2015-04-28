@@ -22,7 +22,6 @@
 + (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString;
 + (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString;
 
-+ (CGGlyph)getSingleGlyphInRun:(CTRunRef)run atIndex:(CFIndex)index;
-
++ (void)getSingleGlyph:(CGGlyph *)glyph AndPosition:(CGPoint *)position InRun:(CTRunRef)run atIndex:(CFIndex)index;
 
 @end

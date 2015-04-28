@@ -14,8 +14,10 @@
 @interface AttributedStringPath : NSObject
 
 @property (nonatomic, retain) NSAttributedString *attributedString;
-@property (nonatomic) CGPathRef path;
+@property (nonatomic) CGMutablePathRef path;
 
 - (instancetype)initWithString:(NSString *)str;
+- (instancetype)initWithString:(NSString *)str andSize:(CGFloat)size;
+- (instancetype)initWithString:(NSString *)str andLocation:(CGPoint)location;
 
 @end

@@ -10,6 +10,34 @@
 
 @implementation AttributedStringPath
 
+- (instancetype)initWithString:(NSString *)str andSize:(CGFloat)size {
+    self = [super init];
+    
+    if ((str == nil) ||
+        (NSNotFound == [str rangeOfCharacterFromSet:NSCharacterSet.letterCharacterSet].location)) {
+        str = @"?";
+    }
+    
+    [self setAttributedString:[LetterConverter createAttributedString:str WithFontSizeInPoints:size]];
+    [self setPath:[LetterConverter createPathAtZeroUsingAttrString:self.attributedString]];
+    
+    return self;
+}
+
+- (instancetype)initWithString:(NSString *)str andLocation:(CGPoint)location {
+    self = [super init];
+    
+    if ((str == nil) ||
+        (NSNotFound == [str rangeOfCharacterFromSet:NSCharacterSet.letterCharacterSet].location)) {
+        str = @"?";
+    }
+    
+    [self setAttributedString:[LetterConverter createAttributedString:str]];
+    [self setPath:[LetterConverter createPathAtLocation:location UsingAttrString:self.attributedString]];
+    
+    return self;
+}
+
 - (instancetype)initWithString:(NSString *)str {
     self = [super init];
 
@@ -19,7 +47,7 @@
     }
 
     [self setAttributedString:[LetterConverter createAttributedString:str]];
-    [self setPath:[LetterConverter createPathAtZeroUsingAttrString:_attributedString]];
+    [self setPath:[LetterConverter createPathAtZeroUsingAttrString:self.attributedString]];
     
     return self;
 }

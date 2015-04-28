@@ -22,5 +22,6 @@
 + (CGFloat)centerY;
 + (CGFloat)findStartingXValueForRect:(CGRect)pathBounds;
 + (CGFloat)findStartingYValueForRect:(CGRect)pathBounds;
++ (CGPoint)originForUpperLeftPlacementOfPath:(CGPathRef)path;
 
 @end

@@ -12,6 +12,8 @@
 #define TITLE_BACKGROUND @"TitleBackground"
 #define TITLE_FOREGROUND @"TitleForeground"
 #define TITLE_STRING_EMITTER @"TitleStringEmitter"
+#define SMOKE_HORIZONTAL_OFFSET -10
+#define SMOKE_VERTICAL_OFFSET   -5
 
 @interface TitleScene : SKScene
 

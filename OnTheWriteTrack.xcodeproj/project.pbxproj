@@ -7,17 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0df2f0aa5296c8d6c4ffd907 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
-		0eb963bfd63ec2534790fd93 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
-		27be227b19cd93c66c077efd /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43d0afec4f925143f9f92ad9 /* CFNetwork.framework */; };
 		33F0F7F8451C437A96FC1B51 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
-		33eb308516f44e45d5caec70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
-		4285041426543582bfc61db0 /* A.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20E1ACB6D0C0094BBE9 /* A.m */; };
-		74a4b7d95a8b65b3339c5ba9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
-		80294a3d5d9055f5db20cd2a /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
-		823be3c8dda767550abbdf1e /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DB850D1AD48ABB0026972B /* TitleScene.m */; };
-		8c6a144de3c2b10cd59e5fc8 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
-		9932544d7b7d4cb856ac6be9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D081731A8A312700DE5ECC /* AppDelegate.m */; };
 		9B4DB71D8E2CAB13BE5077EC /* libPods-OnTheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */; };
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
@@ -25,12 +15,9 @@
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
 		C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
-		C773473A1AE72962005C2950 /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
 		C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
-		C77347401AE72E3D005C2950 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
 		C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347411AE73361005C2950 /* TitleTrainTests.m */; };
 		C77347451AE733F5005C2950 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
-		C77347461AE733F5005C2950 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
 		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
 		C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
@@ -53,15 +40,6 @@
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		C7FDF20F1ACB6D0C0094BBE9 /* A.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20E1ACB6D0C0094BBE9 /* A.m */; };
 		C7FDF2121ACB6E3B0094BBE9 /* ATests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF2111ACB6E3B0094BBE9 /* ATests.m */; };
-		adcee287ba490b297ee2fbda /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06e84e33b57bee0211ce863b /* calabash.framework */; };
-		b5590041ee954e9e4c04c2b9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
-		b942785960a1d8cea004ba26 /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
-		bc05be6de88609f93530eadd /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
-		be9293db0e5731531c34516b /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
-		cbe4b87fb2cd55e83e814889 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
-		ce507c1d6637725017a84a2f /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
-		eee14d23e383d14ce37bea1b /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
-		f6b7783f55be8eb6f343a780 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +66,6 @@
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
 		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; };
-		C761284E1AE5E7DA0015AF7F /* OnTheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77347351AE72936005C2950 /* OrangeSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = OrangeSmoke.sks; path = TheWriteTrack/OrangeSmoke.sks; sourceTree = SOURCE_ROOT; };
 		C773473E1AE72E3D005C2950 /* OrangeSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeSmoke.png; path = images/particles/OrangeSmoke.png; sourceTree = SOURCE_ROOT; };
 		C77347411AE73361005C2950 /* TitleTrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrainTests.m; path = "TheWriteTrack-Tests/TitleTrainTests.m"; sourceTree = SOURCE_ROOT; };
@@ -132,19 +109,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7450cc43c937fcd76ea8fe77 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ce507c1d6637725017a84a2f /* CoreGraphics.framework in Frameworks */,
-				cbe4b87fb2cd55e83e814889 /* CoreText.framework in Frameworks */,
-				8c6a144de3c2b10cd59e5fc8 /* SpriteKit.framework in Frameworks */,
-				0eb963bfd63ec2534790fd93 /* libPods.a in Frameworks */,
-				27be227b19cd93c66c077efd /* CFNetwork.framework in Frameworks */,
-				adcee287ba490b297ee2fbda /* calabash.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C7CED04D1A86B9DA00A4DCC3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -274,7 +238,6 @@
 			children = (
 				C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */,
 				C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */,
-				C761284E1AE5E7DA0015AF7F /* OnTheWriteTrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,25 +381,6 @@
 			productReference = C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		ca701c78e6ff52eb37e0ad89 /* OnTheWriteTrack-cal */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3890ba9b4e187fd01df0e8f8 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack-cal" */;
-			buildPhases = (
-				b13fc4d2522c81076fd541a6 /* Check Pods Manifest.lock */,
-				c302f7d488e405226fe2855a /* Sources */,
-				7450cc43c937fcd76ea8fe77 /* Frameworks */,
-				5f9acbcd1d9eb789f3aacd8c /* Resources */,
-				68fa19400553c29377857209 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "OnTheWriteTrack-cal";
-			productName = "The Write Track-cal";
-			productReference = C761284E1AE5E7DA0015AF7F /* OnTheWriteTrack.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -470,24 +414,11 @@
 			targets = (
 				C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */,
 				C7CED06D1A86B9DA00A4DCC3 /* OnTheWriteTrackTests */,
-				ca701c78e6ff52eb37e0ad89 /* OnTheWriteTrack-cal */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5f9acbcd1d9eb789f3aacd8c /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				74a4b7d95a8b65b3339c5ba9 /* Images.xcassets in Resources */,
-				33eb308516f44e45d5caec70 /* Main.storyboard in Resources */,
-				80294a3d5d9055f5db20cd2a /* LaunchScreen.xib in Resources */,
-				C77347401AE72E3D005C2950 /* OrangeSmoke.png in Resources */,
-				C773473A1AE72962005C2950 /* OrangeSmoke.sks in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C7CED04E1A86B9DA00A4DCC3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -527,21 +458,6 @@
 			showEnvVarsInLog = 0;
 		};
 		6619CAACEF444BC28D2DE667 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		68fa19400553c29377857209 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -600,21 +516,6 @@
 			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
-		b13fc4d2522c81076fd541a6 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -650,24 +551,6 @@
 				C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */,
 				C7DB850B1AD48AA40026972B /* TitleSceneTests.m in Sources */,
 				C7FDF2121ACB6E3B0094BBE9 /* ATests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		c302f7d488e405226fe2855a /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				823be3c8dda767550abbdf1e /* TitleScene.m in Sources */,
-				f6b7783f55be8eb6f343a780 /* LetterConverter.m in Sources */,
-				eee14d23e383d14ce37bea1b /* GameViewController.m in Sources */,
-				b5590041ee954e9e4c04c2b9 /* PathInfo.m in Sources */,
-				be9293db0e5731531c34516b /* LetterView.m in Sources */,
-				4285041426543582bfc61db0 /* A.m in Sources */,
-				C77347461AE733F5005C2950 /* TitleTrain.m in Sources */,
-				0df2f0aa5296c8d6c4ffd907 /* main.m in Sources */,
-				b942785960a1d8cea004ba26 /* _BaseTrackScene.m in Sources */,
-				9932544d7b7d4cb856ac6be9 /* AppDelegate.m in Sources */,
-				bc05be6de88609f93530eadd /* LayoutMath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,68 +755,9 @@
 			};
 			name = Release;
 		};
-		ccd516a499ecb87a2c332b9a /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = TheWriteTrack/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-l\"Pods-OCMock\"",
-					"-force_load",
-					"\"$(SRCROOT)/calabash.framework/calabash\"",
-					"-lstdc++",
-				);
-				PRODUCT_NAME = OnTheWriteTrack;
-				USER_HEADER_SEARCH_PATHS = "";
-			};
-			name = Debug;
-		};
-		efcd142a431cf6991db20fa0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = TheWriteTrack/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-l\"Pods-OCMock\"",
-					"-force_load",
-					"\"$(SRCROOT)/calabash.framework/calabash\"",
-					"-lstdc++",
-				);
-				PRODUCT_NAME = OnTheWriteTrack;
-				USER_HEADER_SEARCH_PATHS = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3890ba9b4e187fd01df0e8f8 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack-cal" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				ccd516a499ecb87a2c332b9a /* Debug */,
-				efcd142a431cf6991db20fa0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "OnTheWriteTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

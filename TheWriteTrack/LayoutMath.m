@@ -60,4 +60,12 @@
     return y;
 }
 
++ (CGPoint)originForUpperLeftPlacementOfPath:(CGPathRef)path {
+    CGRect bounds = CGPathGetPathBoundingBox(path);
+    CGPoint position = CGPointZero;
+    position.x = 0;
+    position.y = [UIScreen mainScreen].bounds.size.height - bounds.size.height;
+    return position;
+}
+
 @end

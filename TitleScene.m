@@ -9,7 +9,6 @@
 #import "TitleScene.h"
 #import "TitleTrain.h"
 #import "CocoaLumberjack.h"
-#import "LetterConverter.h"
 #import "AttributedStringPath.h"
 
 @implementation TitleScene
@@ -28,7 +27,8 @@
 
 - (void)addTrain {
     TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
-    [train applySmokeEmitterAtPosition:CGPointMake(train.size.width - 10, train.size.height - 5)];
+    [train applySmokeEmitterAtPosition:CGPointMake(train.size.width + SMOKE_HORIZONTAL_OFFSET,
+                                                   train.size.height + SMOKE_VERTICAL_OFFSET)];
     [self anchorNode:train atZeroAndZPosition:TitleTrainZOrder];
 }
 
@@ -40,13 +40,15 @@
 
 - (SKEmitterNode *)addTitleString {
     SKEmitterNode *titleStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                         [[NSBundle mainBundle] pathForResource:@"TitleSmoke" ofType:@"sks"]];
+                                         [[NSBundle mainBundle] pathForResource:ORANGE_SMOKE ofType:@"sks"]];
     titleStringEmitter.name = TITLE_STRING_EMITTER;
     
-    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@"Anything"];
-    SKAction *followTitleString = [SKAction followPath:stringPath.path speed:1.0];
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@"A" andSize:100];
+    CGPathMoveToPoint(stringPath.path, nil, 200, 150);
+    SKAction *followTitleString = [SKAction followPath:stringPath.path asOffset:NO orientToPath:YES duration:2.5];
     SKAction *repeatForever = [SKAction repeatActionForever:followTitleString];
     titleStringEmitter.particleAction = repeatForever;
+    titleStringEmitter.zPosition = 100;
     
     [self addChild:titleStringEmitter];
     

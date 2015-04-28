@@ -62,8 +62,19 @@
 
 - (void)testThatANonNilNonEmptyPathIsReturned {
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@""];
-    XCTAssertNotNil(stringPath.path);
+    XCTAssertNotNil((__strong id)stringPath.path);
     XCTAssertFalse(CGPathIsEmpty(stringPath.path));
+}
+
+- (void)testThatTheFontSizeCanBeSuppliedToTheString {
+    CGFloat expectedSize = 40.0;
+
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@"" andSize:expectedSize];
+
+    CTFontRef fontRef = (__bridge CTFontRef)[stringPath.attributedString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
+    CGFloat size = CTFontGetSize(fontRef);
+    
+    XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
 }
 
 @end

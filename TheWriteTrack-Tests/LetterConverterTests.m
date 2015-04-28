@@ -19,6 +19,15 @@
 
 @end
 
+void getFirstGlyphAndPositionFromAttrString(NSAttributedString *attrString,
+                                            CGGlyph *glyph, CGPoint *position)
+{
+    CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
+    CFArrayRef runArray = CTLineGetGlyphRuns(line);
+    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
+    [LetterConverter getSingleGlyph:glyph AndPosition:position InRun:run atIndex:0];
+}
+
 @implementation LetterConverterTests
 {
     NSString *nonNilString;
@@ -52,7 +61,7 @@
     XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
 }
 
-- (void)testThatWhenAFontSizeIsSuppliedItIsUsedForTheAttributedStrign {
+- (void)testThatWhenAFontSizeIsSuppliedItIsUsedForTheAttributedString {
     CGFloat expectedSize = 40.0;
 
     attrString = [LetterConverter createAttributedString:nonNilString WithFontSizeInPoints:expectedSize];
@@ -84,30 +93,24 @@
 }
 
 - (void)testThatWhenARunFromALineIsExaminedAtIndexZeroThenASingleGlyphIsReturned {
-    // Expected Setup
     CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
     CGGlyph expectedGlyph;
     UniChar characters[] = { [@"N" characterAtIndex:0] };
     CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
     
-    // Actual Setup
-    CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
-    CFArrayRef runArray = CTLineGetGlyphRuns(line);
-    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
-    CGGlyph glyph = [LetterConverter getSingleGlyphInRun:run atIndex:0];
+    CGGlyph glyph; CGPoint position;
+    getFirstGlyphAndPositionFromAttrString(attrString, &glyph, &position);
     
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
-//- (void)testThatWhenAStartingPositionIsGivenToTheLetterConverterThenItIsUsed {
-//    CGPoint startingPoint = CGPointMake(15, 50);
-//
-//    attrString = [LetterConverter createAttributedString:@"A" WithFontSizeInPoints:100];
-//    CGPathRef path = [LetterConverter createPathAtLocation:startingPoint UsingAttrString:attrString];
-//    CGRect fontBoundingBox = CGPathGetBoundingBox(path);
-//    
-//    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.x, startingPoint.x, 1.3);
-//    XCTAssertEqualWithAccuracy(fontBoundingBox.origin.y, startingPoint.y, 1.3);
-//}
+- (void)testThatPositionDataIsDeterminedFromTheGlyph {
+    CGGlyph glyph; CGPoint position;
+    getFirstGlyphAndPositionFromAttrString(attrString, &glyph, &position);
+    
+    CGPoint expectedPosition = CGPointZero;
+    XCTAssertEqualWithAccuracy(position.x, expectedPosition.x, defaultAccuracy);
+    XCTAssertEqualWithAccuracy(position.y, expectedPosition.y, defaultAccuracy);
+}
 
 @end

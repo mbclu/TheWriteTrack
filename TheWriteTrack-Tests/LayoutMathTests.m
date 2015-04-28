@@ -63,6 +63,17 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqual([LayoutMath findStartingYValueForRect:bounds], expectedY);
 }
 
+- (void)testThatTheUpperLeftCornerOfAnObjectCanBePlacedAtTheUpperLeftOfTheScreen {
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGRect rect = CGRectMake(0, 0, 10, 20);
+    CGPathAddRect(path, nil, rect);
+    CGPoint origin = [LayoutMath originForUpperLeftPlacementOfPath:path];
+    CGFloat xExpected = rect.origin.x;
+    CGFloat yExpected = [UIScreen mainScreen].bounds.size.height - rect.size.height;
+    XCTAssertEqualWithAccuracy(origin.x, xExpected, defaultAccuracy);
+    XCTAssertEqualWithAccuracy(origin.y, yExpected, defaultAccuracy);
+}
+
 @end
 
 @interface LayoutMathTests_Landscape : LayoutMathTests

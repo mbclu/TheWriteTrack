@@ -26,11 +26,14 @@
 }
 
 - (void)testInitWithStringConvertsTheString_s_t_a_r_t_ToAnArray {
+    NSString *expectedString = @"start";
     id lcMock = OCMClassMock([LetterConverter class]);
     StartButton *startButton = [[StartButton alloc] init];
     startButton.letterConverter = lcMock;
-    [startButton createFromString:@"string"];
-    OCMVerify([lcMock getLetterArrayFromString:@"string"]);
+    [startButton create];
+    OCMVerify([lcMock getLetterArrayFromString:expectedString]);
 }
+
+//- (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString
 
 @end

@@ -9,10 +9,13 @@
 #import "LetterConverter.h"
 #import <SpriteKit/SpriteKit.h>
 
+FOUNDATION_EXPORT NSString *const StartText;
+
 @interface StartButton : SKSpriteNode
 
-@property(retain) LetterConverter *letterConverter;
+@property (readonly) NSString *startText;
+@property (retain) LetterConverter *letterConverter;
 
-- (void)createFromString:(NSString *)string;
+- (void)create;
 
 @end

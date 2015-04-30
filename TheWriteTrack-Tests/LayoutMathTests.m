@@ -15,6 +15,8 @@
 @interface LayoutMathTests : XCTestCase
 @property CGFloat defaultAccuracy;
 @property id startingOrientation;
+@property CGRect rectForTest;
+@property CGMutablePathRef rectPathForTest;
 @end
 
 CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
@@ -33,11 +35,20 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 @implementation LayoutMathTests
 @synthesize defaultAccuracy;
 @synthesize startingOrientation;
+@synthesize rectForTest;
+@synthesize rectPathForTest;
+
+- (void)setUpRectPath {
+    rectPathForTest = CGPathCreateMutable();
+    rectForTest = CGRectMake(0, 0, 10, 20);
+    CGPathAddRect(rectPathForTest, nil, rectForTest);
+}
 
 - (void)setUp {
     [super setUp];
     defaultAccuracy = 1.0;
     startingOrientation = [[UIDevice currentDevice] valueForKey:@"orientation"];
+    [self setUpRectPath];
 }
 
 - (void)tearDown {
@@ -64,12 +75,21 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 }
 
 - (void)testThatTheUpperLeftCornerOfAnObjectCanBePlacedAtTheUpperLeftOfTheScreen {
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGRect rect = CGRectMake(0, 0, 10, 20);
-    CGPathAddRect(path, nil, rect);
-    CGPoint origin = [LayoutMath originForUpperLeftPlacementOfPath:path];
-    CGFloat xExpected = rect.origin.x;
-    CGFloat yExpected = [UIScreen mainScreen].bounds.size.height - rect.size.height;
+    CGPoint origin = [LayoutMath originForUpperLeftPlacementOfPath:rectPathForTest];
+    
+    CGFloat xExpected = rectForTest.origin.x;
+    CGFloat yExpected = [UIScreen mainScreen].bounds.size.height - rectForTest.size.height;
+    
+    XCTAssertEqualWithAccuracy(origin.x, xExpected, defaultAccuracy);
+    XCTAssertEqualWithAccuracy(origin.y, yExpected, defaultAccuracy);
+}
+
+- (void)testThePointAdjacentToTheRightMostLetterHasGreaterXValue {
+    CGPoint origin = [LayoutMath originForPath:rectPathForTest adjacentToPathOnLeft:rectPathForTest];
+    
+    CGFloat xExpected = rectForTest.size.width;
+    CGFloat yExpected = [UIScreen mainScreen].bounds.size.height - rectForTest.size.height;
+    
     XCTAssertEqualWithAccuracy(origin.x, xExpected, defaultAccuracy);
     XCTAssertEqualWithAccuracy(origin.y, yExpected, defaultAccuracy);
 }

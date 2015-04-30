@@ -72,4 +72,13 @@
     return position;
 }
 
++ (CGPoint)originForPath:(CGPathRef)path adjacentToPathOnLeft:(CGPathRef)pathOnLeft {
+    CGRect bounds = CGPathGetPathBoundingBox(path);
+    CGRect leftBounds = CGPathGetPathBoundingBox(pathOnLeft);
+    CGPoint position = CGPointZero;
+    position.x += leftBounds.size.width;
+    position.y = [UIScreen mainScreen].bounds.size.height - bounds.size.height;
+    return position;
+}
+
 @end

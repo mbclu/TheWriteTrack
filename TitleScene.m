@@ -39,21 +39,30 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (void)addStartButtonSmoke:(AttributedStringPath *)pathToFollow {
-    SKEmitterNode *startButtonStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                         [[NSBundle mainBundle] pathForResource:START_STRING_SKS ofType:@"sks"]];
-    startButtonStringEmitter.name = START_SMOKE_TEXT;
-    
+// Spike this out and think about how it can be mocked properly for testing
+- (void)addLetterAtIndex:(NSUInteger)index ofStringPath:(AttributedStringPath *)pathToFollow toNode:(SKSpriteNode *)node {
+    SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                               [[NSBundle mainBundle] pathForResource:START_STRING_SKS ofType:@"sks"]];
     CGPoint moveLocation = [LayoutMath originForUpperLeftPlacementOfPath:pathToFollow.path];
-    startButtonStringEmitter.position = moveLocation;
+    emitter.position = moveLocation;
+    SKAction *followStringPath = [SKAction followPath:pathToFollow.path
+                                              asOffset:NO orientToPath:YES duration:FOLLOW_PATH_DURATION];
+    SKAction *repeatForever = [SKAction repeatActionForever:followStringPath];
+    emitter.particleAction = repeatForever;
     
-    SKAction *followTitleString = [SKAction followPath:pathToFollow.path asOffset:NO orientToPath:YES duration:2.5];
-    SKAction *repeatForever = [SKAction repeatActionForever:followTitleString];
-    startButtonStringEmitter.particleAction = repeatForever;
+    [node addChild:emitter];
+}
+
+- (void)addStartButtonSmoke:(AttributedStringPath *)pathToFollow {
+    SKSpriteNode *startButton = [[SKSpriteNode alloc] init];
+    startButton.name = START_SMOKE_TEXT;
+    startButton.zPosition = StartButtonZOrder;
+
+//    for (NSUInteger i; i < pathToFollow.attributedString.string.length; i++) {
+        [self addLetterAtIndex:1 ofStringPath:pathToFollow toNode:startButton];
+//    }
     
-    startButtonStringEmitter.zPosition = StartButtonZOrder;
-    
-    [self addChild:startButtonStringEmitter];
+    [self addChild:startButton];
 }
 
 - (instancetype)initWithSize:(CGSize)size andStringPath:(AttributedStringPath *)stringPath {

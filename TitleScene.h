@@ -12,6 +12,7 @@
 #define START_SMOKE_TEXT        @"START"
 #define START_SMOKE_SIZE        100.0
 #define START_STRING_SKS        @"TitleStringSmoke"
+#define FOLLOW_PATH_DURATION    3.0
 
 #define TITLE_SCENE             @"TitleScene"
 #define TITLE_BACKGROUND        @"TitleBackground"

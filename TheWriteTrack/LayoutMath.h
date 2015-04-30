@@ -20,6 +20,7 @@
 + (CGFloat)maximumViableFontSize;
 + (CGFloat)centerX;
 + (CGFloat)centerY;
++ (CGPoint)centerPoint;
 + (CGFloat)findStartingXValueForRect:(CGRect)pathBounds;
 + (CGFloat)findStartingYValueForRect:(CGRect)pathBounds;
 + (CGPoint)originForUpperLeftPlacementOfPath:(CGPathRef)path;

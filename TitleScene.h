@@ -9,7 +9,8 @@
 #import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
 
-#define TITLE                   @"On The Write Track"
+#define START_SMOKE             @"START"
+#define START_SMOKE_SIZE        100.0
 
 #define TITLE_SCENE             @"TitleScene"
 #define TITLE_BACKGROUND        @"TitleBackground"
@@ -24,11 +25,10 @@
 typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
     TitleBackgroundZOrder,
     TitleTrainZOrder,
-    TitleForegroundZOrder
+    TitleForegroundZOrder,
+    StartButtonZOrder
 };
 
-- (SKEmitterNode *)addTitleString:(AttributedStringPath *)pathToFollow;
-- (instancetype)initWithSize:(CGSize)size andStringPath:(AttributedStringPath *)stringPath;
 - (instancetype)initWithSize:(CGSize)size;
 
 @end

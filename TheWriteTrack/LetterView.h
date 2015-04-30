@@ -9,13 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <CoreText/CoreText.h>
 
-@interface LetterView : SKView {
-    NSAttributedString *attrString;
-    NSAttributedString *attrStringRails;
-}
-
-@property (strong) IBOutlet NSAttributedString *attrString;
-@property (strong) IBOutlet NSAttributedString *attrStringRails;
+@interface LetterView : SKView
 
 - (void) drawRailInContext:(CGContextRef)context;
 - (void) setupContextForHumanReadableText:(CGContextRef)context;

@@ -65,21 +65,21 @@
 }
 
 #ifdef DEBUG
-- (void)addDebugPrintPathButton
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame = CGRectMake(100, 170, 100, 30);
-    [button setBackgroundColor:[UIColor redColor]];
-    [button setTitle:@"Log Letter Path Data" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonPressed)
-     forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-}
-
--(void)buttonPressed {
-    PrintPath(([LetterConverter createPathAtZeroUsingAttrString:[self.letterView attrString]]));
-    DDLogInfo(@"Button Pressed!");
-}
+//- (void)addDebugPrintPathButton
+//{
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    button.frame = CGRectMake(100, 170, 100, 30);
+//    [button setBackgroundColor:[UIColor redColor]];
+//    [button setTitle:@"Log Letter Path Data" forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(buttonPressed)
+//     forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:button];
+//}
+//
+//-(void)buttonPressed {
+//    PrintPath(([LetterConverter createPathAtZeroUsingAttrString:[self.letterView attrString]]));
+//    DDLogInfo(@"Button Pressed!");
+//}
 #endif
 
 @end

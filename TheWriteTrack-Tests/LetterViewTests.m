@@ -28,7 +28,6 @@
     [super setUp];
     paths = [[NSMutableArray alloc] init];
     letterView = [[LetterView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    [letterView setAttrString:[LetterConverter createAttributedString:@"A"]];
     
     // Added this content according to blog post: http://eng.wealthfront.com/2014/03/unit-testing-drawrect.html
     CGFloat scaleFactor = [[UIScreen mainScreen] scale];
@@ -55,5 +54,9 @@
 - (void)testThatTheLetterViewHasAClearBackground {
     XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
 }
+
+//- (void)testThatTheLetterIsMovedToTheCenterOfTheScreen {
+//    XCTAssertEqual(letterView.
+//}
 
 @end

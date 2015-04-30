@@ -50,6 +50,10 @@
     return center;
 }
 
++ (CGPoint)centerPoint {
+    return CGPointMake([self centerX], [self centerY]);
+}
+
 + (CGFloat)findStartingXValueForRect:(CGRect)pathBounds {
     CGFloat x = ([UIScreen mainScreen].bounds.size.width - pathBounds.size.width) / 2;
     return x;

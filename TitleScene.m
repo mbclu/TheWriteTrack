@@ -39,7 +39,7 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (SKEmitterNode *)addTitleString:(AttributedStringPath *)pathToFollow {
+- (void)addTitleString:(AttributedStringPath *)pathToFollow {
     SKEmitterNode *titleStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                          [[NSBundle mainBundle] pathForResource:TITLE_STRING_SMOKE ofType:@"sks"]];
     titleStringEmitter.name = TITLE_STRING_SMOKE;
@@ -52,8 +52,6 @@
     titleStringEmitter.particleAction = repeatForever;
     
     [self addChild:titleStringEmitter];
-    
-    return titleStringEmitter;
 }
 
 - (instancetype)initWithSize:(CGSize)size andStringPath:(AttributedStringPath *)stringPath {
@@ -70,15 +68,11 @@
 
 - (instancetype)initWithSize:(CGSize)size {
     self = [self initWithSize:size
-                andStringPath:[[AttributedStringPath alloc] initWithString:TITLE andSize:100]];
+                andStringPath:[[AttributedStringPath alloc] initWithString:START_SMOKE andSize:START_SMOKE_SIZE]];
     return self;
 }
 
 -(void)didMoveToView:(SKView *)view {
-//    SKSpriteNode* trainNode = (SKSpriteNode*)[self childNodeWithName:TITLE_TRAIN];
-//    CGFloat trainMoveX = [self size].width + trainNode.size.width;
-//    SKAction * actionMove = [SKAction moveTo:CGPointMake(trainMoveX, 132) duration:10];
-//    [trainNode runAction:actionMove withKey:ACTION_EXIT_SCENE_RIGHT];
 }
 
 //- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {

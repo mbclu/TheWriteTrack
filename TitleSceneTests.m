@@ -19,6 +19,7 @@
     SKSpriteNode *trainNode;
     SKEmitterNode *titleNode;
     SKEmitterNode *smokeNode;
+    SKSpriteNode *startButton;
 }
 
 @end
@@ -104,14 +105,25 @@
     XCTAssertEqual(smokeNode.position.x, trainNode.size.width - 10);
 }
 
-- (void)testThatTheTitleStringEmitterStartsAtTheUpperLeftCorner {
-    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:TITLE];
-    CGRect stringPathBounds = CGPathGetPathBoundingBox(stringPath.path);
-    CGFloat originX = 0;
-    CGFloat originY = scene.frame.size.height - stringPathBounds.size.height;
-    
-    XCTAssertEqualWithAccuracy(titleNode.position.x, originX, 0.1);
-    XCTAssertEqualWithAccuracy(titleNode.position.y, originY, 0.1);
+//- (void)testThatTheTitleStringEmitterStartsAtTheUpperLeftCorner {
+//    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:TITLE];
+//    CGRect stringPathBounds = CGPathGetPathBoundingBox(stringPath.path);
+//    CGFloat originX = 0;
+//    CGFloat originY = scene.frame.size.height - stringPathBounds.size.height;
+//    
+//    XCTAssertEqualWithAccuracy(titleNode.position.x, originX, 0.1);
+//    XCTAssertEqualWithAccuracy(titleNode.position.y, originY, 0.1);
+//}
+
+- (void)testThereIsAButtonToBeginWritingPractice {
+    XCTAssertNotNil(startButton);
+}
+
+- (void)testTheStartButtonIsTheHighestZOrder {
+    NSArray *children = [scene children];
+    for (NSUInteger i; i < children.count; i++) {
+        XCTAssertGreaterThanOrEqual(startButton.zPosition, ((SKNode *)[children objectAtIndex:i]).zPosition);
+    }
 }
 
 @end

@@ -19,13 +19,13 @@
 
 @end
 
-void getFirstGlyphAndPositionFromAttrString(NSAttributedString *attrString,
-                                            CGGlyph *glyph, CGPoint *position)
+void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
+                                        CGGlyph *glyph, CGPoint *position, NSInteger index)
 {
     CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
     CFArrayRef runArray = CTLineGetGlyphRuns(line);
-    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, 0);
-    [LetterConverter getSingleGlyph:glyph AndPosition:position InRun:run atIndex:0];
+    CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, index);
+    [LetterConverter getSingleGlyph:glyph AndPosition:position InRun:run atIndex:index];
 }
 
 @implementation LetterConverterTests
@@ -93,18 +93,36 @@ void getFirstGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
     
     CGGlyph glyph; CGPoint position;
-    getFirstGlyphAndPositionFromAttrString(attrString, &glyph, &position);
+    getGlyphAndPositionFromAttrString(attrString, &glyph, &position, 0);
     
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
 - (void)testThatPositionDataIsDeterminedFromTheGlyph {
     CGGlyph glyph; CGPoint position;
-    getFirstGlyphAndPositionFromAttrString(attrString, &glyph, &position);
+    getGlyphAndPositionFromAttrString(attrString, &glyph, &position, 0);
     
     CGPoint expectedPosition = CGPointZero;
     XCTAssertEqualWithAccuracy(position.x, expectedPosition.x, defaultAccuracy);
     XCTAssertEqualWithAccuracy(position.y, expectedPosition.y, defaultAccuracy);
+}
+
+- (void)testGivenAStringWithMoreThanOneCharacterThenTheSameNumberOfLettersAreInTheAttributedString {
+    NSString *sampleString = @"AB";
+    attrString = [LetterConverter createAttributedString:sampleString WithFontSizeInPoints:[LayoutMath maximumViableFontSize]];
+    XCTAssertEqual(attrString.string.length, 2);
+    XCTAssertEqualObjects(attrString.string, sampleString);
+}
+
+- (void)testGivenAnAttributedStringWithMultipleCharactersThenMoreThanOneLetterIsInThePath {
+    CGFloat fontSize = 10;
+    CGPathRef aLetterPath = [LetterConverter createPathFromString:@"A" AndSize:fontSize];
+    CGPathRef bLetterPath = [LetterConverter createPathFromString:@"B" AndSize:fontSize];
+    CGPathRef multiLetterPath = [LetterConverter createPathFromString:@"AB" AndSize:fontSize];
+    
+    XCTAssertFalse(CGPathEqualToPath(aLetterPath, bLetterPath));
+    XCTAssertFalse(CGPathEqualToPath(aLetterPath, multiLetterPath));
+    XCTAssertFalse(CGPathEqualToPath(multiLetterPath, bLetterPath));
 }
 
 @end

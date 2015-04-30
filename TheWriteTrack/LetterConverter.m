@@ -25,7 +25,7 @@
                                         (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
                                         nil];
         
-        attrString = [[NSAttributedString alloc] initWithString:[attributelessString substringWithRange:NSMakeRange(0, 1)] attributes:attrDictionary];
+        attrString = [[NSAttributedString alloc] initWithString:attributelessString attributes:attrDictionary];
         
         CFRelease(fontRef);
     }

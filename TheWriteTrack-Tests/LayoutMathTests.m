@@ -109,6 +109,13 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqualWithAccuracy([LayoutMath centerY], expectedY, super.defaultAccuracy);
 }
 
+- (void)testTheCenterPointIsWidthHeightWhenInLandscapeOrientation {
+    CGPoint expectedCenter = CGPointMake([UIScreen mainScreen].bounds.size.width / 2,
+                                         [UIScreen mainScreen].bounds.size.height / 2);
+    XCTAssertEqualWithAccuracy([LayoutMath centerPoint].x, expectedCenter.x, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath centerPoint].y, expectedCenter.y, super.defaultAccuracy);
+}
+
 @end
 
 @interface LayoutMathTests_Portrait : LayoutMathTests
@@ -147,6 +154,13 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 - (void)testThatGivenAPortraitOrientationThenTheCenterYValueIsHalfTheWidth {
     CGFloat expectedY = [UIScreen mainScreen].bounds.size.width / 2;
     XCTAssertEqualWithAccuracy([LayoutMath centerY], expectedY, super.defaultAccuracy);
+}
+
+- (void)testTheCenterPointIsHeightWidthWhenInPortraitOrientation {
+    CGPoint expectedCenter = CGPointMake([UIScreen mainScreen].bounds.size.height / 2,
+                                         [UIScreen mainScreen].bounds.size.width / 2);
+    XCTAssertEqualWithAccuracy([LayoutMath centerPoint].x, expectedCenter.x, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath centerPoint].y, expectedCenter.y, super.defaultAccuracy);
 }
 
 @end

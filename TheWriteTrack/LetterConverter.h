@@ -23,4 +23,6 @@
 
 + (void)getSingleGlyph:(CGGlyph *)glyph AndPosition:(CGPoint *)position InRun:(CTRunRef)run atIndex:(CFIndex)index;
 
+- (NSArray *)getLetterArrayFromString:(NSString *)string;
+
 @end

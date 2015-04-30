@@ -10,4 +10,10 @@
 
 @implementation StartButton
 
+@synthesize letterConverter;
+
+- (void)createFromString:(NSString *)string {
+    [letterConverter getLetterArrayFromString:string];
+}
+
 @end

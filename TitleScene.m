@@ -77,6 +77,8 @@
                                [buttonText substringFromIndex:4] andSize:START_SMOKE_SIZE];
     
     NSArray *stringArray = [[NSArray alloc] initWithObjects:S, T1, A, R, T2, nil];
+    NSString *str = @"start";
+    NSMutableArray *mutArray = [[NSMutableArray alloc] initWithCapacity:str.length];
     
     CGPoint firstLocation = [LayoutMath originForUpperLeftPlacementOfPath:S.path];
     [self addLetterOfStringPath:S toNode:startButton atLocation:firstLocation];

@@ -125,4 +125,15 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     XCTAssertFalse(CGPathEqualToPath(multiLetterPath, bLetterPath));
 }
 
+- (void)testTheLetterConverterHasAMethodToConvertAStringIntoAnArrayContainingEachLetterOfTheArrayAsASeparateObject {
+    NSString *str = @"abc";
+    LetterConverter *lc = [[LetterConverter alloc] init];
+    NSArray *array = [lc getLetterArrayFromString:str];
+    
+    XCTAssertEqual(array.count, 3);
+    XCTAssertEqualObjects([str substringFromIndex:0], array[0]);
+    XCTAssertEqualObjects([str substringFromIndex:1], array[1]);
+    XCTAssertEqualObjects([str substringFromIndex:2], array[2]);
+}
+
 @end

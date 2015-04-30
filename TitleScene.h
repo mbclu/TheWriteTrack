@@ -9,7 +9,7 @@
 #import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
 
-#define START_SMOKE_TEXT        @"START"
+#define START_SMOKE_TEXT        @"start"
 #define START_SMOKE_SIZE        100.0
 #define START_STRING_SKS        @"TitleStringSmoke"
 #define FOLLOW_PATH_DURATION    3.0
@@ -29,7 +29,5 @@ typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
     TitleForegroundZOrder,
     StartButtonZOrder
 };
-
-- (instancetype)initWithSize:(CGSize)size;
 
 @end

@@ -40,11 +40,15 @@
 }
 
 // Spike this out and think about how it can be mocked properly for testing
-- (void)addLetterAtIndex:(NSUInteger)index ofStringPath:(AttributedStringPath *)pathToFollow toNode:(SKSpriteNode *)node {
+- (void)addLetterOfStringPath:(AttributedStringPath *)pathToFollow
+                       toNode:(SKSpriteNode *)node
+                   atLocation:(CGPoint)location
+{
     SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                [[NSBundle mainBundle] pathForResource:START_STRING_SKS ofType:@"sks"]];
-    CGPoint moveLocation = [LayoutMath originForUpperLeftPlacementOfPath:pathToFollow.path];
-    emitter.position = moveLocation;
+
+    emitter.position = location;
+    
     SKAction *followStringPath = [SKAction followPath:pathToFollow.path
                                               asOffset:NO orientToPath:YES duration:FOLLOW_PATH_DURATION];
     SKAction *repeatForever = [SKAction repeatActionForever:followStringPath];
@@ -53,33 +57,55 @@
     [node addChild:emitter];
 }
 
-- (void)addStartButtonSmoke:(AttributedStringPath *)pathToFollow {
+- (void)addStartButtonSmoke {
     SKSpriteNode *startButton = [[SKSpriteNode alloc] init];
     startButton.name = START_SMOKE_TEXT;
     startButton.zPosition = StartButtonZOrder;
 
-//    for (NSUInteger i; i < pathToFollow.attributedString.string.length; i++) {
-        [self addLetterAtIndex:1 ofStringPath:pathToFollow toNode:startButton];
-//    }
+    NSString *buttonText = START_SMOKE_TEXT;
+//    NSArray *stringArray = [[NSArray alloc] initWithObjects:@"s", @"t", @"a", @"r", @"t"];
     
+    AttributedStringPath *S = [[AttributedStringPath alloc] initWithString:
+                               [buttonText substringFromIndex:0] andSize:START_SMOKE_SIZE];
+    AttributedStringPath *T1 = [[AttributedStringPath alloc] initWithString:
+                               [buttonText substringFromIndex:1] andSize:START_SMOKE_SIZE];
+    AttributedStringPath *A = [[AttributedStringPath alloc] initWithString:
+                               [buttonText substringFromIndex:2] andSize:START_SMOKE_SIZE];
+    AttributedStringPath *R = [[AttributedStringPath alloc] initWithString:
+                               [buttonText substringFromIndex:3] andSize:START_SMOKE_SIZE];
+    AttributedStringPath *T2 = [[AttributedStringPath alloc] initWithString:
+                               [buttonText substringFromIndex:4] andSize:START_SMOKE_SIZE];
+    
+    NSArray *stringArray = [[NSArray alloc] initWithObjects:S, T1, A, R, T2, nil];
+    
+    CGPoint firstLocation = [LayoutMath originForUpperLeftPlacementOfPath:S.path];
+    [self addLetterOfStringPath:S toNode:startButton atLocation:firstLocation];
+    
+    CGPoint nextLocation = [LayoutMath originForPath:T1.path adjacentToPathOnLeft:S.path];
+    [self addLetterOfStringPath:T1 toNode:startButton atLocation:nextLocation];
+    
+    nextLocation.x += [LayoutMath originForPath:A.path adjacentToPathOnLeft:T1.path].x;
+    [self addLetterOfStringPath:A toNode:startButton atLocation:nextLocation];
+    
+    nextLocation.x += [LayoutMath originForPath:R.path adjacentToPathOnLeft:A.path].x;
+    [self addLetterOfStringPath:R toNode:startButton atLocation:nextLocation];
+    
+    nextLocation.x += [LayoutMath originForPath:T2.path adjacentToPathOnLeft:R.path].x;
+    [self addLetterOfStringPath:T2 toNode:startButton atLocation:nextLocation];
+    
+    startButton.position = CGPointMake(180, -40);
     [self addChild:startButton];
 }
 
-- (instancetype)initWithSize:(CGSize)size andStringPath:(AttributedStringPath *)stringPath {
+- (instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self setName:TITLE_SCENE];
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
         [self addTrain];
         [self addForeground];
-        [self addStartButtonSmoke:stringPath];
+        [self addStartButtonSmoke];
     }
-    return self;
-}
-
-- (instancetype)initWithSize:(CGSize)size {
-    self = [self initWithSize:size
-                andStringPath:[[AttributedStringPath alloc] initWithString:START_SMOKE_TEXT andSize:START_SMOKE_SIZE]];
     return self;
 }
 

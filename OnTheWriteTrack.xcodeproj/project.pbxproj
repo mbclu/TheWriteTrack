@@ -25,6 +25,8 @@
 		C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
 		C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
 		C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */; };
+		C7B697551AF2460C0066086E /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
+		C7B697571AF246330066086E /* StartButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697561AF246330066086E /* StartButtonTests.m */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
@@ -82,6 +84,9 @@
 		C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttributedStringPath.h; path = TheWriteTrack/AttributedStringPath.h; sourceTree = SOURCE_ROOT; };
 		C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPath.m; path = TheWriteTrack/AttributedStringPath.m; sourceTree = SOURCE_ROOT; };
 		C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPathTests.m; path = "TheWriteTrack-Tests/AttributedStringPathTests.m"; sourceTree = SOURCE_ROOT; };
+		C7B697531AF2460C0066086E /* StartButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartButton.h; path = TheWriteTrack/StartButton.h; sourceTree = SOURCE_ROOT; };
+		C7B697541AF2460C0066086E /* StartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButton.m; path = TheWriteTrack/StartButton.m; sourceTree = SOURCE_ROOT; };
+		C7B697561AF246330066086E /* StartButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButtonTests.m; path = "TheWriteTrack-Tests/StartButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
@@ -298,11 +303,13 @@
 		C7DB85081AD48A620026972B /* Title */ = {
 			isa = PBXGroup;
 			children = (
+				C77347471AE735F1005C2950 /* assets */,
 				C7DB850C1AD48ABB0026972B /* TitleScene.h */,
 				C7DB850D1AD48ABB0026972B /* TitleScene.m */,
 				C77347431AE733F5005C2950 /* TitleTrain.h */,
 				C77347441AE733F5005C2950 /* TitleTrain.m */,
-				C77347471AE735F1005C2950 /* assets */,
+				C7B697531AF2460C0066086E /* StartButton.h */,
+				C7B697541AF2460C0066086E /* StartButton.m */,
 			);
 			name = Title;
 			sourceTree = "<group>";
@@ -312,6 +319,7 @@
 			children = (
 				C7DB850A1AD48AA40026972B /* TitleSceneTests.m */,
 				C77347411AE73361005C2950 /* TitleTrainTests.m */,
+				C7B697561AF246330066086E /* StartButtonTests.m */,
 			);
 			name = "Title-Tests";
 			sourceTree = "<group>";
@@ -528,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7DB850E1AD48ABB0026972B /* TitleScene.m in Sources */,
+				C7B697551AF2460C0066086E /* StartButton.m in Sources */,
 				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
@@ -548,6 +557,7 @@
 			files = (
 				C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */,
 				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
+				C7B697571AF246330066086E /* StartButtonTests.m in Sources */,
 				C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */,
 				C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */,
 				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,

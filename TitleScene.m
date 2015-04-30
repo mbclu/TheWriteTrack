@@ -39,19 +39,21 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (void)addTitleString:(AttributedStringPath *)pathToFollow {
-    SKEmitterNode *titleStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                         [[NSBundle mainBundle] pathForResource:TITLE_STRING_SMOKE ofType:@"sks"]];
-    titleStringEmitter.name = TITLE_STRING_SMOKE;
+- (void)addStartButtonSmoke:(AttributedStringPath *)pathToFollow {
+    SKEmitterNode *startButtonStringEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                                         [[NSBundle mainBundle] pathForResource:START_STRING_SKS ofType:@"sks"]];
+    startButtonStringEmitter.name = START_SMOKE_TEXT;
     
     CGPoint moveLocation = [LayoutMath originForUpperLeftPlacementOfPath:pathToFollow.path];
-    titleStringEmitter.position = moveLocation;
+    startButtonStringEmitter.position = moveLocation;
     
     SKAction *followTitleString = [SKAction followPath:pathToFollow.path asOffset:NO orientToPath:YES duration:2.5];
     SKAction *repeatForever = [SKAction repeatActionForever:followTitleString];
-    titleStringEmitter.particleAction = repeatForever;
+    startButtonStringEmitter.particleAction = repeatForever;
     
-    [self addChild:titleStringEmitter];
+    startButtonStringEmitter.zPosition = StartButtonZOrder;
+    
+    [self addChild:startButtonStringEmitter];
 }
 
 - (instancetype)initWithSize:(CGSize)size andStringPath:(AttributedStringPath *)stringPath {
@@ -61,14 +63,14 @@
         [self addBackground];
         [self addTrain];
         [self addForeground];
-        [self addTitleString:stringPath];
+        [self addStartButtonSmoke:stringPath];
     }
     return self;
 }
 
 - (instancetype)initWithSize:(CGSize)size {
     self = [self initWithSize:size
-                andStringPath:[[AttributedStringPath alloc] initWithString:START_SMOKE andSize:START_SMOKE_SIZE]];
+                andStringPath:[[AttributedStringPath alloc] initWithString:START_SMOKE_TEXT andSize:START_SMOKE_SIZE]];
     return self;
 }
 

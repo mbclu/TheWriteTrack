@@ -9,13 +9,13 @@
 #import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
 
-#define START_SMOKE             @"START"
+#define START_SMOKE_TEXT        @"START"
 #define START_SMOKE_SIZE        100.0
+#define START_STRING_SKS        @"TitleStringSmoke"
 
 #define TITLE_SCENE             @"TitleScene"
 #define TITLE_BACKGROUND        @"TitleBackground"
 #define TITLE_FOREGROUND        @"TitleForeground"
-#define TITLE_STRING_SMOKE      @"TitleStringSmoke"
 
 #define SMOKE_HORIZONTAL_OFFSET -10
 #define SMOKE_VERTICAL_OFFSET   -5

@@ -17,9 +17,8 @@
     SKSpriteNode *backgroundNode;
     SKSpriteNode *foregroundNode;
     SKSpriteNode *trainNode;
-    SKEmitterNode *titleNode;
     SKEmitterNode *smokeNode;
-    SKSpriteNode *startButton;
+    SKEmitterNode *startButtonSmoke;
 }
 
 @end
@@ -32,8 +31,8 @@
     backgroundNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_BACKGROUND];
     foregroundNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_FOREGROUND];
     trainNode = (SKSpriteNode *)[scene childNodeWithName:TITLE_TRAIN];
-    titleNode = (SKEmitterNode *)[scene childNodeWithName:TITLE_STRING_SMOKE];
     smokeNode = (SKEmitterNode *)[trainNode childNodeWithName:ORANGE_SMOKE];
+    startButtonSmoke = (SKEmitterNode *)[scene childNodeWithName:START_SMOKE_TEXT];
 }
 
 - (void)tearDown {
@@ -84,13 +83,14 @@
     XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
 }
 
-- (void)testThatTheTitleStringIsCreatedOutOfAParticleEmitter {
-    XCTAssertNotNil(titleNode);
+- (void)testThatTheStartButtonSmokeStringIsCreatedOutOfAParticleEmitter {
+    XCTAssertNotNil(startButtonSmoke);
+    XCTAssertTrue([startButtonSmoke isKindOfClass:[SKEmitterNode class]]);
 }
 
 - (void)testThatTheTitleStringEmitterRepeatsAnAction {
-    XCTAssertNotNil(titleNode.particleAction);
-    XCTAssertNotEqual([titleNode.particleAction.description rangeOfString:@"<SKRepeat:"].location, NSNotFound);
+    XCTAssertNotNil(startButtonSmoke.particleAction);
+    XCTAssertNotEqual([startButtonSmoke.particleAction.description rangeOfString:@"<SKRepeat:"].location, NSNotFound);
 }
 
 - (void)testThatTheTitleTrainHasAnOrangeSmokeEmitter {
@@ -116,13 +116,13 @@
 //}
 
 - (void)testThereIsAButtonToBeginWritingPractice {
-    XCTAssertNotNil(startButton);
+    XCTAssertNotNil(startButtonSmoke);
 }
 
-- (void)testTheStartButtonIsTheHighestZOrder {
+- (void)testTheStartButtonSmokeIsTheHighestZOrder {
     NSArray *children = [scene children];
     for (NSUInteger i; i < children.count; i++) {
-        XCTAssertGreaterThanOrEqual(startButton.zPosition, ((SKNode *)[children objectAtIndex:i]).zPosition);
+        XCTAssertGreaterThanOrEqual(startButtonSmoke.zPosition, ((SKNode *)[children objectAtIndex:i]).zPosition);
     }
 }
 

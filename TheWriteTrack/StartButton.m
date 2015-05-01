@@ -15,8 +15,17 @@ NSString *const StartText = @"start";
 @synthesize startText;
 @synthesize letterConverter;
 
-- (void)create {
+- (instancetype)initWithLetterConverter:(LetterConverter *)converter {
+    self = [super init];
+    
+    letterConverter = converter;
+    if (letterConverter == nil) {
+        letterConverter = [[LetterConverter alloc] init];
+    }
+    
     [letterConverter getLetterArrayFromString:StartText];
+    
+    return self;
 }
 
 @end

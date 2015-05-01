@@ -13,9 +13,13 @@
 
 @interface StartButtonTests : XCTestCase
 
+@property StartButton *startButton;
+
 @end
 
 @implementation StartButtonTests
+
+@synthesize startButton;
 
 - (void)setUp {
     [super setUp];
@@ -28,12 +32,17 @@
 - (void)testInitWithStringConvertsTheString_s_t_a_r_t_ToAnArray {
     NSString *expectedString = @"start";
     id lcMock = OCMClassMock([LetterConverter class]);
-    StartButton *startButton = [[StartButton alloc] init];
-    startButton.letterConverter = lcMock;
-    [startButton create];
+    startButton = [[StartButton alloc] initWithLetterConverter:lcMock];
     OCMVerify([lcMock getLetterArrayFromString:expectedString]);
 }
 
-//- (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString
+- (void)testTheStartButtonHasANonNilLetterConverter {
+    startButton = [[StartButton alloc] initWithLetterConverter:nil];
+    XCTAssertNotNil([startButton letterConverter]);
+}
+
+//- (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString {
+//    StartButton *startButton = start
+//}
 
 @end

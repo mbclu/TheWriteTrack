@@ -16,6 +16,6 @@ FOUNDATION_EXPORT NSString *const StartText;
 @property (readonly) NSString *startText;
 @property (retain) LetterConverter *letterConverter;
 
-- (void)create;
+- (instancetype)initWithLetterConverter:(LetterConverter *)converter;
 
 @end

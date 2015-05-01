@@ -77,6 +77,10 @@
     StartButton *startButton = [[StartButton alloc] initWithAttributedStringPath:stringPath];
     XCTAssertNotNil(startButton);
     OCMVerify([lcMock createPathFromString:@"s" AndSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"t" AndSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"a" AndSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"r" AndSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"t" AndSize:StartStringSize]);
 }
 
 @end

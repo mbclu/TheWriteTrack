@@ -50,12 +50,12 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
 
 /// Attributed String Creation
 
-- (void)testThatTheDefaultFontTypeIsVerdana {
+- (void)testTheDefaultFontTypeIsVerdana {
     CFStringRef stringRef = CTFontCopyFullName(fontRef);
     XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
 }
 
-- (void)testThatWhenAFontSizeIsSuppliedItIsUsedForTheAttributedString {
+- (void)testWhenAFontSizeIsSuppliedItIsUsedForTheAttributedString {
     CGFloat expectedSize = 40.0;
 
     attrString = [LetterConverter createAttributedString:nonNilString WithFontSizeInPoints:expectedSize];
@@ -65,28 +65,28 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     XCTAssertEqualWithAccuracy(size, expectedSize, defaultAccuracy);
 }
 
-- (void)testThatTheFontForegroundColorIsTransparent {
+- (void)testTheFontForegroundColorIsTransparent {
     UIColor *color = [attrString attribute:(NSString *)kCTForegroundColorAttributeName atIndex:0 effectiveRange:nil];
     XCTAssertEqualObjects(color, (id)[[UIColor clearColor] CGColor]);
 }
 
-- (void)testThatTheFontStrokeColorIsBrown {
+- (void)testTheFontStrokeColorIsBrown {
     UIColor *color = [attrString attribute:(NSString *)kCTStrokeColorAttributeName atIndex:0 effectiveRange:nil];
     XCTAssertEqualObjects(color, (id)[[UIColor brownColor] CGColor]);
 }
 
-- (void)testThatTheFontStrokeIsSizeMinusThree {
+- (void)testTheFontStrokeIsSizeMinusThree {
     NSNumber *number = [attrString attribute:(NSString *)kCTStrokeWidthAttributeName atIndex:0 effectiveRange:nil];
     XCTAssertEqualObjects(number, (id)[NSNumber numberWithFloat:-3.0]);
 }
 
 /// Path Creation
 
-- (void)testThatWhenTheAttributedStringIsNilThenThePathIsNil {
+- (void)testWhenTheAttributedStringIsNilThenThePathIsNil {
     XCTAssertNil((__bridge UIBezierPath *)[LetterConverter createPathAtZeroUsingAttrString:nil]);
 }
 
-- (void)testThatWhenARunFromALineIsExaminedAtIndexZeroThenASingleGlyphIsReturned {
+- (void)testWhenARunFromALineIsExaminedAtIndexZeroThenASingleGlyphIsReturned {
     CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
     CGGlyph expectedGlyph;
     UniChar characters[] = { [@"N" characterAtIndex:0] };
@@ -98,7 +98,7 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
-- (void)testThatPositionDataIsDeterminedFromTheGlyph {
+- (void)testPositionDataIsDeterminedFromTheGlyph {
     CGGlyph glyph; CGPoint position;
     getGlyphAndPositionFromAttrString(attrString, &glyph, &position, 0);
     

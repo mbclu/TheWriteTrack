@@ -40,12 +40,12 @@
     XCTAssertNotNil(gvc);
 }
 
-- (void)testThatTheGameViewControllerPresentsTheTitleScene {
+- (void)testTheGameViewControllerPresentsTheTitleScene {
     XCTAssertEqualObjects([titleView scene].name, TITLE_SCENE,
                           @"Name mismsatch: %@ != %@", [titleView scene].name, TITLE_SCENE);
 }
 
-- (void)testThatTheTitleSceneIsPresentedTheSameSizeAsTheMainScreen {
+- (void)testTheTitleSceneIsPresentedTheSameSizeAsTheMainScreen {
     CGSize expectedSize = [UIScreen mainScreen].bounds.size;
     XCTAssertEqual([titleView frame].size.height, expectedSize.height);
     XCTAssertEqual([titleView frame].size.width, expectedSize.width);

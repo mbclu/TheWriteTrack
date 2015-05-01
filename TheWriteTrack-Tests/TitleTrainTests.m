@@ -33,34 +33,34 @@
     [super tearDown];
 }
 
-- (void)testThatTheTitleTrainIsLoadedFromTheTitleTrainImage {
+- (void)testTheTitleTrainIsLoadedFromTheTitleTrainImage {
     XCTAssertNotNil(train);
     XCTAssertNotNil(train.texture);
     XCTAssertEqualObjects(train.name, TITLE_TRAIN);
 }
 
-- (void)testThatTheTitleTrainStartsAtTheCorrectPosition {
+- (void)testTheTitleTrainStartsAtTheCorrectPosition {
     XCTAssertEqual(train.position.x, TITLE_TRAIN_START_POSITION.x);
     XCTAssertEqual(train.position.y, TITLE_TRAIN_START_POSITION.y);
 }
 
-- (void)testThatTheTitleTrainHasAnActionToMove {
+- (void)testTheTitleTrainHasAnActionToMove {
     XCTAssertNotNil(exitRightAction);
     XCTAssertNotEqual([exitRightAction.description rangeOfString:@"SKMove"].location, NSNotFound);
 }
 
-- (void)testThatTheTitleTrainMoveActionHasADurationOfEight {
+- (void)testTheTitleTrainMoveActionHasADurationOfEight {
     XCTAssertEqual(exitRightAction.duration, 8);
 }
 
-- (void)testThatASmokeEmitterCanBeCreatedWithTheOrangeSmokePng {
+- (void)testASmokeEmitterCanBeCreatedWithTheOrangeSmokePng {
     SKEmitterNode *emitter = [TitleTrain createTrainSmokeEmitter];
     SKTexture *texture = [SKTexture textureWithImageNamed:@"OrangeSmoke.png"];
     XCTAssertEqual(emitter.particleTexture.size.height, texture.size.height);
     XCTAssertEqual(emitter.particleTexture.size.width, texture.size.width);
 }
 
-- (void)testThatWhenAppliedAtALocationThenTheTrainHasAChildSmokeEmitter {
+- (void)testWhenAppliedAtALocationThenTheTrainHasAChildSmokeEmitter {
     CGFloat xPoint = 10;
     CGFloat yPoint = 20;
     [train applySmokeEmitterAtPosition:CGPointMake(xPoint, yPoint)];

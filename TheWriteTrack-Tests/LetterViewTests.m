@@ -51,11 +51,11 @@
     [super tearDown];
 }
 
-- (void)testThatTheLetterViewHasAClearBackground {
+- (void)testTheLetterViewHasAClearBackground {
     XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
 }
 
-//- (void)testThatTheLetterIsMovedToTheCenterOfTheScreen {
+//- (void)testTheLetterIsMovedToTheCenterOfTheScreen {
 //    XCTAssertEqual(letterView.
 //}
 

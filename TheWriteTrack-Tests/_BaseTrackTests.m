@@ -29,16 +29,16 @@
     [super tearDown];
 }
 
-- (void)testThatTheBaseSceneIsComprisedOfARockyBackground {
+- (void)testTheBaseSceneIsComprisedOfARockyBackground {
     XCTAssertNotNil(rockyBackground);
 }
 
-- (void)testThatTheBaseSceneBackgroundIsAnchoredAtZero {
+- (void)testTheBaseSceneBackgroundIsAnchoredAtZero {
     XCTAssertEqual(rockyBackground.anchorPoint.x, CGPointZero.x);
     XCTAssertEqual(rockyBackground.anchorPoint.y, CGPointZero.y);
 }
 
-- (void)testThatTheSceneUsesTheFillAspectScaleMode {
+- (void)testTheSceneUsesTheFillAspectScaleMode {
     XCTAssertEqual(scene.scaleMode , SKSceneScaleModeAspectFill);
 }
 

@@ -39,63 +39,63 @@
     [super tearDown];
 }
 
-- (void)testThatTheTitleSceneScaleModeIsConfiguredToFill {
+- (void)testTheTitleSceneScaleModeIsConfiguredToFill {
     XCTAssertEqual([scene scaleMode], SKSceneScaleModeAspectFill);
 }
 
-- (void)testThatTheTitleSceneLoadsTheTitleBackground {
+- (void)testTheTitleSceneLoadsTheTitleBackground {
     XCTAssertNotNil(backgroundNode);
 }
 
-- (void)testThatTheTitleBackgroundIsAnchoredAtZeroXZeroY {
+- (void)testTheTitleBackgroundIsAnchoredAtZeroXZeroY {
     XCTAssertEqual(backgroundNode.anchorPoint.x, 0);
     XCTAssertEqual(backgroundNode.anchorPoint.y, 0);
 }
 
-- (void)testThatTheTitleTrainIsLoadedOnTheTitleScene {
+- (void)testTheTitleTrainIsLoadedOnTheTitleScene {
     XCTAssertNotNil(trainNode);
 }
 
-- (void)testThatTheTitleTrainIsAnchoredAtAPoint {
+- (void)testTheTitleTrainIsAnchoredAtAPoint {
     XCTAssertEqual(trainNode.anchorPoint.x, 0);
     XCTAssertEqual(trainNode.anchorPoint.y, 0);
 }
 
-- (void)testThatTheTrainIsLoadedOnTopOfTheBackground {
+- (void)testTheTrainIsLoadedOnTopOfTheBackground {
     XCTAssertGreaterThan(trainNode.zPosition, backgroundNode.zPosition);
 }
 
-- (void)testThatTheTrainStartsAtTheCorrectPoint {
+- (void)testTheTrainStartsAtTheCorrectPoint {
     XCTAssertEqualWithAccuracy(trainNode.position.x, 123, 1.0);
     XCTAssertEqualWithAccuracy(trainNode.position.y, 138, 1.0);
 }
 
-- (void)testThatTheTitleSceneLoadsTheForeground {
+- (void)testTheTitleSceneLoadsTheForeground {
     XCTAssertNotNil(foregroundNode);
 }
 
-- (void)testThatTheTitleForegroundIsAnchoredAtZero {
+- (void)testTheTitleForegroundIsAnchoredAtZero {
     XCTAssertEqual(foregroundNode.anchorPoint.x, 0);
     XCTAssertEqual(foregroundNode.anchorPoint.y, 0);
 }
 
-- (void)testThatTheTitleForegroundIsLoadedOnTopOfTheTrain {
+- (void)testTheTitleForegroundIsLoadedOnTopOfTheTrain {
     XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
 }
 
-- (void)testThatTheTitleTrainHasAnOrangeSmokeEmitter {
+- (void)testTheTitleTrainHasAnOrangeSmokeEmitter {
     XCTAssertNotNil([trainNode childNodeWithName:ORANGE_SMOKE]);
 }
 
-- (void)testThatTheTitleTrainSmokeIsAtFivePixelsDownFromTheTopCornerOfTheTrain {
+- (void)testTheTitleTrainSmokeIsAtFivePixelsDownFromTheTopCornerOfTheTrain {
     XCTAssertEqual(smokeNode.position.y, trainNode.size.height - 5);
 }
 
-- (void)testThatTheTitleTrainSmokeIsAtTenPixelsLeftOfTheRightSideOfTheTrain {
+- (void)testTheTitleTrainSmokeIsAtTenPixelsLeftOfTheRightSideOfTheTrain {
     XCTAssertEqual(smokeNode.position.x, trainNode.size.width - 10);
 }
 
-//- (void)testThatTheTitleStringEmitterStartsAtTheUpperLeftCorner {
+//- (void)testTheTitleStringEmitterStartsAtTheUpperLeftCorner {
 //    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:TITLE];
 //    CGRect stringPathBounds = CGPathGetPathBoundingBox(stringPath.path);
 //    CGFloat originX = 0;

@@ -26,11 +26,11 @@
     [super tearDown];
 }
 
-- (void)testThatTheSceneUsesAspectScaleMode {
+- (void)testTheSceneUsesAspectScaleMode {
     XCTAssertEqual(a.scene.scaleMode, SKSceneScaleModeAspectFill);
 }
 
-- (void)testThatAUsesTheRockyBackground {
+- (void)testAUsesTheRockyBackground {
     SKNode *background = [a childNodeWithName:ROCKY_BACKGROUND];
     XCTAssertNotNil(background);
 }

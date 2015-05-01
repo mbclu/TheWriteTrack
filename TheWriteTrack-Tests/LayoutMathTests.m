@@ -58,7 +58,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     [super tearDown];
 }
 
-- (void)testThatGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingXValueIsPositionedCorrectly {
+- (void)testGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingXValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
     CGMutablePathRef path = [LetterConverter createPathFromString:stringForTest AndSize:100];
     CGRect bounds = printBoundingBoxForLetter(path, stringForTest);
@@ -66,7 +66,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqual([LayoutMath findStartingXValueForRect:bounds], expectedX);
 }
 
-- (void)testThatGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingYValueIsPositionedCorrectly {
+- (void)testGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingYValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
     CGMutablePathRef path = [LetterConverter createPathFromString:stringForTest AndSize:100];
     CGRect bounds = printBoundingBoxForLetter(path, stringForTest);
@@ -74,7 +74,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqual([LayoutMath findStartingYValueForRect:bounds], expectedY);
 }
 
-- (void)testThatTheUpperLeftCornerOfAnObjectCanBePlacedAtTheUpperLeftOfTheScreen {
+- (void)testTheUpperLeftCornerOfAnObjectCanBePlacedAtTheUpperLeftOfTheScreen {
     CGPoint origin = [LayoutMath originForUpperLeftPlacementOfPath:rectPathForTest];
     
     CGFloat xExpected = rectForTest.origin.x;
@@ -112,19 +112,19 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     [super tearDown];
 }
 
-- (void)testThatGivenALandscapeLayoutTheSmallerOfWidthOrHeightIsFoundToBeHeight {
+- (void)testGivenALandscapeLayoutTheSmallerOfWidthOrHeightIsFoundToBeHeight {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
     XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, super.defaultAccuracy);
 }
 
-- (void)testThatGivenALandscapeOrientationThenTheCenterXValueIsHalfTheWidth {
+- (void)testGivenALandscapeOrientationThenTheCenterXValueIsHalfTheWidth {
     CGFloat expectedX = [UIScreen mainScreen].bounds.size.width / 2;
     XCTAssertEqualWithAccuracy([LayoutMath centerX], expectedX, super.defaultAccuracy);
 }
 
-- (void)testThatGivenALandscapeOrientationThenTheCenterYValueIsHalfTheHeight {
+- (void)testGivenALandscapeOrientationThenTheCenterYValueIsHalfTheHeight {
     CGFloat expectedY = [UIScreen mainScreen].bounds.size.height / 2;
     XCTAssertEqualWithAccuracy([LayoutMath centerY], expectedY, super.defaultAccuracy);
 }
@@ -154,24 +154,24 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     [super tearDown];
 }
 
-- (void)testThatGivenAPortraitLayoutTheSmallerOfWidthOrHeightIsFoundToBeHeight {
+- (void)testGivenAPortraitLayoutTheSmallerOfWidthOrHeightIsFoundToBeHeight {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
     XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, super.defaultAccuracy);
 }
 
-- (void)testThatGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBeThreeHundredTwentyFiveOrFiftyLessThanHalfTheSmallerScreenDimension {
+- (void)testGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBeThreeHundredTwentyFiveOrFiftyLessThanHalfTheSmallerScreenDimension {
     CGFloat expectedSize = 325.0;
     XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, super.defaultAccuracy);
 }
 
-- (void)testThatGivenAPortraitOrientationThenTheCenterXValueIsHalfTheHeight {
+- (void)testGivenAPortraitOrientationThenTheCenterXValueIsHalfTheHeight {
     CGFloat expectedX = [UIScreen mainScreen].bounds.size.height / 2;
     XCTAssertEqualWithAccuracy([LayoutMath centerX], expectedX, super.defaultAccuracy);
 }
 
-- (void)testThatGivenAPortraitOrientationThenTheCenterYValueIsHalfTheWidth {
+- (void)testGivenAPortraitOrientationThenTheCenterYValueIsHalfTheWidth {
     CGFloat expectedY = [UIScreen mainScreen].bounds.size.width / 2;
     XCTAssertEqualWithAccuracy([LayoutMath centerY], expectedY, super.defaultAccuracy);
 }

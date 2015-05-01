@@ -28,31 +28,31 @@
     [super tearDown];
 }
 
-- (void)testThatWhenProvidedANilStringTheAQuestionMarkIsUsed {
+- (void)testWhenProvidedANilStringTheAQuestionMarkIsUsed {
     NSString *string = nil;
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
     XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
 }
 
-- (void)testThatWhenProvidedAnEmptyStringTheAQuestionMarkIsUsed {
+- (void)testWhenProvidedAnEmptyStringTheAQuestionMarkIsUsed {
     NSString *string = @"";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
     XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
 }
 
-- (void)testThatWhenProvidedANumericStringThenAQuestionMarkIsUsed {
+- (void)testWhenProvidedANumericStringThenAQuestionMarkIsUsed {
     NSString *string = @"1";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
     XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
 }
 
-- (void)testThatWhenProvidedAWhiteSpaceStringThenAQuestionMarkIsUsed {
+- (void)testWhenProvidedAWhiteSpaceStringThenAQuestionMarkIsUsed {
     NSString *string = @" ";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
     XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
 }
 
-- (void)testThatTheAttributedStringHasADefaultFontTypeOfVerdana {
+- (void)testTheAttributedStringHasADefaultFontTypeOfVerdana {
     NSString *string = @"";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
     CTFontRef fontRef = (__bridge CTFontRef)[stringPath.attributedString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
@@ -60,13 +60,13 @@
     XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
 }
 
-- (void)testThatANonNilNonEmptyPathIsReturned {
+- (void)testANonNilNonEmptyPathIsReturned {
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@""];
     XCTAssertNotNil((__strong id)stringPath.path);
     XCTAssertFalse(CGPathIsEmpty(stringPath.path));
 }
 
-- (void)testThatTheFontSizeCanBeSuppliedToTheString {
+- (void)testTheFontSizeCanBeSuppliedToTheString {
     CGFloat expectedSize = 40.0;
 
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@"" andSize:expectedSize];
@@ -77,7 +77,7 @@
     XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
 }
 
-- (void)testThatTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
+- (void)testTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
     CGFloat expectedSize = 325.0;
     
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@""];

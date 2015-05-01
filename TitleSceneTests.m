@@ -83,19 +83,6 @@
     XCTAssertGreaterThan(foregroundNode.zPosition, trainNode.zPosition);
 }
 
-// Post start button spike, these will need pulled into a subclass
-/*
-- (void)testThatTheStartButtonSmokeStringIsCreatedOutOfAParticleEmitter {
-    XCTAssertNotNil(startButtonSmoke);
-    XCTAssertTrue([startButtonSmoke isKindOfClass:[SKEmitterNode class]]);
-}
-
-- (void)testThatTheTitleStringEmitterRepeatsAnAction {
-    XCTAssertNotNil(startButtonSmoke.particleAction);
-    XCTAssertNotEqual([startButtonSmoke.particleAction.description rangeOfString:@"<SKRepeat:"].location, NSNotFound);
-}
-*/
-
 - (void)testThatTheTitleTrainHasAnOrangeSmokeEmitter {
     XCTAssertNotNil([trainNode childNodeWithName:ORANGE_SMOKE]);
 }

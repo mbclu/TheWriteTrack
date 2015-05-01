@@ -12,7 +12,7 @@
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
 		C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
-		C72351BE1AEFA1CE005F2961 /* TitleStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72351BD1AEFA1CE005F2961 /* TitleStringSmoke.sks */; };
+		C72351BE1AEFA1CE005F2961 /* StartStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72351BD1AEFA1CE005F2961 /* StartStringSmoke.sks */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
 		C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
@@ -66,7 +66,7 @@
 		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
 		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; };
 		C710AB661A9ECCFD002E7B79 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		C72351BD1AEFA1CE005F2961 /* TitleStringSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = TitleStringSmoke.sks; path = TheWriteTrack/TitleStringSmoke.sks; sourceTree = SOURCE_ROOT; };
+		C72351BD1AEFA1CE005F2961 /* StartStringSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartStringSmoke.sks; path = TheWriteTrack/StartStringSmoke.sks; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
 		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; };
@@ -193,7 +193,7 @@
 			children = (
 				C773473E1AE72E3D005C2950 /* OrangeSmoke.png */,
 				C77347351AE72936005C2950 /* OrangeSmoke.sks */,
-				C72351BD1AEFA1CE005F2961 /* TitleStringSmoke.sks */,
+				C72351BD1AEFA1CE005F2961 /* StartStringSmoke.sks */,
 			);
 			name = assets;
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 				C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */,
 				C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */,
 				C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */,
-				C72351BE1AEFA1CE005F2961 /* TitleStringSmoke.sks in Resources */,
+				C72351BE1AEFA1CE005F2961 /* StartStringSmoke.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

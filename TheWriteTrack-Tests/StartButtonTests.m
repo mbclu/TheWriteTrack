@@ -41,8 +41,21 @@
     XCTAssertNotNil([startButton letterConverter]);
 }
 
-//- (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString {
-//    StartButton *startButton = start
-//}
+- (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString {
+    startButton = [[StartButton alloc] initWithLetterConverter:nil];
+    XCTAssertEqual(startButton.children.count, 5);
+}
+
+- (void)testNodesAddedAreOfTypeSKEmitter {
+    startButton = [[StartButton alloc] initWithLetterConverter:nil];
+    SKNode *node = [[startButton children] objectAtIndex:0];
+    XCTAssertTrue([node isKindOfClass:[SKEmitterNode class]]);
+}
+
+- (void)testTheStartButtonEmittersLoadFromTheStartStringSmokeSKS {
+    startButton = [[StartButton alloc] initWithLetterConverter:nil];
+    SKEmitterNode *node = [[startButton children] objectAtIndex:0];
+    XCTAssertNotEqual([node.particleTexture.description rangeOfString:@"OrangeSmoke.png"].location, NSNotFound);
+}
 
 @end

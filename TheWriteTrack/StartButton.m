@@ -11,9 +11,18 @@
 @implementation StartButton
 
 NSString *const StartText = @"start";
+NSString *const StartStringSmokeSKS = @"StartStringSmoke";
 
 @synthesize startText;
 @synthesize letterConverter;
+
+- (void)addEmittersFromLetterArray:(NSArray *)letterArray {
+    for (NSUInteger i = 0; i < letterArray.count; i++) {
+        SKEmitterNode *node = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                               [[NSBundle mainBundle] pathForResource:StartStringSmokeSKS ofType:@"sks"]];
+        [self addChild:node];
+    }
+}
 
 - (instancetype)initWithLetterConverter:(LetterConverter *)converter {
     self = [super init];
@@ -23,7 +32,8 @@ NSString *const StartText = @"start";
         letterConverter = [[LetterConverter alloc] init];
     }
     
-    [letterConverter getLetterArrayFromString:StartText];
+    NSArray *letterArray = [letterConverter getLetterArrayFromString:StartText];
+    [self addEmittersFromLetterArray:letterArray];
     
     return self;
 }

@@ -10,6 +10,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 FOUNDATION_EXPORT NSString *const StartText;
+FOUNDATION_EXPORT NSString *const StartStringSmokeSKS;
 
 @interface StartButton : SKSpriteNode
 

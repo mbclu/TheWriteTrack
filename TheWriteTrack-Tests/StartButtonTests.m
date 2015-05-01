@@ -52,7 +52,7 @@
     XCTAssertTrue([node isKindOfClass:[SKEmitterNode class]]);
 }
 
-- (void)testTheStartButtonEmittersLoadFromTheStartStringSmokeSKS {
+- (void)testTheStartButtonEmittersLoadFromTheOrangeSmokePNG {
     startButton = [[StartButton alloc] initWithLetterConverter:nil];
     SKEmitterNode *node = [[startButton children] objectAtIndex:0];
     XCTAssertNotEqual([node.particleTexture.description rangeOfString:@"OrangeSmoke.png"].location, NSNotFound);

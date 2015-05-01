@@ -7,6 +7,7 @@
 //
 
 #import "StartButton.h"
+#import "AttributedStringPath.h"
 
 @implementation StartButton
 
@@ -16,10 +17,24 @@ NSString *const StartStringSmokeSKS = @"StartStringSmoke";
 @synthesize startText;
 @synthesize letterConverter;
 
+- (SKAction *)createRepeatFollowActionForPath:(AttributedStringPath *)stringPath {
+    SKAction *followStringPath = [SKAction followPath:stringPath.path
+                                             asOffset:NO
+                                         orientToPath:YES
+                                             duration:1.0];
+    SKAction *repeatForever = [SKAction repeatActionForever:followStringPath];
+    return repeatForever;
+}
+
 - (void)addEmittersFromLetterArray:(NSArray *)letterArray {
     for (NSUInteger i = 0; i < letterArray.count; i++) {
         SKEmitterNode *node = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                [[NSBundle mainBundle] pathForResource:StartStringSmokeSKS ofType:@"sks"]];
+        
+        AttributedStringPath *stringPath = [[AttributedStringPath alloc]
+                                            initWithString:@"s" andSize:100.0];
+        node.particleAction = [self createRepeatFollowActionForPath:stringPath];
+        
         [self addChild:node];
     }
 }

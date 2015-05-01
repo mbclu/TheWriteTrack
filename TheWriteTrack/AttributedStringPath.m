@@ -19,6 +19,7 @@
         str = @"?";
     }
     
+    [self setLetterConverter:[[LetterConverter alloc] init]];
     [self setAttributedString:[LetterConverter createAttributedString:str WithFontSizeInPoints:size]];
     [self setPath:[LetterConverter createPathAtZeroUsingAttrString:self.attributedString]];
     
@@ -27,6 +28,11 @@
 
 - (instancetype)initWithString:(NSString *)str {
     self = [self initWithString:str andSize:[LayoutMath maximumViableFontSize]];
+    return self;
+}
+
+- (instancetype)init {
+    self = [self initWithString:@""];
     return self;
 }
 

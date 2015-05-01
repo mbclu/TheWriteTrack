@@ -88,4 +88,9 @@
     XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
 }
 
+- (void)testTheLetterConverterIsNotNil {
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] init];
+    XCTAssertNotNil(stringPath.letterConverter);
+}
+
 @end

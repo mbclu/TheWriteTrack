@@ -7,12 +7,17 @@
 //
 
 #import "AttributedStringPath.h"
+#import "LayoutMath.h"
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <CoreText/CoreText.h>
 #import <OCMock/OCMock.h>
 
-#define EXPECTED_STRING_FOR_INVALID_USAGE   @"?"
+FOUNDATION_EXPORT NSString *const StringForInvalidUsage;
+NSString *const StringForInvalidUsage = @"?";
+
+FOUNDATION_EXPORT CGFloat const DefualtFontSizeComparisonAccuracy;
+CGFloat const DefualtFontSizeComparisonAccuracy = 0.5;
 
 @interface AttributedStringPathTests : XCTestCase
 
@@ -31,25 +36,25 @@
 - (void)testWhenProvidedANilStringTheAQuestionMarkIsUsed {
     NSString *string = nil;
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
-    XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
+    XCTAssertEqualObjects(stringPath.attributedString.string, StringForInvalidUsage);
 }
 
 - (void)testWhenProvidedAnEmptyStringTheAQuestionMarkIsUsed {
     NSString *string = @"";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
-    XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
+    XCTAssertEqualObjects(stringPath.attributedString.string, StringForInvalidUsage);
 }
 
 - (void)testWhenProvidedANumericStringThenAQuestionMarkIsUsed {
     NSString *string = @"1";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
-    XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
+    XCTAssertEqualObjects(stringPath.attributedString.string, StringForInvalidUsage);
 }
 
 - (void)testWhenProvidedAWhiteSpaceStringThenAQuestionMarkIsUsed {
     NSString *string = @" ";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
-    XCTAssertEqualObjects(stringPath.attributedString.string, EXPECTED_STRING_FOR_INVALID_USAGE);
+    XCTAssertEqualObjects(stringPath.attributedString.string, StringForInvalidUsage);
 }
 
 - (void)testTheAttributedStringHasADefaultFontTypeOfVerdana {
@@ -62,8 +67,8 @@
 
 - (void)testANonNilNonEmptyPathIsReturned {
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:@""];
-    XCTAssertNotNil((__strong id)stringPath.path);
-    XCTAssertFalse(CGPathIsEmpty(stringPath.path));
+    XCTAssertNotNil((__strong id)stringPath.letterPath);
+    XCTAssertFalse(CGPathIsEmpty(stringPath.letterPath));
 }
 
 - (void)testTheFontSizeCanBeSuppliedToTheString {
@@ -74,7 +79,7 @@
     CTFontRef fontRef = (__bridge CTFontRef)[stringPath.attributedString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CGFloat size = CTFontGetSize(fontRef);
     
-    XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
+    XCTAssertEqualWithAccuracy(size, expectedSize, DefualtFontSizeComparisonAccuracy);
 }
 
 - (void)testTheDefaultFontSizeIsFiftyPixelsLessThanTheSmallestEdge {
@@ -85,12 +90,21 @@
     CTFontRef fontRef = (__bridge CTFontRef)[stringPath.attributedString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CGFloat size = CTFontGetSize(fontRef);
     
-    XCTAssertEqualWithAccuracy(size, expectedSize, 1.0);
+    XCTAssertEqualWithAccuracy(size, expectedSize, DefualtFontSizeComparisonAccuracy);
 }
 
 - (void)testTheLetterConverterIsNotNil {
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] init];
     XCTAssertNotNil(stringPath.letterConverter);
+}
+
+- (void)testThePathIsCreatedFromTheAttributedString {
+    id lcMock = OCMClassMock([LetterConverter class]);
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithLetterConverter:lcMock];
+    CGFloat fontSize = [LayoutMath maximumViableFontSize];
+    XCTAssertNotNil(stringPath);
+    OCMVerify([lcMock createAttributedString:OCMOCK_ANY WithFontSizeInPoints:fontSize]);
+    OCMVerify([lcMock createPathAtZeroUsingAttrString:OCMOCK_ANY]);
 }
 
 @end

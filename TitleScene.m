@@ -49,7 +49,7 @@
 
     emitter.position = location;
     
-    SKAction *followStringPath = [SKAction followPath:pathToFollow.path
+    SKAction *followStringPath = [SKAction followPath:pathToFollow.letterPath
                                               asOffset:NO orientToPath:YES duration:FOLLOW_PATH_DURATION];
     SKAction *repeatForever = [SKAction repeatActionForever:followStringPath];
     emitter.particleAction = repeatForever;
@@ -80,19 +80,19 @@
     NSString *str = @"start";
     NSMutableArray *mutArray = [[NSMutableArray alloc] initWithCapacity:str.length];
     
-    CGPoint firstLocation = [LayoutMath originForUpperLeftPlacementOfPath:S.path];
+    CGPoint firstLocation = [LayoutMath originForUpperLeftPlacementOfPath:S.letterPath];
     [self addLetterOfStringPath:S toNode:startButton atLocation:firstLocation];
     
-    CGPoint nextLocation = [LayoutMath originForPath:T1.path adjacentToPathOnLeft:S.path];
+    CGPoint nextLocation = [LayoutMath originForPath:T1.letterPath adjacentToPathOnLeft:S.letterPath];
     [self addLetterOfStringPath:T1 toNode:startButton atLocation:nextLocation];
     
-    nextLocation.x += [LayoutMath originForPath:A.path adjacentToPathOnLeft:T1.path].x;
+    nextLocation.x += [LayoutMath originForPath:A.letterPath adjacentToPathOnLeft:T1.letterPath].x;
     [self addLetterOfStringPath:A toNode:startButton atLocation:nextLocation];
     
-    nextLocation.x += [LayoutMath originForPath:R.path adjacentToPathOnLeft:A.path].x;
+    nextLocation.x += [LayoutMath originForPath:R.letterPath adjacentToPathOnLeft:A.letterPath].x;
     [self addLetterOfStringPath:R toNode:startButton atLocation:nextLocation];
     
-    nextLocation.x += [LayoutMath originForPath:T2.path adjacentToPathOnLeft:R.path].x;
+    nextLocation.x += [LayoutMath originForPath:T2.letterPath adjacentToPathOnLeft:R.letterPath].x;
     [self addLetterOfStringPath:T2 toNode:startButton atLocation:nextLocation];
     
     startButton.position = CGPointMake(180, -40);

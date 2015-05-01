@@ -14,10 +14,14 @@
 @interface AttributedStringPath : NSObject
 
 @property (nonatomic, retain) NSAttributedString *attributedString;
-@property (nonatomic) CGMutablePathRef path;
+@property (nonatomic) CGMutablePathRef letterPath;
 @property (nonatomic) LetterConverter *letterConverter;
 
 - (instancetype)initWithString:(NSString *)str;
 - (instancetype)initWithString:(NSString *)str andSize:(CGFloat)size;
+
+- (instancetype)initWithLetterConverter:(LetterConverter *)converter;
+
+- (CGMutablePathRef)createPathWithString:(NSString *)string andSize:(CGFloat)size;
 
 @end

@@ -17,6 +17,7 @@
 @property id startingOrientation;
 @property CGRect rectForTest;
 @property CGMutablePathRef rectPathForTest;
+@property LetterConverter *letterConverter;
 @end
 
 CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
@@ -37,11 +38,13 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 @synthesize startingOrientation;
 @synthesize rectForTest;
 @synthesize rectPathForTest;
+@synthesize letterConverter;
 
 - (void)setUpRectPath {
     rectPathForTest = CGPathCreateMutable();
     rectForTest = CGRectMake(0, 0, 10, 20);
     CGPathAddRect(rectPathForTest, nil, rectForTest);
+    letterConverter = [[LetterConverter alloc] init];
 }
 
 - (void)setUp {
@@ -60,7 +63,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 
 - (void)testGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingXValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
-    CGMutablePathRef path = [LetterConverter createPathFromString:stringForTest AndSize:100];
+    CGMutablePathRef path = [letterConverter createPathFromString:stringForTest AndSize:100];
     CGRect bounds = printBoundingBoxForLetter(path, stringForTest);
     CGFloat expectedX = ([UIScreen mainScreen].bounds.size.width - bounds.size.width) / 2;
     XCTAssertEqual([LayoutMath findStartingXValueForRect:bounds], expectedX);
@@ -68,7 +71,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
 
 - (void)testGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingYValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
-    CGMutablePathRef path = [LetterConverter createPathFromString:stringForTest AndSize:100];
+    CGMutablePathRef path = [letterConverter createPathFromString:stringForTest AndSize:100];
     CGRect bounds = printBoundingBoxForLetter(path, stringForTest);
     CGFloat expectedY = ([UIScreen mainScreen].bounds.size.height - bounds.size.height) / 2;
     XCTAssertEqual([LayoutMath findStartingYValueForRect:bounds], expectedY);

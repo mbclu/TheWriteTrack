@@ -24,15 +24,15 @@
 
 - (void)setUp {
     [super setUp];
-    startButton = [[StartButton alloc] initWithLetterConverter:nil];
+    startButton = [[StartButton alloc] initWithAttributedStringPath:nil];
 }
 
 - (void)tearDown {
     [super tearDown];
 }
 
-- (void)testTheStartButtonHasANonNilLetterConverter {
-    XCTAssertNotNil([startButton letterConverter]);
+- (void)testTheStartButtonHasANonNilAttributedStringPath {
+    XCTAssertNotNil([startButton stringPath]);
 }
 
 - (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString {
@@ -54,32 +54,29 @@
     XCTAssertNotEqual([node.particleAction.description rangeOfString:@"SKRepeat"].location, NSNotFound);
 }
 
-- (void)testInitWithStringConvertsTheString_s_t_a_r_t_ToAnArray {
-    NSString *expectedString = @"start";
-    id lcMock = OCMClassMock([LetterConverter class]);
-    startButton = [[StartButton alloc] initWithLetterConverter:lcMock];
-    OCMVerify([lcMock getLetterArrayFromString:expectedString]);
+@end
+
+@interface StartButtonWithMockLetterConverterTests : XCTestCase
+@end
+
+@implementation StartButtonWithMockLetterConverterTests
+
+- (void)setUp {
+    [super setUp];
 }
 
-//- (void)testARepeatFollowActionWithFontSizeOneHundredIsCreatedForEachLetter {
-//    NSString *expectedString = @"start";
-//    id lcMock = OCMClassMock([LetterConverter class]);
-//    startButton = [[StartButton alloc] initWithLetterConverter:lcMock];
-//    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"s"];
-////    [[lcMock stub] andReturnValue:(NSValue *)attrString];
-//    OCMVerify([lcMock createAttributedString:@"s" WithFontSizeInPoints:100]);
-////    OCMVerify([lcMock createPathAtZeroUsingAttrString:attrString]);
-//}
+- (void)tearDown {
+    [super tearDown];
+}
 
-- (void)testARepeatFollowActionWithFontSizeOneHundredIsCreatedForEachLetter {
-    NSString *expectedString = @"start";
-    id lcMock = OCMClassMock([LetterConverter class]);
-    id aspMock = OCMClassMock([AttributedStringPath class]);
-    startButton = [[StartButton alloc] initWithLetterConverter:lcMock];
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"s"];
-    //    [[lcMock stub] andReturnValue:(NSValue *)attrString];
-    OCMVerify([aspMock createAttributedString:@"s" WithFontSizeInPoints:100]);
-    //    OCMVerify([lcMock createPathAtZeroUsingAttrString:attrString]);
+- (void)testAPathWithFontSizeOneHundredIsCreatedForEachLetter {
+    LetterConverter *lcObject = [[LetterConverter alloc] init];
+    id lcMock = OCMPartialMock(lcObject);
+    
+    AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithLetterConverter:lcMock];
+    StartButton *startButton = [[StartButton alloc] initWithAttributedStringPath:stringPath];
+    XCTAssertNotNil(startButton);
+    OCMVerify([lcMock createPathFromString:@"s" AndSize:StartStringSize]);
 }
 
 @end

@@ -6,17 +6,18 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "LetterConverter.h"
+#import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
 
 FOUNDATION_EXPORT NSString *const StartText;
 FOUNDATION_EXPORT NSString *const StartStringSmokeSKS;
+FOUNDATION_EXPORT CGFloat const StartStringSize;
 
 @interface StartButton : SKSpriteNode
 
 @property (readonly) NSString *startText;
-@property (retain) LetterConverter *letterConverter;
+@property (retain) AttributedStringPath *stringPath;
 
-- (instancetype)initWithLetterConverter:(LetterConverter *)converter;
+- (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath;
 
 @end

@@ -19,13 +19,13 @@
 
 @end
 
-void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
+void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttributedString *attrString,
                                         CGGlyph *glyph, CGPoint *position, NSInteger index)
 {
     CTLineRef line = CTLineCreateWithAttributedString((CFAttributedStringRef)attrString);
     CFArrayRef runArray = CTLineGetGlyphRuns(line);
     CTRunRef run = (CTRunRef)CFArrayGetValueAtIndex(runArray, index);
-    [LetterConverter getSingleGlyph:glyph AndPosition:position InRun:run atIndex:index];
+    [letterConverter getSingleGlyph:glyph AndPosition:position InRun:run atIndex:index];
 }
 
 @implementation LetterConverterTests
@@ -34,12 +34,14 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     NSAttributedString *attrString;
     CTFontRef fontRef;
     CGFloat defaultAccuracy;
+    LetterConverter *letterConverter;
 }
 
 - (void)setUp {
     [super setUp];
     nonNilString = @"NonNilString";
-    attrString = [LetterConverter createAttributedString:nonNilString WithFontSizeInPoints:100];
+    letterConverter = [[LetterConverter alloc] init];
+    attrString = [letterConverter createAttributedString:nonNilString WithFontSizeInPoints:100];
     fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     defaultAccuracy = 1.0;
 }
@@ -58,7 +60,7 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
 - (void)testWhenAFontSizeIsSuppliedItIsUsedForTheAttributedString {
     CGFloat expectedSize = 40.0;
 
-    attrString = [LetterConverter createAttributedString:nonNilString WithFontSizeInPoints:expectedSize];
+    attrString = [letterConverter createAttributedString:nonNilString WithFontSizeInPoints:expectedSize];
     fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CGFloat size = CTFontGetSize(fontRef);
 
@@ -83,7 +85,7 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
 /// Path Creation
 
 - (void)testWhenTheAttributedStringIsNilThenThePathIsNil {
-    XCTAssertNil((__bridge UIBezierPath *)[LetterConverter createPathAtZeroUsingAttrString:nil]);
+    XCTAssertNil((__bridge UIBezierPath *)[letterConverter createPathAtZeroUsingAttrString:nil]);
 }
 
 - (void)testWhenARunFromALineIsExaminedAtIndexZeroThenASingleGlyphIsReturned {
@@ -93,14 +95,14 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
     
     CGGlyph glyph; CGPoint position;
-    getGlyphAndPositionFromAttrString(attrString, &glyph, &position, 0);
+    getGlyphAndPositionFromAttrString(letterConverter, attrString, &glyph, &position, 0);
     
     XCTAssertEqual(glyph, expectedGlyph);
 }
 
 - (void)testPositionDataIsDeterminedFromTheGlyph {
     CGGlyph glyph; CGPoint position;
-    getGlyphAndPositionFromAttrString(attrString, &glyph, &position, 0);
+    getGlyphAndPositionFromAttrString(letterConverter, attrString, &glyph, &position, 0);
     
     CGPoint expectedPosition = CGPointZero;
     XCTAssertEqualWithAccuracy(position.x, expectedPosition.x, defaultAccuracy);
@@ -109,16 +111,16 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
 
 - (void)testGivenAStringWithMoreThanOneCharacterThenTheSameNumberOfLettersAreInTheAttributedString {
     NSString *sampleString = @"AB";
-    attrString = [LetterConverter createAttributedString:sampleString WithFontSizeInPoints:[LayoutMath maximumViableFontSize]];
+    attrString = [letterConverter createAttributedString:sampleString WithFontSizeInPoints:[LayoutMath maximumViableFontSize]];
     XCTAssertEqual(attrString.string.length, 2);
     XCTAssertEqualObjects(attrString.string, sampleString);
 }
 
 - (void)testGivenAnAttributedStringWithMultipleCharactersThenMoreThanOneLetterIsInThePath {
     CGFloat fontSize = 10;
-    CGPathRef aLetterPath = [LetterConverter createPathFromString:@"A" AndSize:fontSize];
-    CGPathRef bLetterPath = [LetterConverter createPathFromString:@"B" AndSize:fontSize];
-    CGPathRef multiLetterPath = [LetterConverter createPathFromString:@"AB" AndSize:fontSize];
+    CGPathRef aLetterPath = [letterConverter createPathFromString:@"A" AndSize:fontSize];
+    CGPathRef bLetterPath = [letterConverter createPathFromString:@"B" AndSize:fontSize];
+    CGPathRef multiLetterPath = [letterConverter createPathFromString:@"AB" AndSize:fontSize];
     
     XCTAssertFalse(CGPathEqualToPath(aLetterPath, bLetterPath));
     XCTAssertFalse(CGPathEqualToPath(aLetterPath, multiLetterPath));
@@ -131,9 +133,9 @@ void getGlyphAndPositionFromAttrString(NSAttributedString *attrString,
     NSArray *array = [lc getLetterArrayFromString:str];
     
     XCTAssertEqual(array.count, 3);
-    XCTAssertEqualObjects([str substringFromIndex:0], array[0]);
-    XCTAssertEqualObjects([str substringFromIndex:1], array[1]);
-    XCTAssertEqualObjects([str substringFromIndex:2], array[2]);
+    XCTAssertEqualObjects(array[0], @"a");
+    XCTAssertEqualObjects(array[1], @"b");
+    XCTAssertEqualObjects(array[2], @"c");
 }
 
 @end

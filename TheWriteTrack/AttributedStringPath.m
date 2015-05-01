@@ -10,6 +10,8 @@
 #import "LayoutMath.h"
 
 @implementation AttributedStringPath
+@synthesize letterConverter;
+@synthesize letterPath;
 
 - (instancetype)initWithString:(NSString *)str andSize:(CGFloat)size {
     self = [super init];
@@ -19,9 +21,12 @@
         str = @"?";
     }
     
-    [self setLetterConverter:[[LetterConverter alloc] init]];
-    [self setAttributedString:[LetterConverter createAttributedString:str WithFontSizeInPoints:size]];
-    [self setPath:[LetterConverter createPathAtZeroUsingAttrString:self.attributedString]];
+    if (letterConverter == nil) {
+        [self setLetterConverter:[[LetterConverter alloc] init]];
+    }
+
+    [self setAttributedString:[letterConverter createAttributedString:str WithFontSizeInPoints:size]];
+    [self setLetterPath:[letterConverter createPathAtZeroUsingAttrString:self.attributedString]];
     
     return self;
 }
@@ -34,6 +39,17 @@
 - (instancetype)init {
     self = [self initWithString:@""];
     return self;
+}
+
+- (instancetype)initWithLetterConverter:(LetterConverter *)converter {
+    self.letterConverter = converter;
+    self = [self init];
+    return self;
+}
+
+- (CGMutablePathRef)createPathWithString:(NSString *)string andSize:(CGFloat)size {
+    letterPath = [letterConverter createPathFromString:string AndSize:size];
+    return letterPath;
 }
 
 @end

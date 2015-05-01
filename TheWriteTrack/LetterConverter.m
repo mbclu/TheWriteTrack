@@ -12,7 +12,7 @@
 
 @implementation LetterConverter
 
-+ (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize {
+- (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize {
     NSAttributedString *attrString = nil;
     if (attributelessString != (id)[NSNull null] && attributelessString.length != 0)
     {
@@ -32,19 +32,19 @@
     return attrString;
 }
 
-+ (void)getSingleGlyph:(CGGlyph *)glyph AndPosition:(CGPoint *)position InRun:(CTRunRef)run atIndex:(CFIndex)index {
+- (void)getSingleGlyph:(CGGlyph *)glyph AndPosition:(CGPoint *)position InRun:(CTRunRef)run atIndex:(CFIndex)index {
     CFRange glyphRange = CFRangeMake(index, 1);
     CTRunGetGlyphs(run, glyphRange, glyph);
 }
 
-+ (void)addToLocation:(CGPoint)location LetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
+- (void)addToLocation:(CGPoint)location LetterPath:(CGMutablePathRef)path WithFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
     CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
     CGAffineTransform transform = CGAffineTransformMakeTranslation(location.x, location.y);
     CGPathAddPath(path, &transform, letter);
     CGPathRelease(letter);
 }
 
-+ (CGPoint)originAtCenterForFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
+- (CGPoint)originAtCenterForFont:(CTFontRef)font AndGlyph:(CGGlyph)glyph {
     CGPathRef letter = CTFontCreatePathForGlyph(font, glyph, NULL);
     CGRect bounds = CGPathGetPathBoundingBox(letter);
     CGPoint origin = CGPointMake([LayoutMath findStartingXValueForRect:bounds],
@@ -52,7 +52,7 @@
     return origin;
 }
 
-+ (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString {
+- (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString {
     if (attrString == nil) {
         return nil;
     }
@@ -88,11 +88,11 @@
     return letterPath;
 }
 
-+ (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString {
+- (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString {
     return [self createPathAtLocation:CGPointZero UsingAttrString:attrString];
 }
 
-+ (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size {
+- (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size {
     NSAttributedString *attrString = [self createAttributedString:string WithFontSizeInPoints:size];
     return [self createPathAtZeroUsingAttrString:attrString];
 }
@@ -100,7 +100,7 @@
 - (NSArray *)getLetterArrayFromString:(NSString *)string {
     NSMutableArray *letterArray = [[NSMutableArray alloc] initWithCapacity:string.length];
     for (NSUInteger i = 0; i < string.length; i++) {
-        [letterArray addObject:[string substringFromIndex:i]];
+        [letterArray addObject:[string substringWithRange:NSMakeRange(i, 1)]];
     }
     return (NSArray *)letterArray;
 }

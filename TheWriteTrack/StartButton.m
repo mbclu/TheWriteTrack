@@ -7,18 +7,18 @@
 //
 
 #import "StartButton.h"
-#import "AttributedStringPath.h"
 
 @implementation StartButton
 
 NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";
+CGFloat const StartStringSize = 100.0;
 
 @synthesize startText;
-@synthesize letterConverter;
+@synthesize stringPath;
 
-- (SKAction *)createRepeatFollowActionForPath:(AttributedStringPath *)stringPath {
-    SKAction *followStringPath = [SKAction followPath:stringPath.path
+- (SKAction *)createRepeatFollowActionForPath:(CGPathRef)path {
+    SKAction *followStringPath = [SKAction followPath:path
                                              asOffset:NO
                                          orientToPath:YES
                                              duration:1.0];
@@ -26,29 +26,29 @@ NSString *const StartStringSmokeSKS = @"StartStringSmoke";
     return repeatForever;
 }
 
-- (void)addEmittersFromLetterArray:(NSArray *)letterArray {
+- (void)addEmitters {
+    NSArray *letterArray = [[stringPath letterConverter] getLetterArrayFromString:StartText];
+    
     for (NSUInteger i = 0; i < letterArray.count; i++) {
         SKEmitterNode *node = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                [[NSBundle mainBundle] pathForResource:StartStringSmokeSKS ofType:@"sks"]];
         
-        AttributedStringPath *stringPath = [[AttributedStringPath alloc]
-                                            initWithString:@"s" andSize:100.0];
-        node.particleAction = [self createRepeatFollowActionForPath:stringPath];
+        CGPathRef path = [stringPath createPathWithString:[letterArray objectAtIndex:i] andSize:StartStringSize];
+        node.particleAction = [self createRepeatFollowActionForPath:path];
         
         [self addChild:node];
     }
 }
 
-- (instancetype)initWithLetterConverter:(LetterConverter *)converter {
+- (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath {
     self = [super init];
     
-    letterConverter = converter;
-    if (letterConverter == nil) {
-        letterConverter = [[LetterConverter alloc] init];
+    stringPath = strPath;
+    if (stringPath == nil) {
+        stringPath = [[AttributedStringPath alloc] init];
     }
     
-    NSArray *letterArray = [letterConverter getLetterArrayFromString:StartText];
-    [self addEmittersFromLetterArray:letterArray];
+    [self addEmitters];
     
     return self;
 }

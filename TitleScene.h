@@ -18,6 +18,7 @@
 
 #define SMOKE_HORIZONTAL_OFFSET -10
 #define SMOKE_VERTICAL_OFFSET   -5
+#define START_BUTTON_VERTICAL_OFFSET    20
 
 @interface TitleScene : SKScene
 

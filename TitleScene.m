@@ -44,7 +44,9 @@
     SKNode *startButton = [[StartButton alloc] init];
     startButton.name = START_BUTTON;
     startButton.zPosition = StartButtonZOrder;
-    startButton.position = CGPointMake(180, -40);
+    CGFloat xPoint = ([UIScreen mainScreen].bounds.size.width - startButton.frame.size.width) / 2;
+    CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
+    startButton.position = CGPointMake(xPoint, yPoint);
     [self addChild:startButton];
 }
 

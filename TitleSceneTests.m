@@ -87,11 +87,11 @@
     XCTAssertNotNil([trainNode childNodeWithName:ORANGE_SMOKE]);
 }
 
-- (void)testTheTitleTrainSmokeIsAtFivePixelsDownFromTheTopCornerOfTheTrain {
+- (void)testTheTrainSmokeIsAtFivePixelsDownFromTheTopCornerOfTheTrain {
     XCTAssertEqual(smokeNode.position.y, trainNode.size.height - 5);
 }
 
-- (void)testTheTitleTrainSmokeIsAtTenPixelsLeftOfTheRightSideOfTheTrain {
+- (void)testTheTrainSmokeIsAtTenPixelsLeftOfTheRightSideOfTheTrain {
     XCTAssertEqual(smokeNode.position.x, trainNode.size.width - 10);
 }
 
@@ -99,11 +99,26 @@
     XCTAssertNotNil(startButtonNode);
 }
 
-- (void)testTheStartButtonSmokeIsTheHighestZOrder {
+- (void)testTheStartButtonIsTheHighestZOrder {
     NSArray *children = [scene children];
     for (NSUInteger i; i < children.count; i++) {
         XCTAssertGreaterThanOrEqual(startButtonNode.zPosition, ((SKNode *)[children objectAtIndex:i]).zPosition);
     }
+}
+
+- (void)testTheStartButtonIsHorizontallyCentered {
+    XCTAssertEqual([UIScreen mainScreen].bounds.origin.x, 0);
+    
+    CGFloat leftSpan = startButtonNode.position.x - [UIScreen mainScreen].bounds.origin.x;
+    CGFloat rightSpan = [UIScreen mainScreen].bounds.size.width -
+                            (startButtonNode.position.x + startButtonNode.frame.size.width);
+    NSLog(@"%f", startButtonNode.frame.size.width);
+    XCTAssertEqual(leftSpan, rightSpan);
+}
+
+- (void)testTheStartButtonIsVeritcallyPlacedTwentyPixelsUnderTheTopOfTheScreen {
+    CGFloat topOffset = [UIScreen mainScreen].bounds.size.height - startButtonNode.frame.size.height - 20;
+    XCTAssertEqual(startButtonNode.position.y, topOffset);
 }
 
 @end

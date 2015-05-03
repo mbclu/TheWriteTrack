@@ -17,7 +17,7 @@
 @property SKEmitterNode *s_node;
 @property SKEmitterNode *t_node;
 @property SKEmitterNode *a_node;
-
+@property SKEmitterNode *r_node;
 @end
 
 @implementation StartButtonTests
@@ -83,6 +83,21 @@
                                          10 + tBounds.origin.x + tBounds.size.width, 0);
     XCTAssertEqual(a_node.frame.origin.x, expectedOrigin.x);
     XCTAssertEqual(a_node.frame.origin.y, expectedOrigin.y);
+}
+
+- (void)testTheStartButtonHasHeightEqualOrGreaterThanItsTallestChildPath {
+    CGPathRef tPath = [startButton.stringPath createPathWithString:@"t" andSize:StartStringSize];
+    CGRect tBounds = CGPathGetBoundingBox(tPath);
+    XCTAssertGreaterThanOrEqual(startButton.size.height, tBounds.size.height);
+}
+
+- (void)testTheStartButtonHasWidthEqualOrGreaterThanItsCombinedChildrenPaths {
+    CGRect sBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"s" andSize:StartStringSize]);
+    CGRect tBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"t" andSize:StartStringSize]);
+    CGRect aBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"a" andSize:StartStringSize]);
+    CGRect rBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"r" andSize:StartStringSize]);
+    XCTAssertGreaterThanOrEqual(startButton.size.width,
+                   sBounds.size.width + (2 * tBounds.size.width) + aBounds.size.width + rBounds.size.width);
 }
 
 @end

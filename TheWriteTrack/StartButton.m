@@ -19,7 +19,7 @@ CGFloat const LetterHoriztontalOffset = 10.0;
     SKAction *followStringPath = [SKAction followPath:path
                                              asOffset:NO
                                          orientToPath:YES
-                                             duration:1.0];
+                                             duration:3.0];
     SKAction *repeatForever = [SKAction repeatActionForever:followStringPath];
     return repeatForever;
 }
@@ -33,6 +33,19 @@ CGFloat const LetterHoriztontalOffset = 10.0;
     return _nextLetterPosition;
 }
 
+- (void)adjustOverallButtonSizeForLetterPath:(CGPathRef)path {
+    float height = self.size.height;
+    float widthSum = self.size.width;
+    
+    CGRect bounds = CGPathGetBoundingBox(path);
+    if (bounds.size.height > height) {
+        height = bounds.size.height;
+    }
+    widthSum += bounds.size.width;
+    
+    self.size = CGSizeMake(widthSum, height);
+}
+    
 - (void)addEmitters {
     _nextLetterPosition = CGPointZero;
     
@@ -44,6 +57,8 @@ CGFloat const LetterHoriztontalOffset = 10.0;
         [_letterArray replaceObjectAtIndex:i withObject:(__bridge id)(path)];
         node.particleAction = [self createRepeatFollowActionForPath:path];
         node.position = [self getNextPositionForLetterAtIndex:i];
+        
+        [self adjustOverallButtonSizeForLetterPath:path];
         
         [self addChild:node];
     }
@@ -60,6 +75,11 @@ CGFloat const LetterHoriztontalOffset = 10.0;
     _letterArray = [[_stringPath letterConverter] getLetterArrayFromString:StartText];
     [self addEmitters];
     
+    return self;
+}
+
+- (instancetype)init {
+    self = [self initWithAttributedStringPath:nil];
     return self;
 }
 

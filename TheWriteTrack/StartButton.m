@@ -24,6 +24,15 @@ CGFloat const LetterHoriztontalOffset = 10.0;
     return repeatForever;
 }
 
+- (CGPoint)getNextPositionForLetterAtIndex:(NSUInteger)i {
+    if (i > 0) {
+        CGRect previousLetterBounds = CGPathGetBoundingBox((CGPathRef)[_letterArray objectAtIndex:(i - 1)]);
+        CGFloat nextX = _nextLetterPosition.x + previousLetterBounds.origin.x + previousLetterBounds.size.width + LetterHoriztontalOffset;
+        _nextLetterPosition = CGPointMake(nextX, 0);
+    }
+    return _nextLetterPosition;
+}
+
 - (void)addEmitters {
     _nextLetterPosition = CGPointZero;
     
@@ -34,12 +43,7 @@ CGFloat const LetterHoriztontalOffset = 10.0;
         CGPathRef path = [_stringPath createPathWithString:[_letterArray objectAtIndex:i] andSize:StartStringSize];
         [_letterArray replaceObjectAtIndex:i withObject:(__bridge id)(path)];
         node.particleAction = [self createRepeatFollowActionForPath:path];
-        if (i > 0) {
-            CGRect previousLetterBounds = CGPathGetBoundingBox((CGPathRef)[_letterArray objectAtIndex:(i - 1)]);
-            CGFloat nextX = _nextLetterPosition.x + previousLetterBounds.origin.x + previousLetterBounds.size.width + LetterHoriztontalOffset;
-            _nextLetterPosition = CGPointMake(nextX, 0);
-        }
-        node.position = _nextLetterPosition;
+        node.position = [self getNextPositionForLetterAtIndex:i];
         
         [self addChild:node];
     }

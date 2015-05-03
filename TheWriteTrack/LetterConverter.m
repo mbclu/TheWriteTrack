@@ -97,12 +97,12 @@
     return [self createPathAtZeroUsingAttrString:attrString];
 }
 
-- (NSArray *)getLetterArrayFromString:(NSString *)string {
+- (NSMutableArray *)getLetterArrayFromString:(NSString *)string {
     NSMutableArray *letterArray = [[NSMutableArray alloc] initWithCapacity:string.length];
     for (NSUInteger i = 0; i < string.length; i++) {
         [letterArray addObject:[string substringWithRange:NSMakeRange(i, 1)]];
     }
-    return (NSArray *)letterArray;
+    return letterArray;
 }
 
 @end

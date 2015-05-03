@@ -13,9 +13,7 @@
 NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";
 CGFloat const StartStringSize = 100.0;
-
-@synthesize startText;
-@synthesize stringPath;
+CGFloat const LetterHoriztontalOffset = 10.0;
 
 - (SKAction *)createRepeatFollowActionForPath:(CGPathRef)path {
     SKAction *followStringPath = [SKAction followPath:path
@@ -27,14 +25,21 @@ CGFloat const StartStringSize = 100.0;
 }
 
 - (void)addEmitters {
-    NSArray *letterArray = [[stringPath letterConverter] getLetterArrayFromString:StartText];
+    _nextLetterPosition = CGPointZero;
     
-    for (NSUInteger i = 0; i < letterArray.count; i++) {
+    for (NSUInteger i = 0; i < _letterArray.count; i++) {
         SKEmitterNode *node = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                [[NSBundle mainBundle] pathForResource:StartStringSmokeSKS ofType:@"sks"]];
         
-        CGPathRef path = [stringPath createPathWithString:[letterArray objectAtIndex:i] andSize:StartStringSize];
+        CGPathRef path = [_stringPath createPathWithString:[_letterArray objectAtIndex:i] andSize:StartStringSize];
+        [_letterArray replaceObjectAtIndex:i withObject:(__bridge id)(path)];
         node.particleAction = [self createRepeatFollowActionForPath:path];
+        if (i > 0) {
+            CGRect previousLetterBounds = CGPathGetBoundingBox((CGPathRef)[_letterArray objectAtIndex:(i - 1)]);
+            CGFloat nextX = _nextLetterPosition.x + previousLetterBounds.origin.x + previousLetterBounds.size.width + LetterHoriztontalOffset;
+            _nextLetterPosition = CGPointMake(nextX, 0);
+        }
+        node.position = _nextLetterPosition;
         
         [self addChild:node];
     }
@@ -43,11 +48,12 @@ CGFloat const StartStringSize = 100.0;
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath {
     self = [super init];
     
-    stringPath = strPath;
-    if (stringPath == nil) {
-        stringPath = [[AttributedStringPath alloc] init];
+    _stringPath = strPath;
+    if (_stringPath == nil) {
+        _stringPath = [[AttributedStringPath alloc] init];
     }
     
+    _letterArray = [[_stringPath letterConverter] getLetterArrayFromString:StartText];
     [self addEmitters];
     
     return self;

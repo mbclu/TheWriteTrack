@@ -17,6 +17,8 @@ FOUNDATION_EXPORT CGFloat const StartStringSize;
 
 @property (readonly) NSString *startText;
 @property (retain) AttributedStringPath *stringPath;
+@property (nonatomic, retain) NSMutableArray *letterArray;
+@property (readwrite) CGPoint nextLetterPosition;
 
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath;
 

@@ -7,24 +7,32 @@
 //
 
 #import "StartButton.h"
-#import "AttributedStringPath.h"
-#import <UIKit/UIKit.h>
+#import "LayoutMath.h"
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
 @interface StartButtonTests : XCTestCase
 
 @property StartButton *startButton;
+@property SKEmitterNode *s_node;
+@property SKEmitterNode *t_node;
+@property SKEmitterNode *a_node;
 
 @end
 
 @implementation StartButtonTests
 
 @synthesize startButton;
+@synthesize s_node;
+@synthesize t_node;
+@synthesize a_node;
 
 - (void)setUp {
     [super setUp];
     startButton = [[StartButton alloc] initWithAttributedStringPath:nil];
+    s_node = [[startButton children] objectAtIndex:0];
+    t_node = [[startButton children] objectAtIndex:1];
+    a_node = [[startButton children] objectAtIndex:2];
 }
 
 - (void)tearDown {
@@ -45,21 +53,44 @@
 }
 
 - (void)testTheStartButtonEmittersLoadFromTheOrangeSmokePNG {
-    SKEmitterNode *node = [[startButton children] objectAtIndex:0];
-    XCTAssertNotEqual([node.particleTexture.description rangeOfString:@"OrangeSmoke.png"].location, NSNotFound);
+    XCTAssertNotEqual([s_node.particleTexture.description rangeOfString:@"OrangeSmoke.png"].location, NSNotFound);
 }
 
 - (void)testTheStartButtonEmittersHaveARepeatAction {
-    SKEmitterNode *node = [[startButton children] objectAtIndex:0];
-    XCTAssertNotEqual([node.particleAction.description rangeOfString:@"SKRepeat"].location, NSNotFound);
+    XCTAssertNotEqual([s_node.particleAction.description rangeOfString:@"SKRepeat"].location, NSNotFound);
+}
+
+- (void)testTheLetter_s_IsPlacedAtZeroZero {
+    CGPoint expectedOrigin = CGPointZero;
+    XCTAssertEqual(s_node.frame.origin.x, expectedOrigin.x);
+    XCTAssertEqual(s_node.frame.origin.y, expectedOrigin.y);
+}
+
+- (void)testTheFirst_t_LetterIsPlacedAtAnXPositionTenGreaterThanTheWidthOfThe_s_Letter {
+    CGPathRef sPath = [startButton.stringPath createPathWithString:@"s" andSize:StartStringSize];
+    CGRect sBounds = CGPathGetBoundingBox(sPath);
+    CGPoint expectedOrigin = CGPointMake(10 + sBounds.origin.x + sBounds.size.width, 0);
+    XCTAssertEqual(t_node.frame.origin.x, expectedOrigin.x);
+    XCTAssertEqual(t_node.frame.origin.y, expectedOrigin.y);
+}
+
+- (void)testThe_a_LetterIsPlacedAtAnXPositionTwentyGreaterThanTheWidthOfThe_s_And_t_Letters {
+    CGPathRef sPath = [startButton.stringPath createPathWithString:@"s" andSize:StartStringSize];
+    CGPathRef tPath = [startButton.stringPath createPathWithString:@"t" andSize:StartStringSize];
+    CGRect sBounds = CGPathGetBoundingBox(sPath);
+    CGRect tBounds = CGPathGetBoundingBox(tPath);
+    CGPoint expectedOrigin = CGPointMake(10 + sBounds.origin.x + sBounds.size.width +
+                                         10 + tBounds.origin.x + tBounds.size.width, 0);
+    XCTAssertEqual(a_node.frame.origin.x, expectedOrigin.x);
+    XCTAssertEqual(a_node.frame.origin.y, expectedOrigin.y);
 }
 
 @end
 
-@interface StartButtonWithMockLetterConverterTests : XCTestCase
+@interface StartButtonWithMocksTests : XCTestCase
 @end
 
-@implementation StartButtonWithMockLetterConverterTests
+@implementation StartButtonWithMocksTests
 
 - (void)setUp {
     [super setUp];
@@ -84,6 +115,14 @@
     OCMVerify([lcMock createPathFromString:@"a" AndSize:StartStringSize]);
     OCMVerify([lcMock createPathFromString:@"r" AndSize:StartStringSize]);
     OCMVerify([lcMock createPathFromString:@"t" AndSize:StartStringSize]);
+}
+
+// Using a mock so that the next position value is not modified during the addEmitters function
+- (void)testTheNextLetterPositionValueStartsAtZero {
+    id aspMock = OCMClassMock([AttributedStringPath class]);
+    StartButton *startButton = [[StartButton alloc] initWithAttributedStringPath:aspMock];
+    XCTAssertEqual([startButton nextLetterPosition].x, CGPointZero.x);
+    XCTAssertEqual([startButton nextLetterPosition].y, CGPointZero.y);
 }
 
 @end

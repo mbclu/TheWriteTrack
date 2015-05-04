@@ -10,8 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "CocoaLumberjack.h"
 
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-
 void PrintPathElement(void* info, const CGPathElement* element)
 {
     PrintElementType(element);

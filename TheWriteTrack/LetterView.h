@@ -11,9 +11,9 @@
 
 @interface LetterView : SKView
 
-- (void) drawRailInContext:(CGContextRef)context;
+//- (void) drawRailInContext:(CGContextRef)context;
 - (void) setupContextForHumanReadableText:(CGContextRef)context;
 - (void) movePathToCenter:(CGMutablePathRef)path;
-- (CGMutablePathRef) createPathInContext:(CGContextRef)context;
+//- (CGMutablePathRef) createPathInContext:(CGContextRef)context;
 
 @end

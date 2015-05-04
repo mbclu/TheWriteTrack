@@ -104,6 +104,10 @@
     XCTAssertTrue([startButton isUserInteractionEnabled]);
 }
 
+- (void)testThatUserPressingTheButtonSendsAMessageToTheTarget {
+    XCTAssertTrue([startButton isUserInteractionEnabled]);
+}
+
 @end
 
 @interface StartButtonWithMocksTests : XCTestCase

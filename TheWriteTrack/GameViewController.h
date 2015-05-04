@@ -10,14 +10,6 @@
 #import "LetterView.h"
 
 @interface GameViewController : UIViewController {
-    LetterView *letterView;
 }
-
-@property(nonatomic, retain) LetterView *letterView;
-
-#ifdef DEBUG
-- (void)addDebugPrintPathButton;
-- (void)buttonPressed;
-#endif
 
 @end

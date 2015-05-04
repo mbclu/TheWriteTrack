@@ -14,7 +14,7 @@ NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";
 CGFloat const StartStringSize = 125.0;
 CGFloat const LetterHoriztontalOffset = 10.0;
-CGFloat const FollowPathDuration = 1.0;     // The smaller the number
+CGFloat const FollowPathDuration = 2.0;     // The smaller the number
                                             // the faster the letters get filled in
 
 - (SKAction *)createRepeatFollowActionForPath:(CGPathRef)path {

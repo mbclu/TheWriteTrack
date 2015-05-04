@@ -12,14 +12,22 @@
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
 		C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
+		C72351BE1AEFA1CE005F2961 /* StartStringSmoke.bak in Resources */ = {isa = PBXBuildFile; fileRef = C72351BD1AEFA1CE005F2961 /* StartStringSmoke.bak */; };
+		C72C213B1AF70A3700A85ABF /* StartStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
-		C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7584A071AA3A9F600D92D6A /* TrainTests.m */; };
+		C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
+		C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
+		C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347411AE73361005C2950 /* TitleTrainTests.m */; };
+		C77347451AE733F5005C2950 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
 		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
 		C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
-		C78C6F8C1AA3A6790077DE74 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F8B1AA3A6790077DE74 /* Train.m */; };
 		C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
+		C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
+		C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */; };
+		C7B697551AF2460C0066086E /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
+		C7B697571AF246330066086E /* StartButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697561AF246330066086E /* StartButtonTests.m */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */; };
 		C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */; };
@@ -27,7 +35,6 @@
 		C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
 		C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
 		C7D081881A8A312700DE5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
-		C7D081901A8A31F000DE5ECC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7D0818F1A8A31F000DE5ECC /* Default-568h@2x.png */; };
 		C7D081921A8A322A00DE5ECC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7D081911A8A322A00DE5ECC /* Info.plist */; };
 		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
 		C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */; };
@@ -50,30 +57,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06e84e33b57bee0211ce863b /* calabash.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OnTheWriteTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43d0afec4f925143f9f92ad9 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C710AB611A9ECA43002E7B79 /* LetterConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterConverter.h; path = TheWriteTrack/LetterConverter.h; sourceTree = SOURCE_ROOT; };
 		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
-		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; };
+		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C710AB661A9ECCFD002E7B79 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		C72351BD1AEFA1CE005F2961 /* StartStringSmoke.bak */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = StartStringSmoke.bak; path = TheWriteTrack/StartStringSmoke.bak; sourceTree = SOURCE_ROOT; };
+		C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartStringSmoke.sks; path = TheWriteTrack/StartStringSmoke.sks; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
-		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; };
-		C7584A071AA3A9F600D92D6A /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = "TheWriteTrack-Tests/TrainTests.m"; sourceTree = SOURCE_ROOT; };
+		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C77347351AE72936005C2950 /* OrangeSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = OrangeSmoke.sks; path = TheWriteTrack/OrangeSmoke.sks; sourceTree = SOURCE_ROOT; };
+		C773473E1AE72E3D005C2950 /* OrangeSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeSmoke.png; path = images/particles/OrangeSmoke.png; sourceTree = SOURCE_ROOT; };
+		C77347411AE73361005C2950 /* TitleTrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TitleTrainTests.m; path = "TheWriteTrack-Tests/TitleTrainTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C77347431AE733F5005C2950 /* TitleTrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleTrain.h; path = TheWriteTrack/TitleTrain.h; sourceTree = SOURCE_ROOT; };
+		C77347441AE733F5005C2950 /* TitleTrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrain.m; path = TheWriteTrack/TitleTrain.m; sourceTree = SOURCE_ROOT; };
 		C77DF2ED1AC9BC62002A6251 /* PathInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PathInfo.h; path = TheWriteTrack/PathInfo.h; sourceTree = SOURCE_ROOT; };
 		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterViewTests.m; path = "TheWriteTrack-Tests/LetterViewTests.m"; sourceTree = SOURCE_ROOT; };
+		C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LetterViewTests.m; path = "TheWriteTrack-Tests/LetterViewTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C78C6F871AA3A6570077DE74 /* LetterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterView.h; path = TheWriteTrack/LetterView.h; sourceTree = SOURCE_ROOT; };
 		C78C6F881AA3A6570077DE74 /* LetterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterView.m; path = TheWriteTrack/LetterView.m; sourceTree = SOURCE_ROOT; };
-		C78C6F8A1AA3A6790077DE74 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Train.h; path = TheWriteTrack/Train.h; sourceTree = SOURCE_ROOT; };
-		C78C6F8B1AA3A6790077DE74 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Train.m; path = TheWriteTrack/Train.m; sourceTree = SOURCE_ROOT; };
 		C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = TheWriteTrack/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttributedStringPath.h; path = TheWriteTrack/AttributedStringPath.h; sourceTree = SOURCE_ROOT; };
+		C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPath.m; path = TheWriteTrack/AttributedStringPath.m; sourceTree = SOURCE_ROOT; };
+		C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AttributedStringPathTests.m; path = "TheWriteTrack-Tests/AttributedStringPathTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C7B697531AF2460C0066086E /* StartButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartButton.h; path = TheWriteTrack/StartButton.h; sourceTree = SOURCE_ROOT; };
+		C7B697541AF2460C0066086E /* StartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButton.m; path = TheWriteTrack/StartButton.m; sourceTree = SOURCE_ROOT; };
+		C7B697561AF246330066086E /* StartButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButtonTests.m; path = "TheWriteTrack-Tests/StartButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* _BaseTrackScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _BaseTrackScene.h; path = TheWriteTrack/_BaseTrackScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* _BaseTrackScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackScene.m; path = TheWriteTrack/_BaseTrackScene.m; sourceTree = SOURCE_ROOT; };
-		C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BaseTrackTests.m; path = "TheWriteTrack-Tests/_BaseTrackTests.m"; sourceTree = SOURCE_ROOT; };
+		C7C4B8AC1A8C2CBF009FA11B /* _BaseTrackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = _BaseTrackTests.m; path = "TheWriteTrack-Tests/_BaseTrackTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheWriteTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D081731A8A312700DE5ECC /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TheWriteTrack/AppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -83,18 +102,17 @@
 		C7D0817E1A8A312700DE5ECC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TheWriteTrack/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		C7D0817F1A8A312700DE5ECC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TheWriteTrack/main.m; sourceTree = SOURCE_ROOT; };
 		C7D0818B1A8A315A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "TheWriteTrack-Tests/Info.plist"; sourceTree = SOURCE_ROOT; };
-		C7D0818F1A8A31F000DE5ECC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C7D081911A8A322A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TheWriteTrack/Info.plist; sourceTree = SOURCE_ROOT; };
 		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
-		C7DB850A1AD48AA40026972B /* TitleSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleSceneTests.m; sourceTree = SOURCE_ROOT; };
+		C7DB850A1AD48AA40026972B /* TitleSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TitleSceneTests.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C7DB850C1AD48ABB0026972B /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = SOURCE_ROOT; };
 		C7DB850D1AD48ABB0026972B /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleScene.m; sourceTree = SOURCE_ROOT; };
-		C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameViewControllerIntegrationTests.m; path = "TheWriteTrack-Tests/GameViewControllerIntegrationTests.m"; sourceTree = SOURCE_ROOT; };
+		C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GameViewControllerIntegrationTests.m; path = "TheWriteTrack-Tests/GameViewControllerIntegrationTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
 		C7FDF20D1ACB6D0C0094BBE9 /* A.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = A.h; path = TheWriteTrack/A.h; sourceTree = SOURCE_ROOT; };
 		C7FDF20E1ACB6D0C0094BBE9 /* A.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = A.m; path = TheWriteTrack/A.m; sourceTree = SOURCE_ROOT; };
-		C7FDF2111ACB6E3B0094BBE9 /* ATests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ATests.m; path = "TheWriteTrack-Tests/ATests.m"; sourceTree = SOURCE_ROOT; };
+		C7FDF2111ACB6E3B0094BBE9 /* ATests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ATests.m; path = "TheWriteTrack-Tests/ATests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -140,6 +158,11 @@
 				C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */,
 				CCE25A996CEA4B7C8B7FBC33 /* libPods.a */,
 				2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */,
+				C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */,
+				C710AB661A9ECCFD002E7B79 /* CoreText.framework */,
+				C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */,
+				43d0afec4f925143f9f92ad9 /* CFNetwork.framework */,
+				06e84e33b57bee0211ce863b /* calabash.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,6 +174,8 @@
 				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
 				C73700141AB7D4E40035C4A3 /* LayoutMath.h */,
 				C73700151AB7D4E40035C4A3 /* LayoutMath.m */,
+				C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */,
+				C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -160,25 +185,20 @@
 			children = (
 				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
 				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
+				C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */,
 			);
 			name = "Common-Tests";
 			sourceTree = "<group>";
 		};
-		C7387B8B1A97E4060086EC94 /* Trains */ = {
+		C77347471AE735F1005C2950 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				C78C6F8A1AA3A6790077DE74 /* Train.h */,
-				C78C6F8B1AA3A6790077DE74 /* Train.m */,
+				C773473E1AE72E3D005C2950 /* OrangeSmoke.png */,
+				C77347351AE72936005C2950 /* OrangeSmoke.sks */,
+				C72351BD1AEFA1CE005F2961 /* StartStringSmoke.bak */,
+				C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */,
 			);
-			name = Trains;
-			sourceTree = "<group>";
-		};
-		C7584A061AA3A9DB00D92D6A /* Train-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C7584A071AA3A9F600D92D6A /* TrainTests.m */,
-			);
-			name = "Train-Tests";
+			name = assets;
 			sourceTree = "<group>";
 		};
 		C77DF2EA1AC88FA8002A6251 /* Utils */ = {
@@ -216,10 +236,6 @@
 		C7CED0471A86B9DA00A4DCC3 = {
 			isa = PBXGroup;
 			children = (
-				C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */,
-				C710AB661A9ECCFD002E7B79 /* CoreText.framework */,
-				C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */,
-				C7D0818F1A8A31F000DE5ECC /* Default-568h@2x.png */,
 				C7CED0511A86B9DA00A4DCC3 /* Products */,
 				C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */,
 				C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */,
@@ -240,10 +256,10 @@
 		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXGroup;
 			children = (
+				C73700131AB7D49A0035C4A3 /* Common */,
 				C7DB85081AD48A620026972B /* Title */,
 				C7D081791A8A312700DE5ECC /* AppDelegate.h */,
 				C7D081731A8A312700DE5ECC /* AppDelegate.m */,
-				C73700131AB7D49A0035C4A3 /* Common */,
 				C7D0817C1A8A312700DE5ECC /* GameViewController.h */,
 				C7D0817D1A8A312700DE5ECC /* GameViewController.m */,
 				C7D0817E1A8A312700DE5ECC /* Images.xcassets */,
@@ -251,7 +267,6 @@
 				C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */,
 				C7CED0531A86B9DA00A4DCC3 /* Supporting Files */,
 				C7C4B8A61A8C2494009FA11B /* Tracks */,
-				C7387B8B1A97E4060086EC94 /* Trains */,
 				C77DF2EA1AC88FA8002A6251 /* Utils */,
 			);
 			name = TheWriteTrack;
@@ -273,7 +288,6 @@
 				C7DB85091AD48A770026972B /* Title-Tests */,
 				C7F09F511ACCEEEE00B53F66 /* Integration-Tests */,
 				C73700171AB7D5530035C4A3 /* Common-Tests */,
-				C7584A061AA3A9DB00D92D6A /* Train-Tests */,
 				C7C4B8AB1A8C2C87009FA11B /* Track-Tests */,
 				C7CED0721A86B9DA00A4DCC3 /* Supporting Files */,
 			);
@@ -292,8 +306,13 @@
 		C7DB85081AD48A620026972B /* Title */ = {
 			isa = PBXGroup;
 			children = (
+				C77347471AE735F1005C2950 /* assets */,
 				C7DB850C1AD48ABB0026972B /* TitleScene.h */,
 				C7DB850D1AD48ABB0026972B /* TitleScene.m */,
+				C77347431AE733F5005C2950 /* TitleTrain.h */,
+				C77347441AE733F5005C2950 /* TitleTrain.m */,
+				C7B697531AF2460C0066086E /* StartButton.h */,
+				C7B697541AF2460C0066086E /* StartButton.m */,
 			);
 			name = Title;
 			sourceTree = "<group>";
@@ -302,6 +321,8 @@
 			isa = PBXGroup;
 			children = (
 				C7DB850A1AD48AA40026972B /* TitleSceneTests.m */,
+				C77347411AE73361005C2950 /* TitleTrainTests.m */,
+				C7B697561AF246330066086E /* StartButtonTests.m */,
 			);
 			name = "Title-Tests";
 			sourceTree = "<group>";
@@ -418,7 +439,10 @@
 				C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */,
 				C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */,
 				C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */,
-				C7D081901A8A31F000DE5ECC /* Default-568h@2x.png in Resources */,
+				C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */,
+				C72C213B1AF70A3700A85ABF /* StartStringSmoke.sks in Resources */,
+				C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */,
+				C72351BE1AEFA1CE005F2961 /* StartStringSmoke.bak in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,12 +525,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7DB850E1AD48ABB0026972B /* TitleScene.m in Sources */,
-				C78C6F8C1AA3A6790077DE74 /* Train.m in Sources */,
+				C7B697551AF2460C0066086E /* StartButton.m in Sources */,
+				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
 				C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */,
 				C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */,
 				C7FDF20F1ACB6D0C0094BBE9 /* A.m in Sources */,
+				C77347451AE733F5005C2950 /* TitleTrain.m in Sources */,
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* _BaseTrackScene.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
@@ -518,13 +544,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */,
 				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
+				C7B697571AF246330066086E /* StartButtonTests.m in Sources */,
+				C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */,
 				C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */,
 				C7C4B8AD1A8C2CBF009FA11B /* _BaseTrackTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,
 				C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */,
 				C7DB850B1AD48AA40026972B /* TitleSceneTests.m in Sources */,
-				C7584A081AA3A9F600D92D6A /* TrainTests.m in Sources */,
 				C7FDF2121ACB6E3B0094BBE9 /* ATests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

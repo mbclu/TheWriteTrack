@@ -12,6 +12,7 @@
 #import "AttributedStringPath.h"
 #import "LayoutMath.h"
 #import "StartButton.h"
+#import "A.h"
 
 @implementation TitleScene
 
@@ -40,13 +41,23 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
+- (void)startButtonAction {
+    NSLog(@"Start button pressed!");
+    SKScene *sampleScene = [[A alloc] initWithSize:self.size];
+    SKTransition *transition = [SKTransition flipVerticalWithDuration:0.5];
+    [self.view presentScene:sampleScene transition:transition];
+}
+
 - (void)addStartButtonSmoke {
-    SKNode *startButton = [[StartButton alloc] init];
+    StartButton *startButton = [[StartButton alloc] init];
     startButton.name = START_BUTTON;
     startButton.zPosition = StartButtonZOrder;
     CGFloat xPoint = ([UIScreen mainScreen].bounds.size.width - startButton.frame.size.width) / 2;
     CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
     startButton.position = CGPointMake(xPoint, yPoint);
+    
+    [startButton setTouchUpTarget:self action:@selector(startButtonAction)];
+    
     [self addChild:startButton];
 }
 
@@ -60,6 +71,22 @@
         [self addStartButtonSmoke];
     }
     return self;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    NSLog(@"Touches on Title Scene!");
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInNode:self];
+//    SKNode *node = [self nodeAtPoint:location];
+//    
+//    NSLog(@"Node : %@", node.name);
+//    if ([node.name isEqualToString:START_BUTTON]) {
+//        NSLog(@"Start button pressed!");
+//        SKScene *sampleScene = [[A alloc] initWithSize:self.size];
+//        SKTransition *transition = [SKTransition flipVerticalWithDuration:0.5];
+//        [self.view presentScene:sampleScene transition:transition];
+//    }
 }
 
 -(void)didMoveToView:(SKView *)view {

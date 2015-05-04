@@ -20,6 +20,11 @@ FOUNDATION_EXPORT CGFloat const StartStringSize;
 @property (nonatomic, retain) NSMutableArray *letterArray;
 @property (readwrite) CGPoint nextLetterPosition;
 
+@property (nonatomic, readonly) SEL actionTouchUp;
+@property (nonatomic, readonly, weak) id targetTouchUp;
+
+- (void)setTouchUpTarget:(id)target action:(SEL)action;
+
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath;
 
 @end

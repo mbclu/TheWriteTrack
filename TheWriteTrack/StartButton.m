@@ -12,14 +12,16 @@
 
 NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";
-CGFloat const StartStringSize = 100.0;
+CGFloat const StartStringSize = 125.0;
 CGFloat const LetterHoriztontalOffset = 10.0;
+CGFloat const FollowPathDuration = 1.0;     // The smaller the number
+                                            // the faster the letters get filled in
 
 - (SKAction *)createRepeatFollowActionForPath:(CGPathRef)path {
     SKAction *followStringPath = [SKAction followPath:path
                                              asOffset:NO
                                          orientToPath:YES
-                                             duration:3.0];
+                                             duration:FollowPathDuration];
     SKAction *repeatForever = [SKAction repeatActionForever:followStringPath];
     return repeatForever;
 }
@@ -75,12 +77,31 @@ CGFloat const LetterHoriztontalOffset = 10.0;
     _letterArray = [[_stringPath letterConverter] getLetterArrayFromString:StartText];
     [self addEmitters];
     
+    self.userInteractionEnabled = YES;
+    
+#if DEBUG
+    [self setColor:[UIColor blueColor]];
+#endif
     return self;
 }
 
 - (instancetype)init {
     self = [self initWithAttributedStringPath:nil];
     return self;
+}
+
+- (void)setTouchUpTarget:(id)target action:(SEL)action {
+    _targetTouchUp = target;
+    _actionTouchUp = action;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInNode:self.parent];
+    
+    if (CGRectContainsPoint(self.frame, touchPoint)) {
+        objc_msgSend(_targetTouchUp, _actionTouchUp);
+    }
 }
 
 @end

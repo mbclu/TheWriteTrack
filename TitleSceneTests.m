@@ -112,7 +112,7 @@
     CGFloat leftSpan = startButtonNode.position.x - [UIScreen mainScreen].bounds.origin.x;
     CGFloat rightSpan = [UIScreen mainScreen].bounds.size.width -
                             (startButtonNode.position.x + startButtonNode.frame.size.width);
-    NSLog(@"%f", startButtonNode.frame.size.width);
+
     XCTAssertEqual(leftSpan, rightSpan);
 }
 

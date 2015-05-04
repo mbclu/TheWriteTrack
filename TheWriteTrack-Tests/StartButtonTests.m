@@ -100,6 +100,10 @@
                    sBounds.size.width + (2 * tBounds.size.width) + aBounds.size.width + rBounds.size.width);
 }
 
+- (void)testThatUserInteractionIsEnabled {
+    XCTAssertTrue([startButton isUserInteractionEnabled]);
+}
+
 @end
 
 @interface StartButtonWithMocksTests : XCTestCase
@@ -115,7 +119,7 @@
     [super tearDown];
 }
 
-- (void)testAPathWithFontSizeOneHundredIsCreatedForEachLetter {
+- (void)testAPathWithFontSizeOneHundredTwentyFiveIsCreatedForEachLetter {
     LetterConverter *lcObject = [[LetterConverter alloc] init];
     id lcMock = OCMPartialMock(lcObject);
     
@@ -123,7 +127,7 @@
     StartButton *startButton = [[StartButton alloc] initWithAttributedStringPath:stringPath];
     
     XCTAssertNotNil(startButton);
-    XCTAssertEqualWithAccuracy(StartStringSize, 100.0, 0.0);
+    XCTAssertEqualWithAccuracy(StartStringSize, 125.0, 0.0);
     
     OCMVerify([lcMock createPathFromString:@"s" AndSize:StartStringSize]);
     OCMVerify([lcMock createPathFromString:@"t" AndSize:StartStringSize]);

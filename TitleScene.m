@@ -56,7 +56,7 @@
     CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
     startButton.position = CGPointMake(xPoint, yPoint);
     
-    [startButton setTouchUpTarget:self action:@selector(startButtonAction)];
+    [startButton setTouchUpInsideTarget:self action:@selector(startButtonAction)];
     
     [self addChild:startButton];
 }

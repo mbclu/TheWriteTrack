@@ -14,6 +14,7 @@ NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";
 CGFloat const StartStringSize = 125.0;
 CGFloat const LetterHoriztontalOffset = 10.0;
+CGFloat const ButtonOffsetMultiplier = 1.5;
 CGFloat const FollowPathDuration = 2.0;     // The smaller the number
                                             // the faster the letters get filled in
 
@@ -43,7 +44,7 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
     if (bounds.size.height > height) {
         height = bounds.size.height;
     }
-    widthSum += bounds.size.width;
+    widthSum += bounds.size.width + (LetterHoriztontalOffset * 1.5);
     
     self.size = CGSizeMake(widthSum, height);
 }
@@ -57,11 +58,11 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
         
         CGPathRef path = [_stringPath createPathWithString:[_letterArray objectAtIndex:i] andSize:StartStringSize];
         [_letterArray replaceObjectAtIndex:i withObject:(__bridge id)(path)];
+        
         node.particleAction = [self createRepeatFollowActionForPath:path];
         node.position = [self getNextPositionForLetterAtIndex:i];
         
         [self adjustOverallButtonSizeForLetterPath:path];
-        
         [self addChild:node];
     }
 }
@@ -78,6 +79,7 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
     [self addEmitters];
     
     self.userInteractionEnabled = YES;
+    self.anchorPoint = CGPointZero;
     
 #if DEBUG
     [self setColor:[UIColor blueColor]];
@@ -90,18 +92,22 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
     return self;
 }
 
-- (void)setTouchUpTarget:(id)target action:(SEL)action {
-    _targetTouchUp = target;
-    _actionTouchUp = action;
+- (void)setTouchUpInsideTarget:(id)target action:(SEL)action {
+    _targetTouchUpInside = target;
+    _actionTouchUpInside = action;
+}
+
+- (void)evaluateTouchAtPoint:(CGPoint)touchPoint {
+    if (CGRectContainsPoint(self.frame, touchPoint)) {
+        objc_msgSend(_targetTouchUpInside, _actionTouchUpInside);
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self.parent];
     
-    if (CGRectContainsPoint(self.frame, touchPoint)) {
-        objc_msgSend(_targetTouchUp, _actionTouchUp);
-    }
+    [self evaluateTouchAtPoint:touchPoint];
 }
 
 @end

@@ -7,11 +7,7 @@
 //
 
 #import "AttributedStringPath.h"
-#import <SpriteKit/SpriteKit.h>
-
-FOUNDATION_EXPORT NSString *const StartText;
-FOUNDATION_EXPORT NSString *const StartStringSmokeSKS;
-FOUNDATION_EXPORT CGFloat const StartStringSize;
+#import "StartButtonConstants.h"
 
 @interface StartButton : SKSpriteNode
 
@@ -20,11 +16,11 @@ FOUNDATION_EXPORT CGFloat const StartStringSize;
 @property (nonatomic, retain) NSMutableArray *letterArray;
 @property (readwrite) CGPoint nextLetterPosition;
 
-@property (nonatomic, readonly) SEL actionTouchUp;
-@property (nonatomic, readonly, weak) id targetTouchUp;
+@property (nonatomic, readonly) SEL actionTouchUpInside;
+@property (nonatomic, readonly, weak) id targetTouchUpInside;
 
-- (void)setTouchUpTarget:(id)target action:(SEL)action;
-
+- (void)setTouchUpInsideTarget:(id)target action:(SEL)action;
+- (void)evaluateTouchAtPoint:(CGPoint)touchPoint;
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath;
 
 @end

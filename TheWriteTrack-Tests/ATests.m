@@ -35,4 +35,8 @@
     XCTAssertNotNil(background);
 }
 
+- (void)testAIsNamedA {
+    XCTAssertEqualObjects(a.name, @"A");
+}
+
 @end

@@ -42,10 +42,10 @@
 }
 
 - (void)startButtonAction {
-    NSLog(@"Start button pressed!");
-    SKScene *sampleScene = [[A alloc] initWithSize:self.size];
-    SKTransition *transition = [SKTransition flipVerticalWithDuration:0.5];
-    [self.view presentScene:sampleScene transition:transition];
+    SKScene *a = [[A alloc] initWithSize:self.size];
+    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
+    [self.view presentScene:a transition:transition];
+    [self.view setAccessibilityIdentifier:a.name];
 }
 
 - (void)addStartButtonSmoke {
@@ -72,35 +72,5 @@
     }
     return self;
 }
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-//    NSLog(@"Touches on Title Scene!");
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInNode:self];
-//    SKNode *node = [self nodeAtPoint:location];
-//    
-//    NSLog(@"Node : %@", node.name);
-//    if ([node.name isEqualToString:START_BUTTON]) {
-//        NSLog(@"Start button pressed!");
-//        SKScene *sampleScene = [[A alloc] initWithSize:self.size];
-//        SKTransition *transition = [SKTransition flipVerticalWithDuration:0.5];
-//        [self.view presentScene:sampleScene transition:transition];
-//    }
-}
-
--(void)didMoveToView:(SKView *)view {
-}
-
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-//    SKSpriteNode *node = (SKSpriteNode*)[self childNodeWithName:TITLE_TRAIN];
-//    UITouch *touch = [touches anyObject];
-//    node.position = [touch locationInNode:self];
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//    SKSpriteNode *node = (SKSpriteNode*)[self childNodeWithName:TITLE_TRAIN];
-//    DDLogDebug(@"Train Node position: %@", NSStringFromCGPoint(node.position));
-//}
 
 @end

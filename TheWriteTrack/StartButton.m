@@ -81,9 +81,6 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
     self.userInteractionEnabled = YES;
     self.anchorPoint = CGPointZero;
     
-#if DEBUG
-    [self setColor:[UIColor blueColor]];
-#endif
     return self;
 }
 

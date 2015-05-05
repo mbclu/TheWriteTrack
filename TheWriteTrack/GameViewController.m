@@ -30,6 +30,7 @@
     SKView *skView = (SKView *)self.view;
     if (!skView.scene) {
         TitleScene *titleScene = [[TitleScene alloc] initWithSize:skView.bounds.size];
+        [skView setAccessibilityIdentifier:titleScene.name];
         [skView presentScene:titleScene];
     }
 }

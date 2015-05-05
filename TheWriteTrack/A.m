@@ -7,12 +7,14 @@
 //
 
 #import "A.h"
+#import <UIKit/UIKit.h>
 
 @implementation A
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
+        self.name = @"A";
     }
     return self;
 }

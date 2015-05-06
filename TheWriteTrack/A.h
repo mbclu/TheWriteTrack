@@ -8,7 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "_BaseTrackScene.h"
+#import "AttributedStringPath.h"
 
 @interface A : _BaseTrackScene
+
+@property AttributedStringPath *stringPath;
 
 @end

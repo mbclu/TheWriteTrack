@@ -39,4 +39,12 @@
     XCTAssertEqualObjects(a.name, @"A");
 }
 
+- (void)testThereIsAnAttributedStringWithTheLetter_A {
+    XCTAssertEqualObjects(a.stringPath.attributedString.string, @"A");
+}
+
+- (void)testAViewObjectIsCreatedWithTheLetterA {
+    XCTAssertTrue(NO);
+}
+
 @end

@@ -55,8 +55,8 @@
     XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
 }
 
-//- (void)testTheLetterIsMovedToTheCenterOfTheScreen {
-//    XCTAssertEqual(letterView.
-//}
+- (void)testTheContextIsTransformedForHumanReadable {
+    XCTAssertTrue(NO);
+}
 
 @end

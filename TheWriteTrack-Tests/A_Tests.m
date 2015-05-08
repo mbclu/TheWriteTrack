@@ -9,6 +9,14 @@
 #import <XCTest/XCTest.h>
 #import "A.h"
 
+#define XCTAssertEqualRects(rect1, rect2)                   \
+{                                                           \
+    XCTAssertEqual(rect1.origin.x, rect2.origin.x);         \
+    XCTAssertEqual(rect1.origin.y, rect2.origin.y);         \
+    XCTAssertEqual(rect1.size.width, rect2.size.width);     \
+    XCTAssertEqual(rect1.size.height, rect2.size.height);   \
+}
+
 @interface A_Tests : XCTestCase {
     A *a;
 }
@@ -39,16 +47,16 @@
     XCTAssertEqualObjects(a.name, @"A");
 }
 
-- (void)testThereIsAnAttributedStringWithTheLetter_A {
-    XCTAssertEqualObjects(a.attributedStringPath.attributedString.string, @"A");
-}
-
 - (void)testTheASceneHasANonNilView {
     XCTAssertNotNil(a.stringPathView);
 }
 
 - (void)testTheViewIsInitializedWithTheLetterA {
     XCTAssertEqualObjects(a.stringPathView.attributedStringPath.attributedString.string, @"A");
+}
+
+- (void)testTheViewIsInitializedARectEqualToThatOfTheScene {
+    XCTAssertEqualRects(a.stringPathView.bounds, a.frame);
 }
 
 @end

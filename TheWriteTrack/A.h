@@ -13,7 +13,6 @@
 
 @interface A : _BaseTrackScene
 
-@property AttributedStringPath *attributedStringPath;
 @property LetterView *stringPathView;
 
 @end

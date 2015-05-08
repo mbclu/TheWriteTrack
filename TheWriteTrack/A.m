@@ -16,8 +16,7 @@
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
         self.name = @"A";
-        _attributedStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
-        _stringPathView = [[LetterView alloc] init];
+        _stringPathView = [[LetterView alloc] initWithFrame:self.frame andString:@"A"];
     }
     return self;
 }

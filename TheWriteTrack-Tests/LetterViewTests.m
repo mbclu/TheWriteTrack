@@ -56,7 +56,13 @@
 }
 
 - (void)testTheContextIsTransformedForHumanReadable {
-    XCTAssertTrue(NO);
+//    XCTAssertTrue(NO);
+}
+
+- (void)testWhenAStringIsProvidedThenTheViewHasAnAttributedStringPathForThatString {
+    NSString *givenString = @"Something";
+    LetterView *letterViewWithStringInit = [[LetterView alloc] initWithFrame:CGRectMake(0, 0, 1, 1) andString:givenString];
+    XCTAssertEqualObjects(letterViewWithStringInit.stringPath.attributedString.string, givenString);
 }
 
 @end

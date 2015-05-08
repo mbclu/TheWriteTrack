@@ -9,9 +9,11 @@
 #import <SpriteKit/SpriteKit.h>
 #import "_BaseTrackScene.h"
 #import "AttributedStringPath.h"
+#import "LetterView.h"
 
 @interface A : _BaseTrackScene
 
 @property AttributedStringPath *stringPath;
+@property LetterView *stringPathView;
 
 @end

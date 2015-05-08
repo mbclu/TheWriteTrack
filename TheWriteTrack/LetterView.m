@@ -18,6 +18,13 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame andString:(NSString *)string {
+    self = [self initWithFrame:frame];
+    _stringPath = [[AttributedStringPath alloc] initWithString:string];
+    return self;
+}
+
+
 - (void)setupContextForHumanReadableText:(CGContextRef)context {
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);

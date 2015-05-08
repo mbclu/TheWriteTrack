@@ -7,6 +7,7 @@
 //
 
 #import "A.h"
+#import "LetterView.h"
 #import <UIKit/UIKit.h>
 
 @implementation A
@@ -15,7 +16,8 @@
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
         self.name = @"A";
-        self.stringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+        _stringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+        _stringPathView = [[LetterView alloc] init];
     }
     return self;
 }

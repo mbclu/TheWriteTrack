@@ -43,8 +43,12 @@
     XCTAssertEqualObjects(a.stringPath.attributedString.string, @"A");
 }
 
-- (void)testAViewObjectIsCreatedWithTheLetterA {
-    XCTAssertTrue(NO);
+- (void)testTheASceneHasANonNilView {
+    XCTAssertNotNil(a.stringPathView);
+}
+
+- (void)testTheViewIsInitializedWithTheLetterA {
+    XCTAssertEqualObjects(a.stringPathView.stringPath.attributedString.string, @"A");
 }
 
 @end

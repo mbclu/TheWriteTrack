@@ -12,12 +12,12 @@
 
 @interface LetterView : SKView
 
-@property AttributedStringPath *stringPath;
+@property AttributedStringPath *attributedStringPath;
 
-//- (void) drawRailInContext:(CGContextRef)context;
 - (instancetype)initWithFrame:(CGRect)frame;
 - (instancetype)initWithFrame:(CGRect)frame andString:(NSString*)string;
 - (void) setupContextForHumanReadableText:(CGContextRef)context;
+- (void) drawRailPath:(CGPathRef)path InContext:(CGContextRef)context;
 - (void) movePathToCenter:(CGMutablePathRef)path;
 //- (CGMutablePathRef) createPathInContext:(CGContextRef)context;
 

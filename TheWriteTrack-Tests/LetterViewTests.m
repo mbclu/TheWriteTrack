@@ -27,7 +27,8 @@
 - (void)setUp {
     [super setUp];
     paths = [[NSMutableArray alloc] init];
-    letterView = [[LetterView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    CGRect bounds = CGRectMake(0, 0, 100, 100);
+    letterView = [[LetterView alloc] initWithFrame:bounds];
     
     // Added this content according to blog post: http://eng.wealthfront.com/2014/03/unit-testing-drawrect.html
     CGFloat scaleFactor = [[UIScreen mainScreen] scale];
@@ -55,14 +56,24 @@
     XCTAssertEqualObjects(letterView.backgroundColor, [UIColor clearColor]);
 }
 
-- (void)testTheContextIsTransformedForHumanReadable {
-//    XCTAssertTrue(NO);
+- (void)testWhenTheLetterViewIsDrawnTheContextIsTransformedToBeHumanReadable {
+    id mockLetterView = [OCMockObject partialMockForObject:letterView];
+    [[mockLetterView expect] setupContextForHumanReadableText:context];
+    [letterView drawRect:letterView.bounds];
+    [mockLetterView verify];
 }
 
 - (void)testWhenAStringIsProvidedThenTheViewHasAnAttributedStringPathForThatString {
-    NSString *givenString = @"Something";
+    NSString *givenString = @"Anything";
     LetterView *letterViewWithStringInit = [[LetterView alloc] initWithFrame:CGRectMake(0, 0, 1, 1) andString:givenString];
-    XCTAssertEqualObjects(letterViewWithStringInit.stringPath.attributedString.string, givenString);
+    XCTAssertEqualObjects(letterViewWithStringInit.attributedStringPath.attributedString.string, givenString);
+}
+
+- (void)testWhenTheLetterViewIsDrawnTheLetterPathIsDrawnInContex {
+    id mockLetterView = [OCMockObject partialMockForObject:letterView];
+    [[mockLetterView expect] drawRailPath:letterView.attributedStringPath.letterPath InContext:context];
+    [letterView drawRect:letterView.bounds];
+    [mockLetterView verify];
 }
 
 @end

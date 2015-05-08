@@ -20,10 +20,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame andString:(NSString *)string {
     self = [self initWithFrame:frame];
-    _stringPath = [[AttributedStringPath alloc] initWithString:string];
+    _attributedStringPath = [[AttributedStringPath alloc] initWithString:string];
     return self;
 }
-
 
 - (void)setupContextForHumanReadableText:(CGContextRef)context {
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
@@ -49,18 +48,19 @@
 //        CGMutablePathRef railPath;
 //        railPath = [self createPathInContext:context];
 //        
-//        [self drawRailInContext:context];
-//        
+        [self drawRailPath:_attributedStringPath.letterPath InContext:context];
+//
 //        CGPathRelease(railPath);
 //    }
 }
 
-//- (void)drawRailInContext:(CGContextRef)context {
-//    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.400 alpha:1.000].CGColor);
-//    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
-//    CGContextSetLineWidth(context, 10);
-//    CGContextDrawPath(context, kCGPathFillStroke);
-//}
+- (void)drawRailPath:(CGPathRef)path InContext:(CGContextRef)context {
+    CGContextAddPath(context, path);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0.400 alpha:1.000].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+    CGContextSetLineWidth(context, 10);
+    CGContextDrawPath(context, kCGPathFillStroke);
+}
 
 - (void)movePathToCenter:(CGMutablePathRef)path {
     CGPoint center = [LayoutMath centerPoint];

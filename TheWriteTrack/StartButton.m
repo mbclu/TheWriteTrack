@@ -56,7 +56,7 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
         SKEmitterNode *node = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                [[NSBundle mainBundle] pathForResource:StartStringSmokeSKS ofType:@"sks"]];
         
-        CGPathRef path = [_stringPath createPathWithString:[_letterArray objectAtIndex:i] andSize:StartStringSize];
+        CGPathRef path = [_attributedStringPath createPathWithString:[_letterArray objectAtIndex:i] andSize:StartStringSize];
         [_letterArray replaceObjectAtIndex:i withObject:(__bridge id)(path)];
         
         node.particleAction = [self createRepeatFollowActionForPath:path];
@@ -70,12 +70,12 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath {
     self = [super init];
     
-    _stringPath = strPath;
-    if (_stringPath == nil) {
-        _stringPath = [[AttributedStringPath alloc] init];
+    _attributedStringPath = strPath;
+    if (_attributedStringPath == nil) {
+        _attributedStringPath = [[AttributedStringPath alloc] init];
     }
     
-    _letterArray = [[_stringPath letterConverter] getLetterArrayFromString:StartText];
+    _letterArray = [[_attributedStringPath letterConverter] getLetterArrayFromString:StartText];
     [self addEmitters];
     
     self.userInteractionEnabled = YES;

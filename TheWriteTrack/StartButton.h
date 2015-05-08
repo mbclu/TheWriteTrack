@@ -12,7 +12,7 @@
 @interface StartButton : SKSpriteNode
 
 @property (readonly) NSString *startText;
-@property (retain) AttributedStringPath *stringPath;
+@property (retain) AttributedStringPath *attributedStringPath;
 @property (nonatomic, retain) NSMutableArray *letterArray;
 @property (readwrite) CGPoint nextLetterPosition;
 

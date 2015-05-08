@@ -47,7 +47,7 @@
 }
 
 - (void)testTheStartButtonHasANonNilAttributedStringPath {
-    XCTAssertNotNil([startButton stringPath]);
+    XCTAssertNotNil([startButton attributedStringPath]);
 }
 
 - (void)testTheNumberOfChildNodesIsEqualToTheNumberLettersInString {
@@ -72,7 +72,7 @@
 }
 
 - (void)testTheFirst_t_LetterIsPlacedAtAnXPositionTenGreaterThanTheWidthOfThe_s_Letter {
-    CGPathRef sPath = [startButton.stringPath createPathWithString:@"s" andSize:StartStringSize];
+    CGPathRef sPath = [startButton.attributedStringPath createPathWithString:@"s" andSize:StartStringSize];
     CGRect sBounds = CGPathGetBoundingBox(sPath);
     CGPoint expectedOrigin = CGPointMake(10 + sBounds.origin.x + sBounds.size.width, 0);
     
@@ -80,8 +80,8 @@
 }
 
 - (void)testThe_a_LetterIsPlacedAtAnXPositionTwentyGreaterThanTheWidthOfThe_s_And_t_Letters {
-    CGPathRef sPath = [startButton.stringPath createPathWithString:@"s" andSize:StartStringSize];
-    CGPathRef tPath = [startButton.stringPath createPathWithString:@"t" andSize:StartStringSize];
+    CGPathRef sPath = [startButton.attributedStringPath createPathWithString:@"s" andSize:StartStringSize];
+    CGPathRef tPath = [startButton.attributedStringPath createPathWithString:@"t" andSize:StartStringSize];
     CGRect sBounds = CGPathGetBoundingBox(sPath);
     CGRect tBounds = CGPathGetBoundingBox(tPath);
     CGPoint expectedOrigin = CGPointMake(10 + sBounds.origin.x + sBounds.size.width +
@@ -91,17 +91,17 @@
 }
 
 - (void)testTheStartButtonHasHeightEqualOrGreaterThanItsTallestChildPath {
-    CGPathRef tPath = [startButton.stringPath createPathWithString:@"t" andSize:StartStringSize];
+    CGPathRef tPath = [startButton.attributedStringPath createPathWithString:@"t" andSize:StartStringSize];
     CGRect tBounds = CGPathGetBoundingBox(tPath);
     
     XCTAssertGreaterThanOrEqual(startButton.size.height, tBounds.size.height);
 }
 
 - (void)testTheStartButtonHasWidthEqualOrGreaterThanItsCombinedChildrenPathsAndOffsets {
-    CGRect sBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"s" andSize:StartStringSize]);
-    CGRect tBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"t" andSize:StartStringSize]);
-    CGRect aBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"a" andSize:StartStringSize]);
-    CGRect rBounds = CGPathGetBoundingBox([startButton.stringPath createPathWithString:@"r" andSize:StartStringSize]);
+    CGRect sBounds = CGPathGetBoundingBox([startButton.attributedStringPath createPathWithString:@"s" andSize:StartStringSize]);
+    CGRect tBounds = CGPathGetBoundingBox([startButton.attributedStringPath createPathWithString:@"t" andSize:StartStringSize]);
+    CGRect aBounds = CGPathGetBoundingBox([startButton.attributedStringPath createPathWithString:@"a" andSize:StartStringSize]);
+    CGRect rBounds = CGPathGetBoundingBox([startButton.attributedStringPath createPathWithString:@"r" andSize:StartStringSize]);
     float sumOfWidths = sBounds.size.width + (2 * tBounds.size.width) + aBounds.size.width + rBounds.size.width;
     sumOfWidths += (4 * ButtonOffsetMultiplier * LetterHoriztontalOffset);
     

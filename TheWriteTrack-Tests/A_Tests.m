@@ -40,7 +40,7 @@
 }
 
 - (void)testThereIsAnAttributedStringWithTheLetter_A {
-    XCTAssertEqualObjects(a.stringPath.attributedString.string, @"A");
+    XCTAssertEqualObjects(a.attributedStringPath.attributedString.string, @"A");
 }
 
 - (void)testTheASceneHasANonNilView {
@@ -48,7 +48,7 @@
 }
 
 - (void)testTheViewIsInitializedWithTheLetterA {
-    XCTAssertEqualObjects(a.stringPathView.stringPath.attributedString.string, @"A");
+    XCTAssertEqualObjects(a.stringPathView.attributedStringPath.attributedString.string, @"A");
 }
 
 @end

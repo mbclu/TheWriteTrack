@@ -12,15 +12,18 @@
 
 @implementation A
 
-- (void)movePathToCenter:(CGMutablePathRef)path {
+- (void)moveNodeToCenter:(SKNode *)node {
     CGPoint center = [LayoutMath centerOfMainScreen];
-    CGPathMoveToPoint(path, nil, center.x, center.y);
+    center.x -= node.frame.size.width * 0.5;
+    center.y -= node.frame.size.height * 0.5;
+    node.position = center;
 }
 
 -(SKShapeNode *)createLetterPathNode {
     AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = @"LetterNode";
+    [self moveNodeToCenter:letterPathNode];
     return letterPathNode;
 }
 

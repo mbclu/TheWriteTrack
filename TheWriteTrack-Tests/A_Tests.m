@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "A.h"
+#import "CocoaLumberjack.h"
 
 #define XCTAssertEqualRects(rect1, rect2)                   \
 {                                                           \
@@ -27,7 +28,7 @@
 
 - (void)setUp {
     [super setUp];
-    a = [[A alloc] initWithSize:CGSizeMake(100, 100)];
+    a = [[A alloc] initWithSize:[UIScreen mainScreen].bounds.size];
 }
 
 - (void)tearDown {
@@ -61,8 +62,8 @@
 
 -(void)testTheLetterPathIsHorizontallyCenteredInTheScene {
     SKShapeNode *letterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
-    CGFloat leftGap = letterNode.frame.origin.x - a.frame.origin.x;
-    CGFloat rightGap = a.frame.size.width - (letterNode.frame.origin.x + letterNode.frame.size.width);
+    CGFloat leftGap = letterNode.frame.origin.x;
+    CGFloat rightGap = a.frame.size.width - letterNode.frame.size.width - letterNode.frame.origin.x;
     XCTAssertEqualWithAccuracy(leftGap, rightGap, 0.1);
 }
 

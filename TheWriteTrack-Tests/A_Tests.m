@@ -39,7 +39,7 @@
 }
 
 - (void)testAUsesTheRockyBackground {
-    SKNode *background = [a childNodeWithName:ROCKY_BACKGROUND];
+    SKNode *background = [a childNodeWithName:RockyBackgroundName];
     XCTAssertNotNil(background);
 }
 
@@ -57,6 +57,12 @@
 
 - (void)testTheViewIsInitializedARectEqualToThatOfTheScene {
     XCTAssertEqualRects(a.stringPathView.bounds, a.frame);
+}
+
+- (void)testAnSKPathNodeExistsAsAChildOfTheScene {
+    AttributedStringPath *aspForTest = [[AttributedStringPath alloc] initWithString:@"A"];
+    XCTAssertEqualObjects((__strong id)aspForTest.letterPath,
+                          (__strong id)a.stringPathView.attributedStringPath.letterPath);
 }
 
 @end

@@ -51,6 +51,7 @@
         [self drawRailPath:_attributedStringPath.letterPath InContext:context];
 //
 //        CGPathRelease(railPath);
+        CGContextRelease(context);
 //    }
 }
 

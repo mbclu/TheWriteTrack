@@ -10,19 +10,19 @@
 #import "_BaseTrackScene.h"
 #import "CocoaLumberjack.h"
 
-@interface _BaseTrackTests : XCTestCase {
+@interface _BaseTrackSceneTests : XCTestCase {
     _BaseTrackScene *scene;
     SKSpriteNode *rockyBackground;
 }
 
 @end
 
-@implementation _BaseTrackTests
+@implementation _BaseTrackSceneTests
 
 - (void)setUp {
     [super setUp];
     scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
-    rockyBackground = (SKSpriteNode*)[scene childNodeWithName:ROCKY_BACKGROUND];
+    rockyBackground = (SKSpriteNode*)[scene childNodeWithName:@"RockyBackground"];
 }
 
 - (void)tearDown {
@@ -40,6 +40,10 @@
 
 - (void)testTheSceneUsesTheFillAspectScaleMode {
     XCTAssertEqual(scene.scaleMode , SKSceneScaleModeAspectFill);
+}
+
+- (void)testTheRockyBackgroundIsComprisedOfTheRockyBackgroundPNG {
+    XCTAssertTrue([rockyBackground.texture.description containsString:@"RockyBackground"]);
 }
 
 @end

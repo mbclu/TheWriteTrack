@@ -16,10 +16,10 @@
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
         self.name = @"A";
-        _stringPathView = [[LetterView alloc] initWithFrame:self.frame andString:@"A"];
-        SKSpriteNode *backgroundNode = [SKSpriteNode spriteNodeWithImageNamed:@"RockyBackground.png"];
-        SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:_stringPathView.attributedStringPath.letterPath];
-        [self addChild:backgroundNode];
+        
+        AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+        SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
+        letterPathNode.name = @"LetterNode";
         [self addChild:letterPathNode];
     }
     return self;

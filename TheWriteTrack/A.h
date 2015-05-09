@@ -13,6 +13,4 @@
 
 @interface A : _BaseTrackScene
 
-@property LetterView *stringPathView;
-
 @end

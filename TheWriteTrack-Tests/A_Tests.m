@@ -39,7 +39,7 @@
 }
 
 - (void)testAUsesTheRockyBackground {
-    SKNode *background = [a childNodeWithName:RockyBackgroundName];
+    SKNode *background = [a childNodeWithName:@"RockyBackground"];
     XCTAssertNotNil(background);
 }
 
@@ -47,22 +47,13 @@
     XCTAssertEqualObjects(a.name, @"A");
 }
 
-- (void)testTheASceneHasANonNilView {
-    XCTAssertNotNil(a.stringPathView);
-}
-
-- (void)testTheViewIsInitializedWithTheLetterA {
-    XCTAssertEqualObjects(a.stringPathView.attributedStringPath.attributedString.string, @"A");
-}
-
-- (void)testTheViewIsInitializedARectEqualToThatOfTheScene {
-    XCTAssertEqualRects(a.stringPathView.bounds, a.frame);
-}
-
 - (void)testAnSKPathNodeExistsAsAChildOfTheScene {
     AttributedStringPath *aspForTest = [[AttributedStringPath alloc] initWithString:@"A"];
-    XCTAssertEqualObjects((__strong id)aspForTest.letterPath,
-                          (__strong id)a.stringPathView.attributedStringPath.letterPath);
+    SKNode *letterNode = [a childNodeWithName:@"LetterNode"];
+    XCTAssertNotNil(letterNode);
+    XCTAssertTrue([letterNode isKindOfClass:[SKShapeNode class]]);
+//    XCTAssertEqualObjects((__strong id)aspForTest.letterPath,
+//                          (__strong id)a.stringPathView.attributedStringPath.letterPath);
 }
 
 @end

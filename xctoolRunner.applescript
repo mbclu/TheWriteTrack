@@ -12,7 +12,6 @@ on run argv
 	 -configuration Debug \\
 	 -destination \"platform=iOS Simulator,name=iPhone 6,OS=8.3\" \\
 	 clean \\
-	 build \\
 	 test \\
 	 -only OnTheWriteTrackTests" & testClass & "\\
 	 -freshSimulator \\

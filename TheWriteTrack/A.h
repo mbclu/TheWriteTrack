@@ -11,6 +11,8 @@
 #import "AttributedStringPath.h"
 #import "LetterView.h"
 
+FOUNDATION_EXPORT CGFloat const LetterLineWidth;
+
 @interface A : _BaseTrackScene
 
 @end

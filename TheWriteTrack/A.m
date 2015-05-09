@@ -10,12 +10,14 @@
 #import "LayoutMath.h"
 #import <UIKit/UIKit.h>
 
+CGFloat const LetterLineWidth = 10;
+
 @implementation A
 
 - (void)moveNodeToCenter:(SKNode *)node {
     CGPoint center = [LayoutMath centerOfMainScreen];
-    center.x -= node.frame.size.width * 0.5;
-    center.y -= node.frame.size.height * 0.5;
+    center.x -= (node.frame.size.width * 0.5) - (LetterLineWidth * 0.1);
+    center.y -= (node.frame.size.height - LetterLineWidth) * 0.5;
     node.position = center;
 }
 
@@ -23,25 +25,28 @@
     AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = @"LetterNode";
+    letterPathNode.lineWidth = LetterLineWidth;
+    letterPathNode.strokeColor = [SKColor darkGrayColor];
+    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:@"TrackTexture"];
+    letterPathNode.fillColor = [SKColor whiteColor];
     [self moveNodeToCenter:letterPathNode];
     return letterPathNode;
+}
+
+-(SKNode *)createTrainNode {
+    SKNode *trainNode = [[SKNode alloc] init];
+    trainNode.name = @"TrainNode";
+    return trainNode;
 }
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
         self.name = @"A";
-        
+        [self addChild:[self createTrainNode]];
         [self addChild:[self createLetterPathNode]];
     }
     return self;
-}
-
--(void)didMoveToView:(SKView *)view {
-//    [view addSubview:_stringPathView];
-    [super didMoveToView:view];
-//    [self.view addSubview:_stringPathView];
-//    [self.view bringSubviewToFront:_stringPathView];
 }
 
 @end

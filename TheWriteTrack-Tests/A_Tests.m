@@ -69,4 +69,12 @@ const CGFloat GapCheckAccuracy = 1.0;
     XCTAssertEqualWithAccuracy(topGap, bottomGap, GapCheckAccuracy);
 }
 
+-(void)testTheLetterPathHasALineWidthOfTen {
+    XCTAssertEqual(theLetterNode.lineWidth, 10);
+}
+
+-(void)testForThePresenceOfATrainNode {
+    XCTAssertNotNil([a childNodeWithName:@"TrainNode"]);
+}
+
 @end

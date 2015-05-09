@@ -10,16 +10,12 @@
 #import "A.h"
 #import "CocoaLumberjack.h"
 
-#define XCTAssertEqualRects(rect1, rect2)                   \
-{                                                           \
-    XCTAssertEqual(rect1.origin.x, rect2.origin.x);         \
-    XCTAssertEqual(rect1.origin.y, rect2.origin.y);         \
-    XCTAssertEqual(rect1.size.width, rect2.size.width);     \
-    XCTAssertEqual(rect1.size.height, rect2.size.height);   \
-}
+FOUNDATION_EXPORT CGFloat const GapCheckAccuracy;
+const CGFloat GapCheckAccuracy = 1.0;
 
 @interface A_Tests : XCTestCase {
     A *a;
+    SKShapeNode *theLetterNode;
 }
 
 @end
@@ -29,6 +25,7 @@
 - (void)setUp {
     [super setUp];
     a = [[A alloc] initWithSize:[UIScreen mainScreen].bounds.size];
+    theLetterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
 }
 
 - (void)tearDown {
@@ -49,9 +46,9 @@
 }
 
 - (void)testAnSKPathNodeExistsAsAChildOfTheScene {
-    SKNode *letterNode = [a childNodeWithName:@"LetterNode"];
-    XCTAssertNotNil(letterNode);
-    XCTAssertTrue([letterNode isKindOfClass:[SKShapeNode class]]);
+    SKNode *letterNodeDeclaredWithBaseClassType = [a childNodeWithName:@"LetterNode"];
+    XCTAssertNotNil(letterNodeDeclaredWithBaseClassType);
+    XCTAssertTrue([theLetterNode isKindOfClass:[SKShapeNode class]]);
 }
 
 - (void)testThePathNodeUsesTheLetterA {
@@ -61,17 +58,15 @@
 }
 
 -(void)testTheLetterPathIsHorizontallyCenteredInTheScene {
-    SKShapeNode *letterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
-    CGFloat leftGap = letterNode.frame.origin.x;
-    CGFloat rightGap = a.frame.size.width - letterNode.frame.size.width - letterNode.frame.origin.x;
-    XCTAssertEqualWithAccuracy(leftGap, rightGap, 0.1);
+    CGFloat leftGap = theLetterNode.frame.origin.x;
+    CGFloat rightGap = a.frame.size.width - theLetterNode.frame.size.width - theLetterNode.frame.origin.x;
+    XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy);
 }
 
 -(void)testTheLetterPathIsVerticallyCenteredInTheScene {
-    SKShapeNode *letterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
-    CGFloat topGap = a.frame.size.height - letterNode.frame.size.height - letterNode.frame.origin.y;
-    CGFloat bottomGap = letterNode.frame.origin.y;
-    XCTAssertEqualWithAccuracy(topGap, bottomGap, 0.1);
+    CGFloat topGap = a.frame.size.height - theLetterNode.frame.size.height - theLetterNode.frame.origin.y;
+    CGFloat bottomGap = theLetterNode.frame.origin.y;
+    XCTAssertEqualWithAccuracy(topGap, bottomGap, GapCheckAccuracy);
 }
 
 @end

@@ -67,4 +67,11 @@
     XCTAssertEqualWithAccuracy(leftGap, rightGap, 0.1);
 }
 
+-(void)testTheLetterPathIsVerticallyCenteredInTheScene {
+    SKShapeNode *letterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
+    CGFloat topGap = a.frame.size.height - letterNode.frame.size.height - letterNode.frame.origin.y;
+    CGFloat bottomGap = letterNode.frame.origin.y;
+    XCTAssertEqualWithAccuracy(topGap, bottomGap, 0.1);
+}
+
 @end

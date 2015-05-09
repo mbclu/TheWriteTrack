@@ -7,20 +7,29 @@
 //
 
 #import "A.h"
-#import "LetterView.h"
+#import "LayoutMath.h"
 #import <UIKit/UIKit.h>
 
 @implementation A
+
+- (void)movePathToCenter:(CGMutablePathRef)path {
+    CGPoint center = [LayoutMath centerOfMainScreen];
+    CGPathMoveToPoint(path, nil, center.x, center.y);
+}
+
+-(SKShapeNode *)createLetterPathNode {
+    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+    SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
+    letterPathNode.name = @"LetterNode";
+    return letterPathNode;
+}
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
         self.name = @"A";
         
-        AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
-        SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
-        letterPathNode.name = @"LetterNode";
-        [self addChild:letterPathNode];
+        [self addChild:[self createLetterPathNode]];
     }
     return self;
 }

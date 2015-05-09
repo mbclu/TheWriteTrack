@@ -64,7 +64,7 @@
 }
 
 - (void)movePathToCenter:(CGMutablePathRef)path {
-    CGPoint center = [LayoutMath centerPoint];
+    CGPoint center = [LayoutMath centerOfMainScreen];
     CGPathMoveToPoint(path, nil, center.x, center.y);
 }
 

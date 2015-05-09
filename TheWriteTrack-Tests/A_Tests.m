@@ -48,12 +48,22 @@
 }
 
 - (void)testAnSKPathNodeExistsAsAChildOfTheScene {
-    AttributedStringPath *aspForTest = [[AttributedStringPath alloc] initWithString:@"A"];
     SKNode *letterNode = [a childNodeWithName:@"LetterNode"];
     XCTAssertNotNil(letterNode);
     XCTAssertTrue([letterNode isKindOfClass:[SKShapeNode class]]);
-//    XCTAssertEqualObjects((__strong id)aspForTest.letterPath,
-//                          (__strong id)a.stringPathView.attributedStringPath.letterPath);
+}
+
+- (void)testThePathNodeUsesTheLetterA {
+    AttributedStringPath *expectedStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+    CGPathRef actualPath = [(SKShapeNode *)([a childNodeWithName:@"LetterNode"]) path];
+    XCTAssertTrue(CGPathEqualToPath(actualPath, expectedStringPath.letterPath));
+}
+
+-(void)testTheLetterPathIsHorizontallyCenteredInTheScene {
+    SKShapeNode *letterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
+    CGFloat leftGap = letterNode.frame.origin.x - a.frame.origin.x;
+    CGFloat rightGap = a.frame.size.width - (letterNode.frame.origin.x + letterNode.frame.size.width);
+    XCTAssertEqualWithAccuracy(leftGap, rightGap, 0.1);
 }
 
 @end

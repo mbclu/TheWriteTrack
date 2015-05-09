@@ -29,7 +29,7 @@
     return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING);
 }
 
-+ (CGFloat)centerX
++ (CGFloat)xCenterForMainScreen
 {
     CGFloat center = [[UIScreen mainScreen] bounds].size.width / 2.0;
     UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
@@ -40,7 +40,7 @@
     return center;
 }
 
-+ (CGFloat)centerY {
++ (CGFloat)yCenterForMainScreen {
     CGFloat center = [[UIScreen mainScreen] bounds].size.height / 2.0;
     UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
     if (UIDeviceOrientationIsPortrait(deviceOrientation))
@@ -50,8 +50,8 @@
     return center;
 }
 
-+ (CGPoint)centerPoint {
-    return CGPointMake([self centerX], [self centerY]);
++ (CGPoint)centerOfMainScreen {
+    return CGPointMake([self xCenterForMainScreen], [self yCenterForMainScreen]);
 }
 
 + (CGFloat)findStartingXValueForRect:(CGRect)pathBounds {

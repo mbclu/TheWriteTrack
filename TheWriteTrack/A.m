@@ -11,6 +11,8 @@
 #import <UIKit/UIKit.h>
 
 CGFloat const LetterLineWidth = 10;
+NSString *const TrainNodeName = @"TrainNode";
+NSString *const LetterNodeName = @"LetterNode";
 
 @implementation A
 
@@ -24,7 +26,7 @@ CGFloat const LetterLineWidth = 10;
 -(SKShapeNode *)createLetterPathNode {
     AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
-    letterPathNode.name = @"LetterNode";
+    letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
     letterPathNode.strokeColor = [SKColor darkGrayColor];
     letterPathNode.fillTexture = [SKTexture textureWithImageNamed:@"TrackTexture"];
@@ -34,8 +36,8 @@ CGFloat const LetterLineWidth = 10;
 }
 
 -(SKNode *)createTrainNode {
-    SKNode *trainNode = [[SKNode alloc] init];
-    trainNode.name = @"TrainNode";
+    SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:@"MagicTrain"];
+    trainNode.name = TrainNodeName;
     return trainNode;
 }
 

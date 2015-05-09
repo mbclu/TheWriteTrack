@@ -16,6 +16,7 @@ const CGFloat GapCheckAccuracy = 1.0;
 @interface A_Tests : XCTestCase {
     A *a;
     SKShapeNode *theLetterNode;
+    SKSpriteNode *theTrainNode;
 }
 
 @end
@@ -26,6 +27,7 @@ const CGFloat GapCheckAccuracy = 1.0;
     [super setUp];
     a = [[A alloc] initWithSize:[UIScreen mainScreen].bounds.size];
     theLetterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
+    theTrainNode = (SKSpriteNode *)[a childNodeWithName:@"TrainNode"];
 }
 
 - (void)tearDown {
@@ -74,7 +76,11 @@ const CGFloat GapCheckAccuracy = 1.0;
 }
 
 -(void)testForThePresenceOfATrainNode {
-    XCTAssertNotNil([a childNodeWithName:@"TrainNode"]);
+    XCTAssertNotNil(theTrainNode);
+}
+
+-(void)testTrainNodeForMagicTrainTexture {
+    XCTAssertTrue([theTrainNode.description containsString:@"MagicTrain"]);
 }
 
 @end

@@ -12,6 +12,8 @@
 #import "LetterView.h"
 
 FOUNDATION_EXPORT CGFloat const LetterLineWidth;
+FOUNDATION_EXPORT NSString *const TrainNodeName;
+FOUNDATION_EXPORT NSString *const LetterNodeName;
 
 @interface A : _BaseTrackScene
 

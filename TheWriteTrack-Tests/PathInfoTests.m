@@ -31,12 +31,15 @@
     XCTAssertEqual([pathInfo TransformPathToArray:path].count, 0);
 }
 
-- (void)testMoveToPointValueIsReturned {
+- (void)testOnePointIsAddedForMoveToPointType {
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, nil, 10, 20);
     XCTAssertFalse(CGPathIsEmpty(path));
     PathInfo *pathInfo = [[PathInfo alloc] init];
-    XCTAssertEqual([pathInfo TransformPathToArray:path].count, 1);
+    NSMutableArray *array = [pathInfo TransformPathToArray:path];
+    XCTAssertEqual(array.count, 1);
+    NSValue *point = (NSValue *)[array objectAtIndex:0];
+    XCTAssertEqual([point CGPointValue].x, 10);
 }
 
 @end

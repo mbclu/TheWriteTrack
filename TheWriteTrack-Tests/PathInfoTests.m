@@ -74,7 +74,8 @@
 - (void)testOnePointIsAddedForAddLineToPointType {
     [self setupMoveToPoint];
     CGPoint expectedPoint = CGPointMake(20, 35);
-    CGPathAddLineToPoint(thePath, nil, expectedPoint.x, expectedPoint.y);
+    CGPathAddLineToPoint(thePath, nil,
+                         expectedPoint.x, expectedPoint.y);
 
     NSMutableArray *array = [thePathInfo TransformPathToArray:thePath];
     [self assertForArray:array ThereExistsPoint:expectedPoint AtIndex:1];
@@ -84,11 +85,29 @@
     [self setupMoveToPoint];
     CGPoint expectedPoint1 = CGPointMake(1, 2);
     CGPoint expectedPoint2 = CGPointMake(3, 4);
-    CGPathAddQuadCurveToPoint(thePath, nil, expectedPoint1.x, expectedPoint1.y, expectedPoint2.x, expectedPoint2.y);
+    CGPathAddQuadCurveToPoint(thePath, nil,
+                              expectedPoint1.x, expectedPoint1.y,
+                              expectedPoint2.x, expectedPoint2.y);
 
     NSMutableArray *array = [thePathInfo TransformPathToArray:thePath];
     [self assertForArray:array ThereExistsPoint:expectedPoint1 AtIndex:1];
     [self assertForArray:array ThereExistsPoint:expectedPoint2 AtIndex:2];
+}
+
+- (void)testThreePointsAreAddedForAddCurveToPointType {
+    [self setupMoveToPoint];
+    CGPoint expectedPoint1 = CGPointMake(1, 1);
+    CGPoint expectedPoint2 = CGPointMake(2, 2);
+    CGPoint expectedPoint3 = CGPointMake(3, 3);
+    CGPathAddCurveToPoint(thePath, nil,
+                          expectedPoint1.x, expectedPoint1.y,
+                          expectedPoint2.x, expectedPoint2.y,
+                          expectedPoint3.x, expectedPoint3.y);
+    
+    NSMutableArray *array = [thePathInfo TransformPathToArray:thePath];
+    [self assertForArray:array ThereExistsPoint:expectedPoint1 AtIndex:1];
+    [self assertForArray:array ThereExistsPoint:expectedPoint2 AtIndex:2];
+    [self assertForArray:array ThereExistsPoint:expectedPoint3 AtIndex:3];
 }
 
 @end

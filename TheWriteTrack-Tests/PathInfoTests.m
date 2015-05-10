@@ -27,6 +27,7 @@
 }
 
 - (void)tearDown {
+    CGPathRelease(thePath);
     [super tearDown];
 }
 
@@ -40,13 +41,14 @@
     NSMutableArray *array = [thePathInfo TransformPathToArray:thePath];
     XCTAssertEqual(array.count, 1);
     return array;
-    
 }
 
 - (void)assertThereExistsPoint:(CGPoint)expectedPoint AtIndex:(NSUInteger)index {
     NSMutableArray *array = [thePathInfo TransformPathToArray:thePath];
+    
     NSUInteger expetedCount = index + 1;
     XCTAssertEqual(array.count, expetedCount);
+    
     NSValue *point = (NSValue *)[array objectAtIndex:index];
     XCTAssertEqualPoints([point CGPointValue], expectedPoint);
 }

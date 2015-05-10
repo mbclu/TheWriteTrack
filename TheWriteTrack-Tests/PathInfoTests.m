@@ -40,6 +40,7 @@
     XCTAssertEqual(array.count, 1);
     NSValue *point = (NSValue *)[array objectAtIndex:0];
     XCTAssertEqual([point CGPointValue].x, 10);
+    XCTAssertEqual([point CGPointValue].y, 20);
 }
 
 @end

@@ -10,12 +10,23 @@
 #import <UIKit/UIKit.h>
 #import "CocoaLumberjack.h"
 
-void PrintPathElement(void* info, const CGPathElement* element)
-{
-    PrintElementType(element);
+@implementation PathInfo
+
+void AddPathElementToArray(void* info, const CGPathElement* element) {
+    NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;
+    if (element != nil) {
+        CGPoint *points = element->points;
+        [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
+    }
 }
 
-void PrintElementType(const CGPathElement* element)
+-(NSMutableArray *)TransformPathToArray:(CGPathRef)path {
+    NSMutableArray *array = [NSMutableArray array];
+    CGPathApply(path, (__bridge void *)(array), AddPathElementToArray);
+    return array;
+}
+
+void PrintPathElement(void* info, const CGPathElement* element)
 {
     NSString *pointsString = @"";
     NSString *typeString = nil;
@@ -72,3 +83,5 @@ void PrintPath(CGPathRef path)
     DDLogDebug(@"CGPathRef: <%p>", path);
     CGPathApply(path, nil, PrintPathElement);
 }
+
+@end

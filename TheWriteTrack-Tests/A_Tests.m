@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "A.h"
 #import "CocoaLumberjack.h"
+#import "CGMatchers.h"
+#import "PathInfo.h"
 
 FOUNDATION_EXPORT CGFloat const GapCheckAccuracy;
 const CGFloat GapCheckAccuracy = 1.0;
@@ -81,6 +83,13 @@ const CGFloat GapCheckAccuracy = 1.0;
 
 -(void)testTrainNodeForMagicTrainTexture {
     XCTAssertTrue([theTrainNode.description containsString:@"MagicTrain"]);
+}
+
+-(void)testTrainNodeIsPlacedAtTheFirstPointOfTheLetterPath {
+    PrintPath(theLetterNode.path);
+//    XCTAssertEqualPoints(theTrainNode.position, )
+    
+//    XCTAssertEqualPoints(theTrainNode.frame.origin, theLetterNode.path);
 }
 
 @end

@@ -11,12 +11,7 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 #import "TargetFake.h"
-
-#define XCTAssertEqualPoints(point1, point2)    \
-{                                               \
-    XCTAssertEqual(point1.x, point2.x);         \
-    XCTAssertEqual(point1.y, point2.y);         \
-}
+#import "CGMatchers.h"
 
 @interface StartButtonTests : XCTestCase
 

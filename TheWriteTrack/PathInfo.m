@@ -16,7 +16,13 @@ void AddPathElementToArray(void* info, const CGPathElement* element) {
     NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;
     if (element != nil) {
         CGPoint *points = element->points;
-        [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
+        if (element->type == kCGPathElementAddQuadCurveToPoint) {
+            [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
+            [pathPoints addObject:[NSValue valueWithCGPoint:points[1]]];
+        }
+        else {
+            [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
+        }
     }
 }
 

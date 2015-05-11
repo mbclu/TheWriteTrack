@@ -26,7 +26,6 @@ void AddPathElementToArray(void* info, const CGPathElement* element) {
         if (element->type == kCGPathElementAddCurveToPoint) {
             [pathPoints addObject:[NSValue valueWithCGPoint:points[2]]];
         }
-        
     }
 }
 
@@ -36,6 +35,7 @@ void AddPathElementToArray(void* info, const CGPathElement* element) {
     return array;
 }
 
+#ifdef DEBUG
 void PrintPathElement(void* info, const CGPathElement* element)
 {
     NSString *pointsString = @"";
@@ -93,5 +93,6 @@ void PrintPath(CGPathRef path)
     DDLogDebug(@"CGPathRef: <%p>", path);
     CGPathApply(path, nil, PrintPathElement);
 }
+#endif
 
 @end

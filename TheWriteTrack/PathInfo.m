@@ -16,18 +16,17 @@ void AddPathElementToArray(void* info, const CGPathElement* element) {
     NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;
     if (element != nil) {
         CGPoint *points = element->points;
-        if (element->type == kCGPathElementAddCurveToPoint) {
+        if (element->type != kCGPathElementCloseSubpath) {
             [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
+        }
+        if (element->type == kCGPathElementAddQuadCurveToPoint ||
+            element->type == kCGPathElementAddCurveToPoint) {
             [pathPoints addObject:[NSValue valueWithCGPoint:points[1]]];
+        }
+        if (element->type == kCGPathElementAddCurveToPoint) {
             [pathPoints addObject:[NSValue valueWithCGPoint:points[2]]];
         }
-        else if (element->type == kCGPathElementAddQuadCurveToPoint) {
-            [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
-            [pathPoints addObject:[NSValue valueWithCGPoint:points[1]]];
-        }
-        else {
-            [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
-        }
+        
     }
 }
 

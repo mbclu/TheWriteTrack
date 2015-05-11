@@ -110,4 +110,13 @@
     [self assertForArray:array ThereExistsPoint:expectedPoint3 AtIndex:3];
 }
 
+- (void)testZeroPointsAreAddedForCloseSubpathElements {
+    [self setupMoveToPoint];
+    NSMutableArray *array = [thePathInfo TransformPathToArray:thePath];
+    XCTAssertEqual(array.count, 1);
+    CGPathCloseSubpath(thePath);
+    array = [thePathInfo TransformPathToArray:thePath];
+    XCTAssertEqual(array.count, 1);
+}
+
 @end

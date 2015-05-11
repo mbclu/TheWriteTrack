@@ -26,7 +26,7 @@ NSString *const LetterNodeName = @"LetterNode";
 }
 
 -(SKShapeNode *)createLetterPathNode {
-    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"B"];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;

@@ -32,6 +32,9 @@
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
 		C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
+		C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
+		C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
+		C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */; };
 		C72C213B1AF70A3700A85ABF /* StartStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */; };
 		C7340E761AF77F2400915C8C /* StartSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C7340E751AF77F2400915C8C /* StartSmoke.png */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
@@ -96,6 +99,9 @@
 		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
 		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C710AB661A9ECCFD002E7B79 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		C72939921B01A2F100A10AB2 /* GenericSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericSpriteButton.h; path = TheWriteTrack/GenericSpriteButton.h; sourceTree = SOURCE_ROOT; };
+		C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButton.m; path = TheWriteTrack/GenericSpriteButton.m; sourceTree = SOURCE_ROOT; };
+		C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButtonTests.m; path = "TheWriteTrack-Tests/GenericSpriteButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartStringSmoke.sks; path = TheWriteTrack/StartStringSmoke.sks; sourceTree = SOURCE_ROOT; };
 		C7340E751AF77F2400915C8C /* StartSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StartSmoke.png; path = images/particles/StartSmoke.png; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
@@ -224,6 +230,8 @@
 				C73700151AB7D4E40035C4A3 /* LayoutMath.m */,
 				C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */,
 				C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */,
+				C72939921B01A2F100A10AB2 /* GenericSpriteButton.h */,
+				C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -234,6 +242,7 @@
 				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
 				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
 				C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */,
+				C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */,
 			);
 			name = "Common-Tests";
 			sourceTree = "<group>";
@@ -660,6 +669,7 @@
 			files = (
 				C7DB850E1AD48ABB0026972B /* TitleScene.m in Sources */,
 				C7B697551AF2460C0066086E /* StartButton.m in Sources */,
+				C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
@@ -679,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */,
 				C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */,
 				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
 				C7B697571AF246330066086E /* StartButtonTests.m in Sources */,
@@ -699,6 +710,7 @@
 			files = (
 				2d5ffd0ec5b0971806c2b96e /* TitleScene.m in Sources */,
 				9f8087f8b26322ff5cb6a7f8 /* StartButton.m in Sources */,
+				C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				14d627ad861be84bef577fca /* AttributedStringPath.m in Sources */,
 				0aeb68f61d41660a7508bc58 /* LetterConverter.m in Sources */,
 				c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */,

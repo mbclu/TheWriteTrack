@@ -103,10 +103,6 @@
     XCTAssertGreaterThanOrEqual(startButton.size.width, sumOfWidths);
 }
 
-- (void)testThatUserInteractionIsEnabled {
-    XCTAssertTrue([startButton isUserInteractionEnabled]);
-}
-
 - (void)testTheAnchorPointIsAtZero {
     XCTAssertEqualPoints(startButton.anchorPoint, CGPointZero);
 }
@@ -115,7 +111,6 @@
 
 @interface StartButtonWithMocksTests : XCTestCase {
     StartButton *startButton;
-    TargetFake *fakeTarget;
 }
 @end
 
@@ -124,8 +119,6 @@
 - (void)setUp {
     [super setUp];
     startButton = [[StartButton alloc] init];
-    fakeTarget = [[TargetFake alloc] init];
-    [startButton setTouchUpInsideTarget:fakeTarget action:@selector(expectedSelector)];
 }
 
 - (void)tearDown {
@@ -154,16 +147,6 @@
     id aspMock = OCMClassMock([AttributedStringPath class]);
     StartButton *buttonWithMockAttrStringPath = [[StartButton alloc] initWithAttributedStringPath:aspMock];
     XCTAssertEqualPoints([buttonWithMockAttrStringPath nextLetterPosition], CGPointZero);
-}
-
-- (void)testPressingTheButtonSendsAMessageToTheTarget {
-    [startButton touchesEnded:nil withEvent:nil];
-    XCTAssertTrue([fakeTarget didReceiveMessage]);
-}
-
-- (void)testPressingAnAreaOutsideTheButtonDoesNotSendAMessageToTheTarget {
-    [startButton evaluateTouchAtPoint:CGPointMake(startButton.size.width + 1, 0)];
-    XCTAssertFalse([fakeTarget didReceiveMessage]);
 }
 
 @end

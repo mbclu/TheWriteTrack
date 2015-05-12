@@ -8,8 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-FOUNDATION_EXPORT NSString *const RockyBackgroundName;
-
 @interface _BaseTrackScene : SKScene
 
 @end

@@ -10,9 +10,13 @@
 #import "_BaseTrackScene.h"
 #import "CocoaLumberjack.h"
 
+NSString *const RockyBackground = @"RockyBackground";
+NSString *const NextButton = @"NextButton";
+
 @interface _BaseTrackSceneTests : XCTestCase {
     _BaseTrackScene *scene;
     SKSpriteNode *rockyBackground;
+    SKSpriteNode *nextButtonNode;
 }
 
 @end
@@ -22,7 +26,8 @@
 - (void)setUp {
     [super setUp];
     scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
-    rockyBackground = (SKSpriteNode*)[scene childNodeWithName:@"RockyBackground"];
+    rockyBackground = (SKSpriteNode*)[scene childNodeWithName:RockyBackground];
+    nextButtonNode = (SKSpriteNode *)[scene childNodeWithName:NextButton];
 }
 
 - (void)tearDown {
@@ -43,7 +48,15 @@
 }
 
 - (void)testTheRockyBackgroundIsComprisedOfTheRockyBackgroundPNG {
-    XCTAssertTrue([rockyBackground.texture.description containsString:@"RockyBackground"]);
+    XCTAssertTrue([rockyBackground.texture.description containsString:RockyBackground]);
+}
+
+- (void)testForANextLetterButton {
+    XCTAssertNotNil(nextButtonNode);
+}
+
+- (void)testTheNextButtonIsComprisedOfTheNextButtonImage {
+    XCTAssertTrue([nextButtonNode.texture.description containsString:NextButton]);
 }
 
 @end

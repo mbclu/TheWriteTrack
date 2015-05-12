@@ -9,6 +9,7 @@
 #import "_BaseTrackScene.h"
 
 NSString *const RockyBackgroundName = @"RockyBackground";
+NSString *const NextButtonName = @"NextButton";
 
 @implementation _BaseTrackScene
 
@@ -45,14 +46,25 @@ NSString *const RockyBackgroundName = @"RockyBackground";
     /* Called before each frame is rendered */
 }
 
+- (void)addBackground {
+    SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:RockyBackgroundName];
+    rockyBackground.name = RockyBackgroundName;
+    rockyBackground.anchorPoint = CGPointZero;
+    [self addChild:rockyBackground];
+}
+
+-(void)addNextButton {
+    SKSpriteNode *node = [[SKSpriteNode alloc] initWithImageNamed:NextButtonName];
+    node.name = NextButtonName;
+    [self addChild:node];
+}
+
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self setScaleMode:SKSceneScaleModeAspectFill];
         
-        SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:RockyBackgroundName];
-        rockyBackground.name = RockyBackgroundName;
-        rockyBackground.anchorPoint = CGPointZero;
-        [self addChild:rockyBackground];
+        [self addBackground];
+        [self addNextButton];
     }
     return self;
 }

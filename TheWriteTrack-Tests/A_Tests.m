@@ -85,11 +85,8 @@ const CGFloat GapCheckAccuracy = 1.0;
     XCTAssertTrue([theTrainNode.description containsString:@"MagicTrain"]);
 }
 
--(void)testTrainNodeIsPlacedAtTheFirstPointOfTheLetterPath {
-    PrintPath(theLetterNode.path);
-//    XCTAssertEqualPoints(theTrainNode.position, )
-    
-//    XCTAssertEqualPoints(theTrainNode.frame.origin, theLetterNode.path);
+-(void)testTheNextButtonGoesToTheLetterB {
+//    XCAssert
 }
 
 @end

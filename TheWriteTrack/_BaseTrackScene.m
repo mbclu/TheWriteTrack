@@ -10,6 +10,7 @@
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
+CGFloat const NextButtonXPadding = 10;
 
 @implementation _BaseTrackScene
 
@@ -56,6 +57,9 @@ NSString *const NextButtonName = @"NextButton";
 -(void)addNextButton {
     SKSpriteNode *node = [[SKSpriteNode alloc] initWithImageNamed:NextButtonName];
     node.name = NextButtonName;
+    node.anchorPoint = CGPointZero;
+    node.position = CGPointMake(self.size.width - node.size.width - NextButtonXPadding,
+                                self.size.height * 0.5);
     [self addChild:node];
 }
 

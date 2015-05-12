@@ -26,7 +26,7 @@ NSString *const NextButton = @"NextButton";
 
 - (void)setUp {
     [super setUp];
-    scene = [_BaseTrackScene sceneWithSize:CGSizeMake(100, 100)];
+    scene = [_BaseTrackScene sceneWithSize:CGSizeMake(200, 200)];
     rockyBackground = (SKSpriteNode*)[scene childNodeWithName:RockyBackground];
     nextButtonNode = (SKSpriteNode *)[scene childNodeWithName:NextButton];
 }
@@ -60,8 +60,16 @@ NSString *const NextButton = @"NextButton";
     XCTAssertTrue([nextButtonNode.texture.description containsString:NextButton]);
 }
 
-- (void)testTheNextButtonIsAnchoredAtItsWidthXZeroY {
-    XCTAssertEqualPoints(nextButtonNode.anchorPoint, CGPointMake(nextButtonNode.frame.size.width, 0));
+- (void)testTheNextButtonIsAnchoredAtZero {
+    XCTAssertEqualPoints(nextButtonNode.anchorPoint, CGPointZero);
+}
+
+- (void)testTheNextButtonsXPositionIsAtTenLessThanTheDifferenceInWidth {
+    XCTAssertEqual(nextButtonNode.position.x, scene.size.width - nextButtonNode.size.width - 10);
+}
+
+- (void)testTheNextButtonsYPositionIsAtHalfOfTheSceneHeight {
+    XCTAssertEqual(nextButtonNode.position.y, scene.size.height * 0.5);
 }
 
 @end

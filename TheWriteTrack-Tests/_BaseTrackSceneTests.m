@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "_BaseTrackScene.h"
 #import "CocoaLumberjack.h"
+#import "CGMatchers.h"
 
 NSString *const RockyBackground = @"RockyBackground";
 NSString *const NextButton = @"NextButton";
@@ -57,6 +58,10 @@ NSString *const NextButton = @"NextButton";
 
 - (void)testTheNextButtonIsComprisedOfTheNextButtonImage {
     XCTAssertTrue([nextButtonNode.texture.description containsString:NextButton]);
+}
+
+- (void)testTheNextButtonIsAnchoredAtItsWidthXZeroY {
+    XCTAssertEqualPoints(nextButtonNode.anchorPoint, CGPointMake(nextButtonNode.frame.size.width, 0));
 }
 
 @end

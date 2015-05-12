@@ -26,7 +26,7 @@ NSString *const LetterNodeName = @"LetterNode";
 }
 
 -(SKShapeNode *)createLetterPathNode {
-    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"B"];
+    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
@@ -50,6 +50,11 @@ NSString *const LetterNodeName = @"LetterNode";
         point.y += center.y;
         node.position = point;
         node.zPosition = 5;
+        SKLabelNode *label = [[SKLabelNode alloc] init];
+        label.text = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+        label.fontColor = [SKColor whiteColor];
+        label.fontSize = 20;
+        [node addChild:label];
         [self addChild:node];
     }
 }

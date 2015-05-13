@@ -6,15 +6,17 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "_BaseTrackScene.h"
+#import "BaseTrackScene.h"
+#import "BaseTrackProperties.h"
+#import "GenericSpriteButton.h"
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 CGFloat const NextButtonXPadding = 10;
 
-@implementation _BaseTrackScene
+@implementation BaseTrackScene
 
--(void)didMoveToView:(SKView *)view {
+- (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
 }
 
@@ -43,7 +45,7 @@ CGFloat const NextButtonXPadding = 10;
 //    DDLogDebug(@"Train Node position: %@", NSStringFromCGPoint(node.position));
 //}
 
--(void)update:(CFTimeInterval)currentTime {
+- (void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
 }
 
@@ -54,21 +56,22 @@ CGFloat const NextButtonXPadding = 10;
     [self addChild:rockyBackground];
 }
 
--(void)addNextButton {
-    SKSpriteNode *node = [[SKSpriteNode alloc] initWithImageNamed:NextButtonName];
-    node.name = NextButtonName;
-    node.anchorPoint = CGPointZero;
-    node.position = CGPointMake(self.size.width - node.size.width - NextButtonXPadding,
+- (GenericSpriteButton *)addNextButton {
+    GenericSpriteButton *button = [[GenericSpriteButton alloc] initWithImageNamed:NextButtonName];
+    button.name = NextButtonName;
+    button.anchorPoint = CGPointZero;
+    button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
                                 self.size.height * 0.5);
-    [self addChild:node];
+    [self addChild:button];
+    return button;
 }
 
--(instancetype)initWithSize:(CGSize)size {
+- (instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         [self setScaleMode:SKSceneScaleModeAspectFill];
         
         [self addBackground];
-        [self addNextButton];
+        _nextButton = [self addNextButton];
     }
     return self;
 }

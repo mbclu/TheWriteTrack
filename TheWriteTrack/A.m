@@ -23,7 +23,11 @@ NSString *const LetterNodeName = @"LetterNode";
     node.position = center;
 }
 
--(SKShapeNode *)createLetterPathNode {
+- (void)transitionToNextScene {
+    
+}
+
+- (SKShapeNode *)createLetterPathNode {
     AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = LetterNodeName;
@@ -35,18 +39,23 @@ NSString *const LetterNodeName = @"LetterNode";
     return letterPathNode;
 }
 
--(SKNode *)createTrainNode {
+- (SKNode *)createTrainNode {
     SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:@"MagicTrain"];
     trainNode.name = TrainNodeName;
     return trainNode;
 }
 
--(instancetype)initWithSize:(CGSize)size {
+- (void)connectSceneTransition {
+    [self.nextButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
+}
+
+- (instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         self.scene.scaleMode = SKSceneScaleModeAspectFill;
         self.name = @"A";
         [self addChild:[self createTrainNode]];
         [self addChild:[self createLetterPathNode]];
+        [self connectSceneTransition];
     }
     return self;
 }

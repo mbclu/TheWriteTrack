@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "GenericSpriteButton.h"
 #import <SpriteKit/SpriteKit.h>
 
-@interface _BaseTrackScene : SKScene
+FOUNDATION_EXPORT NSString *const NextButtonName;
+
+@interface BaseTrackScene : SKScene
 
 @end

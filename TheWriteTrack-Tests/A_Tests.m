@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "A.h"
 #import "CocoaLumberjack.h"
-#import "CGMatchers.h"
+#import "GenericSpriteButton.h"
 #import "PathInfo.h"
+
+#import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+#import "CGMatchers.h"
 
 FOUNDATION_EXPORT CGFloat const GapCheckAccuracy;
 const CGFloat GapCheckAccuracy = 1.0;
@@ -61,32 +64,35 @@ const CGFloat GapCheckAccuracy = 1.0;
     XCTAssertTrue(CGPathEqualToPath(actualPath, expectedStringPath.letterPath));
 }
 
--(void)testTheLetterPathIsHorizontallyCenteredInTheScene {
+- (void)testTheLetterPathIsHorizontallyCenteredInTheScene {
     CGFloat leftGap = theLetterNode.frame.origin.x;
     CGFloat rightGap = a.frame.size.width - theLetterNode.frame.size.width - theLetterNode.frame.origin.x;
     XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy);
 }
 
--(void)testTheLetterPathIsVerticallyCenteredInTheScene {
+- (void)testTheLetterPathIsVerticallyCenteredInTheScene {
     CGFloat topGap = a.frame.size.height - theLetterNode.frame.size.height - theLetterNode.frame.origin.y;
     CGFloat bottomGap = theLetterNode.frame.origin.y;
     XCTAssertEqualWithAccuracy(topGap, bottomGap, GapCheckAccuracy);
 }
 
--(void)testTheLetterPathHasALineWidthOfTen {
+- (void)testTheLetterPathHasALineWidthOfTen {
     XCTAssertEqual(theLetterNode.lineWidth, 10);
 }
 
--(void)testForThePresenceOfATrainNode {
+- (void)testForThePresenceOfATrainNode {
     XCTAssertNotNil(theTrainNode);
 }
 
--(void)testTrainNodeForMagicTrainTexture {
+- (void)testTrainNodeForMagicTrainTexture {
     XCTAssertTrue([theTrainNode.description containsString:@"MagicTrain"]);
 }
 
--(void)testTheNextButtonGoesToTheLetterB {
-//    XCAssert
+- (void)testTheNextButtonTouchesUpIsHookedToTheLetter_B_Scene {
+    id mockButton = OCMClassMock([GenericSpriteButton class]);
+    [a setNextButton:mockButton];
+    [a connectSceneTransition];
+    OCMVerify([mockButton setTouchUpInsideTarget:a action:[OCMArg anySelector]]);
 }
 
 @end

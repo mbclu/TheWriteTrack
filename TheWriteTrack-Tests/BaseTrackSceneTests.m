@@ -6,27 +6,27 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "BaseTrackScene.h"
+#import "GenericSpriteButton.h"
 #import <XCTest/XCTest.h>
-#import "_BaseTrackScene.h"
-#import "CocoaLumberjack.h"
 #import "CGMatchers.h"
 
 NSString *const RockyBackground = @"RockyBackground";
 NSString *const NextButton = @"NextButton";
 
-@interface _BaseTrackSceneTests : XCTestCase {
-    _BaseTrackScene *scene;
+@interface BaseTrackSceneTests : XCTestCase {
+    BaseTrackScene *scene;
     SKSpriteNode *rockyBackground;
     SKSpriteNode *nextButtonNode;
 }
 
 @end
 
-@implementation _BaseTrackSceneTests
+@implementation BaseTrackSceneTests
 
 - (void)setUp {
     [super setUp];
-    scene = [_BaseTrackScene sceneWithSize:CGSizeMake(200, 200)];
+    scene = [BaseTrackScene sceneWithSize:CGSizeMake(200, 200)];
     rockyBackground = (SKSpriteNode*)[scene childNodeWithName:RockyBackground];
     nextButtonNode = (SKSpriteNode *)[scene childNodeWithName:NextButton];
 }
@@ -45,7 +45,7 @@ NSString *const NextButton = @"NextButton";
 }
 
 - (void)testTheSceneUsesTheFillAspectScaleMode {
-    XCTAssertEqual(scene.scaleMode , SKSceneScaleModeAspectFill);
+    XCTAssertEqual(scene.scaleMode, SKSceneScaleModeAspectFill);
 }
 
 - (void)testTheRockyBackgroundIsComprisedOfTheRockyBackgroundPNG {
@@ -70,6 +70,10 @@ NSString *const NextButton = @"NextButton";
 
 - (void)testTheNextButtonsYPositionIsAtHalfOfTheSceneHeight {
     XCTAssertEqual(nextButtonNode.position.y, scene.size.height * 0.5);
+}
+
+- (void)testTheNextButtonIsDerivedOfTheGenericSpriteButton {
+    XCTAssertTrue([nextButtonNode isKindOfClass:[GenericSpriteButton class]]);
 }
 
 @end

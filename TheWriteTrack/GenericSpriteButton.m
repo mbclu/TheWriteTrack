@@ -7,6 +7,7 @@
 //
 
 #import "GenericSpriteButton.h"
+#import "CocoaLumberjack.h"
 
 @implementation GenericSpriteButton
 
@@ -22,8 +23,10 @@
 }
 
 - (void)evaluateTouchAtPoint:(CGPoint)touchPoint {
-    if (CGRectContainsPoint(self.frame, touchPoint)) {
-        objc_msgSend(_targetTouchUpInside, _actionTouchUpInside);
+    if (CGRectContainsPoint(self.frame, touchPoint) && _actionTouchUpInside) {
+        [self.parent performSelectorOnMainThread:_actionTouchUpInside
+                                      withObject:_targetTouchUpInside
+                                   waitUntilDone:YES];
     }
 }
 
@@ -31,6 +34,9 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self.parent];
     
+    DDLogInfo(@"Touches ended at point : %@ for class : %@",
+               NSStringFromCGPoint(touchPoint), NSStringFromClass([self class]));
+
     [self evaluateTouchAtPoint:touchPoint];
 }
 

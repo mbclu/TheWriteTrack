@@ -13,6 +13,7 @@
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
+#import "CocoaLumberjack.h"
 #import "CGMatchers.h"
 
 FOUNDATION_EXPORT CGFloat const GapCheckAccuracy;
@@ -90,9 +91,16 @@ const CGFloat GapCheckAccuracy = 1.0;
 
 - (void)testTheNextButtonTouchesUpIsHookedToTheLetter_B_Scene {
     id mockButton = OCMClassMock([GenericSpriteButton class]);
-    [a setNextButton:mockButton];
+    [a setNextButtonProperty:mockButton];
     [a connectSceneTransition];
     OCMVerify([mockButton setTouchUpInsideTarget:a action:[OCMArg anySelector]]);
+}
+
+- (void)testPressingTheNextButtonSendsAMessageToTheTransitionToNextSceneAction {
+    id mockA = OCMPartialMock(a);
+    DDLogInfo(@"Next Button Position on A Scene : %@", NSStringFromCGPoint(a.nextButtonProperty.position));
+    [a.nextButtonProperty evaluateTouchAtPoint:a.nextButtonProperty.position];
+    OCMVerify([mockA transitionToNextScene]);
 }
 
 @end

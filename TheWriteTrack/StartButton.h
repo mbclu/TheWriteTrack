@@ -8,7 +8,6 @@
 
 #import "AttributedStringPath.h"
 #import "GenericSpriteButton.h"
-#import "StartButtonConstants.h"
 
 @interface StartButton : GenericSpriteButton
 

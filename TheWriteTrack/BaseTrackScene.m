@@ -7,14 +7,16 @@
 //
 
 #import "BaseTrackScene.h"
-#import "BaseTrackProperties.h"
 #import "GenericSpriteButton.h"
+#import "LetterConstants.h"
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 CGFloat const NextButtonXPadding = 10;
 
 @implementation BaseTrackScene
+
+@synthesize nextButtonProperty = nextButton;
 
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
@@ -56,13 +58,15 @@ CGFloat const NextButtonXPadding = 10;
     [self addChild:rockyBackground];
 }
 
-- (GenericSpriteButton *)addNextButton {
+- (GenericSpriteButton *)createNextButton {
     GenericSpriteButton *button = [[GenericSpriteButton alloc] initWithImageNamed:NextButtonName];
     button.name = NextButtonName;
     button.anchorPoint = CGPointZero;
     button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
-                                self.size.height * 0.5);
-    [self addChild:button];
+                                  (self.size.height - button.size.height) * 0.5);
+    button.color = [SKColor redColor];
+
+    NSLog(@"%@", NSStringFromCGRect(button.frame));
     return button;
 }
 
@@ -71,7 +75,9 @@ CGFloat const NextButtonXPadding = 10;
         [self setScaleMode:SKSceneScaleModeAspectFill];
         
         [self addBackground];
-        _nextButton = [self addNextButton];
+        
+        nextButton = [self createNextButton];
+        [self addChild:nextButton];
     }
     return self;
 }

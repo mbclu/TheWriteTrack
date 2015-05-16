@@ -8,13 +8,8 @@
 
 #import "AttributedStringPath.h"
 #import "BaseTrackScene.h"
-#import "BaseTrackProperties.h"
 #import "LetterView.h"
 #import <SpriteKit/SpriteKit.h>
-
-FOUNDATION_EXPORT CGFloat const LetterLineWidth;
-FOUNDATION_EXPORT NSString *const TrainNodeName;
-FOUNDATION_EXPORT NSString *const LetterNodeName;
 
 @interface A : BaseTrackScene
 

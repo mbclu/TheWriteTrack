@@ -90,7 +90,7 @@ void PrintPathElement(void* info, const CGPathElement* element)
 
 void PrintPath(CGPathRef path)
 {
-    DDLogDebug(@"CGPathRef: <%p>", path);
+    DDLogInfo(@"CGPathRef: <%p>", path);
     CGPathApply(path, nil, PrintPathElement);
 }
 #endif

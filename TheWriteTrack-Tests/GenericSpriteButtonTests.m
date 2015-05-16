@@ -7,24 +7,26 @@
 //
 
 #import "GenericSpriteButton.h"
-#import "TargetFake.h"
+#import "FakeTargetScene.h"
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
 @interface GenericSpriteButtonTests : XCTestCase {
     GenericSpriteButton *genericButton;
-    TargetFake *fakeTarget;
+    FakeTargetScene *fakeScene;
 }
 @end
 
 @implementation GenericSpriteButtonTests
 
 - (void)setUp {
-    genericButton = [[GenericSpriteButton alloc] init];
-    genericButton.size = CGSizeMake(1, 1); // Can't press a button of size zero
-    fakeTarget = [[TargetFake alloc] init];
-    [genericButton setTouchUpInsideTarget:fakeTarget action:@selector(expectedSelector)];
     [super setUp];
+    fakeScene = [[FakeTargetScene alloc] initWithSize:CGSizeMake(100, 100)];
+    genericButton = [[GenericSpriteButton alloc] init];
+    genericButton.position = CGPointZero;
+    genericButton.size = CGSizeMake(10, 10); // Can't press a button of size zero
+    [genericButton setTouchUpInsideTarget:fakeScene action:@selector(expectedSelector)];
+    [fakeScene addChild:genericButton];
 }
 
 - (void)tearDown {
@@ -37,12 +39,12 @@
 
 - (void)testPressingTheButtonSendsAMessageToTheTarget {
     [genericButton evaluateTouchAtPoint:genericButton.position];
-    XCTAssertTrue([fakeTarget didReceiveMessage]);
+    XCTAssertTrue([fakeScene didReceiveMessage]);
 }
 
 - (void)testPressingAnAreaOutsideTheButtonDoesNotSendAMessageToTheTarget {
     [genericButton evaluateTouchAtPoint:CGPointMake(genericButton.size.width + 1, 0)];
-    XCTAssertFalse([fakeTarget didReceiveMessage]);
+    XCTAssertFalse([fakeScene didReceiveMessage]);
 }
 
 @end

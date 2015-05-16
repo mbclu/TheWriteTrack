@@ -68,8 +68,8 @@ NSString *const NextButton = @"NextButton";
     XCTAssertEqual(nextButtonNode.position.x, scene.size.width - nextButtonNode.size.width - 10);
 }
 
-- (void)testTheNextButtonsYPositionIsAtHalfOfTheSceneHeight {
-    XCTAssertEqual(nextButtonNode.position.y, scene.size.height * 0.5);
+- (void)testTheNextButtonIsVerticallyCentered {
+    XCTAssertEqual(nextButtonNode.position.y, (scene.size.height - nextButtonNode.size.height) * 0.5);
 }
 
 - (void)testTheNextButtonIsDerivedOfTheGenericSpriteButton {

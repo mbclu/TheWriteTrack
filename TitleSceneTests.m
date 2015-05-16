@@ -56,7 +56,7 @@
     XCTAssertNotNil(trainNode);
 }
 
-- (void)testTheTitleTrainIsAnchoredAtAPoint {
+- (void)testTheTitleTrainIsAnchoredAtZero {
     XCTAssertEqual(trainNode.anchorPoint.x, 0);
     XCTAssertEqual(trainNode.anchorPoint.y, 0);
 }
@@ -119,6 +119,10 @@
 - (void)testTheStartButtonIsVeritcallyPlacedTwentyPixelsUnderTheTopOfTheScreen {
     CGFloat topOffset = [UIScreen mainScreen].bounds.size.height - startButtonNode.frame.size.height - 20;
     XCTAssertEqual(startButtonNode.position.y, topOffset);
+}
+
+- (void)testPressingTheStartButtonHooksToATransitionToTheAScene {
+    XCTAssertTrue(NO, @"Kid woke up... write me next!");
 }
 
 @end

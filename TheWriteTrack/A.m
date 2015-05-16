@@ -23,7 +23,7 @@
 }
 
 - (void)transitionToNextScene {
-    NSLog(@"Transition to the B scene");
+    DDLogInfo(@"Transition to the %c scene", _letter + 1);
     B *b = [[B alloc] initWithSize:self.size];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
     [self.view presentScene:b transition:transition];
@@ -31,7 +31,8 @@
 }
 
 - (SKShapeNode *)createLetterPathNode {
-    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:@"A"];
+    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:
+                                            [NSString stringWithCharacters:&_letter length:1]];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
@@ -52,10 +53,12 @@
     [nextButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
 }
 
-- (instancetype)initWithSize:(CGSize)size {
+- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
-        self.scene.scaleMode = SKSceneScaleModeAspectFill;
-        self.name = @"A";
+        _letter = [letter characterAtIndex:0];
+
+        [self.scene setScaleMode:SKSceneScaleModeAspectFill];
+        [self setName:[NSString stringWithCharacters:&_letter length:1]];
         [self addChild:[self createTrainNode]];
         [self addChild:[self createLetterPathNode]];
         [self connectSceneTransition];

@@ -31,7 +31,7 @@ const CGFloat GapCheckAccuracy = 1.0;
 
 - (void)setUp {
     [super setUp];
-    a = [[A alloc] initWithSize:[UIScreen mainScreen].bounds.size];
+    a = [[A alloc] initWithSize:[UIScreen mainScreen].bounds.size AndLetter:@"A"];
     theLetterNode = (SKShapeNode *)[a childNodeWithName:@"LetterNode"];
     theTrainNode = (SKSpriteNode *)[a childNodeWithName:@"TrainNode"];
 }

@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "BaseTrackScene.h"
+#import "LetterBaseScene.h"
 #import <SpriteKit/SpriteKit.h>
 
-@interface B : BaseTrackScene
+@interface B : LetterBaseScene
 
 - (void)transitionToNextScene;
 - (void)connectSceneTransition;

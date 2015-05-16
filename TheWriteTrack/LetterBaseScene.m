@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "BaseTrackScene.h"
+#import "LetterBaseScene.h"
 #import "GenericSpriteButton.h"
 #import "LetterConstants.h"
 
@@ -14,7 +14,7 @@ NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 CGFloat const NextButtonXPadding = 10;
 
-@implementation BaseTrackScene
+@implementation LetterBaseScene
 
 @synthesize nextButtonProperty = nextButton;
 

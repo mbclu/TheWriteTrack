@@ -7,12 +7,15 @@
 //
 
 #import "AttributedStringPath.h"
-#import "BaseTrackScene.h"
+#import "LetterBaseScene.h"
 #import "LetterView.h"
 #import <SpriteKit/SpriteKit.h>
 
-@interface A : BaseTrackScene
+@interface A : LetterBaseScene
 
+@property unichar letter;
+
+- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter;
 - (void)transitionToNextScene;
 - (void)connectSceneTransition;
 

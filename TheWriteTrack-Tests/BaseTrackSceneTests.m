@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "BaseTrackScene.h"
+#import "LetterBaseScene.h"
 #import "GenericSpriteButton.h"
 #import <XCTest/XCTest.h>
 #import "CGMatchers.h"
@@ -15,7 +15,7 @@ NSString *const RockyBackground = @"RockyBackground";
 NSString *const NextButton = @"NextButton";
 
 @interface BaseTrackSceneTests : XCTestCase {
-    BaseTrackScene *scene;
+    LetterBaseScene *scene;
     SKSpriteNode *rockyBackground;
     SKSpriteNode *nextButtonNode;
 }
@@ -26,7 +26,7 @@ NSString *const NextButton = @"NextButton";
 
 - (void)setUp {
     [super setUp];
-    scene = [BaseTrackScene sceneWithSize:CGSizeMake(200, 200)];
+    scene = [LetterBaseScene sceneWithSize:CGSizeMake(200, 200)];
     rockyBackground = (SKSpriteNode*)[scene childNodeWithName:RockyBackground];
     nextButtonNode = (SKSpriteNode *)[scene childNodeWithName:NextButton];
 }

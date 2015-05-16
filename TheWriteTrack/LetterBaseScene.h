@@ -12,7 +12,7 @@
 
 FOUNDATION_EXPORT NSString *const NextButtonName;
 
-@interface BaseTrackScene : SKScene {
+@interface LetterBaseScene : SKScene {
     GenericSpriteButton *nextButton;
 }
 

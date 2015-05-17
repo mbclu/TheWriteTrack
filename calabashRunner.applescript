@@ -20,7 +20,7 @@ on run argv
 		tell application "System Events" to keystroke "n" using {command down}
 		do script "cd /Users/clutter/projects/theWriteTrack" in front window
 		do script "bundle install" in front window
-		do script "echo 'y' > bundle exec calabash-ios download" in front window
+		do script "echo 'y' | bundle exec calabash-ios download" in front window
 		do script calabashBuildScript in front window
 		do script "bundle exec calabash-ios sim reset" in front window
 		do script cucumberRunScript in front window

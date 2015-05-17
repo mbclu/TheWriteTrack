@@ -6,10 +6,14 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "TitleScene.h"
-#import "TitleTrain.h"
+
 #import "AttributedStringPath.h"
+#import "StartButton.h"
+#import "TitleTrain.h"
+
+#import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "CocoaLumberjack.h"
 
 @interface TitleSceneTests : XCTestCase {
@@ -122,7 +126,10 @@
 }
 
 - (void)testPressingTheStartButtonHooksToATransitionToTheAScene {
-    XCTAssertTrue(NO, @"Kid woke up... write me next!");
+    id mockTitleScene = OCMPartialMock(scene);
+    StartButton *startButton = (StartButton *)startButtonNode;
+    [startButton evaluateTouchAtPoint:startButtonNode.position];
+    OCMVerify([mockTitleScene transitionToNextScene]);
 }
 
 @end

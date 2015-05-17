@@ -41,11 +41,14 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (void)startButtonAction {
-    SKScene *a = [[A alloc] initWithSize:self.size];
+- (void)transitionToNextScene {
+    SKScene *a = [[A alloc] initWithSize:self.size AndLetter:@"A"];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
     [self.view presentScene:a transition:transition];
+    [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:a.name];
+    NSLog(@"A name is : %@", a.name);
+    NSLog(@"scene.view access id is : %@", [self.view accessibilityIdentifier]);
 }
 
 - (void)addStartButtonSmoke {
@@ -56,7 +59,7 @@
     CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
     startButton.position = CGPointMake(xPoint, yPoint);
     
-    [startButton setTouchUpInsideTarget:self action:@selector(startButtonAction)];
+    [startButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
     
     [self addChild:startButton];
 }

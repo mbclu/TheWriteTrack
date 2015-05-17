@@ -16,6 +16,17 @@ FOUNDATION_EXPORT NSString *const NextButtonName;
     GenericSpriteButton *nextButton;
 }
 
+@property unichar letter;
 @property (nonatomic, readwrite, retain) GenericSpriteButton *nextButtonProperty;
+
+- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter;
+- (void)transitionToNextScene;
+- (void)connectSceneTransition;
+
+- (SKSpriteNode *)createBackground;
+- (GenericSpriteButton *)createNextButton;
+- (SKShapeNode *)createLetterPathNode;
+- (SKNode *)createTrainNode;
+- (void)moveNodeToCenter:(SKNode *)node;
 
 @end

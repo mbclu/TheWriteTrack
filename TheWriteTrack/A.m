@@ -7,73 +7,7 @@
 //
 
 #import "A.h"
-#import "B.h"
-#import "LayoutMath.h"
-
-#import "CocoaLumberjack.h"
-#import <UIKit/UIKit.h>
 
 @implementation A
-
-- (void)moveNodeToCenter:(SKNode *)node {
-    CGPoint center = [LayoutMath centerOfMainScreen];
-    center.x -= (node.frame.size.width * 0.5) - (LetterLineWidth * 0.1);
-    center.y -= (node.frame.size.height - LetterLineWidth) * 0.5;
-    node.position = center;
-}
-
-- (void)transitionToNextScene {
-    DDLogInfo(@"Transition to the %c scene", _letter + 1);
-    B *b = [[B alloc] initWithSize:self.size];
-    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
-    [self.view presentScene:b transition:transition];
-    [self.view setAccessibilityIdentifier:b.name];
-}
-
-- (SKShapeNode *)createLetterPathNode {
-    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:
-                                            [NSString stringWithCharacters:&_letter length:1]];
-    SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
-    letterPathNode.name = LetterNodeName;
-    letterPathNode.lineWidth = LetterLineWidth;
-    letterPathNode.strokeColor = [SKColor darkGrayColor];
-    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:@"TrackTexture"];
-    letterPathNode.fillColor = [SKColor whiteColor];
-    [self moveNodeToCenter:letterPathNode];
-    return letterPathNode;
-}
-
-- (SKNode *)createTrainNode {
-    SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:@"MagicTrain"];
-    trainNode.name = TrainNodeName;
-    return trainNode;
-}
-
-- (void)connectSceneTransition {
-    [nextButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
-}
-
-- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
-    if (self = [super initWithSize:size]) {
-        _letter = [letter characterAtIndex:0];
-
-        [self.scene setScaleMode:SKSceneScaleModeAspectFill];
-        [self setName:[NSString stringWithCharacters:&_letter length:1]];
-        [self addChild:[self createTrainNode]];
-        [self addChild:[self createLetterPathNode]];
-        [self connectSceneTransition];
-    }
-    return self;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInNode:self.parent];
-    
-    DDLogInfo(@"Touches ended at point : %@ for class : %@",
-               NSStringFromCGPoint(touchPoint), NSStringFromClass([self class]));
-    
-    [self.nextButtonProperty touchesEnded:touches withEvent:event];
-}
 
 @end

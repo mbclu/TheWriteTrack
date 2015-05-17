@@ -7,11 +7,7 @@
 //
 
 #import "LetterBaseScene.h"
-#import <SpriteKit/SpriteKit.h>
 
 @interface B : LetterBaseScene
-
-- (void)transitionToNextScene;
-- (void)connectSceneTransition;
 
 @end

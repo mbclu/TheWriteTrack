@@ -7,7 +7,11 @@
 //
 
 #import "LetterBaseScene.h"
+
+#import "AttributedStringPath.h"
+#import "CocoaLumberjack.h"
 #import "GenericSpriteButton.h"
+#import "LayoutMath.h"
 #import "LetterConstants.h"
 
 NSString *const RockyBackgroundName = @"RockyBackground";
@@ -22,40 +26,32 @@ CGFloat const NextButtonXPadding = 10;
     [super didMoveToView:view];
 }
 
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    NSLog(@"Touches on Title Scene!");
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInNode:self];
-//    SKNode *node = [self nodeAtPoint:location];
-//
-//    NSLog(@"Node : %@", node.name);
-//    if ([node.name isEqualToString:START_BUTTON]) {
-//        NSLog(@"Start button pressed!");
-//        SKScene *sampleScene = [[A alloc] initWithSize:self.size];
-//        SKTransition *transition = [SKTransition flipVerticalWithDuration:0.5];
-//        [self.view presentScene:sampleScene transition:transition];
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-//    SKSpriteNode *node = (SKSpriteNode*)[self childNodeWithName:TITLE_TRAIN];
-//    UITouch *touch = [touches anyObject];
-//    node.position = [touch locationInNode:self];
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//    SKSpriteNode *node = (SKSpriteNode*)[self childNodeWithName:TITLE_TRAIN];
-//    DDLogDebug(@"Train Node position: %@", NSStringFromCGPoint(node.position));
-//}
-
-- (void)update:(CFTimeInterval)currentTime {
-    /* Called before each frame is rendered */
+- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
+    if (self = [super initWithSize:size]) {
+        [self setScaleMode:SKSceneScaleModeAspectFill];
+        
+        [self addChild:[self createBackground]];
+        
+        nextButton = [self createNextButton];
+        [self addChild:nextButton];
+        
+        ///Letter Stuff
+        _letter = [letter characterAtIndex:0];
+        
+        [self.scene setScaleMode:SKSceneScaleModeAspectFill];
+        [self setName:[NSString stringWithCharacters:&_letter length:1]];
+        [self addChild:[self createTrainNode]];
+        [self addChild:[self createLetterPathNode]];
+        [self connectSceneTransition];
+    }
+    return self;
 }
 
-- (void)addBackground {
+- (SKSpriteNode *)createBackground {
     SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:RockyBackgroundName];
     rockyBackground.name = RockyBackgroundName;
     rockyBackground.anchorPoint = CGPointZero;
-    [self addChild:rockyBackground];
+    return rockyBackground;
 }
 
 - (GenericSpriteButton *)createNextButton {
@@ -65,21 +61,65 @@ CGFloat const NextButtonXPadding = 10;
     button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
                                   (self.size.height - button.size.height) * 0.5);
     button.color = [SKColor redColor];
-
+    
     NSLog(@"%@", NSStringFromCGRect(button.frame));
     return button;
 }
 
-- (instancetype)initWithSize:(CGSize)size {
-    if (self = [super initWithSize:size]) {
-        [self setScaleMode:SKSceneScaleModeAspectFill];
-        
-        [self addBackground];
-        
-        nextButton = [self createNextButton];
-        [self addChild:nextButton];
-    }
-    return self;
+- (SKShapeNode *)createLetterPathNode {
+    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:
+                                            [NSString stringWithCharacters:&_letter length:1]];
+    SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
+    letterPathNode.name = LetterNodeName;
+    letterPathNode.lineWidth = LetterLineWidth;
+    letterPathNode.strokeColor = [SKColor darkGrayColor];
+    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:@"TrackTexture"];
+    letterPathNode.fillColor = [SKColor whiteColor];
+    [self moveNodeToCenter:letterPathNode];
+    return letterPathNode;
+}
+
+- (SKNode *)createTrainNode {
+    SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:@"MagicTrain"];
+    trainNode.name = TrainNodeName;
+    return trainNode;
+}
+
+- (void)moveNodeToCenter:(SKNode *)node {
+    CGPoint center = [LayoutMath centerOfMainScreen];
+    center.x -= (node.frame.size.width * 0.5) - (LetterLineWidth * 0.1);
+    center.y -= (node.frame.size.height - LetterLineWidth) * 0.5;
+    node.position = center;
+}
+
+- (void)transitionToNextScene {
+    unichar nextCharacter = (unichar)(_letter + 1);
+    NSString *nextLetter = [NSString stringWithCharacters:&nextCharacter length:1];
+    DDLogInfo(@"Transitioning to the %@ scene", nextLetter);
+    
+    SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:nextLetter];
+    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
+    
+    [self.view presentScene:nextScene transition:transition];
+    [self.view setIsAccessibilityElement:YES];
+    [self.view setAccessibilityIdentifier:nextScene.name];
+}
+
+- (void)connectSceneTransition {
+    [nextButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInNode:self.parent];
+    
+    DDLogInfo(@"Touches ended at point : %@ for class : <%@> with name : \'%@\'",
+              NSStringFromCGPoint(touchPoint),
+              NSStringFromClass([self class]),
+              [self name]
+              );
+    
+    [self.nextButtonProperty touchesEnded:touches withEvent:event];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "A.h"
+#import "AttributedStringPath.h"
 #import "CocoaLumberjack.h"
 #import "GenericSpriteButton.h"
 #import "PathInfo.h"

@@ -47,8 +47,6 @@
     [self.view presentScene:a transition:transition];
     [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:a.name];
-    NSLog(@"A name is : %@", a.name);
-    NSLog(@"scene.view access id is : %@", [self.view accessibilityIdentifier]);
 }
 
 - (void)addStartButtonSmoke {

@@ -16,7 +16,10 @@
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
+NSString *const TrackTextureName = @"TrackTexture";
+NSString *const MagicTrainName = @"MagicTrain";
 CGFloat const NextButtonXPadding = 10;
+CGFloat const TransitionLengthInSeconds = 0.6;
 
 @implementation LetterBaseScene
 
@@ -62,7 +65,6 @@ CGFloat const NextButtonXPadding = 10;
                                   (self.size.height - button.size.height) * 0.5);
     button.color = [SKColor redColor];
     
-    NSLog(@"%@", NSStringFromCGRect(button.frame));
     return button;
 }
 
@@ -73,14 +75,14 @@ CGFloat const NextButtonXPadding = 10;
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
     letterPathNode.strokeColor = [SKColor darkGrayColor];
-    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:@"TrackTexture"];
+    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
     letterPathNode.fillColor = [SKColor whiteColor];
     [self moveNodeToCenter:letterPathNode];
     return letterPathNode;
 }
 
 - (SKNode *)createTrainNode {
-    SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:@"MagicTrain"];
+    SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:MagicTrainName];
     trainNode.name = TrainNodeName;
     return trainNode;
 }
@@ -98,7 +100,7 @@ CGFloat const NextButtonXPadding = 10;
     DDLogInfo(@"Transitioning to the %@ scene", nextLetter);
     
     SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:nextLetter];
-    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
+    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionLengthInSeconds];
     
     [self.view presentScene:nextScene transition:transition];
     [self.view setIsAccessibilityElement:YES];

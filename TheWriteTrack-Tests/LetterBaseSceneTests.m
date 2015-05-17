@@ -97,8 +97,8 @@ CGFloat const ArbitrarySceneHeight = 200;
 
 - (void)testTheNameOfTheSceneMatchesTheNameOfTheInitializerConstant {
     NSString *LetterToInitWith = @"K";
-    theScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:LetterToInitWith];
-    XCTAssertEqualObjects(theScene.name, LetterToInitWith);
+    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:LetterToInitWith];
+    XCTAssertEqualObjects(anotherScene.name, LetterToInitWith);
 }
 
 - (void)testAnSKPathNodeExistsAsAChildOfTheScene {
@@ -109,22 +109,22 @@ CGFloat const ArbitrarySceneHeight = 200;
 
 - (void)testWhenInitializedWith_T_ThePathNodeUsesTheLetter_T {
     NSString *AString = @"T";
-    theScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:AString];
+    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:AString];
     AttributedStringPath *expectedStringPath = [[AttributedStringPath alloc] initWithString:AString];
-    CGPathRef actualPath = [(SKShapeNode *)([theScene childNodeWithName:@"LetterNode"]) path];
+    CGPathRef actualPath = [(SKShapeNode *)([anotherScene childNodeWithName:@"LetterNode"]) path];
     XCTAssertTrue(CGPathEqualToPath(actualPath, expectedStringPath.letterPath));
 }
 
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsHorizontallyCenteredInTheScene {
-    theScene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size AndLetter:@"A"];
+    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size AndLetter:@"A"];
     CGFloat leftGap = theLetterNode.frame.origin.x;
-    CGFloat rightGap = theScene.frame.size.width - theLetterNode.frame.size.width - theLetterNode.frame.origin.x;
+    CGFloat rightGap = anotherScene.frame.size.width - theLetterNode.frame.size.width - theLetterNode.frame.origin.x;
     XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy);
 }
 
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsVerticallyCenteredInTheScene {
-    theScene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size AndLetter:@"A"];
-    CGFloat topGap = theScene.frame.size.height - theLetterNode.frame.size.height - theLetterNode.frame.origin.y;
+    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size AndLetter:@"A"];
+    CGFloat topGap = anotherScene.frame.size.height - theLetterNode.frame.size.height - theLetterNode.frame.origin.y;
     CGFloat bottomGap = theLetterNode.frame.origin.y;
     XCTAssertEqualWithAccuracy(topGap, bottomGap, GapCheckAccuracy);
 }
@@ -153,6 +153,11 @@ CGFloat const ArbitrarySceneHeight = 200;
     DDLogInfo(@"Next Button Position on A Scene : %@", NSStringFromCGPoint(theScene.nextButtonProperty.position));
     [theScene.nextButtonProperty evaluateTouchAtPoint:theScene.nextButtonProperty.position];
     OCMVerify([mockA transitionToNextScene]);
+}
+
+- (void)testWhenTheLetterIsCapitalZThenNoNextButtonIsAvailable {
+    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:@"Z"];
+    XCTAssertNil([zScene childNodeWithName:NextButton]);
 }
 
 @end

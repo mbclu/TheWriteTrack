@@ -35,8 +35,10 @@ CGFloat const TransitionLengthInSeconds = 0.6;
         
         [self addChild:[self createBackground]];
         
-        nextButton = [self createNextButton];
-        [self addChild:nextButton];
+        if (![letter isEqual:@"Z"]) {
+            nextButton = [self createNextButton];
+            [self addChild:nextButton];
+        }
         
         ///Letter Stuff
         _letter = [letter characterAtIndex:0];

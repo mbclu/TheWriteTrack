@@ -29,6 +29,6 @@ typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
     StartButtonZOrder
 };
 
-- (void)transitionToNextScene;
+- (void)transitionToAScene;
 
 @end

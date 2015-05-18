@@ -129,7 +129,7 @@
     id mockTitleScene = OCMPartialMock(scene);
     StartButton *startButton = (StartButton *)startButtonNode;
     [startButton evaluateTouchAtPoint:startButtonNode.position];
-    OCMVerify([mockTitleScene transitionToNextScene]);
+    OCMVerify([mockTitleScene transitionToAScene]);
 }
 
 @end

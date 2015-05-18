@@ -41,7 +41,7 @@
     [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
 }
 
-- (void)transitionToNextScene {
+- (void)transitionToAScene {
     SKScene *aScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:@"A"];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
     [self.view presentScene:aScene transition:transition];
@@ -57,7 +57,7 @@
     CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
     startButton.position = CGPointMake(xPoint, yPoint);
     
-    [startButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
+    [startButton setTouchUpInsideTarget:self action:@selector(transitionToAScene)];
     
     [self addChild:startButton];
 }

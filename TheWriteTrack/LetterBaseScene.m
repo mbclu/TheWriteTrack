@@ -16,14 +16,17 @@
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
+NSString *const PreviousButtonName = @"PreviousButton";
 NSString *const TrackTextureName = @"TrackTexture";
 NSString *const MagicTrainName = @"MagicTrain";
 CGFloat const NextButtonXPadding = 10;
 CGFloat const TransitionLengthInSeconds = 0.6;
+NSUInteger const SingleLetterLength = 1;
 
 @implementation LetterBaseScene
 
 @synthesize nextButtonProperty = nextButton;
+@synthesize previousButtonProperty = previousButton;
 
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
@@ -31,7 +34,10 @@ CGFloat const TransitionLengthInSeconds = 0.6;
 
 - (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
+        _letter = [letter characterAtIndex:0];
+        
         [self setScaleMode:SKSceneScaleModeAspectFill];
+        [self setName:[self stringFromSceneUnicharLetter]];
         
         [self addChild:[self createBackground]];
         
@@ -40,14 +46,16 @@ CGFloat const TransitionLengthInSeconds = 0.6;
             [self addChild:nextButton];
         }
         
-        ///Letter Stuff
-        _letter = [letter characterAtIndex:0];
+        if (![letter isEqual:@"A"]) {
+            previousButton = [self createPreviousButton];
+            [self addChild:previousButton];
+        }
         
-        [self.scene setScaleMode:SKSceneScaleModeAspectFill];
-        [self setName:[NSString stringWithCharacters:&_letter length:1]];
-        [self addChild:[self createTrainNode]];
         [self addChild:[self createLetterPathNode]];
-        [self connectSceneTransition];
+        
+        [self addChild:[self createTrainNode]];
+        
+        [self connectSceneTransitions];
     }
     return self;
 }
@@ -65,14 +73,20 @@ CGFloat const TransitionLengthInSeconds = 0.6;
     button.anchorPoint = CGPointZero;
     button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
                                   (self.size.height - button.size.height) * 0.5);
-    button.color = [SKColor redColor];
-    
+    return button;
+}
+
+- (GenericSpriteButton *)createPreviousButton {
+    GenericSpriteButton *button = [[GenericSpriteButton alloc] initWithImageNamed:PreviousButtonName];
+    button.name = PreviousButtonName;
+    button.anchorPoint = CGPointZero;
+    button.position = CGPointMake(self.frame.origin.x + NextButtonXPadding,
+                                  (self.size.height - button.size.height) * 0.5);
     return button;
 }
 
 - (SKShapeNode *)createLetterPathNode {
-    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:
-                                            [NSString stringWithCharacters:&_letter length:1]];
+    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
@@ -96,12 +110,10 @@ CGFloat const TransitionLengthInSeconds = 0.6;
     node.position = center;
 }
 
-- (void)transitionToNextScene {
-    unichar nextCharacter = (unichar)(_letter + 1);
-    NSString *nextLetter = [NSString stringWithCharacters:&nextCharacter length:1];
-    DDLogInfo(@"Transitioning to the %@ scene", nextLetter);
+- (void)transitionToSceneWithLetter:(NSString *)letter {
+    DDLogInfo(@"Transitioning to the %@ scene", letter);
     
-    SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:nextLetter];
+    SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:letter];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionLengthInSeconds];
     
     [self.view presentScene:nextScene transition:transition];
@@ -109,8 +121,17 @@ CGFloat const TransitionLengthInSeconds = 0.6;
     [self.view setAccessibilityIdentifier:nextScene.name];
 }
 
-- (void)connectSceneTransition {
+- (void)transitionToNextScene {
+    [self transitionToSceneWithLetter:[self nextLetterString]];
+}
+
+- (void)transitionToPreviousScene {
+    [self transitionToSceneWithLetter:[self previousLetterString]];
+}
+
+- (void)connectSceneTransitions {
     [nextButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
+    [previousButton setTouchUpInsideTarget:self action:@selector(transitionToPreviousScene)];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -124,6 +145,20 @@ CGFloat const TransitionLengthInSeconds = 0.6;
               );
     
     [self.nextButtonProperty touchesEnded:touches withEvent:event];
+}
+
+- (NSString *)stringFromSceneUnicharLetter {
+    return [NSString stringWithCharacters:&_letter length:SingleLetterLength];
+}
+
+- (NSString *)nextLetterString {
+    unichar nextCharacter = (unichar)(_letter + 1);
+    return [NSString stringWithCharacters:&nextCharacter length:SingleLetterLength];
+}
+
+- (NSString *)previousLetterString {
+    unichar nextCharacter = (unichar)(_letter - 1);
+    return [NSString stringWithCharacters:&nextCharacter length:SingleLetterLength];
 }
 
 @end

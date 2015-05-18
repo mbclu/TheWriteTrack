@@ -6,15 +6,8 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
-#import "_BaseTrackScene.h"
-#import "AttributedStringPath.h"
-#import "LetterView.h"
+#import "LetterBaseScene.h"
 
-FOUNDATION_EXPORT CGFloat const LetterLineWidth;
-FOUNDATION_EXPORT NSString *const TrainNodeName;
-FOUNDATION_EXPORT NSString *const LetterNodeName;
-
-@interface A : _BaseTrackScene
+@interface A : LetterBaseScene
 
 @end

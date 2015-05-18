@@ -7,16 +7,9 @@
 //
 
 #import "StartButton.h"
+#import "StartButtonConstants.h"
 
 @implementation StartButton
-
-NSString *const StartText = @"start";
-NSString *const StartStringSmokeSKS = @"StartStringSmoke";
-CGFloat const StartStringSize = 125.0;
-CGFloat const LetterHoriztontalOffset = 10.0;
-CGFloat const ButtonOffsetMultiplier = 1.5;
-CGFloat const FollowPathDuration = 2.0;     // The smaller the number
-                                            // the faster the letters get filled in
 
 - (SKAction *)createRepeatFollowActionForPath:(CGPathRef)path {
     SKAction *followStringPath = [SKAction followPath:path
@@ -78,7 +71,6 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
     _letterArray = [[_attributedStringPath letterConverter] getLetterArrayFromString:StartText];
     [self addEmitters];
     
-    self.userInteractionEnabled = YES;
     self.anchorPoint = CGPointZero;
     
     return self;
@@ -87,24 +79,6 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
 - (instancetype)init {
     self = [self initWithAttributedStringPath:nil];
     return self;
-}
-
-- (void)setTouchUpInsideTarget:(id)target action:(SEL)action {
-    _targetTouchUpInside = target;
-    _actionTouchUpInside = action;
-}
-
-- (void)evaluateTouchAtPoint:(CGPoint)touchPoint {
-    if (CGRectContainsPoint(self.frame, touchPoint)) {
-        objc_msgSend(_targetTouchUpInside, _actionTouchUpInside);
-    }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInNode:self.parent];
-    
-    [self evaluateTouchAtPoint:touchPoint];
 }
 
 @end

@@ -7,20 +7,15 @@
 //
 
 #import "AttributedStringPath.h"
-#import "StartButtonConstants.h"
+#import "GenericSpriteButton.h"
 
-@interface StartButton : SKSpriteNode
+@interface StartButton : GenericSpriteButton
 
 @property (readonly) NSString *startText;
 @property (retain) AttributedStringPath *attributedStringPath;
 @property (nonatomic, retain) NSMutableArray *letterArray;
 @property (readwrite) CGPoint nextLetterPosition;
 
-@property (nonatomic, readonly) SEL actionTouchUpInside;
-@property (nonatomic, readonly, weak) id targetTouchUpInside;
-
-- (void)setTouchUpInsideTarget:(id)target action:(SEL)action;
-- (void)evaluateTouchAtPoint:(CGPoint)touchPoint;
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath;
 
 @end

@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "TitleTrain.h"
+
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "TitleTrain.h"
+#import <OCMock/OCMock.h>
 #import "CocoaLumberjack.h"
 
 @interface TitleTrainTests : XCTestCase

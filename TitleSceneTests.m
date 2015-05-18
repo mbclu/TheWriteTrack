@@ -6,10 +6,14 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
 #import "TitleScene.h"
-#import "TitleTrain.h"
+
 #import "AttributedStringPath.h"
+#import "StartButton.h"
+#import "TitleTrain.h"
+
+#import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "CocoaLumberjack.h"
 
 @interface TitleSceneTests : XCTestCase {
@@ -56,7 +60,7 @@
     XCTAssertNotNil(trainNode);
 }
 
-- (void)testTheTitleTrainIsAnchoredAtAPoint {
+- (void)testTheTitleTrainIsAnchoredAtZero {
     XCTAssertEqual(trainNode.anchorPoint.x, 0);
     XCTAssertEqual(trainNode.anchorPoint.y, 0);
 }
@@ -119,6 +123,13 @@
 - (void)testTheStartButtonIsVeritcallyPlacedTwentyPixelsUnderTheTopOfTheScreen {
     CGFloat topOffset = [UIScreen mainScreen].bounds.size.height - startButtonNode.frame.size.height - 20;
     XCTAssertEqual(startButtonNode.position.y, topOffset);
+}
+
+- (void)testPressingTheStartButtonHooksToATransitionToTheAScene {
+    id mockTitleScene = OCMPartialMock(scene);
+    StartButton *startButton = (StartButton *)startButtonNode;
+    [startButton evaluateTouchAtPoint:startButtonNode.position];
+    OCMVerify([mockTitleScene transitionToAScene]);
 }
 
 @end

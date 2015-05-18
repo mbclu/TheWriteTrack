@@ -145,6 +145,7 @@ NSUInteger const SingleLetterLength = 1;
               );
     
     [self.nextButtonProperty touchesEnded:touches withEvent:event];
+    [self.previousButtonProperty touchesEnded:touches withEvent:event];
 }
 
 - (NSString *)stringFromSceneUnicharLetter {
@@ -157,8 +158,8 @@ NSUInteger const SingleLetterLength = 1;
 }
 
 - (NSString *)previousLetterString {
-    unichar nextCharacter = (unichar)(_letter - 1);
-    return [NSString stringWithCharacters:&nextCharacter length:SingleLetterLength];
+    unichar previousCharacter = (unichar)(_letter - 1);
+    return [NSString stringWithCharacters:&previousCharacter length:SingleLetterLength];
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "GenericSpriteButton.h"
 #import "LayoutMath.h"
 #import "LetterConstants.h"
+#import "PathInfo.h"
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
@@ -93,7 +94,10 @@ NSUInteger const SingleLetterLength = 1;
     letterPathNode.strokeColor = [SKColor darkGrayColor];
     letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
     letterPathNode.fillColor = [SKColor whiteColor];
-    [self moveNodeToCenter:letterPathNode];
+    CGPoint center = [self moveNodeToCenter:letterPathNode];
+#ifdef DEBUG
+    [self drawDotsAtCenter:center OfPath:attrStringPath.letterPath];
+#endif
     return letterPathNode;
 }
 
@@ -103,12 +107,36 @@ NSUInteger const SingleLetterLength = 1;
     return trainNode;
 }
 
-- (void)moveNodeToCenter:(SKNode *)node {
+- (CGPoint)moveNodeToCenter:(SKNode *)node {
     CGPoint center = [LayoutMath centerOfMainScreen];
     center.x -= (node.frame.size.width * 0.5) - (LetterLineWidth * 0.1);
     center.y -= (node.frame.size.height - LetterLineWidth) * 0.5;
     node.position = center;
+    return center;
 }
+
+#ifdef DEBUG
+-(void)drawDotsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
+    PathInfo *pathInfo = [[PathInfo alloc] init];
+    NSArray *array = [pathInfo TransformPathToArray:path];
+    for (NSUInteger i = 0; i < array.count; ++i) {
+        SKShapeNode *node = [SKShapeNode shapeNodeWithCircleOfRadius:5];
+        node.fillColor = [SKColor redColor];
+        NSValue *pointValue = (NSValue *)[array objectAtIndex:i];
+        CGPoint point = [pointValue CGPointValue];
+        point.x += center.x;
+        point.y += center.y;
+        node.position = point;
+        node.zPosition = 5;
+        SKLabelNode *label = [[SKLabelNode alloc] init];
+        label.text = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+        label.fontColor = [SKColor whiteColor];
+        label.fontSize = 20;
+        [node addChild:label];
+        [self addChild:node];
+    }
+}
+#endif
 
 - (void)transitionToSceneWithLetter:(NSString *)letter {
     DDLogInfo(@"Transitioning to the %@ scene", letter);

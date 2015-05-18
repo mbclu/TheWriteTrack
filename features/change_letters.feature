@@ -30,3 +30,8 @@ Scenario: Each of the Capital letter levels can be reached in sequence by pressi
   When I touch the Next Button I see the "X" view
   When I touch the Next Button I see the "Y" view
   When I touch the Next Button I see the "Z" view
+
+Scenario: The previously played letter can be reached by pressing the Previous Button
+  Given I have started the game
+  When I touch the Next Button I see the "B" view
+  When I touch the Previous Button I see the "A" view

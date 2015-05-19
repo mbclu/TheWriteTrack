@@ -15,6 +15,11 @@
 #import "LetterConstants.h"
 #import "PathInfo.h"
 
+#define DRAW_DOTS   1
+#ifndef DEBUG
+    #define DRAW_DOTS   0
+#endif
+
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 NSString *const PreviousButtonName = @"PreviousButton";
@@ -95,7 +100,7 @@ NSUInteger const SingleLetterLength = 1;
     letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
     letterPathNode.fillColor = [SKColor whiteColor];
     CGPoint center = [self moveNodeToCenter:letterPathNode];
-#ifdef DEBUG
+#if (DRAW_DOTS)
     [self drawDotsAtCenter:center OfPath:attrStringPath.letterPath];
 #endif
     return letterPathNode;
@@ -115,7 +120,7 @@ NSUInteger const SingleLetterLength = 1;
     return center;
 }
 
-#ifdef DEBUG
+#if (DRAW_DOTS)
 -(void)drawDotsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSArray *array = [pathInfo TransformPathToArray:path];

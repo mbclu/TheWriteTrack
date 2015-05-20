@@ -13,18 +13,21 @@
 #import "GenericSpriteButton.h"
 #import "LayoutMath.h"
 #import "LetterConstants.h"
-#import "PathInfo.h"
+#import "Train.h"
 
-#define DRAW_DOTS   1
+#define APP_SHOULD_DRAW_DOTS   1
 #ifndef DEBUG
-    #define DRAW_DOTS   0
+    #define APP_SHOULD_DRAW_DOTS   0
+#endif
+
+#if (APP_SHOULD_DRAW_DOTS)
+    #import "PathInfo.h"
 #endif
 
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 NSString *const PreviousButtonName = @"PreviousButton";
 NSString *const TrackTextureName = @"TrackTexture";
-NSString *const MagicTrainName = @"MagicTrain";
 CGFloat const NextButtonXPadding = 10;
 CGFloat const TransitionLengthInSeconds = 0.6;
 NSUInteger const SingleLetterLength = 1;
@@ -57,9 +60,9 @@ NSUInteger const SingleLetterLength = 1;
             [self addChild:previousButton];
         }
         
-        [self addChild:[self createLetterPathNode]];
-        
-        [self addChild:[self createTrainNode]];
+        AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
+        [self addChild:[self createLetterPathNode:letterPath]];
+        [self addChild:[self createTrainNode:letterPath]];
         
         [self connectSceneTransitions];
     }
@@ -91,8 +94,7 @@ NSUInteger const SingleLetterLength = 1;
     return button;
 }
 
-- (SKShapeNode *)createLetterPathNode {
-    AttributedStringPath *attrStringPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
+- (SKShapeNode *)createLetterPathNode:(AttributedStringPath *)attrStringPath {
     SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
@@ -100,14 +102,14 @@ NSUInteger const SingleLetterLength = 1;
     letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
     letterPathNode.fillColor = [SKColor whiteColor];
     CGPoint center = [self moveNodeToCenter:letterPathNode];
-#if (DRAW_DOTS)
+#if (APP_SHOULD_DRAW_DOTS)
     [self drawDotsAtCenter:center OfPath:attrStringPath.letterPath];
 #endif
     return letterPathNode;
 }
 
-- (SKNode *)createTrainNode {
-    SKSpriteNode *trainNode = [[SKSpriteNode alloc] initWithImageNamed:MagicTrainName];
+- (SKNode *)createTrainNode:(AttributedStringPath *)attrStringPath {
+    Train *trainNode = [[Train alloc] initWithAttributedStringPath:attrStringPath];
     trainNode.name = TrainNodeName;
     return trainNode;
 }
@@ -120,7 +122,7 @@ NSUInteger const SingleLetterLength = 1;
     return center;
 }
 
-#if (DRAW_DOTS)
+#if (APP_SHOULD_DRAW_DOTS)
 -(void)drawDotsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSArray *array = [pathInfo TransformPathToArray:path];

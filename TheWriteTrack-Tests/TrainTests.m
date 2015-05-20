@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "Train.h"
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface TrainTests : XCTestCase
+@interface TrainTests : XCTestCase {
+    Train *theTrain;
+}
 
 @end
 
@@ -17,24 +20,30 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    theTrain = [[Train alloc] init];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testTrainNodeForMagicTrainTexture {
+    XCTAssertTrue([theTrain.description containsString:@"MagicTrain"]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testTrainNodeHasNameTrain {
+    XCTAssertEqualObjects(theTrain.name, @"Train");
+}
+
+- (void)testWhenNoAttributedStringPathIsProvidedItIsNil {
+    XCTAssertNil(theTrain.letterPath);
+}
+
+- (void)testWhenAnAttributedStringPathIsProvidedThenThatStringPathIsUsedAsTheTrainsLetterPath {
+    AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:@"M"];
+    Train *aTrain = [[Train alloc] initWithAttributedStringPath:letterPath];
+    XCTAssertNotNil(aTrain.letterPath);
+    XCTAssertEqualObjects(aTrain.letterPath, letterPath);
 }
 
 @end

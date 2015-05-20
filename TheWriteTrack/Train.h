@@ -6,8 +6,13 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
 
 @interface Train : SKSpriteNode
+
+@property (nonatomic, retain) AttributedStringPath* letterPath;
+
+- (instancetype)initWithAttributedStringPath:(AttributedStringPath*)letterPath;
 
 @end

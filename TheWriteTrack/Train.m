@@ -8,6 +8,21 @@
 
 #import "Train.h"
 
+NSString *const MagicTrainName = @"MagicTrain";
+NSString *const TrainName = @"Train";
+
 @implementation Train
+
+- (instancetype)initWithAttributedStringPath:(AttributedStringPath*)letterPath {
+    self = [self init];
+    [self setLetterPath:letterPath];
+    return self;
+}
+
+- (instancetype)init {
+    self = [super initWithImageNamed:MagicTrainName];
+    self.name = TrainName;
+    return self;
+}
 
 @end

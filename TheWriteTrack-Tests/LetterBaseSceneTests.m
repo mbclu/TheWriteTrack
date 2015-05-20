@@ -10,6 +10,8 @@
 
 #import "AttributedStringPath.h"
 #import "GenericSpriteButton.h"
+#import "Train.h"
+
 #import "CGMatchers.h"
 #import "CocoaLumberjack.h"
 
@@ -20,7 +22,7 @@ NSString *const RockyBackground = @"RockyBackground";
 NSString *const NextButton = @"NextButton";
 NSString *const PrevButton = @"PreviousButton";
 NSString *const Letter = @"LetterNode";
-NSString *const Train = @"TrainNode";
+NSString *const TheTrain = @"TrainNode";
 
 CGFloat const GapCheckAccuracy = 3.0;
 CGFloat const ArbitrarySceneWidth = 300;
@@ -46,7 +48,7 @@ CGFloat const ArbitrarySceneHeight = 200;
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NextButton];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PrevButton];
     theLetterNode = (SKShapeNode *)[theScene childNodeWithName:Letter];
-    theTrainNode = (SKSpriteNode *)[theScene childNodeWithName:Train];
+    theTrainNode = (SKSpriteNode *)[theScene childNodeWithName:TheTrain];
 }
 
 - (void)tearDown {
@@ -102,8 +104,9 @@ CGFloat const ArbitrarySceneHeight = 200;
     XCTAssertNotNil(theTrainNode);
 }
 
-- (void)testTrainNodeForMagicTrainTexture {
-    XCTAssertTrue([theTrainNode.description containsString:@"MagicTrain"]);
+- (void)testTheTrainNodeGetsPassedTheLetterStringPath {
+    Train *train = (Train *)theTrainNode;
+    XCTAssertNotNil(train.letterPath);
 }
 
 - (void)testForANextLetterButton {

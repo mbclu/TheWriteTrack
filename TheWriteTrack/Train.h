@@ -17,5 +17,6 @@
 //NS_DESIGNATED_INITIALIZER
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath*)letterPath;
 - (instancetype)init NS_UNAVAILABLE;
+- (void)positionTrainAtStartPoint;
 
 @end

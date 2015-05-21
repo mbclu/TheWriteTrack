@@ -53,9 +53,10 @@
     XCTAssertNotNil(theTrain.waypoints);
 }
 
-- (void)testTheTrainPositionIsTheSameAsTheFirstWaypoint {
+- (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsTheSameAsTheFirstWaypoint {
     CGPoint expectedPoint = CGPointMake(10, 15);
     [theTrain setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:expectedPoint]]];
+    [theTrain positionTrainAtStartPoint];
     XCTAssertEqualPoints(theTrain.position, expectedPoint);
 }
 

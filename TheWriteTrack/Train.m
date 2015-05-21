@@ -18,7 +18,13 @@ NSString *const TrainName = @"Train";
     self.name = TrainName;
     [self setLetterPath:letterPath];
     [self setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:CGPointMake(0, 0)]]];
+    [self positionTrainAtStartPoint];
     return self;
+}
+
+- (void)positionTrainAtStartPoint {
+    NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
+    [self setPosition:[firstPoint CGPointValue]];
 }
 
 @end

@@ -7,8 +7,11 @@
 //
 
 #import "Train.h"
+
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+
+#import "CGMatchers.h"
 
 @interface TrainTests : XCTestCase {
     Train *theTrain;
@@ -48,6 +51,12 @@
 
 - (void)testTrainHasASetOfPointsToFollowWithAtLeastOnePointInIt {
     XCTAssertNotNil(theTrain.waypoints);
+}
+
+- (void)testTheTrainPositionIsTheSameAsTheFirstWaypoint {
+    CGPoint expectedPoint = CGPointMake(10, 15);
+    [theTrain setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:expectedPoint]]];
+    XCTAssertEqualPoints(theTrain.position, expectedPoint);
 }
 
 @end

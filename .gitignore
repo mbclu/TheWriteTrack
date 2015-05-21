@@ -1,7 +1,6 @@
 #xcode
 build/
 xcuserdata/ 
-xcshareddata/
 
 # cocoapads
 Pods/

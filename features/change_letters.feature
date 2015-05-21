@@ -1,4 +1,4 @@
-Feature: Advancing throug all of the letters
+Feature: Advancing through all of the letters
   As a child playing the game
   I want to be able to skip to the next letter
   So I can advance the game to the next level

@@ -20,7 +20,7 @@
 
 - (void)setUp {
     [super setUp];
-    theTrain = [[Train alloc] init];
+    theTrain = [[Train alloc] initWithAttributedStringPath:nil];
 }
 
 - (void)tearDown {
@@ -44,6 +44,10 @@
     Train *aTrain = [[Train alloc] initWithAttributedStringPath:letterPath];
     XCTAssertNotNil(aTrain.letterPath);
     XCTAssertEqualObjects(aTrain.letterPath, letterPath);
+}
+
+- (void)testTrainHasASetOfPointsToFollowWithAtLeastOnePointInIt {
+    XCTAssertNotNil(theTrain.waypoints);
 }
 
 @end

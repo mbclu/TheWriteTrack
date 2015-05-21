@@ -14,14 +14,10 @@ NSString *const TrainName = @"Train";
 @implementation Train
 
 - (instancetype)initWithAttributedStringPath:(AttributedStringPath*)letterPath {
-    self = [self init];
-    [self setLetterPath:letterPath];
-    return self;
-}
-
-- (instancetype)init {
     self = [super initWithImageNamed:MagicTrainName];
     self.name = TrainName;
+    [self setLetterPath:letterPath];
+    [self setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:CGPointMake(0, 0)]]];
     return self;
 }
 

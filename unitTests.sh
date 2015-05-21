@@ -11,7 +11,7 @@ xctool -workspace OnTheWriteTrack.xcworkspace/ \
 	 -configuration Debug \
 	 -destination "platform=iOS Simulator,name=iPhone 6,OS=8.3" \
 	 -reporter pretty \
-	 -reporter junit \
+	 -reporter junit:unitTestResults.xml \
 	 clean \
 	 test \
 	 -only OnTheWriteTrackTests $TEST_CLASS\

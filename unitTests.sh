@@ -4,7 +4,8 @@ TEST_CLASS=$1
 
 killall 'iOS Simulator' 1&>/dev/null
 
-pod install
+bundle install
+bundle exec pod install
 
 xctool -workspace OnTheWriteTrack.xcworkspace/ \
 	 -scheme OnTheWriteTrack \

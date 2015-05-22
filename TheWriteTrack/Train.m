@@ -17,7 +17,7 @@ NSString *const TrainName = @"Train";
     self = [super initWithImageNamed:MagicTrainName];
     self.name = TrainName;
     [self setLetterPath:letterPath];
-    [self setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:CGPointMake(0, 0)]]];
+    [self setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:CGPointMake(100, 100)]]];
     [self positionTrainAtStartPoint];
     return self;
 }

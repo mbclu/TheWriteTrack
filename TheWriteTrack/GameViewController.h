@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LetterView.h"
 
 @interface GameViewController : UIViewController {
 }

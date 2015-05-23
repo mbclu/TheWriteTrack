@@ -15,6 +15,8 @@ FOUNDATION_EXPORT NSString *const NextButtonName;
 @interface LetterBaseScene : SKScene {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;
+    NSUInteger currentEnvelopeIndex;
+    NSMutableArray *waypointArray;
 }
 
 @property unichar letter;

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "GameViewController.h"
-#import "LetterView.h"
 #import "TitleScene.h"
 
 @interface GameViewControllerIntegrationTests : XCTestCase

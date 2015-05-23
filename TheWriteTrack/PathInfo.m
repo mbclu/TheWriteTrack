@@ -12,7 +12,7 @@
 
 @implementation PathInfo
 
-void AddPathElementToArray(void* info, const CGPathElement* element) {
+void AddPathElementPointsToArray(void* info, const CGPathElement* element) {
     NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;
     if (element != nil) {
         CGPoint *points = element->points;
@@ -29,9 +29,48 @@ void AddPathElementToArray(void* info, const CGPathElement* element) {
     }
 }
 
+void AddPathElementTypesToArray(void* info, const CGPathElement* element) {
+    NSMutableArray *pathTypes = (__bridge NSMutableArray *)info;
+    switch (element->type) {
+        case kCGPathElementMoveToPoint: {
+            [pathTypes addObject:@"kCGPathElementMoveToPoint"];
+            break;
+        }
+            
+        case kCGPathElementAddLineToPoint: {
+            [pathTypes addObject:@"kCGPathElementAddQuadCurveToPoint"];
+            break;
+        }
+            
+        case kCGPathElementAddQuadCurveToPoint: {
+            [pathTypes addObject:@"kCGPathElementAddQuadCurveToPoint"];
+            break;
+        }
+            
+        case kCGPathElementAddCurveToPoint: {
+            [pathTypes addObject:@"kCGPathElementCloseSubpath"];
+            break;
+        }
+            
+        case kCGPathElementCloseSubpath:
+            [pathTypes addObject:@"kCGPathElementCloseSubpath"];
+            break;
+            
+        default:
+            [pathTypes addObject:@"--Unknown-Element-Type--"];
+            break;
+    }
+}
+
 -(NSMutableArray *)TransformPathToArray:(CGPathRef)path {
     NSMutableArray *array = [NSMutableArray array];
-    CGPathApply(path, (__bridge void *)(array), AddPathElementToArray);
+    CGPathApply(path, (__bridge void *)(array), AddPathElementPointsToArray);
+    return array;
+}
+
+- (NSMutableArray *)TransformPathToElementTypes:(CGPathRef)path {
+    NSMutableArray *array = [NSMutableArray array];
+    CGPathApply(path, (__bridge void *)(array), AddPathElementTypesToArray);
     return array;
 }
 

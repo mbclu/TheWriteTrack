@@ -11,7 +11,11 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
 
-#define NAMED_FONT              @"Verdana"
+//#define NAMED_FONT              @"Verana"
+//#define NAMED_FONT              @"Farah"
+//#define NAMED_FONT              @"KohinoorDevanagari-Book"
+//#define NAMED_FONT              @"Symbol"
+#define NAMED_FONT              @"Thonburi"
 
 @interface LetterConverter : NSObject
 

@@ -15,22 +15,15 @@
 #import "LetterConstants.h"
 #import "Train.h"
 
-#define APP_SHOULD_DRAW_DOTS   1
-#ifndef DEBUG
-    #define APP_SHOULD_DRAW_DOTS   0
+#ifdef DEBUG
+    #define APP_SHOULD_DRAW_DOTS                0
+    #define APP_SHOULD_ALLOW_CREATING_WAYPOINTS 0
+    #define APP_SHOULD_LOG_LINE_TYPES           1
 #endif
 
-#if (APP_SHOULD_DRAW_DOTS)
+#if (APP_SHOULD_DRAW_DOTS || APP_SHOULD_LOG_LINE_TYPES)
     #import "PathInfo.h"
 #endif
-
-NSString *const RockyBackgroundName = @"RockyBackground";
-NSString *const NextButtonName = @"NextButton";
-NSString *const PreviousButtonName = @"PreviousButton";
-NSString *const TrackTextureName = @"TrackTexture";
-CGFloat const NextButtonXPadding = 10;
-CGFloat const TransitionLengthInSeconds = 0.6;
-NSUInteger const SingleLetterLength = 1;
 
 @implementation LetterBaseScene
 
@@ -65,6 +58,11 @@ NSUInteger const SingleLetterLength = 1;
         [self addChild:[self createTrainNode:letterPath]];
         
         [self connectSceneTransitions];
+        
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+        currentEnvelopeIndex = 0;
+        waypointArray = [[NSMutableArray alloc] init];
+#endif
     }
     return self;
 }
@@ -99,11 +97,20 @@ NSUInteger const SingleLetterLength = 1;
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
     letterPathNode.strokeColor = [SKColor darkGrayColor];
-    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
-    letterPathNode.fillColor = [SKColor whiteColor];
+//    letterPathNode.fillColor = [SKColor orangeColor];
+//    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
     CGPoint center = [self moveNodeToCenter:letterPathNode];
 #if (APP_SHOULD_DRAW_DOTS)
     [self drawDotsAtCenter:center OfPath:attrStringPath.letterPath];
+    [self drawWaypointsAtCenter:center OfPath:attrStringPath.letterPath];
+#endif
+#if (APP_SHOULD_LOG_LINE_TYPES)
+    PathInfo *pathInfo = [[PathInfo alloc] init];
+    NSMutableArray *array = [pathInfo TransformPathToElementTypes:attrStringPath.letterPath];
+    DDLogInfo(@"Letter : %@", [self stringFromSceneUnicharLetter]);
+    for (NSUInteger i = 0; i < array.count; i++) {
+        DDLogInfo(@"Element Type : %@\n", [array objectAtIndex:i]);
+    }
 #endif
     return letterPathNode;
 }
@@ -121,29 +128,6 @@ NSUInteger const SingleLetterLength = 1;
     node.position = center;
     return center;
 }
-
-#if (APP_SHOULD_DRAW_DOTS)
--(void)drawDotsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
-    PathInfo *pathInfo = [[PathInfo alloc] init];
-    NSArray *array = [pathInfo TransformPathToArray:path];
-    for (NSUInteger i = 0; i < array.count; ++i) {
-        SKShapeNode *node = [SKShapeNode shapeNodeWithCircleOfRadius:5];
-        node.fillColor = [SKColor redColor];
-        NSValue *pointValue = (NSValue *)[array objectAtIndex:i];
-        CGPoint point = [pointValue CGPointValue];
-        point.x += center.x;
-        point.y += center.y;
-        node.position = point;
-        node.zPosition = 5;
-        SKLabelNode *label = [[SKLabelNode alloc] init];
-        label.text = [NSString stringWithFormat:@"%lu", (unsigned long)i];
-        label.fontColor = [SKColor whiteColor];
-        label.fontSize = 20;
-        [node addChild:label];
-        [self addChild:node];
-    }
-}
-#endif
 
 - (void)transitionToSceneWithLetter:(NSString *)letter {
     DDLogInfo(@"Transitioning to the %@ scene", letter);
@@ -169,6 +153,110 @@ NSUInteger const SingleLetterLength = 1;
     [previousButton setTouchUpInsideTarget:self action:@selector(transitionToPreviousScene)];
 }
 
+#if (APP_SHOULD_DRAW_DOTS)
+- (void)drawDotsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
+    PathInfo *pathInfo = [[PathInfo alloc] init];
+    NSArray *array = [pathInfo TransformPathToArray:path];
+    for (NSUInteger i = 0; i < array.count; ++i) {
+        if (i < array.count) {
+            SKShapeNode *node = [SKShapeNode shapeNodeWithCircleOfRadius:5];
+            node.fillColor = [SKColor redColor];
+            NSValue *pointValue = (NSValue *)[array objectAtIndex:i];
+            CGPoint point = [pointValue CGPointValue];
+            point.x += center.x;
+            point.y += center.y;
+            node.position = point;
+            node.zPosition = 5;
+            SKLabelNode *label = [[SKLabelNode alloc] init];
+            label.text = [NSString stringWithFormat:@"%lu <%0.1f, %0.1f>",
+                          (unsigned long)i,
+                          point.x,
+                          point.y];
+            label.fontColor = [SKColor redColor];
+            label.fontSize = 15;
+            [node addChild:label];
+            [self addChild:node];
+        }
+    }
+    DDLogDebug(@"%@", NSStringFromCGPoint(center));
+}
+
+- (void)drawWaypointsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
+    
+}
+#endif
+
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+- (void)addEnvelopeAtPoint:(CGPoint)touchPoint {
+    if (CGRectContainsPoint([self childNodeWithName:LetterNodeName].frame, touchPoint)) {
+        currentEnvelopeIndex++;
+        SKSpriteNode *node = [[SKSpriteNode alloc] initWithImageNamed:@"Envelope"];
+        node.name = [NSString stringWithFormat:@"%lui" , (unsigned long)currentEnvelopeIndex];
+        node.position = touchPoint;
+        [self addChild:node];
+    }
+}
+
+- (void)moveLastPlacedEnvelopeToPoint:(CGPoint)touchPoint {
+    if (CGRectContainsPoint([self childNodeWithName:LetterNodeName].frame, touchPoint)) {
+        SKSpriteNode *node = (SKSpriteNode *)[self childNodeWithName:[NSString stringWithFormat:@"%lui" , (unsigned long)currentEnvelopeIndex]];
+        node.position = touchPoint;
+    }
+}
+
+- (NSString *)getWaypointFileName {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libDirectory = [paths objectAtIndex:0];
+    NSString *fileName = [NSString stringWithFormat:@"%@/%@_waypoints.plist",
+                          libDirectory,
+                          [self stringFromSceneUnicharLetter]];
+    return fileName;
+}
+
+/***********************************************************************************************
+ * Here is a fun fact:
+ * ~/Library/Developer/CoreSimulator/Devices/2D048742-A844-4620-AD5B-C832A0A1A658/data/...
+ * ./Containers/Data/Application/1E1A5B19-33C3-4FDA-85B2-8C65A41B690A/Library/
+ * YEAH! That is the file directory that get's written from this call....... Phwew!
+ * The first UUID matches the simulator device which I confirmed with ```xcrun simctl list```
+ * The second must be the Application itself, but I haven't confirmed
+ **********************************************************************************************/
+- (void)createWaypointPropertyList {
+    [waypointArray writeToFile:[self getWaypointFileName] atomically:NO];
+}
+
+- (void)addWaypointToArray:(CGPoint)waypoint {
+    if (CGRectContainsPoint([self childNodeWithName:LetterNodeName].frame, waypoint)) {
+        [waypointArray addObject:NSStringFromCGPoint(waypoint)];
+    }
+}
+
+- (void)displayWaypointFileContent {
+    NSString *content = [[NSString alloc] initWithContentsOfFile:[self getWaypointFileName]
+                                                    usedEncoding:nil
+                                                           error:nil];
+    DDLogDebug(@"Contents of waypoint file:\n%@", content);
+}
+#endif
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInNode:self];
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+    [self addEnvelopeAtPoint:touchPoint];
+#endif
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInNode:self];
+    
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+    [self moveLastPlacedEnvelopeToPoint:touchPoint];
+#endif
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self.parent];
@@ -178,6 +266,12 @@ NSUInteger const SingleLetterLength = 1;
               NSStringFromClass([self class]),
               [self name]
               );
+    
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+    [self addWaypointToArray:touchPoint];
+    [self createWaypointPropertyList];
+    [self displayWaypointFileContent];
+#endif
     
     [self.nextButtonProperty touchesEnded:touches withEvent:event];
     [self.previousButtonProperty touchesEnded:touches withEvent:event];

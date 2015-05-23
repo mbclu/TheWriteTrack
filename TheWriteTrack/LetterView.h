@@ -19,6 +19,7 @@
 - (void) setupContextForHumanReadableText:(CGContextRef)context;
 - (void) drawRailPath:(CGPathRef)path InContext:(CGContextRef)context;
 - (void) movePathToCenter:(CGMutablePathRef)path;
+- (void) drawRect:(CGRect)rect;
 //- (CGMutablePathRef) createPathInContext:(CGContextRef)context;
 
 @end

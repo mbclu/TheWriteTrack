@@ -21,7 +21,7 @@
         NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
                                         (id)[[UIColor clearColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
-                                        (id)[[UIColor brownColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
+                                        (id)[[UIColor clearColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
                                         (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
                                         nil];
         

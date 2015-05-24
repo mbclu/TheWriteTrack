@@ -15,6 +15,7 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 #import "CocoaLumberjack.h"
+#import "CGMatchers.h"
 
 @interface TitleSceneTests : XCTestCase {
     TitleScene *scene;
@@ -49,6 +50,10 @@
 
 - (void)testTheTitleSceneLoadsTheTitleBackground {
     XCTAssertNotNil(backgroundNode);
+}
+
+- (void)testTheTitleSceneBackgroundIsTheSameSizeAsTheScene {
+    XCTAssertEqualSizes(backgroundNode.size, scene.size);
 }
 
 - (void)testTheTitleBackgroundIsAnchoredAtZeroXZeroY {

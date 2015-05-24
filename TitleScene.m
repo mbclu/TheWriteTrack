@@ -25,7 +25,8 @@
 }
 
 - (void)addBackground {
-    SKSpriteNode *background = [[SKSpriteNode alloc] initWithImageNamed:TITLE_BACKGROUND];
+    SKTexture *texture = [SKTexture textureWithImageNamed:TITLE_BACKGROUND];
+    SKSpriteNode *background = [SKSpriteNode spriteNodeWithTexture:texture size:self.size];
     background.name = TITLE_BACKGROUND;
     [self anchorNode:background atZeroAndZPosition:TitleBackgroundZOrder];
 }

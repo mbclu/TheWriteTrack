@@ -72,8 +72,8 @@ CGFloat const ArbitrarySceneHeight = 200;
     XCTAssertTrue([theBackgroundNode.texture.description containsString:RockyBackground]);
 }
 
-- (void)testTheSceneUsesAspectScaleMode {
-    XCTAssertEqual(theScene.scene.scaleMode, SKSceneScaleModeAspectFill);
+- (void)testTheSizeOfTheBackgroundIsTheSameAsTheSceneSize {
+    XCTAssertEqualSizes(theBackgroundNode.size, theScene.size);
 }
 
 - (void)testTheNameOfTheSceneMatchesTheNameOfTheInitializerConstant {

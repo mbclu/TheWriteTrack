@@ -68,7 +68,8 @@
 }
 
 - (SKSpriteNode *)createBackground {
-    SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithImageNamed:RockyBackgroundName];
+    SKTexture *texture = [SKTexture textureWithImageNamed:RockyBackgroundName];
+    SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithTexture:texture size:self.size];
     rockyBackground.name = RockyBackgroundName;
     rockyBackground.anchorPoint = CGPointZero;
     return rockyBackground;

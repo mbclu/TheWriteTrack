@@ -15,4 +15,10 @@
     XCTAssertEqual(point1.y, point2.y);         \
 }
 
+#define XCTAssertEqualSizes(size1, size2)       \
+{                                               \
+    XCTAssertEqual(size1.width, size2.width);   \
+    XCTAssertEqual(size1.height, size2.height); \
+}
+
 #endif

@@ -8,6 +8,7 @@
 
 #import "AttributedStringPath.h"
 #import "LayoutMath.h"
+#import "LetterConstants.h"
 
 @implementation AttributedStringPath
 @synthesize letterConverter;
@@ -25,7 +26,7 @@
         [self setLetterConverter:[[LetterConverter alloc] init]];
     }
 
-    [self setAttributedString:[letterConverter createAttributedString:str WithFontSizeInPoints:size]];
+    [self setAttributedString:[letterConverter createAttributedString:str withFontType:DefaultLetterFont andSize:size]];
     [self setLetterPath:[letterConverter createPathAtZeroUsingAttrString:self.attributedString]];
     
     return self;

@@ -18,3 +18,4 @@ NSString *const TrackTextureName = @"TrackTexture";
 CGFloat const NextButtonXPadding = 10;
 CGFloat const TransitionLengthInSeconds = 0.6;
 NSUInteger const SingleLetterLength = 1;
+CFStringRef const DefaultLetterFont = (CFStringRef)@"Thonburi";

@@ -10,13 +10,22 @@
 #import "LetterConstants.h"
 #import <SpriteKit/SpriteKit.h>
 
+#ifdef DEBUG
+    #define APP_SHOULD_DRAW_DOTS                0
+    #define APP_SHOULD_ALLOW_CREATING_WAYPOINTS 1
+#endif
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+    #import "WaypointDropper.h"
+#endif
+
 FOUNDATION_EXPORT NSString *const NextButtonName;
 
 @interface LetterBaseScene : SKScene {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;
-    NSUInteger currentEnvelopeIndex;
-    NSMutableArray *waypointArray;
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+    WaypointDropper *wpDropper;
+#endif
 }
 
 @property unichar letter;

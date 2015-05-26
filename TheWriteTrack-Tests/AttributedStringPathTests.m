@@ -8,15 +8,14 @@
 
 #import "AttributedStringPath.h"
 #import "LayoutMath.h"
+#import "LetterConstants.h"
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <CoreText/CoreText.h>
 #import <OCMock/OCMock.h>
 
-FOUNDATION_EXPORT NSString *const StringForInvalidUsage;
-NSString *const StringForInvalidUsage = @"?";
 
-FOUNDATION_EXPORT CGFloat const DefualtFontSizeComparisonAccuracy;
+NSString *const StringForInvalidUsage = @"?";
 CGFloat const DefualtFontSizeComparisonAccuracy = 0.5;
 
 @interface AttributedStringPathTests : XCTestCase
@@ -57,12 +56,12 @@ CGFloat const DefualtFontSizeComparisonAccuracy = 0.5;
     XCTAssertEqualObjects(stringPath.attributedString.string, StringForInvalidUsage);
 }
 
-- (void)testTheAttributedStringHasADefaultFontTypeOfVerdana {
+- (void)testTheAttributedStringHasADefaultFontTypeOf {
     NSString *string = @"";
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithString:string];
     CTFontRef fontRef = (__bridge CTFontRef)[stringPath.attributedString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CFStringRef stringRef = CTFontCopyFullName(fontRef);
-    XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
+    XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Thonburi");
 }
 
 - (void)testANonNilNonEmptyPathIsReturned {
@@ -103,7 +102,7 @@ CGFloat const DefualtFontSizeComparisonAccuracy = 0.5;
     AttributedStringPath *stringPath = [[AttributedStringPath alloc] initWithLetterConverter:lcMock];
     CGFloat fontSize = [LayoutMath maximumViableFontSize];
     XCTAssertNotNil(stringPath);
-    OCMVerify([lcMock createAttributedString:OCMOCK_ANY WithFontSizeInPoints:fontSize]);
+    OCMVerify([lcMock createAttributedString:OCMOCK_ANY withFontType:DefaultLetterFont andSize:fontSize]);
     OCMVerify([lcMock createPathAtZeroUsingAttrString:OCMOCK_ANY]);
 }
 

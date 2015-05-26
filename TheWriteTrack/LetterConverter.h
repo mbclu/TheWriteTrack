@@ -15,11 +15,10 @@
 //#define NAMED_FONT              @"Farah"
 //#define NAMED_FONT              @"KohinoorDevanagari-Book"
 //#define NAMED_FONT              @"Symbol"
-#define NAMED_FONT              @"Thonburi"
 
 @interface LetterConverter : NSObject
 
-- (NSAttributedString *)createAttributedString:(NSString *)attributelessString WithFontSizeInPoints:(CGFloat)pointSize;
+- (NSAttributedString *)createAttributedString:(NSString *)attributelessString withFontType:(CFStringRef)fontType andSize:(CGFloat)fontSize;
 
 - (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size;
 - (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString;

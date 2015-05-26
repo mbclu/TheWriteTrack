@@ -15,6 +15,8 @@
 #import "PathInfo.h"
 #import "CocoaLumberjack.h"
 
+CFStringRef const FONT = (CFStringRef)@"Thonburi";
+
 @interface LetterConverterTests : XCTestCase
 
 @end
@@ -41,7 +43,7 @@ void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttri
     [super setUp];
     nonNilString = @"NonNilString";
     letterConverter = [[LetterConverter alloc] init];
-    attrString = [letterConverter createAttributedString:nonNilString WithFontSizeInPoints:100];
+    attrString = [letterConverter createAttributedString:nonNilString withFontType:FONT andSize:100];
     fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     defaultAccuracy = 1.0;
 }
@@ -54,13 +56,13 @@ void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttri
 
 - (void)testTheDefaultFontTypeIsVerdana {
     CFStringRef stringRef = CTFontCopyFullName(fontRef);
-    XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Verdana");
+    XCTAssertEqualObjects((__bridge NSString *)stringRef, @"Thonburi");
 }
 
 - (void)testWhenAFontSizeIsSuppliedItIsUsedForTheAttributedString {
     CGFloat expectedSize = 40.0;
 
-    attrString = [letterConverter createAttributedString:nonNilString WithFontSizeInPoints:expectedSize];
+    attrString = [letterConverter createAttributedString:nonNilString withFontType:FONT andSize:expectedSize];
     fontRef = (__bridge CTFontRef)[attrString attribute:(NSString *)kCTFontAttributeName atIndex:0 effectiveRange:nil];
     CGFloat size = CTFontGetSize(fontRef);
 
@@ -72,9 +74,9 @@ void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttri
     XCTAssertEqualObjects(color, (id)[[UIColor clearColor] CGColor]);
 }
 
-- (void)testTheFontStrokeColorIsBrown {
+- (void)testTheFontStrokeColorIsDarkGray {
     UIColor *color = [attrString attribute:(NSString *)kCTStrokeColorAttributeName atIndex:0 effectiveRange:nil];
-    XCTAssertEqualObjects(color, (id)[[UIColor brownColor] CGColor]);
+    XCTAssertEqualObjects(color, (id)[[UIColor darkGrayColor] CGColor]);
 }
 
 - (void)testTheFontStrokeIsSizeMinusThree {
@@ -89,7 +91,7 @@ void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttri
 }
 
 - (void)testWhenARunFromALineIsExaminedAtIndexZeroThenASingleGlyphIsReturned {
-    CTFontRef font = CTFontCreateWithName((CFStringRef)NAMED_FONT, [LayoutMath maximumViableFontSize], NULL);
+    CTFontRef font = CTFontCreateWithName(FONT, [LayoutMath maximumViableFontSize], NULL);
     CGGlyph expectedGlyph;
     UniChar characters[] = { [@"N" characterAtIndex:0] };
     CTFontGetGlyphsForCharacters(font, characters, &expectedGlyph, 1);
@@ -111,7 +113,7 @@ void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttri
 
 - (void)testGivenAStringWithMoreThanOneCharacterThenTheSameNumberOfLettersAreInTheAttributedString {
     NSString *sampleString = @"AB";
-    attrString = [letterConverter createAttributedString:sampleString WithFontSizeInPoints:[LayoutMath maximumViableFontSize]];
+    attrString = [letterConverter createAttributedString:sampleString withFontType:FONT andSize:[LayoutMath maximumViableFontSize]];
     XCTAssertEqual(attrString.string.length, 2);
     XCTAssertEqualObjects(attrString.string, sampleString);
 }

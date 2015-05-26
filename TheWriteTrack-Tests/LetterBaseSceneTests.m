@@ -216,6 +216,8 @@ CGFloat const ArbitrarySceneHeight = 200;
     }
 }
 
+#define PERFORM_VERTICAL_CENTER_TEST    0
+#if (PERFORM_VERTICAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsVerticallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
@@ -228,5 +230,6 @@ CGFloat const ArbitrarySceneHeight = 200;
         unicharRepOfLetter = (unichar)(unicharRepOfLetter + 1);
     }
 }
+#endif
 
 @end

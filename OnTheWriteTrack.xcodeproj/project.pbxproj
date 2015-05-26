@@ -41,8 +41,9 @@
 		C73018231B14197700266CB9 /* WaypointDropper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018211B14197700266CB9 /* WaypointDropper.m */; };
 		C73018261B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C73018271B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
+		C730182A1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
+		C730182B1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
 		C7340E761AF77F2400915C8C /* StartSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C7340E751AF77F2400915C8C /* StartSmoke.png */; };
-		C7360C551B0437A600AEA146 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C541B0437A600AEA146 /* Constants.m */; };
 		C7360C571B04387500AEA146 /* StartButtonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C561B04387500AEA146 /* StartButtonConstants.m */; };
 		C7360C581B04387500AEA146 /* StartButtonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C561B04387500AEA146 /* StartButtonConstants.m */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
@@ -58,7 +59,6 @@
 		C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */; };
 		C78C6F891AA3A6570077DE74 /* LetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C6F881AA3A6570077DE74 /* LetterView.m */; };
 		C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
-		C7A39EF71B05A0F500D38F5B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C541B0437A600AEA146 /* Constants.m */; };
 		C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
 		C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */; };
 		C7B697551AF2460C0066086E /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
@@ -119,9 +119,9 @@
 		C73018211B14197700266CB9 /* WaypointDropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaypointDropper.m; path = TheWriteTrack/WaypointDropper.m; sourceTree = SOURCE_ROOT; };
 		C73018241B148E5600266CB9 /* PathSegments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegments.h; path = TheWriteTrack/PathSegments.h; sourceTree = SOURCE_ROOT; };
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
+		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
+		C73018291B148FD400266CB9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = TheWriteTrack/Constants.m; sourceTree = SOURCE_ROOT; };
 		C7340E751AF77F2400915C8C /* StartSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StartSmoke.png; path = images/particles/StartSmoke.png; sourceTree = SOURCE_ROOT; };
-		C7360C531B04314C00AEA146 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = SOURCE_ROOT; };
-		C7360C541B0437A600AEA146 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = SOURCE_ROOT; };
 		C7360C561B04387500AEA146 /* StartButtonConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartButtonConstants.m; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
@@ -340,8 +340,8 @@
 		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXGroup;
 			children = (
-				C7360C531B04314C00AEA146 /* Constants.h */,
-				C7360C541B0437A600AEA146 /* Constants.m */,
+				C73018281B148FD400266CB9 /* Constants.h */,
+				C73018291B148FD400266CB9 /* Constants.m */,
 				C73700131AB7D49A0035C4A3 /* Common */,
 				C7DB85081AD48A620026972B /* Title */,
 				C7C4B8A61A8C2494009FA11B /* Tracks */,
@@ -684,7 +684,6 @@
 				C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
 				C730181E1B14172E00266CB9 /* PathDots.m in Sources */,
-				C7360C551B0437A600AEA146 /* Constants.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
 				C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */,
@@ -695,6 +694,7 @@
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* LetterBaseScene.m in Sources */,
 				C73018221B14197700266CB9 /* WaypointDropper.m in Sources */,
+				C730182A1B148FD400266CB9 /* Constants.m in Sources */,
 				C7360C571B04387500AEA146 /* StartButtonConstants.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
@@ -731,7 +731,6 @@
 				14d627ad861be84bef577fca /* AttributedStringPath.m in Sources */,
 				C730181F1B14172E00266CB9 /* PathDots.m in Sources */,
 				0aeb68f61d41660a7508bc58 /* LetterConverter.m in Sources */,
-				C7A39EF71B05A0F500D38F5B /* Constants.m in Sources */,
 				c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */,
 				82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */,
 				C75D0E0F1B0C2A08006A71C8 /* Train.m in Sources */,
@@ -741,6 +740,7 @@
 				2bc1c89bef203c330e89d183 /* TitleTrain.m in Sources */,
 				bd5de2f53c1df7d85136a815 /* main.m in Sources */,
 				C73018231B14197700266CB9 /* WaypointDropper.m in Sources */,
+				C730182B1B148FD400266CB9 /* Constants.m in Sources */,
 				18b2c493a8303f37dd0e0516 /* LetterBaseScene.m in Sources */,
 				54b7d83e13b2ab087b7ba46b /* AppDelegate.m in Sources */,
 				30559a6be018832e48653bae /* LayoutMath.m in Sources */,

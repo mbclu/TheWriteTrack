@@ -19,6 +19,10 @@
     #import "PathDots.h"
 #endif
 
+#define APP_SHOULD_DRAW_SEGMENTS 1
+#if (APP_SHOULD_DRAW_SEGMENTS)
+    #import "PathSegments.h"
+#endif
 @implementation LetterBaseScene
 
 @synthesize nextButtonProperty = nextButton;
@@ -56,6 +60,11 @@
         
 #if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
         wpDropper = [[WaypointDropper alloc] initForLetter:[self stringFromSceneUnicharLetter]];
+#endif
+        
+#if (APP_SHOULD_DRAW_SEGMENTS)
+        PathSegments *pathSegments = [[PathSegments alloc] init];
+        [pathSegments drawAllSegementsInScene:self];
 #endif
     }
     return self;

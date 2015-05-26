@@ -13,4 +13,6 @@
 @property CGRect segmentBounds;
 @property NSMutableArray *segments;
 
+- (void)drawAllSegementsInScene:(SKScene *)scene;
+
 @end

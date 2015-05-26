@@ -15,10 +15,12 @@
 #import "LetterConstants.h"
 #import "Train.h"
 
+#define HALF_OF(dimension) dimension * 0.5
+
 #ifdef DEBUG
-    #define APP_SHOULD_DRAW_DOTS                0
-    #define APP_SHOULD_ALLOW_CREATING_WAYPOINTS 0
-    #define APP_SHOULD_LOG_LINE_TYPES           1
+    #define APP_SHOULD_DRAW_DOTS                1
+    #define APP_SHOULD_ALLOW_CREATING_WAYPOINTS 1
+    #define APP_SHOULD_LOG_LINE_TYPES           0
 #endif
 
 #if (APP_SHOULD_DRAW_DOTS || APP_SHOULD_LOG_LINE_TYPES)
@@ -42,19 +44,19 @@
         [self setName:[self stringFromSceneUnicharLetter]];
         
         [self addChild:[self createBackground]];
-        
-        if (![letter isEqual:@"Z"]) {
-            nextButton = [self createNextButton];
-            [self addChild:nextButton];
-        }
-        
-        if (![letter isEqual:@"A"]) {
-            previousButton = [self createPreviousButton];
-            [self addChild:previousButton];
-        }
+
+        [self addNavigationButtons];
         
         AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
-        [self addChild:[self createLetterPathNode:letterPath]];
+        SKShapeNode* letterNode = [self createLetterPathNode:letterPath];
+        CGPoint center = [self moveNodeToCenter:letterNode];
+        [self addChild:letterNode];
+        DDLogDebug(@"Path line length = %f", letterNode.lineLength);
+        
+#if (APP_SHOULD_DRAW_DOTS)
+        [self drawDotsAtCenter:center OfPath:letterPath.letterPath];
+        [self drawWaypointsAtCenter:center OfPath:letterPath.letterPath];
+#endif
         [self addChild:[self createTrainNode:letterPath]];
         
         [self connectSceneTransitions];
@@ -73,6 +75,18 @@
     rockyBackground.name = RockyBackgroundName;
     rockyBackground.anchorPoint = CGPointZero;
     return rockyBackground;
+}
+
+- (void)addNavigationButtons {
+    if (![[self stringFromSceneUnicharLetter] isEqual:@"Z"]) {
+        nextButton = [self createNextButton];
+        [self addChild:nextButton];
+    }
+    
+    if (![[self stringFromSceneUnicharLetter] isEqual:@"A"]) {
+        previousButton = [self createPreviousButton];
+        [self addChild:previousButton];
+    }
 }
 
 - (GenericSpriteButton *)createNextButton {
@@ -100,18 +114,17 @@
     letterPathNode.strokeColor = [SKColor darkGrayColor];
 //    letterPathNode.fillColor = [SKColor orangeColor];
 //    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
-    CGPoint center = [self moveNodeToCenter:letterPathNode];
-#if (APP_SHOULD_DRAW_DOTS)
-    [self drawDotsAtCenter:center OfPath:attrStringPath.letterPath];
-    [self drawWaypointsAtCenter:center OfPath:attrStringPath.letterPath];
-#endif
+    
 #if (APP_SHOULD_LOG_LINE_TYPES)
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSMutableArray *array = [pathInfo TransformPathToElementTypes:attrStringPath.letterPath];
-    DDLogInfo(@"Letter : %@", [self stringFromSceneUnicharLetter]);
+    NSString *combined = [NSString stringWithFormat:@"\nLetter : %@\n-----------------------------------\n", [self stringFromSceneUnicharLetter]];
     for (NSUInteger i = 0; i < array.count; i++) {
-        DDLogInfo(@"Element Type : %@\n", [array objectAtIndex:i]);
+        combined = [combined stringByAppendingString:@"Element Type : "];
+        combined  = [combined stringByAppendingString:[array objectAtIndex:i]];
+        combined  = [combined stringByAppendingString:@"\n"];
     }
+    DDLogInfo(@"%@", combined);
 #endif
     return letterPathNode;
 }
@@ -162,24 +175,64 @@
         if (i < array.count) {
             SKShapeNode *node = [SKShapeNode shapeNodeWithCircleOfRadius:5];
             node.fillColor = [SKColor redColor];
-            NSValue *pointValue = (NSValue *)[array objectAtIndex:i];
-            CGPoint point = [pointValue CGPointValue];
-            point.x += center.x;
-            point.y += center.y;
-            node.position = point;
             node.zPosition = 5;
-            SKLabelNode *label = [[SKLabelNode alloc] init];
-            label.text = [NSString stringWithFormat:@"%lu <%0.1f, %0.1f>",
-                          (unsigned long)i,
-                          point.x,
-                          point.y];
-            label.fontColor = [SKColor redColor];
-            label.fontSize = 15;
-            [node addChild:label];
-            [self addChild:node];
+            NSValue *pointValue = (NSValue *)[array objectAtIndex:i];
+            CGPoint position = [self adjustPoint:[pointValue CGPointValue] forPath:path withCenter:center];
+            node.position = position;
+            [self addPositionLabelToNode:node atIndex:i];
+            if ( ! CGPointEqualToPoint(node.position, CGPointZero)) {
+                [self addChild:node];
+            }
         }
     }
     DDLogDebug(@"%@", NSStringFromCGPoint(center));
+}
+
+- (CGPoint)adjustPoint:(CGPoint)point forPath:(CGPathRef)path withCenter:(CGPoint)center {
+    SKShapeNode *letter = (SKShapeNode *)[self childNodeWithName:LetterNodeName];
+/* Make initial adjustment */
+    if (point.x > HALF_OF(letter.frame.size.width) + 5) {
+        point.x -= 15;
+        if ( ! CGPathContainsPoint(path, nil, point, NO)) {
+            point.x += 30;
+        }
+    } else if (point.x < HALF_OF(letter.frame.size.width) - 5) {
+        point.x += 15;
+        if ( ! CGPathContainsPoint(path, nil, point, NO)) {
+            point.x -= 30;
+        }
+    }
+    if (point.y > HALF_OF(letter.frame.size.height) + 5) {
+        point.y -= 15;
+        if ( ! CGPathContainsPoint(path, nil, point, NO)) {
+            point.y += 30;
+        }
+    } else if (point.y < HALF_OF(letter.frame.size.height) - 5) {
+        point.y += 15;
+        if ( ! CGPathContainsPoint(path, nil, point, NO)) {
+            point.y -= 30;
+        }
+    }
+    if ( ! CGPathContainsPoint(path, nil, point, NO)) {
+        point = CGPointZero;
+    }
+    else {
+        point.x += center.x;
+        point.y += center.y;        
+    }
+    
+    return point;
+}
+
+- (void)addPositionLabelToNode:(SKShapeNode *)node atIndex:(NSUInteger)i  {
+    SKLabelNode *label = [[SKLabelNode alloc] init];
+    label.text = [NSString stringWithFormat:@"%lu <%0.1f, %0.1f>",
+                  (unsigned long)i,
+                  node.position.x,
+                  node.position.y];
+    label.fontColor = [SKColor redColor];
+    label.fontSize = 15;
+    [node addChild:label];
 }
 
 - (void)drawWaypointsAtCenter:(CGPoint)center OfPath:(CGPathRef)path {
@@ -241,22 +294,20 @@
 }
 #endif
 
+#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self];
-#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
     [self addEnvelopeAtPoint:touchPoint];
-#endif
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self];
-    
-#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
+
     [self moveLastPlacedEnvelopeToPoint:touchPoint];
-#endif
 }
+#endif
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];

@@ -12,9 +12,10 @@
 
 @implementation PathInfo
 
+static BOOL pathClosed = NO;
 void AddPathElementPointsToArray(void* info, const CGPathElement* element) {
     NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;
-    if (element != nil) {
+    if (element != nil && pathClosed == NO) {
         CGPoint *points = element->points;
         if (element->type != kCGPathElementCloseSubpath) {
             [pathPoints addObject:[NSValue valueWithCGPoint:points[0]]];
@@ -25,6 +26,9 @@ void AddPathElementPointsToArray(void* info, const CGPathElement* element) {
         }
         if (element->type == kCGPathElementAddCurveToPoint) {
             [pathPoints addObject:[NSValue valueWithCGPoint:points[2]]];
+        }
+        if (element->type == kCGPathElementCloseSubpath) {
+//            pathClosed = YES;
         }
     }
 }
@@ -64,6 +68,7 @@ void AddPathElementTypesToArray(void* info, const CGPathElement* element) {
 
 -(NSMutableArray *)TransformPathToArray:(CGPathRef)path {
     NSMutableArray *array = [NSMutableArray array];
+    pathClosed = NO;
     CGPathApply(path, (__bridge void *)(array), AddPathElementPointsToArray);
     return array;
 }

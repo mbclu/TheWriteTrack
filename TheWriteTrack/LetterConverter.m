@@ -20,9 +20,9 @@
         
         NSDictionary *attrDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         (__bridge id)fontRef, (NSString *)kCTFontAttributeName,
-                                        (id)[[UIColor clearColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
-                                        (id)[[UIColor clearColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
-                                        (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
+//                                        (id)[[UIColor clearColor] CGColor], (NSString *)kCTForegroundColorAttributeName,
+//                                        (id)[[UIColor clearColor] CGColor], (NSString *)kCTStrokeColorAttributeName,
+//                                        (id)[NSNumber numberWithFloat:-3.0], (NSString *)kCTStrokeWidthAttributeName,
                                         nil];
         
         attrString = [[NSAttributedString alloc] initWithString:attributelessString attributes:attrDictionary];
@@ -75,11 +75,16 @@
         {
             CGGlyph glyph;
             CGPoint position;
-            [self getSingleGlyph:&glyph AndPosition:&position InRun:run atIndex:runIndex];
+            
+            [self getSingleGlyph:&glyph
+                     AndPosition:&position
+                           InRun:run
+                         atIndex:runIndex];
+            
             [self addToLocation:location
-             LetterPath:letterPath
-             WithFont:runFont
-             AndGlyph:glyph];
+                     LetterPath:letterPath
+                       WithFont:runFont
+                       AndGlyph:glyph];
         }
     }
     

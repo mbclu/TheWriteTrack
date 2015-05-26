@@ -43,6 +43,7 @@
 		C73018271B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C730182A1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
 		C730182B1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
+		C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C730182C1B14907500266CB9 /* PathSegmentsTests.m */; };
 		C7340E761AF77F2400915C8C /* StartSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C7340E751AF77F2400915C8C /* StartSmoke.png */; };
 		C7360C571B04387500AEA146 /* StartButtonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C561B04387500AEA146 /* StartButtonConstants.m */; };
 		C7360C581B04387500AEA146 /* StartButtonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C561B04387500AEA146 /* StartButtonConstants.m */; };
@@ -121,6 +122,7 @@
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
 		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
 		C73018291B148FD400266CB9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = TheWriteTrack/Constants.m; sourceTree = SOURCE_ROOT; };
+		C730182C1B14907500266CB9 /* PathSegmentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentsTests.m; path = "TheWriteTrack-Tests/PathSegmentsTests.m"; sourceTree = SOURCE_ROOT; };
 		C7340E751AF77F2400915C8C /* StartSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StartSmoke.png; path = images/particles/StartSmoke.png; sourceTree = SOURCE_ROOT; };
 		C7360C561B04387500AEA146 /* StartButtonConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartButtonConstants.m; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
@@ -312,6 +314,7 @@
 				C7C4B8AC1A8C2CBF009FA11B /* LetterBaseSceneTests.m */,
 				C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */,
 				C75D0E0A1B0C285B006A71C8 /* TrainTests.m */,
+				C730182C1B14907500266CB9 /* PathSegmentsTests.m */,
 			);
 			name = "Track-Tests";
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				C7C4B8AD1A8C2CBF009FA11B /* LetterBaseSceneTests.m in Sources */,
 				C7E298261AFEEAA4007F593C /* PathInfoTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,
+				C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */,
 				C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */,
 				C7DB850B1AD48AA40026972B /* TitleSceneTests.m in Sources */,
 			);

@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface PathSegments : NSObject
+
+@property CGRect segmentBounds;
+@property NSMutableArray *segments;
 
 @end

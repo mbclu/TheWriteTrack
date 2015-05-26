@@ -8,7 +8,7 @@
 
 #import "AttributedStringPath.h"
 #import "LayoutMath.h"
-#import "LetterConstants.h"
+#import "Constants.h"
 
 @implementation AttributedStringPath
 @synthesize letterConverter;

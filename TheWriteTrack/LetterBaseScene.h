@@ -7,7 +7,7 @@
 //
 
 #import "GenericSpriteButton.h"
-#import "LetterConstants.h"
+#import "Constants.h"
 #import <SpriteKit/SpriteKit.h>
 
 #ifdef DEBUG

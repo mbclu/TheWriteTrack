@@ -12,7 +12,7 @@
 #import "CocoaLumberjack.h"
 #import "GenericSpriteButton.h"
 #import "LayoutMath.h"
-#import "LetterConstants.h"
+#import "Constants.h"
 #import "Train.h"
 
 #if (APP_SHOULD_DRAW_DOTS)

@@ -8,7 +8,7 @@
 
 #import "LetterConverter.h"
 #import "LayoutMath.h"
-#import "LetterConstants.h"
+#import "Constants.h"
 #import <UIKit/UIKit.h>
 
 @implementation LetterConverter

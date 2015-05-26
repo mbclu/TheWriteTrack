@@ -9,7 +9,7 @@
 #import "PathDots.h"
 #import "PathInfo.h"
 #import "CocoaLumberjack.h"
-#import "LetterConstants.h"
+#import "Constants.h"
 
 @implementation PathDots
 

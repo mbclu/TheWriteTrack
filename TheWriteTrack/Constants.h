@@ -1,5 +1,5 @@
 //
-//  LetterConstants.h
+//  Constants.h
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 5/13/15.

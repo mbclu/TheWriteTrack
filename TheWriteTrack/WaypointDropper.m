@@ -7,7 +7,7 @@
 //
 
 #import "WaypointDropper.h"
-#import "LetterConstants.h"
+#import "Constants.h"
 #import "CocoaLumberjack.h"
 #import <SpriteKit/SpriteKit.h>
 #import <UIKit/UIKit.h>

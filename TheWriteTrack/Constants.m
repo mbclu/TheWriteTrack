@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "LetterConstants.h"
+#import "Constants.h"
 
 CGFloat const LetterLineWidth = 10;
 NSString *const TrainNodeName = @"TrainNode";

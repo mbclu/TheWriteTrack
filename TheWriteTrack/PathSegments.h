@@ -13,6 +13,9 @@
 @property CGRect segmentBounds;
 @property NSMutableArray *segments;
 
-- (void)drawAllSegementsInScene:(SKScene *)scene;
+- (instancetype)initWithRect:(CGRect)rect;
+- (void)createRowSegmentsForColumn:(NSUInteger)column;
+- (void)createColumnSegmentsForRow:(NSUInteger)row;
+- (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene;
 
 @end

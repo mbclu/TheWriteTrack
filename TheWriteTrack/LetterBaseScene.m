@@ -47,7 +47,6 @@
         SKShapeNode* letterNode = [self createLetterPathNode:letterPath];
         CGPoint center = [self moveNodeToCenter:letterNode];
         [self addChild:letterNode];
-        DDLogDebug(@"Path line length = %f", letterNode.lineLength);
         
         [self addChild:[self createTrainNode:letterPath]];
         
@@ -64,7 +63,7 @@
         
 #if (APP_SHOULD_DRAW_SEGMENTS)
         PathSegments *pathSegments = [[PathSegments alloc] init];
-        [pathSegments drawAllSegementsInScene:self];
+        [pathSegments drawAllSegementsInCenter:center ofScene:self];
 #endif
     }
     return self;

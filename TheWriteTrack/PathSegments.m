@@ -9,7 +9,7 @@
 #import "PathSegments.h"
 #if (DEBUG)
     #import <CocoaLumberjack/CocoaLumberjack.h>
-    static const DDLogLevel ddLogLevel = DDLogLevelInfo;
+    #define APP_SHOULD_DRAW_ALL_SEGMENTS    1
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
@@ -31,11 +31,25 @@ const CGFloat boundingHeightPercentage = 0.75;
     [self setSegmentBounds:rect];
     _segments = [[NSMutableArray alloc] init];
     
+    [self calculateGridDimensions];
+    
     [self addVerticalSegments];
     [self addHorizontalSegments];
     [self addDiagonalSegments];
-
+    [self addCurvedSegments];
+    
     return self;
+}
+
+- (void)calculateGridDimensions {
+    _quarterHeight = _segmentBounds.size.height * 0.25;
+    _halfHeight = _segmentBounds.size.height * 0.5;
+    _threeQuarterHeight = _segmentBounds.size.height * 0.75;
+    _fullHeight = _segmentBounds.size.height;
+    _quarterWidth = _segmentBounds.size.width * 0.25;
+    _halfWidth = _segmentBounds.size.width * 0.5;
+    _threeQuarterWidth = _segmentBounds.size.width * 0.75;
+    _fullWidth = _segmentBounds.size.width;
 }
 
 - (void)addVerticalSegments {
@@ -57,6 +71,18 @@ const CGFloat boundingHeightPercentage = 0.75;
     [self createDiagonalSegmentsWithXShift:0.5 yShift:1.0 xOffset:4 yOffset:0];
     [self createDiagonalSegmentsWithXShift:1.0 yShift:1.0 xOffset:0 yOffset:0];
     [self createDiagonalSegmentsWithXShift:1.0 yShift:-1.0 xOffset:0 yOffset:-4];
+}
+
+- (void)addCurvedSegments {
+    [self addCurveSegmentsWithXStart:_halfWidth YStart:0 XControl:0 YControl:0 XEnd:0 YEnd:_quarterHeight];
+    [self addCurveSegmentsWithXStart:0 YStart:_quarterHeight XControl:0 YControl:_halfHeight XEnd:_halfWidth YEnd:_halfHeight];
+    [self addCurveSegmentsWithXStart:_halfWidth YStart:_halfHeight XControl:0 YControl:_halfHeight XEnd:0 YEnd:_threeQuarterHeight];
+    [self addCurveSegmentsWithXStart:0 YStart:_threeQuarterHeight XControl:0 YControl:_fullHeight XEnd:_halfWidth YEnd:_fullHeight];
+    
+    [self addCurveSegmentsWithXStart:_halfWidth YStart:_fullHeight XControl:_fullWidth YControl:_fullHeight XEnd:_fullWidth YEnd:_threeQuarterHeight];
+    [self addCurveSegmentsWithXStart:_fullWidth YStart:_threeQuarterHeight XControl:_fullWidth YControl:_halfHeight XEnd:_halfWidth YEnd:_halfHeight];
+    [self addCurveSegmentsWithXStart:_halfWidth YStart:_halfHeight XControl:_fullWidth YControl:_halfHeight XEnd:_fullWidth YEnd:_quarterHeight];
+    [self addCurveSegmentsWithXStart:_fullWidth YStart:_quarterHeight XControl:_fullWidth YControl:0 XEnd:_halfWidth YEnd:0];
 }
 
 - (void)createColumnSegmentsForRow:(NSUInteger)row {
@@ -99,13 +125,34 @@ const CGFloat boundingHeightPercentage = 0.75;
 //#endif
 }
 
+- (void)addCurveSegmentsWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart
+                          XControl:(CGFloat)xControl YControl:(CGFloat)yControl
+                              XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd {
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, nil, xStart, yStart);
+    CGPathAddQuadCurveToPoint(path, nil, xControl, yControl, xEnd, yEnd);
+    [_segments addObject:(__bridge id)(path)];
+}
+
 - (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene {
-#if (DEBUG)
+#if (APP_SHOULD_DRAW_ALL_SEGMENTS)
     for (NSUInteger i = 0; i < _segments.count; i++) {
-        SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:(CGPathRef)[_segments objectAtIndex:i]];
-        segmentNode.strokeColor = [SKColor blueColor];
+        CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:i];
+        SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:path];
+        segmentNode.strokeColor = [SKColor whiteColor];
         segmentNode.lineWidth = 10;
         segmentNode.position = center;
+        
+        SKLabelNode *labelNode = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%lu", (unsigned long)i]];
+        labelNode.fontSize = 20;
+        labelNode.fontColor  = [SKColor blackColor];
+        CGRect pathBounds = CGPathGetBoundingBox(path);
+        CGPoint labelNodePosition = CGPointMake(pathBounds.origin.x + pathBounds.size.width * 0.5,
+                                                pathBounds.origin.y + pathBounds.size.height * 0.5);
+        labelNode.position = labelNodePosition;
+        labelNode.zPosition = 200;
+        [segmentNode addChild:labelNode];
+        
         [scene addChild:segmentNode];
     }
 #endif

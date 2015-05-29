@@ -12,10 +12,27 @@
 
 @property CGRect segmentBounds;
 @property NSMutableArray *segments;
+@property CGFloat quarterHeight;
+@property CGFloat halfHeight;
+@property CGFloat threeQuarterHeight;
+@property CGFloat fullHeight;
+@property CGFloat quarterWidth;
+@property CGFloat halfWidth;
+@property CGFloat threeQuarterWidth;
+@property CGFloat fullWidth;
 
 - (instancetype)initWithRect:(CGRect)rect;
+
+- (void)calculateGridDimensions;
+
 - (void)createRowSegmentsForColumn:(NSUInteger)column;
+
 - (void)createColumnSegmentsForRow:(NSUInteger)row;
+
 - (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene;
+
+- (void)addCurveSegmentsWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart
+                          XControl:(CGFloat)xControl YControl:(CGFloat)yControl
+                              XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd;
 
 @end

@@ -246,3 +246,72 @@ const NSUInteger numberOfVFrameSegments = 8;
 }
 
 @end
+
+@interface CurveSegmentsTests : XCTestCase {
+    PathSegments *theSegments;
+    id theMockSegments;
+}
+@end
+
+@implementation CurveSegmentsTests
+
+- (void)setUp {
+    [super setUp];
+    
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
+                                forKey:@"orientation"];
+    
+    theSegments = [PathSegments alloc];
+    theMockSegments = OCMPartialMock(theSegments);
+    XCTAssertNotNil([theSegments initWithRect:CGRectMake(0, 0, 8, 8)]);
+}
+
+- (void)tearDown {
+    [super tearDown];
+}
+
+- (void)testTheGridIsDefinedAsAFourByFour {
+    XCTAssertEqual(theSegments.quarterHeight, 2);
+    XCTAssertEqual(theSegments.halfHeight, 4);
+    XCTAssertEqual(theSegments.threeQuarterHeight, 6);
+    XCTAssertEqual(theSegments.fullHeight, 8);
+    XCTAssertEqual(theSegments.quarterWidth, 2);
+    XCTAssertEqual(theSegments.halfWidth, 4);
+    XCTAssertEqual(theSegments.threeQuarterWidth, 6);
+    XCTAssertEqual(theSegments.fullWidth, 8);
+}
+
+- (void)testThe_LowerLeft_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:0 XControl:0 YControl:0 XEnd:0 YEnd:2]);
+}
+
+- (void)testThe_SecondLeft_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:0 YStart:2 XControl:0 YControl:4 XEnd:4 YEnd:4]);
+}
+
+- (void)testThe_ThirdLeft_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:4 XControl:0 YControl:4 XEnd:0 YEnd:6]);
+}
+
+- (void)testThe_UpperLeft_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:0 YStart:6 XControl:0 YControl:8 XEnd:4 YEnd:8]);
+}
+
+- (void)testThe_UpperRight_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:8 XControl:8 YControl:8 XEnd:8 YEnd:6]);
+}
+
+- (void)testThe_SecondRight_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:6 XControl:8 YControl:4 XEnd:4 YEnd:4]);
+}
+
+- (void)testThe_ThirdRight_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:4 XControl:8 YControl:4 XEnd:8 YEnd:2]);
+}
+
+- (void)testThe_LowerRight_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:2 XControl:8 YControl:0 XEnd:4 YEnd:0]);
+}
+
+@end

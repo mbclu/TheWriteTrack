@@ -20,7 +20,7 @@
         if (i < array.count) {
             SKShapeNode *node = [SKShapeNode shapeNodeWithCircleOfRadius:5];
             node.fillColor = [SKColor redColor];
-            node.zPosition = 5;
+            node.zPosition = 300;
             NSValue *pointValue = (NSValue *)[array objectAtIndex:i];
             CGPoint position = [self adjustPoint:[pointValue CGPointValue] forPath:path withCenter:center inScene:scene];
             node.position = position;

@@ -66,7 +66,7 @@ void AddPathElementTypesToArray(void* info, const CGPathElement* element) {
     }
 }
 
--(NSMutableArray *)TransformPathToArray:(CGPathRef)path {
+- (NSMutableArray *)TransformPathToArray:(CGPathRef)path {
     NSMutableArray *array = [NSMutableArray array];
     pathClosed = NO;
     CGPathApply(path, (__bridge void *)(array), AddPathElementPointsToArray);

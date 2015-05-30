@@ -7,7 +7,12 @@
 //
 
 #import "PathSegments.h"
+
+
+#import "PathSegmentsIndeces.h"
 #if (DEBUG)
+    #import "PathDots.h"
+    #import "PathInfo.h"
     #import <CocoaLumberjack/CocoaLumberjack.h>
     #define APP_SHOULD_DRAW_ALL_SEGMENTS    1
 #endif
@@ -134,27 +139,85 @@ const CGFloat boundingHeightPercentage = 0.75;
     [_segments addObject:(__bridge id)(path)];
 }
 
+static inline float degreesToRadians(double degrees) { return degrees * M_PI / 180; }
+
+- (void)addCrossbarWithSlope:(CGFloat)slope andPosition:(CGPoint)position toCenter:(CGPoint)center ofScene:(SKScene *)scene {
+    CGFloat angleInRadians = atanf(slope);
+    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
+    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x + center.x, position.y + center.y);
+
+    CGMutablePathRef crossbar = CGPathCreateMutable();
+    CGPathMoveToPoint(crossbar, nil, -20, 0);
+    CGPathAddLineToPoint(crossbar, nil, 20, 0);
+    
+    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &zeroTransform);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
+    
+    SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:crossbar];
+    crossbarNode.lineWidth = 8;
+    crossbarNode.strokeColor = [SKColor brownColor];
+    crossbarNode.zPosition = 10;
+    
+    [scene addChild:crossbarNode];
+}
+
+- (void)addAllCrossbarsForPath:(CGPathRef)path toCenter:(CGPoint)center ofScene:(SKScene *)scene {
+    PathInfo *pathInfo = [[PathInfo alloc] init];
+    NSArray *pathArray = [pathInfo TransformPathToArray:path];
+    
+    for (NSUInteger j = 1; j < pathArray.count; j++) {
+        CGPoint end = [[pathArray objectAtIndex:j] CGPointValue];
+        CGPoint start = [[pathArray objectAtIndex:j - 1] CGPointValue];
+        CGFloat yChange = (end.y - start.y);
+        CGFloat xChange = (end.x - start.x);
+        CGFloat slope = yChange / xChange;
+        for (NSInteger k = 0; k < 5; k++) {
+            if (!isnan(slope) && !isinf(slope)) {
+                CGFloat xNew = (start.x + (xChange * k / 5));
+                CGFloat yNew = (start.y + (yChange * k / 5));
+                [self addCrossbarWithSlope:slope andPosition:CGPointMake(xNew, yNew) toCenter:center ofScene:scene];
+            }
+        }
+        [self addCrossbarWithSlope:slope andPosition:end toCenter:center ofScene:scene];
+    }
+}
+
 - (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene {
 #if (APP_SHOULD_DRAW_ALL_SEGMENTS)
-    for (NSUInteger i = 0; i < _segments.count; i++) {
-        CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:i];
-        SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:path];
-        segmentNode.strokeColor = [SKColor whiteColor];
-        segmentNode.lineWidth = 10;
-        segmentNode.position = center;
+    NSArray *letterKeys = [NSArray arrayWithObjects:@"A", nil];
+    NSMutableArray *letterValues = [[NSMutableArray alloc] init];
+    NSArray *A_Values = [NSArray arrayWithObjects:a43, a42, a41, a44, a45, a46, h29, h30, nil];
+    NSArray *B_Values = [NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil];
+    
+    [letterValues addObject:A_Values];
+    [letterValues addObject:B_Values];
+//    NSDictionary *letterDictionary = [NSDictionary dictionaryWithObjects:letterValues forKeys:letterKeys];
+    
+    CGMutablePathRef combinedPath = CGPathCreateMutable();
+    
+    for (NSUInteger i = 0; i < A_Values.count; i++) {
+        NSInteger segmentIndex = [[A_Values objectAtIndex:i] integerValue];
+        CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
+
+        [self addAllCrossbarsForPath:path toCenter:center ofScene:scene];
         
-        SKLabelNode *labelNode = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%lu", (unsigned long)i]];
-        labelNode.fontSize = 20;
-        labelNode.fontColor  = [SKColor blackColor];
-        CGRect pathBounds = CGPathGetBoundingBox(path);
-        CGPoint labelNodePosition = CGPointMake(pathBounds.origin.x + pathBounds.size.width * 0.5,
-                                                pathBounds.origin.y + pathBounds.size.height * 0.5);
-        labelNode.position = labelNodePosition;
-        labelNode.zPosition = 200;
-        [segmentNode addChild:labelNode];
-        
-        [scene addChild:segmentNode];
+        CGPathAddPath(combinedPath, nil, path);
     }
+    
+    CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
+
+    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 25.0, kCGLineCapButt, kCGLineJoinRound, 1.0)];
+    outlineNode.lineWidth = 10.0;
+    outlineNode.strokeColor = [SKColor darkGrayColor];
+    
+    SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
+    segmentNode.strokeColor = [SKColor lightGrayColor];
+    segmentNode.lineWidth = 20.0;
+
+    [scene addChild:outlineNode];
+    [scene addChild:segmentNode];
 #endif
 }
 

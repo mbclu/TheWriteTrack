@@ -18,7 +18,7 @@
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
-const NSInteger crossbarsPerSegment = 5;
+const NSInteger crossbarsPerSegment = 4;
 const NSUInteger numberOfCurvedSegments = 8;
 const NSUInteger numberOfValuesDefiningQuadCurve = 6;
 const CGFloat oneOverTheNumberOfSegments = 1.0 / segmentsPerDimension;
@@ -187,7 +187,7 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     [scene addChild:crossbarNode];
 }
 
-- (void)addAllCrossbarsForPath:(CGPathRef)path toCenter:(CGPoint)center ofScene:(SKScene *)scene {
+- (void)addCrossbarsForStraightPath:(CGPathRef)path toCenter:(CGPoint)center ofScene:(SKScene *)scene {
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSArray *pathArray = [pathInfo TransformPathToArray:path];
     
@@ -208,15 +208,45 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     }
 }
 
-float QuadBezier(float t, float start, float c1, float end)
+float interpolateQuadBezier(const CGFloat step, const CGFloat start, const CGFloat control, const CGFloat end)
 {
-    CGFloat t_ = (1.0 - t);
-    CGFloat tt_ = t_ * t_;
-    CGFloat tt = t * t;
+    const CGFloat percent = (1.0 - step);
+    const CGFloat percentSquared = percent * percent;
+    const CGFloat stepSquared = step * step;
     
-    return start * tt_
-    + 2.0 *  c1 * t_ * t
-    + end * tt;
+    return start * percentSquared
+            + 2.0 *  control * percent * step
+            + end * stepSquared;
+}
+
+float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat control, const CGFloat end)
+{
+    const CGFloat percent = (1.0 - step);
+    
+    return 2.0 * percent * (control - start)
+    + 2.0 * step * (end - control);
+}
+
+
+- (void)addCrossbarsForCurve:(NSUInteger)curveIndex atCenter:(CGPoint)center ofScene:(SKScene *)scene {
+    CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
+    [self getCurveDefintions:curvePoints];
+    for (CGFloat t = 0.05; t < 1.0; t += 0.1) {
+        CGPoint interpolationPoint = CGPointMake(interpolateQuadBezier(t, curvePoints[curveIndex][0], curvePoints[curveIndex][2], curvePoints[curveIndex][4]) + center.x,
+                                                 interpolateQuadBezier(t, curvePoints[curveIndex][1], curvePoints[curveIndex][3], curvePoints[curveIndex][5]) + center.y);
+        
+        CGPoint tangent = CGPointMake(tangentQuadBezier(t, curvePoints[curveIndex][0], curvePoints[curveIndex][2], curvePoints[curveIndex][4]),
+                                      tangentQuadBezier(t, curvePoints[curveIndex][1], curvePoints[curveIndex][3], curvePoints[curveIndex][5]));
+        
+        float y2 = interpolationPoint.y + tangent.y;
+        float y1 = interpolationPoint.y;
+        float x2 = interpolationPoint.x + tangent.x;
+        float x1 = interpolationPoint.x;
+        
+        CGFloat slope = (y2 - y1) / (x2 - x1);
+        
+        [self addCrossbarWithSlope:(slope) andPosition:CGPointMake(interpolationPoint.x, interpolationPoint.y) toCenter:CGPointZero ofScene:scene];
+    }
 }
 
 - (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene {
@@ -236,7 +266,12 @@ float QuadBezier(float t, float start, float c1, float end)
         NSInteger segmentIndex = [[B_Values objectAtIndex:i] integerValue];
         CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
 
-        [self addAllCrossbarsForPath:path toCenter:center ofScene:scene];
+        if (segmentIndex < [c64 integerValue]) {
+            [self addCrossbarsForStraightPath:path toCenter:center ofScene:scene];
+        }
+        else {
+            [self addCrossbarsForCurve:(segmentIndex - [c64 integerValue]) atCenter:center ofScene:scene];
+        }
         
         CGPathAddPath(combinedPath, nil, path);
     }
@@ -252,11 +287,7 @@ float QuadBezier(float t, float start, float c1, float end)
     segmentNode.lineWidth = 20.0;
 
     [scene addChild:outlineNode];
-
-    CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
-    [self getCurveDefintions:curvePoints];
-//    QuadBezier(<#float t#>, <#float start#>, <#float c1#>, <#float end#>)
-//    [scene addChild:segmentNode];
+    [scene addChild:segmentNode];
 #endif
 }
 

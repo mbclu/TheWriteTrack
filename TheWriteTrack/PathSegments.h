@@ -8,7 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface PathSegments : NSObject
+@interface PathSegments : NSObject {
+}
 
 @property CGRect segmentBounds;
 @property NSMutableArray *segments;

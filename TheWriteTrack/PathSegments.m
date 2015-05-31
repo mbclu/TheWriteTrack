@@ -18,6 +18,9 @@
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
+const NSInteger crossbarsPerSegment = 5;
+const NSUInteger numberOfCurvedSegments = 8;
+const NSUInteger numberOfValuesDefiningQuadCurve = 6;
 const CGFloat oneOverTheNumberOfSegments = 1.0 / segmentsPerDimension;
 const CGFloat boundingWidthPercentage = 0.35;
 const CGFloat boundingHeightPercentage = 0.75;
@@ -78,16 +81,34 @@ const CGFloat boundingHeightPercentage = 0.75;
     [self createDiagonalSegmentsWithXShift:1.0 yShift:-1.0 xOffset:0 yOffset:-4];
 }
 
+
 - (void)addCurvedSegments {
-    [self addCurveSegmentsWithXStart:_halfWidth YStart:0 XControl:0 YControl:0 XEnd:0 YEnd:_quarterHeight];
-    [self addCurveSegmentsWithXStart:0 YStart:_quarterHeight XControl:0 YControl:_halfHeight XEnd:_halfWidth YEnd:_halfHeight];
-    [self addCurveSegmentsWithXStart:_halfWidth YStart:_halfHeight XControl:0 YControl:_halfHeight XEnd:0 YEnd:_threeQuarterHeight];
-    [self addCurveSegmentsWithXStart:0 YStart:_threeQuarterHeight XControl:0 YControl:_fullHeight XEnd:_halfWidth YEnd:_fullHeight];
+    CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
+    [self getCurveDefintions:curvePoints];
+    for (NSUInteger i = 0; i < 8; i++) {
+        [self addCurveSegmentsWithXStart:curvePoints[i][0] YStart:curvePoints[i][1]
+                                XControl:curvePoints[i][2] YControl:curvePoints[i][3]
+                                    XEnd:curvePoints[i][4] YEnd:curvePoints[i][5]];
+    }
+}
+
+- (void)getCurveDefintions:(CGFloat[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve])points {
+    CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve] = {
+        { _halfWidth, 0.0, 0.0, 0.0, 0.0, _quarterHeight },
+        { 0, _quarterHeight, 0, _halfHeight, _halfWidth, _halfHeight },
+        { _halfWidth, _halfHeight, 0, _halfHeight, 0, _threeQuarterHeight },
+        { 0, _threeQuarterHeight, 0, _fullHeight, _halfWidth, _fullHeight },
+        { _halfWidth, _fullHeight, _fullWidth, _fullHeight, _fullWidth, _threeQuarterHeight },
+        { _fullWidth, _threeQuarterHeight, _fullWidth, _halfHeight, _halfWidth, _halfHeight },
+        { _halfWidth, _halfHeight, _fullWidth, _halfHeight, _fullWidth, _quarterHeight },
+        { _fullWidth, _quarterHeight, _fullWidth, 0, _halfWidth, 0 }
+    };
     
-    [self addCurveSegmentsWithXStart:_halfWidth YStart:_fullHeight XControl:_fullWidth YControl:_fullHeight XEnd:_fullWidth YEnd:_threeQuarterHeight];
-    [self addCurveSegmentsWithXStart:_fullWidth YStart:_threeQuarterHeight XControl:_fullWidth YControl:_halfHeight XEnd:_halfWidth YEnd:_halfHeight];
-    [self addCurveSegmentsWithXStart:_halfWidth YStart:_halfHeight XControl:_fullWidth YControl:_halfHeight XEnd:_fullWidth YEnd:_quarterHeight];
-    [self addCurveSegmentsWithXStart:_fullWidth YStart:_quarterHeight XControl:_fullWidth YControl:0 XEnd:_halfWidth YEnd:0];
+    for (NSUInteger i = 0; i < numberOfCurvedSegments; i++) {
+        for (NSUInteger j = 0; j < numberOfValuesDefiningQuadCurve; j++) {
+            points[i][j] = curvePoints[i][j];
+        }
+    }
 }
 
 - (void)createColumnSegmentsForRow:(NSUInteger)row {
@@ -139,18 +160,21 @@ const CGFloat boundingHeightPercentage = 0.75;
     [_segments addObject:(__bridge id)(path)];
 }
 
+
+/*** Unfortunately, NOT much testing after this point ***/
+
 static inline float degreesToRadians(double degrees) { return degrees * M_PI / 180; }
 
 - (void)addCrossbarWithSlope:(CGFloat)slope andPosition:(CGPoint)position toCenter:(CGPoint)center ofScene:(SKScene *)scene {
     CGFloat angleInRadians = atanf(slope);
     CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
+    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
     CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x + center.x, position.y + center.y);
 
     CGMutablePathRef crossbar = CGPathCreateMutable();
     CGPathMoveToPoint(crossbar, nil, -20, 0);
     CGPathAddLineToPoint(crossbar, nil, 20, 0);
     
-    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &zeroTransform);
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
@@ -168,15 +192,15 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     NSArray *pathArray = [pathInfo TransformPathToArray:path];
     
     for (NSUInteger j = 1; j < pathArray.count; j++) {
-        CGPoint end = [[pathArray objectAtIndex:j] CGPointValue];
         CGPoint start = [[pathArray objectAtIndex:j - 1] CGPointValue];
+        CGPoint end = [[pathArray objectAtIndex:j] CGPointValue];
         CGFloat yChange = (end.y - start.y);
         CGFloat xChange = (end.x - start.x);
         CGFloat slope = yChange / xChange;
-        for (NSInteger k = 0; k < 5; k++) {
+        for (NSInteger k = 0; k < crossbarsPerSegment; k++) {
             if (!isnan(slope) && !isinf(slope)) {
-                CGFloat xNew = (start.x + (xChange * k / 5));
-                CGFloat yNew = (start.y + (yChange * k / 5));
+                CGFloat xNew = (start.x + (xChange * k / crossbarsPerSegment));
+                CGFloat yNew = (start.y + (yChange * k / crossbarsPerSegment));
                 [self addCrossbarWithSlope:slope andPosition:CGPointMake(xNew, yNew) toCenter:center ofScene:scene];
             }
         }
@@ -184,12 +208,23 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     }
 }
 
+float QuadBezier(float t, float start, float c1, float end)
+{
+    CGFloat t_ = (1.0 - t);
+    CGFloat tt_ = t_ * t_;
+    CGFloat tt = t * t;
+    
+    return start * tt_
+    + 2.0 *  c1 * t_ * t
+    + end * tt;
+}
+
 - (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene {
 #if (APP_SHOULD_DRAW_ALL_SEGMENTS)
-    NSArray *letterKeys = [NSArray arrayWithObjects:@"A", nil];
+    const NSArray *letterKeys = [NSArray arrayWithObjects:@"A", nil];
     NSMutableArray *letterValues = [[NSMutableArray alloc] init];
-    NSArray *A_Values = [NSArray arrayWithObjects:a43, a42, a41, a44, a45, a46, h29, h30, nil];
-    NSArray *B_Values = [NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil];
+    const NSArray *A_Values = [NSArray arrayWithObjects:a43, a42, a41, a44, a45, a46, h29, h30, nil];
+    const NSArray *B_Values = [NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil];
     
     [letterValues addObject:A_Values];
     [letterValues addObject:B_Values];
@@ -197,8 +232,8 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     
     CGMutablePathRef combinedPath = CGPathCreateMutable();
     
-    for (NSUInteger i = 0; i < A_Values.count; i++) {
-        NSInteger segmentIndex = [[A_Values objectAtIndex:i] integerValue];
+    for (NSUInteger i = 0; i < B_Values.count; i++) {
+        NSInteger segmentIndex = [[B_Values objectAtIndex:i] integerValue];
         CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
 
         [self addAllCrossbarsForPath:path toCenter:center ofScene:scene];
@@ -208,7 +243,7 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     
     CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
 
-    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 25.0, kCGLineCapButt, kCGLineJoinRound, 1.0)];
+    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 25.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
     outlineNode.lineWidth = 10.0;
     outlineNode.strokeColor = [SKColor darkGrayColor];
     
@@ -217,7 +252,11 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     segmentNode.lineWidth = 20.0;
 
     [scene addChild:outlineNode];
-    [scene addChild:segmentNode];
+
+    CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
+    [self getCurveDefintions:curvePoints];
+//    QuadBezier(<#float t#>, <#float start#>, <#float c1#>, <#float end#>)
+//    [scene addChild:segmentNode];
 #endif
 }
 

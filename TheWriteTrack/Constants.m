@@ -11,6 +11,7 @@
 CGFloat const LetterLineWidth = 10;
 NSString *const TrainNodeName = @"TrainNode";
 NSString *const LetterNodeName = @"LetterNode";
+NSString *const LetterOutlineName = @"LetterOutlineNode";
 NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 NSString *const PreviousButtonName = @"PreviousButton";

@@ -11,11 +11,10 @@
 
 @interface Train : SKSpriteNode
 
-@property (nonatomic, retain) AttributedStringPath* letterPath;
+@property (nonatomic) CGPathRef letterPath;
 @property (nonatomic, retain) NSArray *waypoints;
 
-//NS_DESIGNATED_INITIALIZER
-- (instancetype)initWithAttributedStringPath:(AttributedStringPath*)letterPath;
+- (instancetype)initWithPath:(CGPathRef)letterPath;
 - (instancetype)init NS_UNAVAILABLE;
 - (void)positionTrainAtStartPoint;
 

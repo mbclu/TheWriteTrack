@@ -14,15 +14,12 @@
 #import "LayoutMath.h"
 #import "Constants.h"
 #import "Train.h"
+#import "PathSegments.h"
 
 #if (APP_SHOULD_DRAW_DOTS)
     #import "PathDots.h"
 #endif
 
-#define APP_SHOULD_DRAW_SEGMENTS 1
-#if (APP_SHOULD_DRAW_SEGMENTS)
-    #import "PathSegments.h"
-#endif
 @implementation LetterBaseScene
 
 @synthesize nextButtonProperty = nextButton;
@@ -46,12 +43,19 @@
         AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
         SKShapeNode* letterNode = [self createLetterPathNode:letterPath];
         CGPoint center = [self moveNodeToCenter:letterNode];
-        [self addChild:letterNode];
-        
-        [self addChild:[self createTrainNode:letterPath]];
+        CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
+//        [self addChild:letterNode];
         
         [self connectSceneTransitions];
+
+        PathSegments *pathSegments = [[PathSegments alloc] init];
+        [pathSegments generateCombinedPathAndCrossbarsForLetter:self.name atCenter:center];
+        [self addChild:[self createTrackPathNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
+        [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
+        [self addCrossbars:pathSegments.crossbars];
         
+        [self addChild:[self createTrainNodeWithPath:pathSegments.combinedPath]];
+
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
         [dots drawDotsAtCenter:center OfPath:letterPath.letterPath inScene:self];
@@ -59,12 +63,6 @@
         
 #if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
         wpDropper = [[WaypointDropper alloc] initForLetter:[self stringFromSceneUnicharLetter]];
-#endif
-        
-#if (APP_SHOULD_DRAW_SEGMENTS)
-        PathSegments *pathSegments = [[PathSegments alloc] init];
-        [pathSegments drawUpperCaseLetter:self.name atCenter:center ofScene:self];
-//        [pathSegments drawAllSegementsInCenter:center ofScene:self];
 #endif
     }
     return self;
@@ -118,8 +116,30 @@
     return letterPathNode;
 }
 
-- (SKNode *)createTrainNode:(AttributedStringPath *)attrStringPath {
-    Train *trainNode = [[Train alloc] initWithAttributedStringPath:attrStringPath];
+- (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
+    SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
+    segmentNode.name = LetterNodeName;
+    segmentNode.strokeColor = [SKColor lightGrayColor];
+    segmentNode.lineWidth = 20.0;
+    return segmentNode;
+}
+
+- (SKShapeNode *)createTrackPathNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
+    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 25.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
+    outlineNode.name = LetterOutlineName;
+    outlineNode.lineWidth = 10.0;
+    outlineNode.strokeColor = [SKColor darkGrayColor];
+    return outlineNode;
+}
+
+- (void)addCrossbars:(NSArray *)crossbars {
+    for (NSUInteger i = 0; i < crossbars.count; i++) {
+        [self addChild:(SKShapeNode *)[crossbars objectAtIndex:i]];
+    }
+}
+
+- (SKNode *)createTrainNodeWithPath:(CGPathRef)path {
+    Train *trainNode = [[Train alloc] initWithPath:path];
     trainNode.name = TrainNodeName;
     return trainNode;
 }

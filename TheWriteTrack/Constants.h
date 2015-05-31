@@ -12,6 +12,7 @@
 FOUNDATION_EXPORT CGFloat const LetterLineWidth;
 FOUNDATION_EXPORT NSString *const TrainNodeName;
 FOUNDATION_EXPORT NSString *const LetterNodeName;
+FOUNDATION_EXPORT NSString *const LetterOutlineName;
 FOUNDATION_EXPORT NSString *const RockyBackgroundName;
 FOUNDATION_EXPORT NSString *const NextButtonName;
 FOUNDATION_EXPORT NSString *const PreviousButtonName;

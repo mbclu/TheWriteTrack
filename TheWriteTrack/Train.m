@@ -7,18 +7,25 @@
 //
 
 #import "Train.h"
+#import "PathInfo.h"
 
 NSString *const MagicTrainName = @"MagicTrain";
 NSString *const TrainName = @"Train";
 
 @implementation Train
 
-- (instancetype)initWithAttributedStringPath:(AttributedStringPath*)letterPath {
+- (instancetype)initWithPath:(CGPathRef)letterPath {
     self = [super initWithImageNamed:MagicTrainName];
-    self.name = TrainName;
+    
+    [self setName:TrainName];
+    
     [self setLetterPath:letterPath];
-    [self setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:CGPointMake(100, 100)]]];
-    [self positionTrainAtStartPoint];
+    
+    PathInfo *pathInfo = [[PathInfo alloc] init];
+    [self setWaypoints:[pathInfo TransformPathToArray:_letterPath]];
+
+//    [self positionTrainAtStartPoint];
+    
     return self;
 }
 

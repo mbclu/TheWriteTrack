@@ -23,7 +23,7 @@
 
 - (void)setUp {
     [super setUp];
-    theTrain = [[Train alloc] initWithAttributedStringPath:nil];
+    theTrain = [[Train alloc] initWithPath:CGPathCreateMutable()];
 }
 
 - (void)tearDown {
@@ -38,15 +38,11 @@
     XCTAssertEqualObjects(theTrain.name, @"Train");
 }
 
-- (void)testWhenNoAttributedStringPathIsProvidedItIsNil {
-    XCTAssertNil(theTrain.letterPath);
-}
-
-- (void)testWhenAnAttributedStringPathIsProvidedThenThatStringPathIsUsedAsTheTrainsLetterPath {
+- (void)testWhenAPathIsProvidedThenThatPathIsTheTrainsPath {
     AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:@"M"];
-    Train *aTrain = [[Train alloc] initWithAttributedStringPath:letterPath];
-    XCTAssertNotNil(aTrain.letterPath);
-    XCTAssertEqualObjects(aTrain.letterPath, letterPath);
+    Train *aTrain = [[Train alloc] initWithPath:letterPath.letterPath];
+    XCTAssertFalse(CGPathIsEmpty(aTrain.letterPath));
+    XCTAssertTrue(CGPathEqualToPath(aTrain.letterPath, letterPath.letterPath));
 }
 
 - (void)testTrainHasASetOfPointsToFollowWithAtLeastOnePointInIt {

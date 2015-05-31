@@ -12,7 +12,7 @@
 
 #ifdef DEBUG
     #define APP_SHOULD_DRAW_DOTS                0
-    #define APP_SHOULD_ALLOW_CREATING_WAYPOINTS 1
+    #define APP_SHOULD_ALLOW_CREATING_WAYPOINTS 0
 #endif
 #if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
     #import "WaypointDropper.h"
@@ -36,5 +36,6 @@ FOUNDATION_EXPORT NSString *const NextButtonName;
 - (void)transitionToNextScene;
 - (void)transitionToPreviousScene;
 - (void)connectSceneTransitions;
+- (void)addCrossbars:(NSArray *)crossbars;
 
 @end

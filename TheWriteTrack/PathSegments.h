@@ -21,6 +21,7 @@
 @property CGFloat halfWidth;
 @property CGFloat threeQuarterWidth;
 @property CGFloat fullWidth;
+@property CGMutablePathRef combinedPath;
 @property NSMutableArray *crossbars;
 
 - (instancetype)initWithRect:(CGRect)rect;
@@ -35,8 +36,6 @@
                           XControl:(CGFloat)xControl YControl:(CGFloat)yControl
                               XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd;
 
-- (void)drawUpperCaseLetter:(NSString *)letter atCenter:(CGPoint)center ofScene:(SKScene *)scene;
-    
-- (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene;
+- (void)generateCombinedPathAndCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center;
 
 @end

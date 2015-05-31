@@ -13,7 +13,6 @@
     #import "PathDots.h"
     #import "PathInfo.h"
     #import <CocoaLumberjack/CocoaLumberjack.h>
-    #define APP_SHOULD_DRAW_ALL_SEGMENTS    0
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
@@ -175,41 +174,20 @@ const CGFloat boundingHeightPercentage = 0.75;
 
 /*** Unfortunately, NOT much testing after this point ***/
 
-- (void)drawUpperCaseLetter:(NSString *)letter atCenter:(CGPoint)center ofScene:(SKScene *)scene {
+- (void)generateCombinedPathAndCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center {
     _crossbars = [[NSMutableArray alloc] init];
+    _combinedPath = CGPathCreateMutable();
     
     NSDictionary *letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
     NSArray *letterSegments = [letterSegmentDictionary objectForKey:letter];
-    
-    CGMutablePathRef combinedPath = CGPathCreateMutable();
     
     for (NSUInteger i = 0; i < letterSegments.count; i++) {
         NSInteger segmentIndex = [[letterSegments objectAtIndex:i] integerValue];
         CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
         
-        CGPathAddPath(combinedPath, nil, path);
+        CGPathAddPath(_combinedPath, nil, path);
         
         [self createCrossbarsForSegment:path atCenter:center withIndex:segmentIndex];
-    }
-    
-    [self addTrack:combinedPath atCenter:center ofScene:scene];
-}
-
-- (void)addTrack:(CGPathRef)combinedPath atCenter:(CGPoint)center ofScene:(SKScene *)scene {
-    CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
-    
-    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 25.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
-    outlineNode.lineWidth = 10.0;
-    outlineNode.strokeColor = [SKColor darkGrayColor];
-    [scene addChild:outlineNode];
-    
-    SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
-    segmentNode.strokeColor = [SKColor lightGrayColor];
-    segmentNode.lineWidth = 20.0;
-    [scene addChild:segmentNode];
-    
-    for (NSUInteger i = 0; i < _crossbars.count; i++) {
-        [scene addChild:(SKShapeNode *)[_crossbars objectAtIndex:i]];
     }
 }
 
@@ -309,46 +287,6 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
     crossbarNode.strokeColor = [SKColor brownColor];
     
     [_crossbars addObject:crossbarNode];
-}
-
-- (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene {
-#if (APP_SHOULD_DRAW_ALL_SEGMENTS)
-    const NSArray *letterKeys = [NSArray arrayWithObjects:@"A", nil];
-    NSMutableArray *letterValues = [[NSMutableArray alloc] init];
-    
-    [letterValues addObject:A_Values];
-    [letterValues addObject:B_Values];
-    [letterValues addObject:C_Values];
-    
-    CGMutablePathRef combinedPath = CGPathCreateMutable();
-    
-    for (NSUInteger i = 0; i < C_Values.count; i++) {
-        NSInteger segmentIndex = [[C_Values objectAtIndex:i] integerValue];
-        CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
-
-        if (segmentIndex < [c64 integerValue]) {
-            [self addCrossbarsForStraightPath:path toCenter:center ofScene:scene];
-        }
-        else {
-            [self addCrossbarsForCurve:(segmentIndex - [c64 integerValue]) atCenter:center ofScene:scene];
-        }
-        
-        CGPathAddPath(combinedPath, nil, path);
-    }
-    
-    CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
-
-    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 25.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
-    outlineNode.lineWidth = 10.0;
-    outlineNode.strokeColor = [SKColor darkGrayColor];
-    
-    SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
-    segmentNode.strokeColor = [SKColor lightGrayColor];
-    segmentNode.lineWidth = 20.0;
-
-    [scene addChild:outlineNode];
-//    [scene addChild:segmentNode];
-#endif
 }
 
 @end

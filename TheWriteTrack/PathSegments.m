@@ -8,17 +8,15 @@
 
 #import "PathSegments.h"
 
-
-#import "PathSegmentsIndeces.h"
 #if (DEBUG)
     #import "PathDots.h"
     #import "PathInfo.h"
     #import <CocoaLumberjack/CocoaLumberjack.h>
-    #define APP_SHOULD_DRAW_ALL_SEGMENTS    1
+    #define APP_SHOULD_DRAW_ALL_SEGMENTS    0
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
-const NSUInteger numberOfCurvedSegments = 8;
+const NSUInteger numberOfCurvedSegments = 12;
 const NSUInteger numberOfValuesDefiningQuadCurve = 6;
 const CGFloat oneOverTheNumberOfSegments = 1.0 / segmentsPerDimension;
 const CGFloat boundingWidthPercentage = 0.35;
@@ -84,7 +82,7 @@ const CGFloat boundingHeightPercentage = 0.75;
 - (void)addCurvedSegments {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
-    for (NSUInteger i = 0; i < 8; i++) {
+    for (NSUInteger i = 0; i < numberOfCurvedSegments; i++) {
         [self addCurveSegmentsWithXStart:curvePoints[i][0] YStart:curvePoints[i][1]
                                 XControl:curvePoints[i][2] YControl:curvePoints[i][3]
                                     XEnd:curvePoints[i][4] YEnd:curvePoints[i][5]];
@@ -93,14 +91,33 @@ const CGFloat boundingHeightPercentage = 0.75;
 
 - (void)getCurveDefintions:(CGFloat[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve])points {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve] = {
+        //Bottom left bubble:
         { _halfWidth, 0.0, 0.0, 0.0, 0.0, _quarterHeight },
         { 0, _quarterHeight, 0, _halfHeight, _halfWidth, _halfHeight },
+        
+        //Top left bubble:
         { _halfWidth, _halfHeight, 0, _halfHeight, 0, _threeQuarterHeight },
         { 0, _threeQuarterHeight, 0, _fullHeight, _halfWidth, _fullHeight },
+        
+        //Top right bubble:
         { _halfWidth, _fullHeight, _fullWidth, _fullHeight, _fullWidth, _threeQuarterHeight },
         { _fullWidth, _threeQuarterHeight, _fullWidth, _halfHeight, _halfWidth, _halfHeight },
+        
+        //Bottom right bubble:
         { _halfWidth, _halfHeight, _fullWidth, _halfHeight, _fullWidth, _quarterHeight },
-        { _fullWidth, _quarterHeight, _fullWidth, 0, _halfWidth, 0 }
+        { _fullWidth, _quarterHeight, _fullWidth, 0, _halfWidth, 0 },
+        
+        //Top left quadrant:
+        { _halfWidth, _fullHeight, 0, _fullHeight, 0, _halfHeight },
+        
+        //Bottom left quadrant:
+        { 0, _halfHeight, 0, 0, _halfWidth, 0 },
+        
+        //Bottom right quadrant:
+        { _halfWidth, 0, _fullWidth, 0, _fullWidth, _halfHeight },
+        
+        //Top right quadrant:
+        { _fullWidth, _halfHeight, _fullWidth, _fullHeight, _halfWidth, _fullHeight }
     };
     
     for (NSUInteger i = 0; i < numberOfCurvedSegments; i++) {
@@ -257,14 +274,10 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
 #if (APP_SHOULD_DRAW_ALL_SEGMENTS)
     const NSArray *letterKeys = [NSArray arrayWithObjects:@"A", nil];
     NSMutableArray *letterValues = [[NSMutableArray alloc] init];
-    const NSArray *A_Values = [NSArray arrayWithObjects:a43, a42, a41, a44, a45, a46, h29, h30, nil];
-    const NSArray *B_Values = [NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil];
-    const NSArray *C_Values = [NSArray arrayWithObjects:c68, c67, v2, v1, c64, c71, nil];
     
     [letterValues addObject:A_Values];
     [letterValues addObject:B_Values];
     [letterValues addObject:C_Values];
-//    NSDictionary *letterDictionary = [NSDictionary dictionaryWithObjects:letterValues forKeys:letterKeys];
     
     CGMutablePathRef combinedPath = CGPathCreateMutable();
     

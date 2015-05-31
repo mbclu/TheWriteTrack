@@ -314,4 +314,20 @@ const NSUInteger numberOfVFrameSegments = 8;
     OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:2 XControl:8 YControl:0 XEnd:4 YEnd:0]);
 }
 
+- (void)testThe_TopLeftQuadrant_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:8 XControl:0 YControl:8 XEnd:0 YEnd:4]);
+}
+
+- (void)testThe_BottomLeftQuadrant_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:0 YStart:4 XControl:0 YControl:0 XEnd:4 YEnd:0]);
+}
+
+- (void)testThe_BottomRightQuadrant_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:0 XControl:8 YControl:0 XEnd:8 YEnd:4]);
+}
+
+- (void)testThe_TopRightQuadrant_CurveIsAdded {
+    OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:4 XControl:8 YControl:8 XEnd:4 YEnd:8]);
+}
+
 @end

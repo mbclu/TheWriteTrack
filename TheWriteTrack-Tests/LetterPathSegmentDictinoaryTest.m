@@ -53,4 +53,8 @@
     [self assertArrayWithKey:@"C" hasObjectCount:4];
 }
 
+- (void)testTheLetter_D_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
+    [self assertArrayWithKey:@"D" hasObjectCount:8];
+}
+
 @end

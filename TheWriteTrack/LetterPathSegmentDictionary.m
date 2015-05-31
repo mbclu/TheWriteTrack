@@ -26,7 +26,7 @@
     /* A */ [letterValues addObject:[NSArray arrayWithObjects:a43, a42, a41, a44, a45, a46, h29, h30, nil]];
     /* B */ [letterValues addObject:[NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil]];
     /* C */ [letterValues addObject:[NSArray arrayWithObjects:c68, c72, c73, c71, nil]];
-    /* D */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
+    /* D */ [letterValues addObject:[NSArray arrayWithObjects:v7, v6, v5, v4, h21, c74, c75, h37, nil]];
     /* E */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
     /* F */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
     /* G */ [letterValues addObject:[NSArray arrayWithObjects:nil]];

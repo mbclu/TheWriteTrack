@@ -63,7 +63,8 @@
         
 #if (APP_SHOULD_DRAW_SEGMENTS)
         PathSegments *pathSegments = [[PathSegments alloc] init];
-        [pathSegments drawAllSegementsInCenter:center ofScene:self];
+        [pathSegments drawUpperCaseLetter:self.name atCenter:center ofScene:self];
+//        [pathSegments drawAllSegementsInCenter:center ofScene:self];
 #endif
     }
     return self;

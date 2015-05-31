@@ -7,7 +7,6 @@
 //
 
 #import "LetterPathSegmentDictionary.h"
-#import "PathSegmentsIndeces.h"
 
 @implementation LetterPathSegmentDictionary
 

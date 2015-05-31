@@ -21,6 +21,7 @@
 @property CGFloat halfWidth;
 @property CGFloat threeQuarterWidth;
 @property CGFloat fullWidth;
+@property NSMutableArray *crossbars;
 
 - (instancetype)initWithRect:(CGRect)rect;
 
@@ -30,10 +31,12 @@
 
 - (void)createColumnSegmentsForRow:(NSUInteger)row;
 
-- (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene;
-
 - (void)addCurveSegmentsWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart
                           XControl:(CGFloat)xControl YControl:(CGFloat)yControl
                               XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd;
+
+- (void)drawUpperCaseLetter:(NSString *)letter atCenter:(CGPoint)center ofScene:(SKScene *)scene;
+    
+- (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene;
 
 @end

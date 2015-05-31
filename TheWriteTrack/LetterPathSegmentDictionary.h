@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "PathSegmentsIndeces.h"
+
 #import <Foundation/Foundation.h>
 
 @interface LetterPathSegmentDictionary : NSObject {

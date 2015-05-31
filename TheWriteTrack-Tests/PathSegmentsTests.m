@@ -330,4 +330,8 @@ const NSUInteger numberOfVFrameSegments = 8;
     OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:4 XControl:8 YControl:8 XEnd:4 YEnd:8]);
 }
 
+- (void)testAMethodCanDrawAPathForAGivenLetter {
+    
+}
+
 @end

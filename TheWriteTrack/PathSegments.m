@@ -7,6 +7,7 @@
 //
 
 #import "PathSegments.h"
+#import "LetterPathSegmentDictionary.h"
 
 #if (DEBUG)
     #import "PathDots.h"
@@ -28,6 +29,7 @@ const CGFloat boundingHeightPercentage = 0.75;
     self = [self initWithRect:CGRectMake(CGPointZero.x, CGPointZero.y,
                               ([UIScreen mainScreen].bounds.size.width * boundingWidthPercentage),
                               ([UIScreen mainScreen].bounds.size.height * boundingHeightPercentage))];
+    
     return self;
 }
 
@@ -160,11 +162,6 @@ const CGFloat boundingHeightPercentage = 0.75;
     CGPathMoveToPoint(path, nil, xStart, yStart);
     CGPathAddLineToPoint(path, nil, xEnd, yEnd);
     [_segments addObject:(__bridge id)(path)];
-    
-//#if (DEBUG)
-//        DDLogDebug(@"Line Segment:\n\tINDEX = %lu\n\tSTART = <%0.1f, %0.1f>\n\tENDPT = <%0.1f, %0.1f>",
-//                   (_segments.count - 1), xStart, yStart, xEnd, yEnd);
-//#endif
 }
 
 - (void)addCurveSegmentsWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart
@@ -176,34 +173,56 @@ const CGFloat boundingHeightPercentage = 0.75;
     [_segments addObject:(__bridge id)(path)];
 }
 
-
 /*** Unfortunately, NOT much testing after this point ***/
 
-static inline float degreesToRadians(double degrees) { return degrees * M_PI / 180; }
-
-- (void)addCrossbarWithSlope:(CGFloat)slope andPosition:(CGPoint)position toCenter:(CGPoint)center ofScene:(SKScene *)scene {
-    CGFloat angleInRadians = atanf(slope);
-    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
-    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
-    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x + center.x, position.y + center.y);
-
-    CGMutablePathRef crossbar = CGPathCreateMutable();
-    CGPathMoveToPoint(crossbar, nil, -20, 0);
-    CGPathAddLineToPoint(crossbar, nil, 20, 0);
+- (void)drawUpperCaseLetter:(NSString *)letter atCenter:(CGPoint)center ofScene:(SKScene *)scene {
+    _crossbars = [[NSMutableArray alloc] init];
     
-    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &zeroTransform);
-    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
-    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
+    NSDictionary *letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
+    NSArray *letterSegments = [letterSegmentDictionary objectForKey:letter];
     
-    SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:crossbar];
-    crossbarNode.lineWidth = 8;
-    crossbarNode.strokeColor = [SKColor brownColor];
-    crossbarNode.zPosition = 10;
+    CGMutablePathRef combinedPath = CGPathCreateMutable();
     
-    [scene addChild:crossbarNode];
+    for (NSUInteger i = 0; i < letterSegments.count; i++) {
+        NSInteger segmentIndex = [[letterSegments objectAtIndex:i] integerValue];
+        CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
+        
+        CGPathAddPath(combinedPath, nil, path);
+        
+        [self createCrossbarsForSegment:path atCenter:center withIndex:segmentIndex];
+    }
+    
+    [self addTrack:combinedPath atCenter:center ofScene:scene];
 }
 
-- (void)addCrossbarsForStraightPath:(CGPathRef)path toCenter:(CGPoint)center ofScene:(SKScene *)scene {
+- (void)addTrack:(CGPathRef)combinedPath atCenter:(CGPoint)center ofScene:(SKScene *)scene {
+    CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
+    
+    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 25.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
+    outlineNode.lineWidth = 10.0;
+    outlineNode.strokeColor = [SKColor darkGrayColor];
+    [scene addChild:outlineNode];
+    
+    SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &centerTranslateTransform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
+    segmentNode.strokeColor = [SKColor lightGrayColor];
+    segmentNode.lineWidth = 20.0;
+    [scene addChild:segmentNode];
+    
+    for (NSUInteger i = 0; i < _crossbars.count; i++) {
+        [scene addChild:(SKShapeNode *)[_crossbars objectAtIndex:i]];
+    }
+}
+
+- (void)createCrossbarsForSegment:(CGPathRef)path atCenter:(CGPoint)center withIndex:(NSUInteger)index {
+    if (index < [c64 integerValue]) {
+        [self createCrossbarsForStraightPath:path atCenter:center];
+    }
+    else {
+        [self createCrossbarsForCurve:(index - [c64 integerValue]) atCenter:center];
+    }
+}
+
+- (void)createCrossbarsForStraightPath:(CGPathRef)path atCenter:(CGPoint)center {
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSArray *pathArray = [pathInfo TransformPathToArray:path];
     
@@ -223,9 +242,8 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
                 xNew += (xChange * (1.0 - t));
                 yNew += (yChange * (1.0 - t));
             }
-            [self addCrossbarWithSlope:slope andPosition:CGPointMake(xNew, yNew) toCenter:center ofScene:scene];
+            [self addCrossbarWithSlope:slope position:CGPointMake(xNew, yNew) center:center];
         }
-//        [self addCrossbarWithSlope:slope andPosition:end toCenter:center ofScene:scene];
     }
 }
 
@@ -248,10 +266,10 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
     + 2.0 * step * (end - control);
 }
 
-
-- (void)addCrossbarsForCurve:(NSUInteger)curveIndex atCenter:(CGPoint)center ofScene:(SKScene *)scene {
+- (void)createCrossbarsForCurve:(NSUInteger)curveIndex atCenter:(CGPoint)center {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
+    
     for (CGFloat t = 0.05; t <= 1.0; t += 0.1) {
         CGPoint interpolationPoint = CGPointMake(interpolateQuadBezier(t, curvePoints[curveIndex][0], curvePoints[curveIndex][2], curvePoints[curveIndex][4]) + center.x,
                                                  interpolateQuadBezier(t, curvePoints[curveIndex][1], curvePoints[curveIndex][3], curvePoints[curveIndex][5]) + center.y);
@@ -266,8 +284,31 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
         
         CGFloat slope = (y2 - y1) / (x2 - x1);
         
-        [self addCrossbarWithSlope:(slope) andPosition:CGPointMake(interpolationPoint.x, interpolationPoint.y) toCenter:CGPointZero ofScene:scene];
+        [self addCrossbarWithSlope:(slope) position:CGPointMake(interpolationPoint.x, interpolationPoint.y) center:CGPointZero];
     }
+}
+
+static inline float degreesToRadians(double degrees) { return degrees * M_PI / 180; }
+
+- (void)addCrossbarWithSlope:(CGFloat)slope position:(CGPoint)position center:(CGPoint)center {
+    CGFloat angleInRadians = atanf(slope);
+    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
+    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
+    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x + center.x, position.y + center.y);
+    
+    CGMutablePathRef crossbar = CGPathCreateMutable();
+    CGPathMoveToPoint(crossbar, nil, -20, 0);
+    CGPathAddLineToPoint(crossbar, nil, 20, 0);
+    
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &zeroTransform);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
+    
+    SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:crossbar];
+    crossbarNode.lineWidth = 8;
+    crossbarNode.strokeColor = [SKColor brownColor];
+    
+    [_crossbars addObject:crossbarNode];
 }
 
 - (void)drawAllSegementsInCenter:(CGPoint)center ofScene:(SKScene *)scene {

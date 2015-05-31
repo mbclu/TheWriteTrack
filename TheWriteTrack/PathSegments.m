@@ -18,7 +18,6 @@
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
-const NSInteger crossbarsPerSegment = 4;
 const NSUInteger numberOfCurvedSegments = 8;
 const NSUInteger numberOfValuesDefiningQuadCurve = 6;
 const CGFloat oneOverTheNumberOfSegments = 1.0 / segmentsPerDimension;
@@ -197,14 +196,19 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
         CGFloat yChange = (end.y - start.y);
         CGFloat xChange = (end.x - start.x);
         CGFloat slope = yChange / xChange;
-        for (NSInteger k = 0; k < crossbarsPerSegment; k++) {
-            if (!isnan(slope) && !isinf(slope)) {
-                CGFloat xNew = (start.x + (xChange * k / crossbarsPerSegment));
-                CGFloat yNew = (start.y + (yChange * k / crossbarsPerSegment));
-                [self addCrossbarWithSlope:slope andPosition:CGPointMake(xNew, yNew) toCenter:center ofScene:scene];
+        for (CGFloat t = 0.0; t <= 1.0; t += 0.25) {
+            CGFloat xNew = start.x;
+            CGFloat yNew = start.y;
+            if (isinf(slope)) {
+                yNew += (yChange * (1.0 - t));
             }
+            else if (!isnan(slope)) {
+                xNew += (xChange * (1.0 - t));
+                yNew += (yChange * (1.0 - t));
+            }
+            [self addCrossbarWithSlope:slope andPosition:CGPointMake(xNew, yNew) toCenter:center ofScene:scene];
         }
-        [self addCrossbarWithSlope:slope andPosition:end toCenter:center ofScene:scene];
+//        [self addCrossbarWithSlope:slope andPosition:end toCenter:center ofScene:scene];
     }
 }
 
@@ -231,7 +235,7 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
 - (void)addCrossbarsForCurve:(NSUInteger)curveIndex atCenter:(CGPoint)center ofScene:(SKScene *)scene {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
-    for (CGFloat t = 0.05; t < 1.0; t += 0.1) {
+    for (CGFloat t = 0.05; t <= 1.0; t += 0.1) {
         CGPoint interpolationPoint = CGPointMake(interpolateQuadBezier(t, curvePoints[curveIndex][0], curvePoints[curveIndex][2], curvePoints[curveIndex][4]) + center.x,
                                                  interpolateQuadBezier(t, curvePoints[curveIndex][1], curvePoints[curveIndex][3], curvePoints[curveIndex][5]) + center.y);
         
@@ -255,15 +259,17 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
     NSMutableArray *letterValues = [[NSMutableArray alloc] init];
     const NSArray *A_Values = [NSArray arrayWithObjects:a43, a42, a41, a44, a45, a46, h29, h30, nil];
     const NSArray *B_Values = [NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil];
+    const NSArray *C_Values = [NSArray arrayWithObjects:c68, c67, v2, v1, c64, c71, nil];
     
     [letterValues addObject:A_Values];
     [letterValues addObject:B_Values];
+    [letterValues addObject:C_Values];
 //    NSDictionary *letterDictionary = [NSDictionary dictionaryWithObjects:letterValues forKeys:letterKeys];
     
     CGMutablePathRef combinedPath = CGPathCreateMutable();
     
-    for (NSUInteger i = 0; i < B_Values.count; i++) {
-        NSInteger segmentIndex = [[B_Values objectAtIndex:i] integerValue];
+    for (NSUInteger i = 0; i < C_Values.count; i++) {
+        NSInteger segmentIndex = [[C_Values objectAtIndex:i] integerValue];
         CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
 
         if (segmentIndex < [c64 integerValue]) {
@@ -287,7 +293,7 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
     segmentNode.lineWidth = 20.0;
 
     [scene addChild:outlineNode];
-    [scene addChild:segmentNode];
+//    [scene addChild:segmentNode];
 #endif
 }
 

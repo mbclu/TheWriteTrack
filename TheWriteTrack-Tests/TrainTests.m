@@ -61,4 +61,40 @@
     XCTAssertEqualPoints(emptyPathTrain.position, CGPointMake(-100, -100));
 }
 
+- (void)testTheTrainIsInitiallyStill {
+    XCTAssertFalse(theTrain.isMoving);
+}
+
+- (void)testGivenTouchesBeginWhenTouchesAreNotOnTheTrainThenTheTrainIsConsideredToBeStill {
+    [theTrain evaluateTouchesBeganAtPoint:CGPointMake(theTrain.position.x + 100, theTrain.position.y + 100)];
+    XCTAssertFalse(theTrain.isMoving);
+}
+
+- (void)testGivenTouchesBeginWhenTouchesAreOnTheTrainThenTheTrainIsConsideredToBeMoving {
+    [theTrain evaluateTouchesBeganAtPoint:CGPointMake(theTrain.position.x, theTrain.position.y)];
+    XCTAssertTrue(theTrain.isMoving);
+}
+
+- (void)testGivenTheTrainIsStillWhenTouchesMovedThenTheTrainRemainsStill {
+    CGPoint initialTrainPosition = theTrain.position;
+    [theTrain setIsMoving:NO];
+    [theTrain evaluateTouchesMovedAtPoint:CGPointMake(initialTrainPosition.x, initialTrainPosition.y)];
+    XCTAssertFalse(theTrain.isMoving);
+    XCTAssertEqualPoints(theTrain.position, initialTrainPosition);
+}
+
+- (void)testGivenTheTrainIsMovingWhenTouchesMovedThenTheTrainPositionWillUpdateToTheTouchPosition {
+    CGPoint initialTrainPosition = theTrain.position;
+    CGPoint touchPosition = CGPointMake(initialTrainPosition.x + 10, initialTrainPosition.y + 10);
+    [theTrain setIsMoving:YES];
+    [theTrain evaluateTouchesMovedAtPoint:touchPosition];
+    XCTAssertTrue(theTrain.isMoving);
+    XCTAssertEqualPoints(theTrain.position, touchPosition);
+}
+
+- (void)testGivenTouchesEndedThenTheTrainIsConsideredToBeStill {
+    [theTrain evaluateTouchesBeganAtPoint:CGPointMake(theTrain.position.x, theTrain.position.y)];
+    XCTAssertTrue(theTrain.isMoving);
+}
+
 @end

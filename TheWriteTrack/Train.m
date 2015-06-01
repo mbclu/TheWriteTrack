@@ -26,6 +26,8 @@ NSString *const TrainName = @"Train";
 
     [self positionTrainAtStartPoint];
     
+    _isMoving = NO;
+    
     return self;
 }
 
@@ -37,6 +39,34 @@ NSString *const TrainName = @"Train";
     else {
         [self setPosition:CGPointMake(-100, -100)];
     }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self evaluateTouchesBeganAtPoint:[[touches anyObject] locationInNode:self.parent]];
+}
+
+- (void)evaluateTouchesBeganAtPoint:(CGPoint)touchPoint {
+    if (CGRectContainsPoint(self.frame, touchPoint)) {
+        _isMoving = YES;
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self evaluateTouchesMovedAtPoint:[[touches anyObject] locationInNode:self.parent]];
+}
+
+- (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint {
+    if (_isMoving == YES && CGRectContainsPoint(self.frame, touchPoint)) {
+        self.position = touchPoint;
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self evaluateTouchesEndedAtPoint:[[touches anyObject] locationInNode:self.parent]];
+}
+
+- (void)evaluateTouchesEndedAtPoint:(CGPoint)touchPoint {
+    _isMoving = NO;
 }
 
 @end

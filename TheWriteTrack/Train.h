@@ -13,9 +13,13 @@
 
 @property (nonatomic) CGPathRef letterPath;
 @property (nonatomic, retain) NSArray *waypoints;
+@property BOOL isMoving;
 
 - (instancetype)initWithPath:(CGPathRef)letterPath;
 - (instancetype)init NS_UNAVAILABLE;
 - (void)positionTrainAtStartPoint;
+- (void)evaluateTouchesBeganAtPoint:(CGPoint)touchPoint;
+- (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint;
+- (void)evaluateTouchesEndedAtPoint:(CGPoint)touchPoint;
 
 @end

@@ -42,7 +42,7 @@
 }
 
 - (void)testTheLetter_A_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"A" hasObjectCount:8];
+    [self assertArrayWithKey:@"A" hasObjectCount:10];
 }
 
 - (void)testTheLetter_B_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {

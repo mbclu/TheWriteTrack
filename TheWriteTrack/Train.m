@@ -24,14 +24,19 @@ NSString *const TrainName = @"Train";
     PathInfo *pathInfo = [[PathInfo alloc] init];
     [self setWaypoints:[pathInfo TransformPathToArray:_letterPath]];
 
-//    [self positionTrainAtStartPoint];
+    [self positionTrainAtStartPoint];
     
     return self;
 }
 
 - (void)positionTrainAtStartPoint {
-    NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
-    [self setPosition:[firstPoint CGPointValue]];
+    if (_waypoints.count > 0) {
+        NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
+        [self setPosition:[firstPoint CGPointValue]];
+    }
+    else {
+        [self setPosition:CGPointMake(-100, -100)];
+    }
 }
 
 @end

@@ -56,4 +56,9 @@
     XCTAssertEqualPoints(theTrain.position, expectedPoint);
 }
 
+- (void)testTheTrainIsPositionedOffScreenWhenPathIsEmpty {
+    Train *emptyPathTrain = [[Train alloc] initWithPath:CGPathCreateMutable()];
+    XCTAssertEqualPoints(emptyPathTrain.position, CGPointMake(-100, -100));
+}
+
 @end

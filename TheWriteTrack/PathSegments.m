@@ -93,7 +93,7 @@ const CGFloat boundingHeightPercentage = 0.75;
 - (void)getCurveDefintions:(CGFloat[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve])points {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve] = {
         //Bottom left bubble:
-        { _halfWidth, 0.0, 0.0, 0.0, 0.0, _quarterHeight },
+        { _halfWidth, 0, 0, 0, 0, _quarterHeight },
         { 0, _quarterHeight, 0, _halfHeight, _halfWidth, _halfHeight },
         
         //Top left bubble:
@@ -131,16 +131,16 @@ const CGFloat boundingHeightPercentage = 0.75;
 - (void)createColumnSegmentsForRow:(NSUInteger)row {
     for (NSUInteger i = 0; i < segmentsPerDimension; i++) {
         CGFloat x = _segmentBounds.size.width * oneOverTheNumberOfSegments * row;
-        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * i;
-        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + 1);
+        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * i;
+        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + 1);
         [self addLineSegmentWithXStart:x YStart:yStart XEnd:x YEnd:yEnd];
     }
 }
 
 - (void)createRowSegmentsForColumn:(NSUInteger)column {
     for (NSUInteger i = 0; i < segmentsPerDimension; i++) {
-        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * i;
-        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + 1);
+        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * i;
+        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + 1);
         CGFloat y = _segmentBounds.size.height * oneOverTheNumberOfSegments * column;
         [self addLineSegmentWithXStart:xStart YStart:y XEnd:xEnd YEnd:y];
     }
@@ -148,10 +148,10 @@ const CGFloat boundingHeightPercentage = 0.75;
 
 - (void)createDiagonalSegmentsWithXShift:(CGFloat)xShift yShift:(CGFloat)yShift xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset {
     for (NSInteger i = 0; i < segmentsPerDimension; i++) {
-        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + xOffset) * xShift;
-        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + yOffset) * yShift;
-        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * (1 + i + xOffset) * xShift;
-        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * (1 + i + yOffset) * yShift;
+        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + xOffset) * xShift;
+        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + yOffset) * yShift;
+        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * (1 + i + xOffset) * xShift;
+        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * (1 + i + yOffset) * yShift;
         [self addLineSegmentWithXStart:xStart YStart:yStart XEnd:xEnd YEnd:yEnd];
     }
 }

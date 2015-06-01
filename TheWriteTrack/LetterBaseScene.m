@@ -50,11 +50,12 @@
 
         PathSegments *pathSegments = [[PathSegments alloc] init];
         [pathSegments generateCombinedPathAndCrossbarsForLetter:self.name atCenter:center];
-        [self addChild:[self createTrackPathNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
+        SKShapeNode *letter = [self createTrackPathNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
+        [self addChild:letter];
         [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
         [self addCrossbars:pathSegments.crossbars];
         
-        [self addChild:[self createTrainNodeWithPath:pathSegments.combinedPath]];
+        [self addChild:[self createTrainNodeWithPath:letter.path]];
 
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
@@ -111,8 +112,6 @@
     letterPathNode.name = LetterNodeName;
     letterPathNode.lineWidth = LetterLineWidth;
     letterPathNode.strokeColor = [SKColor darkGrayColor];
-//    letterPathNode.fillColor = [SKColor orangeColor];
-//    letterPathNode.fillTexture = [SKTexture textureWithImageNamed:TrackTextureName];
     return letterPathNode;
 }
 

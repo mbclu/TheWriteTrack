@@ -26,6 +26,8 @@ NSString *const TrainName = @"Train";
 
     [self positionTrainAtStartPoint];
     
+    self.userInteractionEnabled = YES;
+    
     _isMoving = NO;
     
     return self;
@@ -56,8 +58,11 @@ NSString *const TrainName = @"Train";
 }
 
 - (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint {
-    if (_isMoving == YES && CGRectContainsPoint(self.frame, touchPoint)) {
+    if (_isMoving == YES && CGPathContainsPoint(_letterPath, nil, touchPoint, NO)) {
         self.position = touchPoint;
+    }
+    else {
+        _isMoving = NO;
     }
 }
 

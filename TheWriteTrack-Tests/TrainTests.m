@@ -13,7 +13,11 @@
 
 #import "CGMatchers.h"
 
+const uint pathWidth = 10;
+const uint pathHeight = 10;
+
 @interface TrainTests : XCTestCase {
+    CGPathRef thePath;
     Train *theTrain;
 }
 
@@ -23,11 +27,19 @@
 
 - (void)setUp {
     [super setUp];
-    theTrain = [[Train alloc] initWithPath:CGPathCreateMutable()];
+    thePath = CGPathCreateWithRect(CGRectMake(0, 0, pathWidth, pathHeight), nil);
+    theTrain = [[Train alloc] initWithPath:thePath];
 }
 
 - (void)tearDown {
     [super tearDown];
+}
+
+- (CGPoint)simulateTrainMoveWithXYOffsetFromPoint:(CGPoint)initial x:(uint)x y:(uint)y {
+    CGPoint touchPosition = CGPointMake(initial.x + x, initial.y + y);
+    [theTrain setIsMoving:YES];
+    [theTrain evaluateTouchesMovedAtPoint:touchPosition];
+    return touchPosition;
 }
 
 - (void)testTrainNodeForMagicTrainTexture {
@@ -66,7 +78,8 @@
 }
 
 - (void)testGivenTouchesBeginWhenTouchesAreNotOnTheTrainThenTheTrainIsConsideredToBeStill {
-    [theTrain evaluateTouchesBeganAtPoint:CGPointMake(theTrain.position.x + 100, theTrain.position.y + 100)];
+    [theTrain evaluateTouchesBeganAtPoint:CGPointMake(theTrain.position.x + theTrain.size.width + 1,
+                                                      theTrain.position.y + theTrain.size.height)];
     XCTAssertFalse(theTrain.isMoving);
 }
 
@@ -85,16 +98,27 @@
 
 - (void)testGivenTheTrainIsMovingWhenTouchesMovedThenTheTrainPositionWillUpdateToTheTouchPosition {
     CGPoint initialTrainPosition = theTrain.position;
-    CGPoint touchPosition = CGPointMake(initialTrainPosition.x + 10, initialTrainPosition.y + 10);
-    [theTrain setIsMoving:YES];
-    [theTrain evaluateTouchesMovedAtPoint:touchPosition];
+    CGPoint touchPoint = [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth / 2) y:(pathHeight / 2)];
+    XCTAssertEqualPoints(theTrain.position, touchPoint);
     XCTAssertTrue(theTrain.isMoving);
-    XCTAssertEqualPoints(theTrain.position, touchPosition);
 }
 
 - (void)testGivenTouchesEndedThenTheTrainIsConsideredToBeStill {
     [theTrain evaluateTouchesBeganAtPoint:CGPointMake(theTrain.position.x, theTrain.position.y)];
     XCTAssertTrue(theTrain.isMoving);
+}
+
+- (void)testUserInteractionIsEnabled {
+    XCTAssertTrue(theTrain.isUserInteractionEnabled);
+}
+
+- (void)testWhenATouchIsMovedOutsideThePathThenTheTrainDoesNotMoveAndIsConsideredStill {
+    CGPoint initialTrainPosition = theTrain.position;
+
+    [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth * 2) y:(pathHeight * 2)];
+    
+    XCTAssertFalse(theTrain.isMoving);
+    XCTAssertEqualPoints(theTrain.position, initialTrainPosition);
 }
 
 @end

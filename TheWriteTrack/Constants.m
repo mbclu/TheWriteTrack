@@ -16,6 +16,7 @@ NSString *const RockyBackgroundName = @"RockyBackground";
 NSString *const NextButtonName = @"NextButton";
 NSString *const PreviousButtonName = @"PreviousButton";
 NSString *const TrackTextureName = @"TrackTexture";
+NSString *const EnvelopeName = @"Envelope";
 CGFloat const NextButtonXPadding = 10;
 CGFloat const TransitionLengthInSeconds = 0.6;
 NSUInteger const SingleLetterLength = 1;

@@ -82,24 +82,6 @@ CGFloat const ArbitrarySceneHeight = 200;
     XCTAssertEqualObjects(anotherScene.name, LetterToInitWith);
 }
 
-//- (void)testAnSKPathNodeExistsAsAChildOfTheScene {
-//    SKNode *letterNodeDeclaredWithBaseClassType = [theScene childNodeWithName:Letter];
-//    XCTAssertNotNil(letterNodeDeclaredWithBaseClassType);
-//    XCTAssertTrue([theLetterNode isKindOfClass:[SKShapeNode class]]);
-//}
-//
-//- (void)testWhenInitializedWith_T_ThePathNodeUsesTheLetter_T {
-//    NSString *AString = @"T";
-//    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:AString];
-//    AttributedStringPath *expectedStringPath = [[AttributedStringPath alloc] initWithString:AString];
-//    CGPathRef actualPath = [(SKShapeNode *)([anotherScene childNodeWithName:@"LetterNode"]) path];
-//    XCTAssertTrue(CGPathEqualToPath(actualPath, expectedStringPath.letterPath));
-//}
-//
-//- (void)testTheLetterPathHasALineWidthOfTen {
-//    XCTAssertEqual(theLetterNode.lineWidth, 10);
-//}
-
 - (void)testForThePresenceOfATrainNode {
     XCTAssertNotNil(theTrainNode);
 }
@@ -212,8 +194,9 @@ CGFloat const ArbitrarySceneHeight = 200;
 }
 
 - (void)testTheCrossbarsAreAddedToTheLetterTrack {
+    NSUInteger initialChildCount = theScene.children.count;
     id mockScene = OCMPartialMock(theScene);
-
+    
     SKShapeNode *crossbar1 = [[SKShapeNode alloc] init];
     SKShapeNode *crossbar2 = [[SKShapeNode alloc] init];
     SKShapeNode *crossbar3 = [[SKShapeNode alloc] init];
@@ -223,6 +206,21 @@ CGFloat const ArbitrarySceneHeight = 200;
     OCMVerify([mockScene addChild:crossbar1]);
     OCMVerify([mockScene addChild:crossbar2]);
     OCMVerify([mockScene addChild:crossbar3]);
+    XCTAssertEqual(theScene.children.count, initialChildCount + 3);
+}
+
+- (void)testTheWaypointsAreAddedToTheLetterTrack {
+    NSUInteger initialChildCount = theScene.children.count;
+    
+    CGPoint waypoint1 = CGPointMake(0, 10);
+    CGPoint waypoint2 = CGPointMake(10, 0);
+    
+    [theScene addWaypoints:[NSArray arrayWithObjects:
+                            [NSValue valueWithCGPoint:waypoint1],
+                            [NSValue valueWithCGPoint:waypoint2],
+                            nil]];
+    
+    XCTAssertEqual(theScene.children.count, initialChildCount + 2);
 }
 
 @end

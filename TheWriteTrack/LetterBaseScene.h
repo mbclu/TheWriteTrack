@@ -37,5 +37,6 @@ FOUNDATION_EXPORT NSString *const NextButtonName;
 - (void)transitionToPreviousScene;
 - (void)connectSceneTransitions;
 - (void)addCrossbars:(NSArray *)crossbars;
+- (void)addWaypoints:(NSArray *)waypoints;
 
 @end

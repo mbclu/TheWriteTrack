@@ -55,7 +55,10 @@
         [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
         [self addCrossbars:pathSegments.crossbars];
         
-        [self addChild:[self createTrainNodeWithPath:letter.path]];
+        Train *train = [self createTrainNodeWithPath:letter.path];
+        [self addChild:(SKNode *)train];
+        
+        [self addWaypoints:train.waypoints];
 
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
@@ -137,7 +140,19 @@
     }
 }
 
-- (SKNode *)createTrainNodeWithPath:(CGPathRef)path {
+- (void)addWaypoints:(NSArray *)waypoints {
+    for (NSInteger i = 0; i < waypoints.count; i++) {
+        [self addEnvelopeAtPoint:[[waypoints objectAtIndex:i] CGPointValue]];
+    }
+}
+
+- (void)addEnvelopeAtPoint:(CGPoint)position {
+    SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeName];
+    envelope.position = position;
+    [self addChild:envelope];
+}
+
+- (Train *)createTrainNodeWithPath:(CGPathRef)path {
     Train *trainNode = [[Train alloc] initWithPath:path];
     trainNode.name = TrainNodeName;
     return trainNode;

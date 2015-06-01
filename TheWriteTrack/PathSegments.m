@@ -200,6 +200,29 @@ const CGFloat boundingHeightPercentage = 0.75;
     }
 }
 
+const CGPoint interpolateLine(const CGFloat step, const CGPoint start, const CGPoint end) {
+    const CGFloat yChange = (end.y - start.y);
+    const CGFloat xChange = (end.x - start.x);
+    const CGFloat slope = yChange / xChange;
+    
+    CGFloat xNew = start.x;
+    CGFloat yNew = start.y;
+    
+    if (isinf(slope)) {
+        yNew += (yChange * (1.0 - step));
+    }
+    else if (!isnan(slope)) {
+        xNew += (xChange * (1.0 - step));
+        yNew += (yChange * (1.0 - step));
+    }
+    
+    return CGPointMake(xNew, yNew);
+}
+
+const CGFloat lineSlope(const CGPoint start, const CGPoint end) {
+    return (end.y - start.y) / (end.x - start.x);
+}
+
 - (void)createCrossbarsForStraightPath:(CGPathRef)path atCenter:(CGPoint)center {
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSArray *pathArray = [pathInfo TransformPathToArray:path];
@@ -207,25 +230,14 @@ const CGFloat boundingHeightPercentage = 0.75;
     for (NSUInteger j = 1; j < pathArray.count; j++) {
         CGPoint start = [[pathArray objectAtIndex:j - 1] CGPointValue];
         CGPoint end = [[pathArray objectAtIndex:j] CGPointValue];
-        CGFloat yChange = (end.y - start.y);
-        CGFloat xChange = (end.x - start.x);
-        CGFloat slope = yChange / xChange;
         for (CGFloat t = 0.0; t <= 1.0; t += 0.25) {
-            CGFloat xNew = start.x;
-            CGFloat yNew = start.y;
-            if (isinf(slope)) {
-                yNew += (yChange * (1.0 - t));
-            }
-            else if (!isnan(slope)) {
-                xNew += (xChange * (1.0 - t));
-                yNew += (yChange * (1.0 - t));
-            }
-            [self addCrossbarWithSlope:slope position:CGPointMake(xNew, yNew) center:center];
+            CGPoint newPoint = interpolateLine(t, start, end);
+            [self addCrossbarWithSlope:lineSlope(start, end) position:newPoint center:center];
         }
     }
 }
 
-float interpolateQuadBezier(const CGFloat step, const CGFloat start, const CGFloat control, const CGFloat end)
+CGFloat interpolateQuadBezier(const CGFloat step, const CGFloat start, const CGFloat control, const CGFloat end)
 {
     const CGFloat percent = (1.0 - step);
     const CGFloat percentSquared = percent * percent;

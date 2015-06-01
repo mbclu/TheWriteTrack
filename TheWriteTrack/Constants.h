@@ -17,9 +17,8 @@ FOUNDATION_EXPORT NSString *const RockyBackgroundName;
 FOUNDATION_EXPORT NSString *const NextButtonName;
 FOUNDATION_EXPORT NSString *const PreviousButtonName;
 FOUNDATION_EXPORT NSString *const TrackTextureName;
+FOUNDATION_EXPORT NSString *const EnvelopeName;
 FOUNDATION_EXPORT CGFloat const NextButtonXPadding;
 FOUNDATION_EXPORT CGFloat const TransitionLengthInSeconds;
 FOUNDATION_EXPORT NSUInteger const SingleLetterLength;
 FOUNDATION_EXPORT CFStringRef const DefaultLetterFont;
-
-#define HALF_OF(dimension) (dimension * 0.5)

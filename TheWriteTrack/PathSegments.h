@@ -32,9 +32,7 @@
 
 - (void)createColumnSegmentsForRow:(NSUInteger)row;
 
-- (void)addCurveSegmentsWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart
-                          XControl:(CGFloat)xControl YControl:(CGFloat)yControl
-                              XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd;
+- (void)addQuadCurveDefinitionWithP1:(CGPoint)point1 ControlPoint:(CGPoint)control P2:(CGPoint)point2;
 
 - (void)generateCombinedPathAndCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center;
 

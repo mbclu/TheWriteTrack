@@ -20,8 +20,8 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 @interface PathSegmentsTests : XCTestCase {
     PathSegments *thePathSegments;
-    CGFloat rowSegmentHeight;
-    CGFloat columnSegmentWidth;
+    CGFloat segmentHeight;
+    CGFloat segmentWidth;
     NSArray *pathSegmentArray;
 }
 
@@ -35,62 +35,53 @@ const NSUInteger numberOfVFrameSegments = 8;
     [[UIDevice currentDevice] setValue:
      [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
                                 forKey:@"orientation"];
+    
+    thePathSegments = [[PathSegments alloc] init];
+    segmentHeight = thePathSegments.segmentBounds.size.height * oneOverTheNumberOfSegments;
+    segmentWidth = thePathSegments.segmentBounds.size.width * oneOverTheNumberOfSegments;
 }
 
 - (void)tearDown {
     [super tearDown];
 }
 
-- (void)checkSegmentStart:(CGPoint)start andEndPoint:(CGPoint)end atIndex:(NSUInteger)index {
-    CGPathRef path = (__bridge CGPathRef)([thePathSegments.segments objectAtIndex:index]);
-    XCTAssertTrue(CGPathContainsPoint(path, nil, CGPointMake(start.x, start.y), NO),
-                  @"\nExpected Start Point = <%0.2f, %0.2f>", start.x, start.y);
-    XCTAssertTrue(CGPathContainsPoint(path, nil, CGPointMake(end.x, end.y), NO),
-                  @"\nExpected End Point = <%0.2f, %0.2f>", end.x, end.y);
+/********************************************************************************
+ *      HELPERS
+ ********************************************************************************/
+- (void)assertPointsP0:(CGPoint)p0 andP1:(CGPoint)p1 existAtIndex:(NSUInteger)index {
+    NSArray *pointArray = (NSArray *)[thePathSegments.segments objectAtIndex:index];
+    XCTAssertEqualPoints([pointArray[0] CGPointValue], p0);
+    XCTAssertEqualPoints([pointArray[1] CGPointValue], p1);
 }
 
-- (void)checkSegment:(PathSegments *)segments index:(NSUInteger)index
-                  x1:(CGFloat)x1 y1:(CGFloat)y1 x2:(CGFloat)x2 y2:(CGFloat)y2  {
-    CGPathRef path = (__bridge CGPathRef)([segments.segments objectAtIndex:index]);
-    XCTAssertTrue(CGPathContainsPoint(path, nil, CGPointMake(x1, y1), NO), @"\nExpected Start Point = <%0.2f, %0.2f>", x1, y1);
-    XCTAssertTrue(CGPathContainsPoint(path, nil, CGPointMake(x2, y2), NO), @"\nExpected End Point = <%0.2f, %0.2f>", x2, y2);
+- (void)assertSegmentPointsExist:(PathSegments *)segments index:(NSUInteger)index
+                              x1:(CGFloat)x1 y1:(CGFloat)y1 x2:(CGFloat)x2 y2:(CGFloat)y2  {
+    NSArray *pointArray = (NSArray *)[segments.segments objectAtIndex:index];
+    XCTAssertEqualPoints([pointArray[0] CGPointValue], CGPointMake(x1, y1));
+    XCTAssertEqualPoints([pointArray[1] CGPointValue], CGPointMake(x2, y2));
 }
 
-- (void)checkRowSegmentAtIndex:(NSUInteger)index {
-    thePathSegments = [[PathSegments alloc] init];
-    rowSegmentHeight = thePathSegments.segmentBounds.size.height * oneOverTheNumberOfSegments;
-    columnSegmentWidth = thePathSegments.segmentBounds.size.width * oneOverTheNumberOfSegments;
-    [self checkSegmentStart:CGPointMake(columnSegmentWidth * 0, rowSegmentHeight * (index + 0))
-                andEndPoint:CGPointMake(columnSegmentWidth * 0, rowSegmentHeight * (index + 1))
-                    atIndex:index];
+- (void)checkVerticalSegmentAtIndex:(NSUInteger)index {
+    [self assertPointsP0:CGPointMake(segmentWidth * 0, segmentHeight * (index + 0))
+                   andP1:CGPointMake(segmentWidth * 0, segmentHeight * (index + 1))
+            existAtIndex:index];
 }
 
-- (void)checkColumnSegmentAtIndex:(NSUInteger)index {
-    thePathSegments = [[PathSegments alloc] init];
-    rowSegmentHeight = thePathSegments.segmentBounds.size.height * oneOverTheNumberOfSegments;
-    columnSegmentWidth = thePathSegments.segmentBounds.size.width * oneOverTheNumberOfSegments;
-    [self checkSegmentStart:CGPointMake(columnSegmentWidth * (index - numberOfVerticleSegments + 0), rowSegmentHeight * 0)
-                andEndPoint:CGPointMake(columnSegmentWidth * (index - numberOfVerticleSegments + 1), rowSegmentHeight * 0)
-                    atIndex:index];
+- (void)checkHorizontalSegmentAtIndex:(NSUInteger)index {
+    [self assertPointsP0:CGPointMake(segmentWidth * (index - numberOfVerticleSegments + 0), segmentHeight * 0)
+                   andP1:CGPointMake(segmentWidth * (index - numberOfVerticleSegments + 1), segmentHeight * 0)
+            existAtIndex:index];
 }
 
-- (void)checkDiagonalSegmentAtIndex:(NSUInteger)index indexOffset:(NSUInteger)indexOffset
-                             xShift:(CGFloat)xShift yShift:(CGFloat)yShift {
-    CGFloat xStart = columnSegmentWidth * (index - indexOffset + 0) * xShift;
-    CGFloat xEnd = columnSegmentWidth * (index - indexOffset + 1) * xShift;
-    CGFloat yStart = rowSegmentHeight * (index - indexOffset + 0) * yShift;
-    CGFloat yEnd = rowSegmentHeight * (index - indexOffset + 1) * yShift;
-    [self checkSegmentStart:CGPointMake(xStart, yStart)
-                andEndPoint:CGPointMake(xEnd, yEnd)
-                    atIndex:index];
-}
-
+/********************************************************************************
+ *      TESTS
+ ********************************************************************************/
 - (void)testSegmentsObjectHasAAnOriginOfZeroByDefault {
     PathSegments *pathSegments = [[PathSegments alloc] init];
     XCTAssertEqualPoints(pathSegments.segmentBounds.origin, CGPointZero);
 }
 
-- (void)testSegmentsObjectHasAHeightOfNinetyFivePrecentThatOfTheSreenHeightByDefault {
+- (void)testSegmentsObjectHasAHeightOfSeventyFivePrecentThatOfTheSreenHeightByDefault {
     PathSegments *pathSegments = [[PathSegments alloc] init];
     XCTAssertEqualWithAccuracy(pathSegments.segmentBounds.size.height, [UIScreen mainScreen].bounds.size.height * 0.75, 0.1);
 }
@@ -109,36 +100,36 @@ const NSUInteger numberOfVFrameSegments = 8;
     XCTAssertEqualWithAccuracy(pathSegments.segmentBounds.size.height, 4, 0.0);
 }
 
-- (void)testRow_1_Column_1_Verticlal {
-    [self checkRowSegmentAtIndex:0];
+- (void)testRow_1_Column_1_Vertical {
+    [self checkVerticalSegmentAtIndex:0];
 }
 
 - (void)testRow_2_Column_1_Vertical {
-    [self checkRowSegmentAtIndex:1];
+    [self checkVerticalSegmentAtIndex:1];
 }
 
 - (void)testRow_3_Column_1_Vertical {
-    [self checkRowSegmentAtIndex:2];
+    [self checkVerticalSegmentAtIndex:2];
 }
 
 - (void)testRow_4_Column_1_Vertical {
-    [self checkRowSegmentAtIndex:3];
+    [self checkVerticalSegmentAtIndex:3];
 }
 
 - (void)testColumn_1_Row_1_Horizontal {
-    [self checkColumnSegmentAtIndex:numberOfVerticleSegments];
+    [self checkHorizontalSegmentAtIndex:numberOfVerticleSegments + 0];
 }
 
 - (void)testColumn_2_Row_1_Horizontal {
-    [self checkColumnSegmentAtIndex:numberOfVerticleSegments + 1];
+    [self checkHorizontalSegmentAtIndex:numberOfVerticleSegments + 1];
 }
 
 - (void)testColumn_3_Row_1_Horizontal {
-    [self checkColumnSegmentAtIndex:numberOfVerticleSegments + 2];
+    [self checkHorizontalSegmentAtIndex:numberOfVerticleSegments + 2];
 }
 
 - (void)testColumn_4_Row_1_Horizontal {
-    [self checkColumnSegmentAtIndex:numberOfVerticleSegments + 3];
+    [self checkHorizontalSegmentAtIndex:numberOfVerticleSegments + 3];
 }
 
 - (void)testThereAre_5_TotalColumns {
@@ -163,12 +154,6 @@ const NSUInteger numberOfVFrameSegments = 8;
     OCMVerify([mockPathSegments createRowSegmentsForColumn:4]);
 }
 
-- (void)checkDiagonalSegmentAtIndex:(NSUInteger)index indexOffset:(NSUInteger)indexOffset andSlope:(CGFloat)slope {
-    [self checkSegmentStart:CGPointMake(0, (index - indexOffset) * slope)
-                andEndPoint:CGPointMake(1, (index - indexOffset + 1) * slope)
-                    atIndex:index];
-}
-
 /*     /\     */
 /*    /  \    */
 /*   /    \   */
@@ -181,16 +166,16 @@ const NSUInteger numberOfVFrameSegments = 8;
     -   1;
 
     // Slope up
-    [self checkSegment:segments index:++index x1:0 y1:0 x2:1 y2:2];
-    [self checkSegment:segments index:++index x1:1 y1:2 x2:2 y2:4];
-    [self checkSegment:segments index:++index x1:2 y1:4 x2:3 y2:6];
-    [self checkSegment:segments index:++index x1:3 y1:6 x2:4 y2:8];
+    [self assertSegmentPointsExist:segments index:++index x1:0 y1:0 x2:1 y2:2];
+    [self assertSegmentPointsExist:segments index:++index x1:1 y1:2 x2:2 y2:4];
+    [self assertSegmentPointsExist:segments index:++index x1:2 y1:4 x2:3 y2:6];
+    [self assertSegmentPointsExist:segments index:++index x1:3 y1:6 x2:4 y2:8];
     
     // Slope down
-    [self checkSegment:segments index:++index x1:4 y1:8 x2:5 y2:6];
-    [self checkSegment:segments index:++index x1:5 y1:6 x2:6 y2:4];
-    [self checkSegment:segments index:++index x1:6 y1:4 x2:7 y2:2];
-    [self checkSegment:segments index:++index x1:7 y1:2 x2:8 y2:0];
+    [self assertSegmentPointsExist:segments index:++index x1:4 y1:8 x2:5 y2:6];
+    [self assertSegmentPointsExist:segments index:++index x1:5 y1:6 x2:6 y2:4];
+    [self assertSegmentPointsExist:segments index:++index x1:6 y1:4 x2:7 y2:2];
+    [self assertSegmentPointsExist:segments index:++index x1:7 y1:2 x2:8 y2:0];
 }
 
 /*  \      /  */
@@ -206,16 +191,16 @@ const NSUInteger numberOfVFrameSegments = 8;
     -   1;
     
     // Slope down
-    [self checkSegment:segments index:++index x1:0 y1:8 x2:1 y2:6];
-    [self checkSegment:segments index:++index x1:1 y1:6 x2:2 y2:4];
-    [self checkSegment:segments index:++index x1:2 y1:4 x2:3 y2:2];
-    [self checkSegment:segments index:++index x1:3 y1:2 x2:4 y2:0];
+    [self assertSegmentPointsExist:segments index:++index x1:0 y1:8 x2:1 y2:6];
+    [self assertSegmentPointsExist:segments index:++index x1:1 y1:6 x2:2 y2:4];
+    [self assertSegmentPointsExist:segments index:++index x1:2 y1:4 x2:3 y2:2];
+    [self assertSegmentPointsExist:segments index:++index x1:3 y1:2 x2:4 y2:0];
     
     // Slope up
-    [self checkSegment:segments index:++index x1:4 y1:0 x2:5 y2:2];
-    [self checkSegment:segments index:++index x1:5 y1:2 x2:6 y2:4];
-    [self checkSegment:segments index:++index x1:6 y1:4 x2:7 y2:6];
-    [self checkSegment:segments index:++index x1:7 y1:6 x2:8 y2:8];
+    [self assertSegmentPointsExist:segments index:++index x1:4 y1:0 x2:5 y2:2];
+    [self assertSegmentPointsExist:segments index:++index x1:5 y1:2 x2:6 y2:4];
+    [self assertSegmentPointsExist:segments index:++index x1:6 y1:4 x2:7 y2:6];
+    [self assertSegmentPointsExist:segments index:++index x1:7 y1:6 x2:8 y2:8];
 }
 
 /*  \  /  */
@@ -233,16 +218,16 @@ const NSUInteger numberOfVFrameSegments = 8;
     -   1;
     
     // Slope down
-    [self checkSegment:segments index:++index x1:0 y1:0 x2:2 y2:2];
-    [self checkSegment:segments index:++index x1:2 y1:2 x2:4 y2:4];
-    [self checkSegment:segments index:++index x1:4 y1:4 x2:6 y2:6];
-    [self checkSegment:segments index:++index x1:6 y1:6 x2:8 y2:8];
+    [self assertSegmentPointsExist:segments index:++index x1:0 y1:0 x2:2 y2:2];
+    [self assertSegmentPointsExist:segments index:++index x1:2 y1:2 x2:4 y2:4];
+    [self assertSegmentPointsExist:segments index:++index x1:4 y1:4 x2:6 y2:6];
+    [self assertSegmentPointsExist:segments index:++index x1:6 y1:6 x2:8 y2:8];
     
     // Slope up
-    [self checkSegment:segments index:++index x1:0 y1:8 x2:2 y2:6];
-    [self checkSegment:segments index:++index x1:2 y1:6 x2:4 y2:4];
-    [self checkSegment:segments index:++index x1:4 y1:4 x2:6 y2:2];
-    [self checkSegment:segments index:++index x1:6 y1:2 x2:8 y2:0];
+    [self assertSegmentPointsExist:segments index:++index x1:0 y1:8 x2:2 y2:6];
+    [self assertSegmentPointsExist:segments index:++index x1:2 y1:6 x2:4 y2:4];
+    [self assertSegmentPointsExist:segments index:++index x1:4 y1:4 x2:6 y2:2];
+    [self assertSegmentPointsExist:segments index:++index x1:6 y1:2 x2:8 y2:0];
 }
 
 @end
@@ -283,55 +268,51 @@ const NSUInteger numberOfVFrameSegments = 8;
 }
 
 - (void)testThe_LowerLeft_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:0 XControl:0 YControl:0 XEnd:0 YEnd:2]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(4,0) ControlPoint:CGPointMake(0,0) P2:CGPointMake(0,2)]);
 }
 
 - (void)testThe_SecondLeft_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:0 YStart:2 XControl:0 YControl:4 XEnd:4 YEnd:4]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(0,2) ControlPoint:CGPointMake(0,4) P2:CGPointMake(4,4)]);
 }
 
 - (void)testThe_ThirdLeft_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:4 XControl:0 YControl:4 XEnd:0 YEnd:6]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(4,4) ControlPoint:CGPointMake(0,4) P2:CGPointMake(0,6)]);
 }
 
 - (void)testThe_UpperLeft_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:0 YStart:6 XControl:0 YControl:8 XEnd:4 YEnd:8]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(0,6) ControlPoint:CGPointMake(0,8) P2:CGPointMake(4,8)]);
 }
 
 - (void)testThe_UpperRight_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:8 XControl:8 YControl:8 XEnd:8 YEnd:6]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(4,8) ControlPoint:CGPointMake(8,8) P2:CGPointMake(8,6)]);
 }
 
 - (void)testThe_SecondRight_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:6 XControl:8 YControl:4 XEnd:4 YEnd:4]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(8,6) ControlPoint:CGPointMake(8,4) P2:CGPointMake(4,4)]);
 }
 
 - (void)testThe_ThirdRight_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:4 XControl:8 YControl:4 XEnd:8 YEnd:2]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(4,4) ControlPoint:CGPointMake(8,4) P2:CGPointMake(8,2)]);
 }
 
 - (void)testThe_LowerRight_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:2 XControl:8 YControl:0 XEnd:4 YEnd:0]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(8,2) ControlPoint:CGPointMake(8,0) P2:CGPointMake(4,0)]);
 }
 
 - (void)testThe_TopLeftQuadrant_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:8 XControl:0 YControl:8 XEnd:0 YEnd:4]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(4,8) ControlPoint:CGPointMake(0,8) P2:CGPointMake(0,4)]);
 }
 
 - (void)testThe_BottomLeftQuadrant_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:0 YStart:4 XControl:0 YControl:0 XEnd:4 YEnd:0]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(0,4) ControlPoint:CGPointMake(0,0) P2:CGPointMake(4,0)]);
 }
 
 - (void)testThe_BottomRightQuadrant_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:4 YStart:0 XControl:8 YControl:0 XEnd:8 YEnd:4]);
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(4,0) ControlPoint:CGPointMake(8,0) P2:CGPointMake(8,4)]);
 }
 
 - (void)testThe_TopRightQuadrant_CurveIsAdded {
-    OCMVerify([theMockSegments addCurveSegmentsWithXStart:8 YStart:4 XControl:8 YControl:8 XEnd:4 YEnd:8]);
-}
-
-- (void)testAMethodCanDrawAPathForAGivenLetter {
-    
+    OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(8,4) ControlPoint:CGPointMake(8,8) P2:CGPointMake(4,8)]);
 }
 
 @end

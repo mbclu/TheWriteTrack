@@ -6,18 +6,21 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "LayoutMath.h"
+
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "LayoutMath.h"
 #import "LetterConverter.h"
 #import "CocoaLumberjack.h"
 
-@interface LayoutMathTests : XCTestCase
-@property CGFloat defaultAccuracy;
-@property id startingOrientation;
-@property CGRect rectForTest;
-@property CGMutablePathRef rectPathForTest;
-@property LetterConverter *letterConverter;
+@interface LayoutMathTestsSetup : XCTestCase {
+    @protected CGFloat defaultAccuracy;
+    @protected id startingOrientation;
+    @protected CGRect rectForTest;
+    @protected CGMutablePathRef rectPathForTest;
+    @protected LetterConverter *letterConverter;
+}
+
 @end
 
 CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
@@ -33,12 +36,7 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     return bounds;
 }
 
-@implementation LayoutMathTests
-@synthesize defaultAccuracy;
-@synthesize startingOrientation;
-@synthesize rectForTest;
-@synthesize rectPathForTest;
-@synthesize letterConverter;
+@implementation LayoutMathTestsSetup
 
 - (void)setUpRectPath {
     rectPathForTest = CGPathCreateMutable();
@@ -60,6 +58,13 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
                                 forKey:@"orientation"];
     [super tearDown];
 }
+
+@end
+
+@interface LayoutMathTests : LayoutMathTestsSetup
+@end
+
+@implementation LayoutMathTests
 
 - (void)testGivenABoundingRectangleWhenTheRectangleIsCeneteredThenTheStartingXValueIsPositionedCorrectly {
     NSString *stringForTest = @"A";
@@ -97,9 +102,15 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqualWithAccuracy(origin.y, yExpected, defaultAccuracy);
 }
 
+- (void)testGivenAStartAndEndPointWhenALineIsInterpolatedForXThenTheReturnIsXStartPlusAPercentageOfTheChange {
+    CGPoint start = CGPointZero;
+    CGPoint end = CGPointMake(10, 0);
+    XCTAssertEqual([LayoutMath interpolateLineWithStep:0.1 start:start.x end:end.x], 9);
+}
+
 @end
 
-@interface LayoutMathTests_Landscape : LayoutMathTests
+@interface LayoutMathTests_Landscape : LayoutMathTestsSetup
 @end
 
 @implementation LayoutMathTests_Landscape
@@ -119,29 +130,29 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
-    XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, defaultAccuracy);
 }
 
 - (void)testGivenALandscapeOrientationThenTheCenterXValueIsHalfTheWidth {
     CGFloat expectedX = [UIScreen mainScreen].bounds.size.width / 2;
-    XCTAssertEqualWithAccuracy([LayoutMath xCenterForMainScreen], expectedX, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath xCenterForMainScreen], expectedX, defaultAccuracy);
 }
 
 - (void)testGivenALandscapeOrientationThenTheCenterYValueIsHalfTheHeight {
     CGFloat expectedY = [UIScreen mainScreen].bounds.size.height / 2;
-    XCTAssertEqualWithAccuracy([LayoutMath yCenterForMainScreen], expectedY, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath yCenterForMainScreen], expectedY, defaultAccuracy);
 }
 
 - (void)testTheCenterPointIsWidthHeightWhenInLandscapeOrientation {
     CGPoint expectedCenter = CGPointMake([UIScreen mainScreen].bounds.size.width / 2,
                                          [UIScreen mainScreen].bounds.size.height / 2);
-    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].x, expectedCenter.x, super.defaultAccuracy);
-    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].y, expectedCenter.y, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].x, expectedCenter.x, defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].y, expectedCenter.y, defaultAccuracy);
 }
 
 @end
 
-@interface LayoutMathTests_Portrait : LayoutMathTests
+@interface LayoutMathTests_Portrait : LayoutMathTestsSetup
 @end
 
 @implementation LayoutMathTests_Portrait
@@ -161,29 +172,29 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     CGFloat width = [[UIScreen mainScreen] bounds].size.width;
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
-    XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, defaultAccuracy);
 }
 
 - (void)testGivenAniPhone6InPortraitOrientationTheLetterSizeIsFoundToBeThreeHundredTwentyFiveOrFiftyLessThanHalfTheSmallerScreenDimension {
     CGFloat expectedSize = 325.0;
-    XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath maximumViableFontSize], expectedSize, defaultAccuracy);
 }
 
 - (void)testGivenAPortraitOrientationThenTheCenterXValueIsHalfTheHeight {
     CGFloat expectedX = [UIScreen mainScreen].bounds.size.height / 2;
-    XCTAssertEqualWithAccuracy([LayoutMath xCenterForMainScreen], expectedX, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath xCenterForMainScreen], expectedX, defaultAccuracy);
 }
 
 - (void)testGivenAPortraitOrientationThenTheCenterYValueIsHalfTheWidth {
     CGFloat expectedY = [UIScreen mainScreen].bounds.size.width / 2;
-    XCTAssertEqualWithAccuracy([LayoutMath yCenterForMainScreen], expectedY, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath yCenterForMainScreen], expectedY, defaultAccuracy);
 }
 
 - (void)testTheCenterPointIsHeightWidthWhenInPortraitOrientation {
     CGPoint expectedCenter = CGPointMake([UIScreen mainScreen].bounds.size.height / 2,
                                          [UIScreen mainScreen].bounds.size.width / 2);
-    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].x, expectedCenter.x, super.defaultAccuracy);
-    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].y, expectedCenter.y, super.defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].x, expectedCenter.x, defaultAccuracy);
+    XCTAssertEqualWithAccuracy([LayoutMath centerOfMainScreen].y, expectedCenter.y, defaultAccuracy);
 }
 
 @end

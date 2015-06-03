@@ -48,7 +48,7 @@
 		C7360C571B04387500AEA146 /* StartButtonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C561B04387500AEA146 /* StartButtonConstants.m */; };
 		C7360C581B04387500AEA146 /* StartButtonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C7360C561B04387500AEA146 /* StartButtonConstants.m */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
-		C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTests.m */; };
+		C73700191AB7D5790035C4A3 /* LayoutMathTestsSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */; };
 		C75D0E0B1B0C285B006A71C8 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0A1B0C285B006A71C8 /* TrainTests.m */; };
 		C75D0E0E1B0C2A08006A71C8 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0D1B0C2A08006A71C8 /* Train.m */; };
 		C75D0E0F1B0C2A08006A71C8 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0D1B0C2A08006A71C8 /* Train.m */; };
@@ -130,7 +130,7 @@
 		C7360C561B04387500AEA146 /* StartButtonConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartButtonConstants.m; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
-		C73700181AB7D5790035C4A3 /* LayoutMathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LayoutMathTests.m; path = "TheWriteTrack-Tests/LayoutMathTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LayoutMathTestsSetup.m; path = "TheWriteTrack-Tests/LayoutMathTestsSetup.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C755E7851B1919F60045E05D /* PathSegmentsIndeces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegmentsIndeces.h; path = TheWriteTrack/PathSegmentsIndeces.h; sourceTree = SOURCE_ROOT; };
 		C75D0E0A1B0C285B006A71C8 /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = "TheWriteTrack-Tests/TrainTests.m"; sourceTree = SOURCE_ROOT; };
 		C75D0E0C1B0C2A08006A71C8 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Train.h; path = TheWriteTrack/Train.h; sourceTree = SOURCE_ROOT; };
@@ -268,7 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
-				C73700181AB7D5790035C4A3 /* LayoutMathTests.m */,
+				C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */,
 				C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */,
 				C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */,
 			);
@@ -727,7 +727,7 @@
 				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
 				C7B697571AF246330066086E /* StartButtonTests.m in Sources */,
 				C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */,
-				C73700191AB7D5790035C4A3 /* LayoutMathTests.m in Sources */,
+				C73700191AB7D5790035C4A3 /* LayoutMathTestsSetup.m in Sources */,
 				C7C4B8AD1A8C2CBF009FA11B /* LetterBaseSceneTests.m in Sources */,
 				C7E298261AFEEAA4007F593C /* PathInfoTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,

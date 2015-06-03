@@ -41,7 +41,7 @@
     XCTAssertTrue([upperCaseKeys isEqualToArray:expectedKeys]);
 }
 
-- (void)testTheLetter_A_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
+- (void)testTheLetter_A_HasANonNilSegmentArrayWithTheCorrectNumberOfSubSegments {
     [self assertArrayWithKey:@"A" hasObjectCount:10];
 }
 

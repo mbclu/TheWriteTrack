@@ -9,7 +9,15 @@
 #ifndef OnTheWriteTrack_PathSegmentsIndeces_h
 #define OnTheWriteTrack_PathSegmentsIndeces_h
 
-#define cs  [NSNumber numberWithInteger:-1]
+/* Control indeces */
+#define NORMAL_PATH_SEGMENT_DIRECTION   -1  // top to bottom, left to right
+#define REVERSE_PATH_SEGMENT_DIRECTION  -2
+#define PATH_SEGMENT_END                -3
+#define ND  [NSNumber numberWithInteger:NORMAL_PATH_SEGMENT_DIRECTION]
+#define RD  [NSNumber numberWithInteger:REVERSE_PATH_SEGMENT_DIRECTION]
+#define SE  [NSNumber numberWithInteger:PATH_SEGMENT_END]
+
+/* Veritcal Segment Indeces */
 #define v0  [NSNumber numberWithInteger:0]
 #define v1  [NSNumber numberWithInteger:1]
 #define v2  [NSNumber numberWithInteger:2]
@@ -31,6 +39,7 @@
 #define v18 [NSNumber numberWithInteger:18]
 #define v19 [NSNumber numberWithInteger:19]
 
+/* Horizontal Segment Indeces */
 #define h20 [NSNumber numberWithInteger:20]
 #define h21 [NSNumber numberWithInteger:21]
 #define h22 [NSNumber numberWithInteger:22]
@@ -52,6 +61,7 @@
 #define h38 [NSNumber numberWithInteger:38]
 #define h39 [NSNumber numberWithInteger:39]
 
+/* Letter 'A' Diagonal Indeces */
 #define a40 [NSNumber numberWithInteger:40]
 #define a41 [NSNumber numberWithInteger:41]
 #define a42 [NSNumber numberWithInteger:42]
@@ -61,6 +71,7 @@
 #define a46 [NSNumber numberWithInteger:46]
 #define a47 [NSNumber numberWithInteger:47]
 
+/* Letter 'V' Diagonal Segment Indeces */
 #define v48 [NSNumber numberWithInteger:48]
 #define v49 [NSNumber numberWithInteger:49]
 #define v50 [NSNumber numberWithInteger:50]
@@ -70,6 +81,7 @@
 #define v54 [NSNumber numberWithInteger:54]
 #define v55 [NSNumber numberWithInteger:55]
 
+/* Letter 'X' Diagonal Segment Indeces */
 #define x56 [NSNumber numberWithInteger:56]
 #define x57 [NSNumber numberWithInteger:57]
 #define x58 [NSNumber numberWithInteger:58]
@@ -79,6 +91,7 @@
 #define x62 [NSNumber numberWithInteger:62]
 #define x63 [NSNumber numberWithInteger:63]
 
+/* Curved Segment Indeces ('B', 'O', etc.) */
 #define c64 [NSNumber numberWithInteger:64]
 #define c65 [NSNumber numberWithInteger:65]
 #define c66 [NSNumber numberWithInteger:66]

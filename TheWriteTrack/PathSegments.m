@@ -7,6 +7,8 @@
 //
 
 #import "PathSegments.h"
+
+#import "LayoutMath.h"
 #import "LetterPathSegmentDictionary.h"
 
 #if (DEBUG)
@@ -79,14 +81,14 @@ const CGFloat boundingHeightPercentage = 0.75;
     [self createDiagonalSegmentsWithXShift:1.0 yShift:-1.0 xOffset:0 yOffset:-4];
 }
 
-
 - (void)addCurvedSegments {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
+    
     for (NSUInteger i = 0; i < numberOfCurvedSegments; i++) {
-        [self addCurveSegmentsWithXStart:curvePoints[i][0] YStart:curvePoints[i][1]
-                                XControl:curvePoints[i][2] YControl:curvePoints[i][3]
-                                    XEnd:curvePoints[i][4] YEnd:curvePoints[i][5]];
+        [self addQuadCurveDefinitionWithP1:CGPointMake(curvePoints[i][0], curvePoints[i][1])
+                              ControlPoint:CGPointMake(curvePoints[i][2], curvePoints[i][3])
+                                        P2:CGPointMake(curvePoints[i][4], curvePoints[i][5])];
     }
 }
 
@@ -131,96 +133,148 @@ const CGFloat boundingHeightPercentage = 0.75;
 - (void)createColumnSegmentsForRow:(NSUInteger)row {
     for (NSUInteger i = 0; i < segmentsPerDimension; i++) {
         CGFloat x = _segmentBounds.size.width * oneOverTheNumberOfSegments * row;
-        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * i;
-        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + 1);
-        [self addLineSegmentWithXStart:x YStart:yStart XEnd:x YEnd:yEnd];
+        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * i;
+        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + 1);
+        [self addLineDefinitionWithPointsP1:CGPointMake(x, yStart) P2:CGPointMake(x, yEnd)];
     }
 }
 
 - (void)createRowSegmentsForColumn:(NSUInteger)column {
     for (NSUInteger i = 0; i < segmentsPerDimension; i++) {
-        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * i;
-        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + 1);
+        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * i;
+        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + 1);
         CGFloat y = _segmentBounds.size.height * oneOverTheNumberOfSegments * column;
-        [self addLineSegmentWithXStart:xStart YStart:y XEnd:xEnd YEnd:y];
+        [self addLineDefinitionWithPointsP1:CGPointMake(xStart, y) P2:CGPointMake(xEnd, y)];
     }
 }
 
 - (void)createDiagonalSegmentsWithXShift:(CGFloat)xShift yShift:(CGFloat)yShift xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset {
     for (NSInteger i = 0; i < segmentsPerDimension; i++) {
-        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + xOffset) * xShift;
-        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + yOffset) * yShift;
-        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * (1 + i + xOffset) * xShift;
-        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * (1 + i + yOffset) * yShift;
-        [self addLineSegmentWithXStart:xStart YStart:yStart XEnd:xEnd YEnd:yEnd];
+        CGFloat xStart = _segmentBounds.size.width * oneOverTheNumberOfSegments * (i + xOffset) * xShift;
+        CGFloat yStart = _segmentBounds.size.height * oneOverTheNumberOfSegments * (i + yOffset) * yShift;
+        CGFloat xEnd = _segmentBounds.size.width * oneOverTheNumberOfSegments * (1 + i + xOffset) * xShift;
+        CGFloat yEnd = _segmentBounds.size.height * oneOverTheNumberOfSegments * (1 + i + yOffset) * yShift;
+        [self addLineDefinitionWithPointsP1:CGPointMake(xStart, yStart) P2:CGPointMake(xEnd, yEnd)];
     }
 }
 
-- (void)addLineSegmentWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd {
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, nil, xStart, yStart);
-    CGPathAddLineToPoint(path, nil, xEnd, yEnd);
-    [_segments addObject:(__bridge id)(path)];
+- (void)addLineDefinitionWithPointsP1:(CGPoint)point1 P2:(CGPoint)point2 {
+    [_segments addObject:
+     [NSArray arrayWithObjects:
+      [NSValue valueWithCGPoint:point1],
+      [NSValue valueWithCGPoint:point2],
+      nil]];
 }
 
-- (void)addCurveSegmentsWithXStart:(CGFloat)xStart YStart:(CGFloat)yStart
-                          XControl:(CGFloat)xControl YControl:(CGFloat)yControl
-                              XEnd:(CGFloat)xEnd YEnd:(CGFloat)yEnd {
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, nil, xStart, yStart);
-    CGPathAddQuadCurveToPoint(path, nil, xControl, yControl, xEnd, yEnd);
-    [_segments addObject:(__bridge id)(path)];
+- (void)addQuadCurveDefinitionWithP1:(CGPoint)point1 ControlPoint:(CGPoint)control P2:(CGPoint)point2 {
+    [_segments addObject:
+     [NSArray arrayWithObjects:
+      [NSValue valueWithCGPoint:point1],
+      [NSValue valueWithCGPoint:control],
+      [NSValue valueWithCGPoint:point2],
+      nil]
+     ];
 }
 
-/*** Unfortunately, NOT much testing after this point ***/
+/* Unfortunately, NOT much test coverage after this point  *
+ * Everything was instead spiked out with trial and error. */
 
 - (void)generateCombinedPathAndCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center {
     _crossbars = [[NSMutableArray alloc] init];
     _combinedPath = CGPathCreateMutable();
+    CGMutablePathRef subPath = CGPathCreateMutable();
     
     NSDictionary *letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
     NSArray *letterSegments = [letterSegmentDictionary objectForKey:letter];
     
+    BOOL isSegmentDirectionReversed = NO;
+    
     for (NSUInteger i = 0; i < letterSegments.count; i++) {
         NSInteger segmentIndex = [[letterSegments objectAtIndex:i] integerValue];
-        CGPathRef path = (__bridge CGPathRef)[_segments objectAtIndex:segmentIndex];
         
-        CGPathAddPath(_combinedPath, nil, path);
-        
-        [self createCrossbarsForSegment:path atCenter:center withIndex:segmentIndex];
+        switch (segmentIndex) {
+            case NORMAL_PATH_SEGMENT_DIRECTION:
+                isSegmentDirectionReversed = NO;
+                break;
+            case REVERSE_PATH_SEGMENT_DIRECTION:
+                isSegmentDirectionReversed = YES;
+                break;
+            case PATH_SEGMENT_END:
+                CGPathAddPath(_combinedPath, nil, subPath);
+                CGPathRelease(subPath);
+                subPath = CGPathCreateMutable();
+                break;
+            default:
+            {
+                NSArray *points = [_segments objectAtIndex:segmentIndex];
+                NSUInteger startIndex = 0;
+                NSInteger indexChange = +1;
+                
+                if (isSegmentDirectionReversed) {
+                    startIndex = points.count - 1;
+                    indexChange = -1;
+                }
+                
+                if (CGPathIsEmpty(subPath)) {
+                    CGPoint start = [[points objectAtIndex:startIndex] CGPointValue];
+                    CGPathMoveToPoint(subPath, nil, start.x, start.y);
+                }
+                
+                if (points.count == 2) {
+                    CGPoint point = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
+                    CGPathAddLineToPoint(subPath, nil, point.x, point.y);
+                    [self createCrossbarsForSegment:subPath atCenter:center type:NO];
+                }
+                else {
+                    CGPoint controlPoint = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
+                    CGPoint endPoint = [[points objectAtIndex:startIndex + (2 * indexChange)] CGPointValue];
+                    CGPathAddQuadCurveToPoint(subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
+                    [self createCrossbarsForSegment:subPath atCenter:center type:YES];
+                }
+
+                break;
+            }
+        }
+    }
+    
+    CGPathRelease(subPath);
+}
+
+void CombinePathSegments(void* info, const CGPathElement* element) {
+    CGMutablePathRef *combinedPath = (CGMutablePathRef *)info;
+    if (element != nil) {
+        CGPoint *points = element->points;
+        switch (element->type) {
+            case kCGPathElementMoveToPoint:
+                if (CGPathIsEmpty(*combinedPath)) {
+                    CGPathMoveToPoint(*combinedPath, nil, points[0].x, points[0].y);
+                }
+                else {
+                    CGPathAddLineToPoint(*combinedPath, nil, points[0].x, points[0].y);
+                }
+                break;
+            case kCGPathElementAddLineToPoint:
+                    CGPathAddLineToPoint(*combinedPath, nil, points[0].x, points[0].y);
+                break;
+            case kCGPathElementAddQuadCurveToPoint:
+                break;
+            case kCGPathElementAddCurveToPoint:
+                DDLogError(@"Cubic curves not supported by the PathSegments class");
+                break;
+            default:
+                // Nothing to do
+                break;
+        }
     }
 }
 
-- (void)createCrossbarsForSegment:(CGPathRef)path atCenter:(CGPoint)center withIndex:(NSUInteger)index {
-    if (index < [c64 integerValue]) {
-        [self createCrossbarsForStraightPath:path atCenter:center];
+- (void)createCrossbarsForSegment:(CGPathRef)path atCenter:(CGPoint)center type:(BOOL)isCurve {
+    if (isCurve) {
+        [self createCrossbarsForCurve:path atCenter:center];
     }
     else {
-        [self createCrossbarsForCurve:(index - [c64 integerValue]) atCenter:center];
+        [self createCrossbarsForStraightPath:path atCenter:center];
     }
-}
-
-const CGPoint interpolateLine(const CGFloat step, const CGPoint start, const CGPoint end) {
-    const CGFloat yChange = (end.y - start.y);
-    const CGFloat xChange = (end.x - start.x);
-    const CGFloat slope = yChange / xChange;
-    
-    CGFloat xNew = start.x;
-    CGFloat yNew = start.y;
-    
-    if (isinf(slope)) {
-        yNew += (yChange * (1.0 - step));
-    }
-    else if (!isnan(slope)) {
-        xNew += (xChange * (1.0 - step));
-        yNew += (yChange * (1.0 - step));
-    }
-    
-    return CGPointMake(xNew, yNew);
-}
-
-const CGFloat lineSlope(const CGPoint start, const CGPoint end) {
-    return (end.y - start.y) / (end.x - start.x);
 }
 
 - (void)createCrossbarsForStraightPath:(CGPathRef)path atCenter:(CGPoint)center {
@@ -231,29 +285,12 @@ const CGFloat lineSlope(const CGPoint start, const CGPoint end) {
         CGPoint start = [[pathArray objectAtIndex:j - 1] CGPointValue];
         CGPoint end = [[pathArray objectAtIndex:j] CGPointValue];
         for (CGFloat t = 0.0; t <= 1.0; t += 0.25) {
-            CGPoint newPoint = interpolateLine(t, start, end);
-            [self addCrossbarWithSlope:lineSlope(start, end) position:newPoint center:center];
+            CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateLineWithStep:t start:start.x end:end.x],
+                                                     [LayoutMath interpolateLineWithStep:t start:start.y end:end.y]);
+            [self addCrossbarWithSlope:[LayoutMath slopeOfLineWithStartPoint:start endPoint:end]
+                              position:interpolationPoint center:center];
         }
     }
-}
-
-CGFloat interpolateQuadBezier(const CGFloat step, const CGFloat start, const CGFloat control, const CGFloat end)
-{
-    const CGFloat percent = (1.0 - step);
-    const CGFloat percentSquared = percent * percent;
-    const CGFloat stepSquared = step * step;
-    
-    return start * percentSquared
-            + 2.0 *  control * percent * step
-            + end * stepSquared;
-}
-
-float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat control, const CGFloat end)
-{
-    const CGFloat percent = (1.0 - step);
-    
-    return 2.0 * percent * (control - start)
-    + 2.0 * step * (end - control);
 }
 
 - (void)createCrossbarsForCurve:(NSUInteger)curveIndex atCenter:(CGPoint)center {
@@ -261,11 +298,23 @@ float tangentQuadBezier(const CGFloat step, const CGFloat start, const CGFloat c
     [self getCurveDefintions:curvePoints];
     
     for (CGFloat t = 0.05; t <= 1.0; t += 0.1) {
-        CGPoint interpolationPoint = CGPointMake(interpolateQuadBezier(t, curvePoints[curveIndex][0], curvePoints[curveIndex][2], curvePoints[curveIndex][4]) + center.x,
-                                                 interpolateQuadBezier(t, curvePoints[curveIndex][1], curvePoints[curveIndex][3], curvePoints[curveIndex][5]) + center.y);
+        CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateQuadBezierAtStep:t
+                                                                                   start:curvePoints[curveIndex][0]
+                                                                                 control:curvePoints[curveIndex][2]
+                                                                                     end:curvePoints[curveIndex][4]] + center.x,
+                                                 [LayoutMath interpolateQuadBezierAtStep:t
+                                                                                   start:curvePoints[curveIndex][1]
+                                                                                 control:curvePoints[curveIndex][3]
+                                                                                     end:curvePoints[curveIndex][5]] + center.y);
         
-        CGPoint tangent = CGPointMake(tangentQuadBezier(t, curvePoints[curveIndex][0], curvePoints[curveIndex][2], curvePoints[curveIndex][4]),
-                                      tangentQuadBezier(t, curvePoints[curveIndex][1], curvePoints[curveIndex][3], curvePoints[curveIndex][5]));
+        CGPoint tangent = CGPointMake([LayoutMath tangentQuadBezierAtStep:t
+                                                                    start:curvePoints[curveIndex][0]
+                                                                  control:curvePoints[curveIndex][2]
+                                                                      end:curvePoints[curveIndex][4]],
+                                      [LayoutMath tangentQuadBezierAtStep:t
+                                                                    start:curvePoints[curveIndex][1]
+                                                                  control:curvePoints[curveIndex][3]
+                                                                      end:curvePoints[curveIndex][5]]);
         
         float y2 = interpolationPoint.y + tangent.y;
         float y1 = interpolationPoint.y;
@@ -282,6 +331,7 @@ static inline float degreesToRadians(double degrees) { return degrees * M_PI / 1
 
 - (void)addCrossbarWithSlope:(CGFloat)slope position:(CGPoint)position center:(CGPoint)center {
     CGFloat angleInRadians = atanf(slope);
+    
     CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
     CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
     CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x + center.x, position.y + center.y);

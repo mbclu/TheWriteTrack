@@ -26,4 +26,10 @@
 + (CGPoint)originForUpperLeftPlacementOfPath:(CGPathRef)path;
 + (CGPoint)originForPath:(CGPathRef)path adjacentToPathOnLeft:(CGPathRef)pathOnLeft;
 
+// Line traversal and orientation
++ (CGFloat)interpolateLineWithStep:(const CGFloat)step start:(const CGFloat)start end:(const CGFloat)end;
++ (CGFloat)slopeOfLineWithStartPoint:(const CGPoint)start endPoint:(const CGPoint)end;
++ (CGFloat)interpolateQuadBezierAtStep:(const CGFloat)step start:(const CGFloat)start control:(const CGFloat)control end:(const CGFloat)end;
++ (CGFloat)tangentQuadBezierAtStep:(const CGFloat)step start:(const CGFloat)start control:(const CGFloat)control end:(const CGFloat)end;
+
 @end

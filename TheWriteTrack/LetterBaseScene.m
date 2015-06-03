@@ -51,14 +51,14 @@
         PathSegments *pathSegments = [[PathSegments alloc] init];
         [pathSegments generateCombinedPathAndCrossbarsForLetter:self.name atCenter:center];
         SKShapeNode *letter = [self createTrackPathNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
-        [self addChild:letter];
-        [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
+//        [self addChild:letter];
         [self addCrossbars:pathSegments.crossbars];
+        [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
         
         Train *train = [self createTrainNodeWithPath:letter.path];
         [self addChild:(SKNode *)train];
         
-        [self addWaypoints:train.waypoints];
+//        [self addWaypoints:train.waypoints];
 
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
@@ -118,7 +118,7 @@
     return letterPathNode;
 }
 
-- (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
+- (SKShapeNode *)createTrackPathNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
     SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
     segmentNode.name = LetterNodeName;
     segmentNode.strokeColor = [SKColor lightGrayColor];
@@ -126,8 +126,8 @@
     return segmentNode;
 }
 
-- (SKShapeNode *)createTrackPathNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
-    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 25.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
+- (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
+    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 25.0, kCGLineCapButt, kCGLineJoinBevel, 1.0)];
     outlineNode.name = LetterOutlineName;
     outlineNode.lineWidth = 10.0;
     outlineNode.strokeColor = [SKColor darkGrayColor];

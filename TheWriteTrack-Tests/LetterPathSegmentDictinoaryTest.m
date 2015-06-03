@@ -42,19 +42,19 @@
 }
 
 - (void)testTheLetter_A_HasANonNilSegmentArrayWithTheCorrectNumberOfSubSegments {
-    [self assertArrayWithKey:@"A" hasObjectCount:10];
+    [self assertArrayWithKey:@"A" hasObjectCount:15];
 }
 
 - (void)testTheLetter_B_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"B" hasObjectCount:11];
+    [self assertArrayWithKey:@"B" hasObjectCount:19];
 }
 
 - (void)testTheLetter_C_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"C" hasObjectCount:4];
+    [self assertArrayWithKey:@"C" hasObjectCount:5];
 }
 
 - (void)testTheLetter_D_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"D" hasObjectCount:8];
+    [self assertArrayWithKey:@"D" hasObjectCount:13];
 }
 
 @end

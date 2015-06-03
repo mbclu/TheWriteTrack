@@ -223,13 +223,13 @@ const CGFloat boundingHeightPercentage = 0.75;
                 if (points.count == 2) {
                     CGPoint point = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
                     CGPathAddLineToPoint(subPath, nil, point.x, point.y);
-                    [self createCrossbarsForSegment:subPath atCenter:center type:NO];
+                    [self createCrossbarsForStraightPath:subPath atCenter:center];
                 }
                 else {
                     CGPoint controlPoint = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
                     CGPoint endPoint = [[points objectAtIndex:startIndex + (2 * indexChange)] CGPointValue];
                     CGPathAddQuadCurveToPoint(subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
-                    [self createCrossbarsForSegment:subPath atCenter:center type:YES];
+                    [self createCrossbarsForCurve:(segmentIndex - [c64 integerValue]) atCenter:center];
                 }
 
                 break;
@@ -238,43 +238,6 @@ const CGFloat boundingHeightPercentage = 0.75;
     }
     
     CGPathRelease(subPath);
-}
-
-void CombinePathSegments(void* info, const CGPathElement* element) {
-    CGMutablePathRef *combinedPath = (CGMutablePathRef *)info;
-    if (element != nil) {
-        CGPoint *points = element->points;
-        switch (element->type) {
-            case kCGPathElementMoveToPoint:
-                if (CGPathIsEmpty(*combinedPath)) {
-                    CGPathMoveToPoint(*combinedPath, nil, points[0].x, points[0].y);
-                }
-                else {
-                    CGPathAddLineToPoint(*combinedPath, nil, points[0].x, points[0].y);
-                }
-                break;
-            case kCGPathElementAddLineToPoint:
-                    CGPathAddLineToPoint(*combinedPath, nil, points[0].x, points[0].y);
-                break;
-            case kCGPathElementAddQuadCurveToPoint:
-                break;
-            case kCGPathElementAddCurveToPoint:
-                DDLogError(@"Cubic curves not supported by the PathSegments class");
-                break;
-            default:
-                // Nothing to do
-                break;
-        }
-    }
-}
-
-- (void)createCrossbarsForSegment:(CGPathRef)path atCenter:(CGPoint)center type:(BOOL)isCurve {
-    if (isCurve) {
-        [self createCrossbarsForCurve:path atCenter:center];
-    }
-    else {
-        [self createCrossbarsForStraightPath:path atCenter:center];
-    }
 }
 
 - (void)createCrossbarsForStraightPath:(CGPathRef)path atCenter:(CGPoint)center {
@@ -327,10 +290,13 @@ void CombinePathSegments(void* info, const CGPathElement* element) {
     }
 }
 
-static inline float degreesToRadians(double degrees) { return degrees * M_PI / 180; }
+static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI / 180; }
 
 - (void)addCrossbarWithSlope:(CGFloat)slope position:(CGPoint)position center:(CGPoint)center {
-    CGFloat angleInRadians = atanf(slope);
+    CGFloat angleInRadians = degreesToRadians(90);
+    if (!isnan(slope)) {
+        angleInRadians = atanf(slope);
+    }
     
     CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
     CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);

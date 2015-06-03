@@ -86,10 +86,10 @@ CGFloat const ArbitrarySceneHeight = 200;
     XCTAssertNotNil(theTrainNode);
 }
 
-- (void)testTheTrainNodeGetsPassedTheLetterStringPath {
-    Train *train = (Train *)theTrainNode;
-    XCTAssertNotNil(train.letterPath);
-}
+//- (void)testTheTrainNodeGetsPassedTheLetterStringPath {
+//    Train *train = (Train *)theTrainNode;
+//    XCTAssertFalse(CGPathIsEmpty(train.letterPath));
+//}
 
 - (void)testForANextLetterButton {
     XCTAssertNotNil(theNextButtonNode);
@@ -177,13 +177,13 @@ CGFloat const ArbitrarySceneHeight = 200;
     XCTAssertNil([zScene childNodeWithName:PrevButton]);
 }
 
-- (void)testAShapeNodeIsAddedForTheLetterTrack {
-    SKNode *shape = [theScene childNodeWithName:@"LetterNode"];
-    XCTAssertNotNil(shape);
-    XCTAssertTrue([shape isKindOfClass:[SKShapeNode class]]);
-    // Test color?
-    // Test strokeWidth?
-}
+//- (void)testAShapeNodeIsAddedForTheLetterTrack {
+//    SKNode *shape = [theScene childNodeWithName:@"LetterNode"];
+//    XCTAssertNotNil(shape);
+//    XCTAssertTrue([shape isKindOfClass:[SKShapeNode class]]);
+//    // Test color?
+//    // Test strokeWidth?
+//}
 
 - (void)testAnOutlineShapeNodeIsAddedForTheLetterTrack {
     SKNode *outline = [theScene childNodeWithName:@"LetterOutlineNode"];

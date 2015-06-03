@@ -23,9 +23,9 @@
     NSMutableArray *letterValues = [[NSMutableArray alloc] init];
     
     /* A */ [letterValues addObject:[NSArray arrayWithObjects:RD, a43, a42, a41, a40, SE, ND, a44, a45, a46, a47, SE, h29, h30, SE, nil]];
-    /* B */ [letterValues addObject:[NSArray arrayWithObjects:v7, v6, v5, v4, h37, c68, c69, h29, c70, c71, h21, nil]];
-    /* C */ [letterValues addObject:[NSArray arrayWithObjects:c68, c72, c73, c71, nil]];
-    /* D */ [letterValues addObject:[NSArray arrayWithObjects:v7, v6, v5, v4, h21, c74, c75, h37, nil]];
+    /* B */ [letterValues addObject:[NSArray arrayWithObjects:RD, v7, v6, v5, v4, SE, ND, h37, c68, c69, h29, RD, h29, ND, c70, c71, RD, h21, SE, nil]];
+    /* C */ [letterValues addObject:[NSArray arrayWithObjects:c68, c72, c73, c71, SE, nil]];
+    /* D */ [letterValues addObject:[NSArray arrayWithObjects:RD, v7, v6, v5, v4, SE, ND, h21, RD, c74, c75, h37, SE, nil]];
     /* E */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
     /* F */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
     /* G */ [letterValues addObject:[NSArray arrayWithObjects:nil]];

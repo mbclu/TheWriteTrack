@@ -64,4 +64,16 @@
     [self assertArrayWithKey:@"D" hasObjectCount:8 andSubSegmentCount:2];
 }
 
+- (void)testTheLetter_E_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
+    [self assertArrayWithKey:@"E" hasObjectCount:12 andSubSegmentCount:4];
+}
+
+- (void)testTheLetter_F_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
+    [self assertArrayWithKey:@"F" hasObjectCount:9 andSubSegmentCount:3];
+}
+
+- (void)testTheLetter_G_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
+    [self assertArrayWithKey:@"G" hasObjectCount:6 andSubSegmentCount:1];
+}
+
 @end

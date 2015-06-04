@@ -27,8 +27,8 @@
     /* C */ [letterValues addObject:[NSArray arrayWithObjects:RD, c68, ND, c72, c73, RD, c71, SE, nil]];
     /* D */ [letterValues addObject:[NSArray arrayWithObjects:RD, v7, v6, v5, v4, SE, ND, h37, RD, c75, c74, h21, SE, nil]];
     /* E */ [letterValues addObject:[NSArray arrayWithObjects:RD, v7, v6, v5, v4, SE, ND, h37, h38, h39, SE, h29, h30, SE, h21, h22, h23, SE, nil]];
-    /* F */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
-    /* G */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
+    /* F */ [letterValues addObject:[NSArray arrayWithObjects:RD, v7, v6, v5, v4, SE, ND, h37, h38, h39, SE, h29, h30, SE, nil]];
+    /* G */ [letterValues addObject:[NSArray arrayWithObjects:RD, c68, ND, c72, c73, c74, RD, h31, h30, SE, nil]];
     /* H */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
     /* I */ [letterValues addObject:[NSArray arrayWithObjects:nil]];
     /* J */ [letterValues addObject:[NSArray arrayWithObjects:nil]];

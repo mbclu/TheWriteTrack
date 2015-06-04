@@ -54,7 +54,7 @@
 		C75D0E0F1B0C2A08006A71C8 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0D1B0C2A08006A71C8 /* Train.m */; };
 		C76529FA1B1B722E0075456A /* LetterPathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* LetterPathSegmentDictionary.m */; };
 		C76529FB1B1B722E0075456A /* LetterPathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* LetterPathSegmentDictionary.m */; };
-		C76529FD1B1B732D0075456A /* LetterPathSegmentDictinoaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529FC1B1B732D0075456A /* LetterPathSegmentDictinoaryTest.m */; };
+		C76529FD1B1B732D0075456A /* LetterPathSegmentDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529FC1B1B732D0075456A /* LetterPathSegmentDictionaryTest.m */; };
 		C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
 		C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
 		C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347411AE73361005C2950 /* TitleTrainTests.m */; };
@@ -137,7 +137,7 @@
 		C75D0E0D1B0C2A08006A71C8 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Train.m; path = TheWriteTrack/Train.m; sourceTree = SOURCE_ROOT; };
 		C76529F81B1B722E0075456A /* LetterPathSegmentDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterPathSegmentDictionary.h; path = TheWriteTrack/LetterPathSegmentDictionary.h; sourceTree = SOURCE_ROOT; };
 		C76529F91B1B722E0075456A /* LetterPathSegmentDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterPathSegmentDictionary.m; path = TheWriteTrack/LetterPathSegmentDictionary.m; sourceTree = SOURCE_ROOT; };
-		C76529FC1B1B732D0075456A /* LetterPathSegmentDictinoaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterPathSegmentDictinoaryTest.m; path = "TheWriteTrack-Tests/LetterPathSegmentDictinoaryTest.m"; sourceTree = SOURCE_ROOT; };
+		C76529FC1B1B732D0075456A /* LetterPathSegmentDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterPathSegmentDictionaryTest.m; path = "TheWriteTrack-Tests/LetterPathSegmentDictionaryTest.m"; sourceTree = SOURCE_ROOT; };
 		C77347351AE72936005C2950 /* OrangeSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = OrangeSmoke.sks; path = TheWriteTrack/OrangeSmoke.sks; sourceTree = SOURCE_ROOT; };
 		C773473E1AE72E3D005C2950 /* OrangeSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeSmoke.png; path = images/particles/OrangeSmoke.png; sourceTree = SOURCE_ROOT; };
 		C77347411AE73361005C2950 /* TitleTrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TitleTrainTests.m; path = "TheWriteTrack-Tests/TitleTrainTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -325,7 +325,7 @@
 				C78C6F851AA3A5E30077DE74 /* LetterViewTests.m */,
 				C75D0E0A1B0C285B006A71C8 /* TrainTests.m */,
 				C730182C1B14907500266CB9 /* PathSegmentsTests.m */,
-				C76529FC1B1B732D0075456A /* LetterPathSegmentDictinoaryTest.m */,
+				C76529FC1B1B732D0075456A /* LetterPathSegmentDictionaryTest.m */,
 			);
 			name = "Track-Tests";
 			sourceTree = "<group>";
@@ -732,7 +732,7 @@
 				C7E298261AFEEAA4007F593C /* PathInfoTests.m in Sources */,
 				C78C6F861AA3A5E30077DE74 /* LetterViewTests.m in Sources */,
 				C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */,
-				C76529FD1B1B732D0075456A /* LetterPathSegmentDictinoaryTest.m in Sources */,
+				C76529FD1B1B732D0075456A /* LetterPathSegmentDictionaryTest.m in Sources */,
 				C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */,
 				C7DB850B1AD48AA40026972B /* TitleSceneTests.m in Sources */,
 			);

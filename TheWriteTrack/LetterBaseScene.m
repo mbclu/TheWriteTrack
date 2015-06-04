@@ -55,7 +55,7 @@
         [self addCrossbars:pathSegments.crossbars];
         [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
         
-        Train *train = [self createTrainNodeWithPath:letter.path];
+        Train *train = [self createTrainNodeWithPath:pathSegments.combinedPath];
         [self addChild:(SKNode *)train];
         
 //        [self addWaypoints:train.waypoints];

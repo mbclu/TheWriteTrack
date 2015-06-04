@@ -1,5 +1,5 @@
 //
-//  LetterPathSegmentDictionaryTest.m
+//      .m
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 5/31/15.
@@ -9,13 +9,13 @@
 #import "LetterPathSegmentDictionary.h"
 #import <XCTest/XCTest.h>
 
-@interface LetterPathSegmentDictinoaryTest : XCTestCase {
+@interface LetterPathSegmentDictionaryTest : XCTestCase {
     NSMutableArray *upperCaseKeys;
 }
 
 @end
 
-@implementation LetterPathSegmentDictinoaryTest
+@implementation LetterPathSegmentDictionaryTest
 
 - (void)setUp {
     upperCaseKeys = [LetterPathSegmentDictionary initializeUpperCaseKeys];
@@ -26,10 +26,17 @@
     [super tearDown];
 }
 
-- (void)assertArrayWithKey:(id)key hasObjectCount:(NSUInteger)count {
+- (void)assertArrayWithKey:(id)key hasObjectCount:(NSUInteger)count andSubSegmentCount:(NSUInteger)expectedSegmentEnds {
     NSArray *array = [[LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments] objectForKey:key];
     XCTAssertNotNil(array);
-    XCTAssertEqual(array.count, count);
+    
+    NSUInteger nonControlIndexCount = [[array indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [obj integerValue] > 0; }] count];
+    XCTAssertEqual(nonControlIndexCount, count);
+    
+    NSUInteger segmentEndCount = [[array indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [obj isEqual:SE]; }] count];
+    XCTAssertEqual(segmentEndCount, expectedSegmentEnds);
 }
 
 - (void)testUpperCaseKeyArrayContainsAllUpperCaseLettersFromAtoZInclusive {
@@ -42,19 +49,19 @@
 }
 
 - (void)testTheLetter_A_HasANonNilSegmentArrayWithTheCorrectNumberOfSubSegments {
-    [self assertArrayWithKey:@"A" hasObjectCount:15];
+    [self assertArrayWithKey:@"A" hasObjectCount:10 andSubSegmentCount:3];
 }
 
 - (void)testTheLetter_B_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"B" hasObjectCount:19];
+    [self assertArrayWithKey:@"B" hasObjectCount:12 andSubSegmentCount:2];
 }
 
 - (void)testTheLetter_C_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"C" hasObjectCount:5];
+    [self assertArrayWithKey:@"C" hasObjectCount:4 andSubSegmentCount:1];
 }
 
 - (void)testTheLetter_D_HasANonNilSegmentArrayWithTheCorrectNumberOfSegments {
-    [self assertArrayWithKey:@"D" hasObjectCount:13];
+    [self assertArrayWithKey:@"D" hasObjectCount:8 andSubSegmentCount:2];
 }
 
 @end

@@ -230,6 +230,12 @@ const NSUInteger numberOfVFrameSegments = 8;
     [self assertSegmentPointsExist:segments index:++index x1:6 y1:2 x2:8 y2:0];
 }
 
+- (void)testTheCrossbarsAreNamedCrossbar {
+    [thePathSegments generateCombinedPathAndCrossbarsForLetter:@"A" atCenter:CGPointZero];
+    SKShapeNode *aCrossbar = (SKShapeNode *)[thePathSegments.crossbars objectAtIndex:0];
+    XCTAssertEqualObjects(aCrossbar.name, @"Crossbar");
+}
+
 @end
 
 @interface CurveSegmentsTests : XCTestCase {

@@ -223,13 +223,13 @@ const CGFloat boundingHeightPercentage = 0.75;
                 if (points.count == 2) {
                     CGPoint point = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
                     CGPathAddLineToPoint(subPath, nil, point.x, point.y);
-                    [self createCrossbarsForStraightPath:subPath atCenter:center];
+                    [self createCrossbarsForStraightSegment:points atCenter:center];
                 }
                 else {
                     CGPoint controlPoint = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
                     CGPoint endPoint = [[points objectAtIndex:startIndex + (2 * indexChange)] CGPointValue];
                     CGPathAddQuadCurveToPoint(subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
-                    [self createCrossbarsForCurve:(segmentIndex - [c64 integerValue]) atCenter:center];
+                    [self createCrossbarsForCurveSegment:(segmentIndex - [c64 integerValue]) atCenter:center];
                 }
 
                 break;
@@ -240,7 +240,10 @@ const CGFloat boundingHeightPercentage = 0.75;
     CGPathRelease(subPath);
 }
 
-- (void)createCrossbarsForStraightPath:(CGPathRef)path atCenter:(CGPoint)center {
+- (void)createCrossbarsForStraightSegment:(NSArray *)points atCenter:(CGPoint)center {
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, nil, [points[0] CGPointValue].x, [points[0] CGPointValue].y);
+    CGPathAddLineToPoint(path, nil, [points[1] CGPointValue].x, [points[1] CGPointValue].y);
     PathInfo *pathInfo = [[PathInfo alloc] init];
     NSArray *pathArray = [pathInfo TransformPathToArray:path];
     
@@ -256,7 +259,7 @@ const CGFloat boundingHeightPercentage = 0.75;
     }
 }
 
-- (void)createCrossbarsForCurve:(NSUInteger)curveIndex atCenter:(CGPoint)center {
+- (void)createCrossbarsForCurveSegment:(NSUInteger)curveIndex atCenter:(CGPoint)center {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
     
@@ -313,6 +316,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:crossbar];
     crossbarNode.lineWidth = 8;
     crossbarNode.strokeColor = [SKColor brownColor];
+    crossbarNode.name = @"Crossbar";
     
     [_crossbars addObject:crossbarNode];
 }

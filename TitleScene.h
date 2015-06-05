@@ -22,7 +22,7 @@
 
 @interface TitleScene : SKScene
 
-typedef NS_ENUM(NSInteger, TitleNodeZOrder) {
+typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
     TitleBackgroundZOrder,
     TitleTrainZOrder,
     TitleForegroundZOrder,

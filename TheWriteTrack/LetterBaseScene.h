@@ -20,6 +20,16 @@
 
 FOUNDATION_EXPORT NSString *const NextButtonName;
 
+typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
+    LetterBaseSceneBackgroundZPosition,
+    LetterBaseSceneTrackOutlineZPosition,
+    LetterBaseSceneCrossbarZPosition,
+    LetterBaseSceneWaypointZPosition,
+    LetterBaseSceneTrainZPosition,
+    LetterBaseSceneNextButtonZPosition,
+    LetterBaseScenePreviousButtonZPosition
+};
+
 @interface LetterBaseScene : SKScene {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;

@@ -38,7 +38,7 @@
         
         [self addChild:[self createBackground]];
 
-        [self addNavigationButtons];
+        [self createNavigationButtons];
         
         AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
         SKShapeNode* letterNode = [self createLetterPathNode:letterPath];
@@ -50,15 +50,14 @@
 
         PathSegments *pathSegments = [[PathSegments alloc] init];
         [pathSegments generateCombinedPathAndCrossbarsForLetter:self.name atCenter:center];
-        SKShapeNode *letter = [self createTrackPathNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
-//        [self addChild:letter];
+        SKShapeNode *letterOutline = [self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
+        [self addChild:letterOutline];
         [self addCrossbars:pathSegments.crossbars];
-        [self addChild:[self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform]];
         
-        Train *train = [self createTrainNodeWithPath:pathSegments.combinedPath];
+        Train *train = [self createTrainNodeWithPath:letterOutline.path];
         [self addChild:(SKNode *)train];
         
-//        [self addWaypoints:train.waypoints];
+        [self addWaypoints:train.waypoints];
 
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
@@ -77,10 +76,11 @@
     SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithTexture:texture size:self.size];
     rockyBackground.name = RockyBackgroundName;
     rockyBackground.anchorPoint = CGPointZero;
+    rockyBackground.zPosition = LetterBaseSceneBackgroundZPosition;
     return rockyBackground;
 }
 
-- (void)addNavigationButtons {
+- (void)createNavigationButtons {
     if (![[self stringFromSceneUnicharLetter] isEqual:@"Z"]) {
         nextButton = [self createNextButton];
         [self addChild:nextButton];
@@ -98,6 +98,7 @@
     button.anchorPoint = CGPointZero;
     button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
                                   (self.size.height - button.size.height) * 0.5);
+    button.zPosition = LetterBaseSceneNextButtonZPosition;
     return button;
 }
 
@@ -107,6 +108,7 @@
     button.anchorPoint = CGPointZero;
     button.position = CGPointMake(self.frame.origin.x + NextButtonXPadding,
                                   (self.size.height - button.size.height) * 0.5);
+    button.zPosition = LetterBaseScenePreviousButtonZPosition;
     return button;
 }
 
@@ -118,25 +120,20 @@
     return letterPathNode;
 }
 
-- (SKShapeNode *)createTrackPathNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
-    SKShapeNode *segmentNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 1.0, kCGLineCapRound, kCGLineJoinRound, 1.0)];
-    segmentNode.name = LetterNodeName;
-    segmentNode.strokeColor = [SKColor lightGrayColor];
-    segmentNode.lineWidth = 20.0;
-    return segmentNode;
-}
-
 - (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
     SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 25.0, kCGLineCapButt, kCGLineJoinBevel, 1.0)];
     outlineNode.name = LetterOutlineName;
-    outlineNode.lineWidth = 10.0;
+    outlineNode.lineWidth = 7.0;
     outlineNode.strokeColor = [SKColor darkGrayColor];
+    outlineNode.zPosition = LetterBaseSceneTrackOutlineZPosition;
     return outlineNode;
 }
 
 - (void)addCrossbars:(NSArray *)crossbars {
     for (NSUInteger i = 0; i < crossbars.count; i++) {
-        [self addChild:(SKShapeNode *)[crossbars objectAtIndex:i]];
+        SKShapeNode *crossbar = (SKShapeNode *)[crossbars objectAtIndex:i];
+        crossbar.zPosition = LetterBaseSceneCrossbarZPosition;
+        [self addChild:crossbar];
     }
 }
 
@@ -149,6 +146,8 @@
 - (void)addEnvelopeAtPoint:(CGPoint)position {
     SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeName];
     envelope.position = position;
+    envelope.name = @"Waypoint";
+    envelope.zPosition = LetterBaseSceneWaypointZPosition;
     [self addChild:envelope];
 }
 

@@ -154,6 +154,7 @@
 - (Train *)createTrainNodeWithPath:(CGPathRef)path {
     Train *trainNode = [[Train alloc] initWithPath:path];
     trainNode.name = TrainNodeName;
+    trainNode.zPosition = LetterBaseSceneTrainZPosition;
     return trainNode;
 }
 

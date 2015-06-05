@@ -224,7 +224,9 @@ NSString *const WaypointName = @"Waypoint";
 
 - (void)testTheTrackOutlineIsDrawnBeforeTheCrossbars {
     NSArray *sceneChildren = [theScene children];
+    
     XCTAssertNotNil([theScene childNodeWithName:CrossbarName]);
+    
     [sceneChildren enumerateObjectsWithOptions:NSEnumerationConcurrent
                                     usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                         SKNode *crossbarNode = (SKNode *)obj;
@@ -237,7 +239,9 @@ NSString *const WaypointName = @"Waypoint";
 - (void)testTheTheCrossbarsAreDrawnBeforeTheWaypoints {
     SKNode *aCrossbar = (SKNode *)[theScene childNodeWithName:CrossbarName];
     NSArray *sceneChildren = [theScene children];
+    
     XCTAssertNotNil([theScene childNodeWithName:WaypointName]);
+    
     [sceneChildren enumerateObjectsWithOptions:NSEnumerationConcurrent
                                     usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                         SKNode *waypointNode = (SKNode *)obj;
@@ -249,7 +253,7 @@ NSString *const WaypointName = @"Waypoint";
 
 - (void)testTheWaypointsAreDrawnBeforeTheTrain {
     SKNode *aWaypoint = (SKNode *)[theScene childNodeWithName:WaypointName];
-    XCTAssertLessThan(theTrainNode.zPosition, aWaypoint.zPosition);
+    XCTAssertLessThan(aWaypoint.zPosition, theTrainNode.zPosition);
 }
 
 @end

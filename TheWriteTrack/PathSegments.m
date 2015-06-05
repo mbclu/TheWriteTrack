@@ -30,7 +30,7 @@ const CGFloat boundingHeightPercentage = 0.75;
     self = [self initWithRect:CGRectMake(CGPointZero.x, CGPointZero.y,
                               ([UIScreen mainScreen].bounds.size.width * boundingWidthPercentage),
                               ([UIScreen mainScreen].bounds.size.height * boundingHeightPercentage))];
-    
+    _letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
     return self;
 }
 
@@ -179,13 +179,11 @@ const CGFloat boundingHeightPercentage = 0.75;
 /* Unfortunately, NOT much test coverage after this point  *
  * Everything was instead spiked out with trial and error. */
 
-- (void)generateCombinedPathAndCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center {
-    _crossbars = [[NSMutableArray alloc] init];
+- (CGPathRef)generateCombinedPathForLetter:(NSString *)letter atCenter:(CGPoint)center {
     _combinedPath = CGPathCreateMutable();
     CGMutablePathRef subPath = CGPathCreateMutable();
     
-    NSDictionary *letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
-    NSArray *letterSegments = [letterSegmentDictionary objectForKey:letter];
+    NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
     
     BOOL isSegmentDirectionReversed = NO;
     
@@ -223,13 +221,11 @@ const CGFloat boundingHeightPercentage = 0.75;
                 if (points.count == 2) {
                     CGPoint point = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
                     CGPathAddLineToPoint(subPath, nil, point.x, point.y);
-                    [self createCrossbarsForStraightSegment:points atCenter:center];
                 }
                 else {
                     CGPoint controlPoint = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
                     CGPoint endPoint = [[points objectAtIndex:startIndex + (2 * indexChange)] CGPointValue];
                     CGPathAddQuadCurveToPoint(subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
-                    [self createCrossbarsForCurveSegment:(segmentIndex - [c64 integerValue]) atCenter:center];
                 }
 
                 break;
@@ -238,6 +234,37 @@ const CGFloat boundingHeightPercentage = 0.75;
     }
     
     CGPathRelease(subPath);
+    return _combinedPath;
+}
+
+- (NSArray *)generateCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center {
+    _crossbars = [[NSMutableArray alloc] init];
+
+    NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
+    
+    for (NSUInteger i = 0; i < letterSegments.count; i++) {
+        NSInteger segmentIndex = [[letterSegments objectAtIndex:i] integerValue];
+        
+        switch (segmentIndex) {
+            case NORMAL_PATH_SEGMENT_DIRECTION:
+            case REVERSE_PATH_SEGMENT_DIRECTION:
+            case PATH_SEGMENT_END:
+                break;
+            default:
+            {
+                NSArray *points = [_segments objectAtIndex:segmentIndex];
+                if (points.count == 2) {
+                    [self createCrossbarsForStraightSegment:points atCenter:center];
+                }
+                else if (points.count == 3) {
+                    [self createCrossbarsForCurveSegment:(segmentIndex - [c64 integerValue]) atCenter:center];
+                }
+                break;
+            }
+        }
+    }
+    
+    return _crossbars;
 }
 
 - (void)createCrossbarsForStraightSegment:(NSArray *)points atCenter:(CGPoint)center {
@@ -319,6 +346,11 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     crossbarNode.name = @"Crossbar";
     
     [_crossbars addObject:crossbarNode];
+}
+
+- (NSArray *)generateWaypointsForLetter:(NSString *)letter atCenter:(CGPoint)center {
+    _waypoints = [[NSMutableArray alloc] init];
+    return _waypoints;
 }
 
 @end

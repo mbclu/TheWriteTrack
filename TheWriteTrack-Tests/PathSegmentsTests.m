@@ -7,6 +7,7 @@
 //
 
 #import "PathSegments.h"
+#import "PathSegmentsIndeces.h"
 
 #import "CGMatchers.h"
 #import <XCTest/XCTest.h>
@@ -230,12 +231,6 @@ const NSUInteger numberOfVFrameSegments = 8;
     [self assertSegmentPointsExist:segments index:++index x1:6 y1:2 x2:8 y2:0];
 }
 
-- (void)testTheCrossbarsAreNamedCrossbar {
-    [thePathSegments generateCombinedPathAndCrossbarsForLetter:@"A" atCenter:CGPointZero];
-    SKShapeNode *aCrossbar = (SKShapeNode *)[thePathSegments.crossbars objectAtIndex:0];
-    XCTAssertEqualObjects(aCrossbar.name, @"Crossbar");
-}
-
 @end
 
 @interface CurveSegmentsTests : XCTestCase {
@@ -319,6 +314,85 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 - (void)testThe_TopRightQuadrant_CurveIsAdded {
     OCMVerify([theMockSegments addQuadCurveDefinitionWithP1:CGPointMake(8,4) ControlPoint:CGPointMake(8,8) P2:CGPointMake(4,8)]);
+}
+
+@end
+
+@interface CrossbarTests : XCTestCase {
+    PathSegments *thePathSegments;
+    NSDictionary *segmentDictionaryForTest;
+}
+@end
+
+@implementation CrossbarTests
+
+- (void)setUp {
+    [super setUp];
+    
+    [[UIDevice currentDevice] setValue:
+     [NSNumber numberWithInteger: UIInterfaceOrientationLandscapeLeft]
+                                forKey:@"orientation"];
+    
+    thePathSegments = [[PathSegments alloc] initWithRect:CGRectMake(0, 0, 8, 8)];
+    
+    segmentDictionaryForTest = [NSDictionary dictionaryWithObjects:
+                                [NSArray arrayWithObjects:
+                                 [NSArray arrayWithObjects:ND, RD, SE, nil],
+                                 [NSArray arrayWithObjects:v0, nil],
+                                 [NSArray arrayWithObjects:h20, nil],
+                                 [NSArray arrayWithObjects:a40, nil],
+                                 [NSArray arrayWithObjects:c64, nil],
+                                 [NSArray arrayWithObjects:RD, v1, h21, a41, v48, x59, c64, c65, SE, nil], nil]
+                                                           forKeys:
+                                [NSArray arrayWithObjects:@"ControlPointsOnly", @"VericalOne", @"HorizontalOne", @"DiagonalOne", @"CurvedOne", @"AllCombined", nil]];
+    
+    [thePathSegments setLetterSegmentDictionary:segmentDictionaryForTest];
+}
+
+- (void)tearDown {
+    [super tearDown];
+}
+
+- (void)testGivenALetterDefinitionDoesNotExistForKeyWhenCrossbarsAreGeneratedThenTheCountIsZero {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"!" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 0);
+}
+
+- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenAnyControlSegmentsAreIgnored {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"ControlPointsOnly" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 0);
+}
+
+- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForVerticalSegments {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"VericalOne" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 5);
+}
+
+- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForHorizontalSegments {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"HorizontalOne" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 5);
+}
+
+- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForDiagonalSegments {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"DiagonalOne" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 5);
+}
+
+- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenTenCrossbarsAreGeneratedForCurvedSegments {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"CurvedOne" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 10);
+}
+
+- (void)testGivenAValidLetterWithDifferentSegmentTypesWhenCrossbarsAreCreatedThenTheTotalNumberOfCrossbarsIncludesAllSegments {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"AllCombined" atCenter:CGPointZero];
+    XCTAssertEqual(crossbarArray.count, 5 + 5 + 5 + 5 + 5 + 10 + 10);
+}
+
+- (void)testTheCrossbarsAreLineWidth_8_AndNamedCrossbar {
+    NSArray *crossbarArray = [thePathSegments generateCrossbarsForLetter:@"VericalOne" atCenter:CGPointZero];
+    SKShapeNode *aCrossbar = (SKShapeNode *)[crossbarArray objectAtIndex:0];
+    XCTAssertEqual(aCrossbar.lineWidth, 8);
+    XCTAssertEqualObjects(aCrossbar.name, @"Crossbar");
 }
 
 @end

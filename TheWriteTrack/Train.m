@@ -8,21 +8,21 @@
 
 #import "Train.h"
 #import "PathInfo.h"
+#import "PathSegments.h"
 
 NSString *const MagicTrainName = @"MagicTrain";
 NSString *const TrainName = @"Train";
 
 @implementation Train
 
-- (instancetype)initWithPath:(CGPathRef)letterPath {
+- (instancetype)initWithPathSegments:(PathSegments *)pathSegments {
     self = [super initWithImageNamed:MagicTrainName];
     
     [self setName:TrainName];
     
-    [self setLetterPath:letterPath];
+    [self setPathSegments:pathSegments];
     
-    PathInfo *pathInfo = [[PathInfo alloc] init];
-    [self setWaypoints:[pathInfo TransformPathToArray:_letterPath]];
+    [self addWaypointsByInterpolatingPath];
 
     [self positionTrainAtStartPoint];
     
@@ -33,14 +33,21 @@ NSString *const TrainName = @"Train";
     return self;
 }
 
+- (void)addWaypointsByInterpolatingPath {
+    _waypoints = [[NSMutableArray alloc] init];
+    [_waypoints addObject:[_pathSegments.segments objectAtIndex:0]];
+}
+
 - (void)positionTrainAtStartPoint {
-    if (_waypoints.count > 0) {
-        NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
-        [self setPosition:[firstPoint CGPointValue]];
-    }
-    else {
-        [self setPosition:CGPointMake(-100, -100)];
-    }
+    [self setPosition:CGPointMake(-100, -100)];
+//
+//    if (_waypoints.count > 0) {
+//        NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
+//        [self setPosition:[firstPoint CGPointValue]];
+//    }
+//    else {
+//        [self setPosition:CGPointMake(-100, -100)];
+//    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -58,7 +65,7 @@ NSString *const TrainName = @"Train";
 }
 
 - (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint {
-    if (_isMoving == YES && CGPathContainsPoint(_letterPath, nil, touchPoint, NO)) {
+    if (_isMoving == YES && CGPathContainsPoint(_pathSegments.combinedPath, nil, touchPoint, NO)) {
         self.position = touchPoint;
     }
     else {

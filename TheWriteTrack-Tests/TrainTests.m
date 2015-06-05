@@ -8,17 +8,16 @@
 
 #import "Train.h"
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-
 #import "CGMatchers.h"
 
-const uint pathWidth = 10;
-const uint pathHeight = 10;
+const uint pathWidth = 8;
+const uint pathHeight = 8;
 
 @interface TrainTests : XCTestCase {
-    CGPathRef thePath;
     Train *theTrain;
+    PathSegments *thePathSegments;
+    CGPoint initialTrainPosition;
 }
 
 @end
@@ -27,8 +26,9 @@ const uint pathHeight = 10;
 
 - (void)setUp {
     [super setUp];
-    thePath = CGPathCreateWithRect(CGRectMake(0, 0, pathWidth, pathHeight), nil);
-    theTrain = [[Train alloc] initWithPath:thePath];
+    thePathSegments = [[PathSegments alloc] initWithRect:CGRectMake(0, 0, pathWidth, pathHeight)];
+    theTrain = [[Train alloc] initWithPathSegments:thePathSegments];
+    initialTrainPosition = theTrain.position;
 }
 
 - (void)tearDown {
@@ -50,15 +50,14 @@ const uint pathHeight = 10;
     XCTAssertEqualObjects(theTrain.name, @"Train");
 }
 
-- (void)testWhenAPathIsProvidedThenThatPathIsTheTrainsPath {
-    AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:@"M"];
-    Train *aTrain = [[Train alloc] initWithPath:letterPath.letterPath];
-    XCTAssertFalse(CGPathIsEmpty(aTrain.letterPath));
-    XCTAssertTrue(CGPathEqualToPath(aTrain.letterPath, letterPath.letterPath));
-}
-
 - (void)testTrainHasASetOfPointsToFollowWithAtLeastOnePointInIt {
     XCTAssertNotNil(theTrain.waypoints);
+}
+
+- (void)testTheFirstWaypointIsAtAQuarterOfTheFirstPathSegmentDistance {
+    [thePathSegments generateCombinedPathForLetter:@"A" atCenter:CGPointZero];
+    Train *trainForTest = [[Train alloc] initWithPathSegments:thePathSegments];
+    XCTAssertEqualPoints([[trainForTest.waypoints objectAtIndex:0] CGPointValue], CGPointMake(3, 6));
 }
 
 - (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsTheSameAsTheFirstWaypoint {
@@ -68,8 +67,8 @@ const uint pathHeight = 10;
     XCTAssertEqualPoints(theTrain.position, expectedPoint);
 }
 
-- (void)testTheTrainIsPositionedOffScreenWhenPathIsEmpty {
-    Train *emptyPathTrain = [[Train alloc] initWithPath:CGPathCreateMutable()];
+- (void)testTheTrainIsPositionedOffScreenWhenPathSegmentsIsNull {
+    Train *emptyPathTrain = [[Train alloc] initWithPathSegments:nil];
     XCTAssertEqualPoints(emptyPathTrain.position, CGPointMake(-100, -100));
 }
 
@@ -89,7 +88,6 @@ const uint pathHeight = 10;
 }
 
 - (void)testGivenTheTrainIsStillWhenTouchesMovedThenTheTrainRemainsStill {
-    CGPoint initialTrainPosition = theTrain.position;
     [theTrain setIsMoving:NO];
     [theTrain evaluateTouchesMovedAtPoint:CGPointMake(initialTrainPosition.x, initialTrainPosition.y)];
     XCTAssertFalse(theTrain.isMoving);
@@ -97,7 +95,6 @@ const uint pathHeight = 10;
 }
 
 - (void)testGivenTheTrainIsMovingWhenTouchesMovedThenTheTrainPositionWillUpdateToTheTouchPosition {
-    CGPoint initialTrainPosition = theTrain.position;
     CGPoint touchPoint = [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth / 2) y:(pathHeight / 2)];
     XCTAssertEqualPoints(theTrain.position, touchPoint);
     XCTAssertTrue(theTrain.isMoving);
@@ -113,8 +110,6 @@ const uint pathHeight = 10;
 }
 
 - (void)testWhenATouchIsMovedOutsideThePathThenTheTrainDoesNotMoveAndIsConsideredStill {
-    CGPoint initialTrainPosition = theTrain.position;
-
     [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth * 2) y:(pathHeight * 2)];
     
     XCTAssertFalse(theTrain.isMoving);

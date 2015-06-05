@@ -23,17 +23,16 @@
 @property CGFloat fullWidth;
 @property CGMutablePathRef combinedPath;
 @property NSMutableArray *crossbars;
+@property NSMutableArray *waypoints;
+@property NSDictionary *letterSegmentDictionary;
 
 - (instancetype)initWithRect:(CGRect)rect;
-
 - (void)calculateGridDimensions;
-
 - (void)createRowSegmentsForColumn:(NSUInteger)column;
-
 - (void)createColumnSegmentsForRow:(NSUInteger)row;
-
 - (void)addQuadCurveDefinitionWithP1:(CGPoint)point1 ControlPoint:(CGPoint)control P2:(CGPoint)point2;
-
-- (void)generateCombinedPathAndCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center;
+- (CGPathRef)generateCombinedPathForLetter:(NSString *)letter atCenter:(CGPoint)center;
+- (NSArray *)generateCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center;
+- (NSArray *)generateWaypointsForLetter:(NSString *)letter atCenter:(CGPoint)center;
 
 @end

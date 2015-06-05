@@ -49,15 +49,15 @@
         [self connectSceneTransitions];
 
         PathSegments *pathSegments = [[PathSegments alloc] init];
-        [pathSegments generateCombinedPathAndCrossbarsForLetter:self.name atCenter:center];
+        [pathSegments generateCombinedPathForLetter:self.name atCenter:center];
         SKShapeNode *letterOutline = [self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
         [self addChild:letterOutline];
         [self addCrossbars:pathSegments.crossbars];
         
-        Train *train = [self createTrainNodeWithPath:letterOutline.path];
+        Train *train = [self createTrainNodeWithPathSegments:pathSegments];
         [self addChild:(SKNode *)train];
         
-        [self addWaypoints:train.waypoints];
+//        [self addWaypoints:train.waypoints];
 
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
@@ -151,8 +151,8 @@
     [self addChild:envelope];
 }
 
-- (Train *)createTrainNodeWithPath:(CGPathRef)path {
-    Train *trainNode = [[Train alloc] initWithPath:path];
+- (Train *)createTrainNodeWithPathSegments:(PathSegments *)pathSegments {
+    Train *trainNode = [[Train alloc] initWithPathSegments:pathSegments];
     trainNode.name = TrainNodeName;
     trainNode.zPosition = LetterBaseSceneTrainZPosition;
     return trainNode;

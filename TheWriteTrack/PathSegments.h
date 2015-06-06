@@ -25,14 +25,15 @@
 @property NSMutableArray *crossbars;
 @property NSMutableArray *waypoints;
 @property NSDictionary *letterSegmentDictionary;
+@property CGPoint center;
 
 - (instancetype)initWithRect:(CGRect)rect;
 - (void)calculateGridDimensions;
 - (void)createRowSegmentsForColumn:(NSUInteger)column;
 - (void)createColumnSegmentsForRow:(NSUInteger)row;
 - (void)addQuadCurveDefinitionWithP1:(CGPoint)point1 ControlPoint:(CGPoint)control P2:(CGPoint)point2;
-- (CGPathRef)generateCombinedPathForLetter:(NSString *)letter atCenter:(CGPoint)center;
-- (NSArray *)generateCrossbarsForLetter:(NSString *)letter atCenter:(CGPoint)center;
-- (NSArray *)generateWaypointsForLetter:(NSString *)letter atCenter:(CGPoint)center;
+- (CGPathRef)generateCombinedPathForLetter:(NSString *)letter;
+- (NSArray *)generateCrossbarsForLetter:(NSString *)letter;
+- (NSArray *)generateWaypointsForLetter:(NSString *)letter;
 
 @end

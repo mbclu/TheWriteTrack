@@ -55,7 +55,7 @@ const uint pathHeight = 8;
 }
 
 - (void)testTheFirstWaypointIsAtAQuarterOfTheFirstPathSegmentDistance {
-    [thePathSegments generateCombinedPathForLetter:@"A" atCenter:CGPointZero];
+    [thePathSegments generateCombinedPathForLetter:@"A"];
     Train *trainForTest = [[Train alloc] initWithPathSegments:thePathSegments];
     XCTAssertEqualPoints([[trainForTest.waypoints objectAtIndex:0] CGPointValue], CGPointMake(3, 6));
 }

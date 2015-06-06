@@ -24,6 +24,7 @@ CGFloat const ArbitrarySceneWidth = 300;
 CGFloat const ArbitrarySceneHeight = 200;
 NSString *const CrossbarName = @"Crossbar";
 NSString *const WaypointName = @"Waypoint";
+NSString *const OutlineNodeName = @"LetterOutlineNode";
 
 @interface LetterBaseSceneTests : XCTestCase {
     LetterBaseScene *theScene;
@@ -49,7 +50,7 @@ NSString *const WaypointName = @"Waypoint";
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:@"PreviousButton"];
     theLetterNode = (SKShapeNode *)[theScene childNodeWithName:@"LetterNode"];
     theTrainNode = (SKSpriteNode *)[theScene childNodeWithName:@"TrainNode"];
-    theLetterTrackOutlineNode = (SKShapeNode *)[theScene childNodeWithName:@"LetterOutlineNode"];
+    theLetterTrackOutlineNode = (SKShapeNode *)[theScene childNodeWithName:OutlineNodeName];
 }
 
 - (void)tearDown {
@@ -87,11 +88,12 @@ NSString *const WaypointName = @"Waypoint";
     XCTAssertNotNil(theTrainNode);
 }
 
-- (void)testTheTrainNodeGetsPassedTheLetterStringPath {
-    Train *train = (Train *)theTrainNode;
-    XCTAssertFalse(CGPathIsEmpty(train.letterPath));
-    XCTAssertTrue(CGPathEqualToPath(train.letterPath, theLetterTrackOutlineNode.path));
-}
+/* Come back to this after fleshing out the train more. I think all we need here is the waypoints. */
+//- (void)testTheTrainNodeGetsPassedThePathSegments {
+//    Train *train = (Train *)theTrainNode;
+//    XCTAssertEqualObjects(theTrainNode.pathSegments, PathSegments )
+//    XCTAssertTrue(CGPathEqualToPath(train.letterPath, theLetterTrackOutlineNode.path));
+//}
 
 - (void)testForANextLetterButton {
     XCTAssertNotNil(theNextButtonNode);
@@ -190,10 +192,9 @@ NSString *const WaypointName = @"Waypoint";
 - (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {
     NSUInteger initialChildCount = theScene.children.count;
     PathSegments *pathSegments = [[PathSegments alloc] init];
-    [pathSegments generateCombinedPathAndCrossbarsForLetter:letterForTest atCenter:CGPointZero];
+    [pathSegments generateCrossbarsForLetter:letterForTest];
     [theScene addCrossbars:pathSegments.crossbars];
     XCTAssertEqual(theScene.children.count, initialChildCount + pathSegments.crossbars.count);
-
 }
 
 - (void)testTheWaypointsAreAddedToTheLetterTrackAsNodes {
@@ -264,14 +265,14 @@ NSString *const WaypointName = @"Waypoint";
 
 @implementation LetterBaseSceneLetterPathTests
 
-#define PERFORM_HORIZONTAL_CENTER_TEST    0
+#define PERFORM_HORIZONTAL_CENTER_TEST    1
 #if (PERFORM_HORIZONTAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsHorizontallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
         LetterBaseScene *scene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size
                                                             AndLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
-        SKShapeNode *letterNode = (SKShapeNode *)[scene childNodeWithName:Letter];
+        SKShapeNode *letterNode = (SKShapeNode *)[scene childNodeWithName:OutlineNodeName];
         CGFloat leftGap = letterNode.frame.origin.x;
         CGFloat rightGap = scene.frame.size.width - letterNode.frame.size.width - letterNode.frame.origin.x;
         XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy, @"Letter %c Does not meet the Horizontal Alignment Standard", unicharRepOfLetter);

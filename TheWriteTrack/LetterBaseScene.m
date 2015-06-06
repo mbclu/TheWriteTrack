@@ -37,28 +37,30 @@
         [self setName:[self stringFromSceneUnicharLetter]];
         
         [self addChild:[self createBackground]];
-
-        [self createNavigationButtons];
         
         AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
         SKShapeNode* letterNode = [self createLetterPathNode:letterPath];
         CGPoint center = [self moveNodeToCenter:letterNode];
         CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
-//        [self addChild:letterNode];
-        
-        [self connectSceneTransitions];
 
         PathSegments *pathSegments = [[PathSegments alloc] init];
-        [pathSegments generateCombinedPathForLetter:self.name atCenter:center];
+        [pathSegments generateCombinedPathForLetter:self.name];
+        
         SKShapeNode *letterOutline = [self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
+        
         [self addChild:letterOutline];
-        [self addCrossbars:pathSegments.crossbars];
+        
+        [self addCrossbars:[pathSegments generateCrossbarsForLetter:self.name]];
+        
+        NSArray *waypoints = [pathSegments generateWaypointsForLetter:self.name];
+        [self addWaypoints:waypoints];
         
         Train *train = [self createTrainNodeWithPathSegments:pathSegments];
         [self addChild:(SKNode *)train];
-        
-//        [self addWaypoints:train.waypoints];
 
+        [self createNavigationButtons];
+        [self connectSceneTransitions];
+        
 #if (APP_SHOULD_DRAW_DOTS)
         PathDots *dots = [[PathDots alloc] init];
         [dots drawDotsAtCenter:center OfPath:letterPath.letterPath inScene:self];
@@ -131,10 +133,17 @@
 
 - (void)addCrossbars:(NSArray *)crossbars {
     for (NSUInteger i = 0; i < crossbars.count; i++) {
-        SKShapeNode *crossbar = (SKShapeNode *)[crossbars objectAtIndex:i];
-        crossbar.zPosition = LetterBaseSceneCrossbarZPosition;
-        [self addChild:crossbar];
+        [self addCrossbarWithPath:(__bridge CGPathRef)[crossbars objectAtIndex:i]];
     }
+}
+
+- (void)addCrossbarWithPath:(CGPathRef)crossbarPath {
+    SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:crossbarPath];
+    crossbarNode.lineWidth = 8.0;
+    crossbarNode.strokeColor = [SKColor brownColor];
+    crossbarNode.name = @"Crossbar";
+    crossbarNode.zPosition = LetterBaseSceneCrossbarZPosition;
+    [self addChild:crossbarNode];
 }
 
 - (void)addWaypoints:(NSArray *)waypoints {

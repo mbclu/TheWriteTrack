@@ -11,6 +11,7 @@
 #import "AttributedStringPath.h"
 #import "GenericSpriteButton.h"
 #import "PathSegments.h"
+#import "LayoutMath.h"
 #import "Train.h"
 
 #import "CGMatchers.h"
@@ -28,6 +29,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 
 @interface LetterBaseSceneTests : XCTestCase {
     LetterBaseScene *theScene;
+    CGSize arbitrarySceneSize;
     NSString *letterForTest;
     SKSpriteNode *theBackgroundNode;
     SKSpriteNode *theNextButtonNode;
@@ -44,7 +46,8 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 - (void)setUp {
     [super setUp];
     letterForTest = @"E";
-    theScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:letterForTest];
+    arbitrarySceneSize = CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight);
+    theScene = [[LetterBaseScene alloc]initWithSize:arbitrarySceneSize andLetter:letterForTest];
     theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:@"RockyBackground"];
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:@"NextButton"];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:@"PreviousButton"];
@@ -79,7 +82,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 
 - (void)testTheNameOfTheSceneMatchesTheNameOfTheInitializerConstant {
     NSString *letterToInitWith = @"K";
-    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:letterToInitWith];
+    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:letterToInitWith];
     XCTAssertEqualObjects(anotherScene.name, letterToInitWith);
 }
 
@@ -133,7 +136,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 }
 
 - (void)testWhenTheLetterIsCapitalZThenNoNextButtonIsAvailable {
-    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:@"Z"];
+    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"Z"];
     XCTAssertNil([zScene childNodeWithName:@"NextButton"]);
 }
 
@@ -176,7 +179,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 }
 
 - (void)testWhenTheLetterIsCapitalAThenNoPrevButtonIsAvailable {
-    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) AndLetter:@"A"];
+    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"A"];
     XCTAssertNil([zScene childNodeWithName:@"PreviousButton"]);
 }
 
@@ -188,9 +191,20 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     // Test strokeWidth?
 }
 
-- (void)testThePathSegmentsCenterOffsetIsSetAfterTheTrackOutlineIsAddedToTheScene {
-    XCTAssertNotNil(theScene.pathSegments);
-    XCTAssertTrue(false);
+- (void)testWhenThePathSegmentsCenterShiftIsSetThenItIsSetToTheOutlineCenterPlusTheOriginShift {
+    CGPoint offsetFromZero = CGPointMake(10, 15);
+    PathSegments *newPathSegments = [[PathSegments alloc] init];
+    id mockPathSegments = OCMPartialMock(newPathSegments);
+    OCMStub([mockPathSegments pathOffsetFromZero]).andReturn(offsetFromZero);
+    
+    LetterBaseScene *newScene = [[LetterBaseScene alloc] initWithSize:arbitrarySceneSize
+                                                               letter:letterForTest
+                                                      andPathSegments:mockPathSegments];
+
+    SKShapeNode *outline = (SKShapeNode *)[newScene childNodeWithName:OutlineNodeName];
+    INCREMENT_POINT_BY_POINT(offsetFromZero, outline.position);
+    
+    OCMVerify([mockPathSegments setCenterShift:offsetFromZero]);
 }
 
 - (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {

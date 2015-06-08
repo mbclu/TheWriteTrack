@@ -44,7 +44,8 @@ typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
 @property GenericSpriteButton *previousButtonProperty;
 @property PathSegments *pathSegments;
 
-- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter;
+- (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter;
+- (instancetype)initWithSize:(CGSize)size letter:(NSString *)letter andPathSegments:(PathSegments *)pathSegments;
 - (void)transitionToNextScene;
 - (void)transitionToPreviousScene;
 - (void)connectSceneTransitions;

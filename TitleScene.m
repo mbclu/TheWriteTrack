@@ -45,7 +45,7 @@
 }
 
 - (void)transitionToAScene {
-    SKScene *aScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:@"A"];
+    SKScene *aScene = [[LetterBaseScene alloc] initWithSize:self.size andLetter:@"A"];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
     [self.view presentScene:aScene transition:transition];
     [self.view setIsAccessibilityElement:YES];

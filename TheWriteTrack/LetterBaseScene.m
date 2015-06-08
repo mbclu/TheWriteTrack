@@ -29,9 +29,13 @@
     [super didMoveToView:view];
 }
 
-- (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
+- (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
-        _pathSegments = [[PathSegments alloc] init];
+        
+        if (_pathSegments == nil) {
+            _pathSegments = [[PathSegments alloc] init];
+        }
+        
         _letter = [letter characterAtIndex:0];
         
         [self setScaleMode:SKSceneScaleModeAspectFill];
@@ -41,18 +45,13 @@
         [self addChild:[self createBackground]];
         
         SKShapeNode *trackOutline = [self createTrackOutlineNode:[_pathSegments generateCombinedPathForLetter:self.name]];
-        [_pathSegments generateObjectsWithType:CrossbarObjectType forLetter:self.name];
-        [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:self.name];
-        
         [self addChild:trackOutline];
 
-        [self createSpritesForCrossbars:_pathSegments.crossbars withTransform:_pathSegments.translateToZeroTransform];
-        
-        [self createSpritesForWaypoints:_pathSegments.waypoints withOffset:_pathSegments.pathOffsetFromZero];
+        [self addCrossbarsAndWaypoints];
         
         [self addChild:[self createTrainNodeWithPathSegments:_pathSegments]];
 
-        [self createNavigationButtons];
+        [self addNavigationButtons];
         [self connectSceneTransitions];
         
 #if (APP_SHOULD_DRAW_DOTS)
@@ -67,6 +66,12 @@
     return self;
 }
 
+- (instancetype)initWithSize:(CGSize)size letter:(NSString *)letter andPathSegments:(PathSegments *)pathSegments {
+    _pathSegments = pathSegments;
+    self = [self initWithSize:size andLetter:letter];
+    return self;
+}
+
 - (SKSpriteNode *)createBackground {
     SKTexture *texture = [SKTexture textureWithImageNamed:RockyBackgroundName];
     SKSpriteNode *rockyBackground = [SKSpriteNode spriteNodeWithTexture:texture size:self.size];
@@ -76,7 +81,7 @@
     return rockyBackground;
 }
 
-- (void)createNavigationButtons {
+- (void)addNavigationButtons {
     if (![[self stringFromSceneUnicharLetter] isEqual:@"Z"]) {
         nextButton = [self createNextButton];
         [self addChild:nextButton];
@@ -108,14 +113,6 @@
     return button;
 }
 
-- (SKShapeNode *)createLetterPathNode:(AttributedStringPath *)attrStringPath {
-    SKShapeNode *letterPathNode = [SKShapeNode shapeNodeWithPath:attrStringPath.letterPath];
-    letterPathNode.name = LetterNodeName;
-    letterPathNode.lineWidth = LetterLineWidth;
-    letterPathNode.strokeColor = [SKColor darkGrayColor];
-    return letterPathNode;
-}
-
 - (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath {
     SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:
                                 CGPathCreateCopyByStrokingPath(combinedPath,
@@ -133,6 +130,18 @@
     outlineNode.zPosition = LetterBaseSceneTrackOutlineZPosition;
     
     return outlineNode;
+}
+
+- (void)addCrossbarsAndWaypoints {
+    CGPoint centeringShiftPoint = [_pathSegments pathOffsetFromZero];
+    INCREMENT_POINT_BY_POINT(centeringShiftPoint, [self childNodeWithName:LetterOutlineName].position);
+    
+    [_pathSegments setCenterShift:centeringShiftPoint];
+    [_pathSegments generateObjectsWithType:CrossbarObjectType forLetter:self.name];
+    [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:self.name];
+    
+    [self createSpritesForCrossbars:_pathSegments.crossbars withTransform:_pathSegments.translateToZeroTransform];
+    [self createSpritesForWaypoints:_pathSegments.waypoints withOffset:_pathSegments.pathOffsetFromZero];
 }
 
 - (void)createSpritesForCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero {
@@ -191,7 +200,7 @@
 - (void)transitionToSceneWithLetter:(NSString *)letter {
     DDLogInfo(@"Transitioning to the %@ scene", letter);
     
-    SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size AndLetter:letter];
+    SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size andLetter:letter];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionLengthInSeconds];
     
     [self.view presentScene:nextScene transition:transition];

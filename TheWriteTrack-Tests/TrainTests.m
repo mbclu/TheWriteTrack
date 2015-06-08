@@ -16,11 +16,16 @@
 
 const uint pathWidth = 8;
 const uint pathHeight = 8;
+const CGFloat xCenterOffset = 1.0;
+const CGFloat yCenterOffset = 3.0;
+const CGFloat xOriginShift = 2.0;
+const CGFloat yOriginShift = 4.0;
 const NSString *RKEY = @"RectangleKey";
 
 @interface TrainTests : XCTestCase {
     Train *theTrain;
     PathSegments *thePathSegments;
+    CGPoint pathSegmentOffset;
     CGPoint initialTrainPosition;
 }
 
@@ -40,7 +45,9 @@ const NSString *RKEY = @"RectangleKey";
                                                   SE, nil] forKey:RKEY]];
     [thePathSegments generateCombinedPathForLetter:RKEY];
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:RKEY];
-    theTrain = [[Train alloc] initWithPathSegments:thePathSegments];
+    [thePathSegments setPathOffsetFromZero:CGPointMake(xOriginShift, yOriginShift)];
+    
+    theTrain = [[Train alloc] initWithPathSegments:thePathSegments andCenterOffset:CGPointMake(xCenterOffset, yCenterOffset)];
     initialTrainPosition = theTrain.position;
 }
 
@@ -68,19 +75,20 @@ const NSString *RKEY = @"RectangleKey";
     id mockSegments = OCMClassMock([PathSegments class]);
     NSArray *stubWaypoints = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:expectedPoint], nil];
     OCMStub([mockSegments waypoints]).andReturn(stubWaypoints);
-    Train *thisTrain = [[Train alloc] initWithPathSegments:mockSegments];
+    Train *thisTrain = [[Train alloc] initWithPathSegments:mockSegments andCenterOffset:CGPointZero];
     XCTAssertEqualPoints([thisTrain.waypoints[0] CGPointValue], expectedPoint);
 }
 
-- (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsTheSameAsTheFirstWaypoint {
-    CGPoint expectedPoint = CGPointMake(10, 15);
-    [theTrain setWaypoints:[NSMutableArray arrayWithObject:[NSValue valueWithCGPoint:expectedPoint]]];
+- (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsTheSameAsTheFirstWaypointPlusTheCenterOffsetAndMinusTheOriginShift {
+    CGPoint firstWaypoint = CGPointMake(10, 15);
+    CGPoint expectedPoint = CGPointMake(firstWaypoint.x + xCenterOffset - xOriginShift, firstWaypoint.y + yCenterOffset - yOriginShift);
+    [theTrain setWaypoints:[NSMutableArray arrayWithObject:[NSValue valueWithCGPoint:firstWaypoint]]];
     [theTrain positionTrainAtStartPoint];
     XCTAssertEqualPoints(theTrain.position, expectedPoint);
 }
 
 - (void)testTheTrainIsPositionedOffScreenWhenPathSegmentsIsNull {
-    Train *emptyPathTrain = [[Train alloc] initWithPathSegments:nil];
+    Train *emptyPathTrain = [[Train alloc] initWithPathSegments:nil andCenterOffset:CGPointZero];
     XCTAssertEqualPoints(emptyPathTrain.position, CGPointMake(-100, -100));
 }
 

@@ -48,7 +48,6 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:@"RockyBackground"];
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:@"NextButton"];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:@"PreviousButton"];
-    theLetterNode = (SKShapeNode *)[theScene childNodeWithName:@"LetterNode"];
     theTrainNode = (SKSpriteNode *)[theScene childNodeWithName:@"TrainNode"];
     theLetterTrackOutlineNode = (SKShapeNode *)[theScene childNodeWithName:OutlineNodeName];
 }
@@ -189,11 +188,16 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     // Test strokeWidth?
 }
 
+- (void)testThePathSegmentsCenterOffsetIsSetAfterTheTrackOutlineIsAddedToTheScene {
+    XCTAssertNotNil(theScene.pathSegments);
+    XCTAssertTrue(false);
+}
+
 - (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {
     NSUInteger initialChildCount = theScene.children.count;
     PathSegments *pathSegments = [[PathSegments alloc] init];
     [pathSegments generateObjectsWithType:CrossbarObjectType forLetter:letterForTest];
-    [theScene addCrossbars:pathSegments.crossbars withTransform:CGAffineTransformIdentity];
+    [theScene createSpritesForCrossbars:pathSegments.crossbars withTransform:CGAffineTransformIdentity];
     XCTAssertEqual(theScene.children.count, initialChildCount + pathSegments.crossbars.count);
 }
 
@@ -203,7 +207,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     CGPoint waypoint1 = CGPointMake(0, 10);
     CGPoint waypoint2 = CGPointMake(10, 0);
     
-    [theScene addWaypoints:[NSArray arrayWithObjects:
+    [theScene createSpritesForWaypoints:[NSArray arrayWithObjects:
                             [NSValue valueWithCGPoint:waypoint1],
                             [NSValue valueWithCGPoint:waypoint2],
                             nil]

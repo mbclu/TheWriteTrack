@@ -7,6 +7,8 @@
 //
 
 #import "Train.h"
+
+#import "LayoutMath.h"
 #import "PathInfo.h"
 #import "PathSegments.h"
 
@@ -15,8 +17,13 @@ NSString *const TrainName = @"Train";
 
 @implementation Train
 
-- (instancetype)initWithPathSegments:(PathSegments *)pathSegments {
+- (instancetype)initWithPathSegments:(PathSegments *)pathSegments andCenterOffset:(CGPoint)centerOffset {
     self = [super initWithImageNamed:MagicTrainName];
+    
+    _centerOffset = centerOffset;
+    _isMoving = NO;
+    
+    self.userInteractionEnabled = YES;
     
     [self setName:TrainName];
     
@@ -25,17 +32,15 @@ NSString *const TrainName = @"Train";
     
     [self positionTrainAtStartPoint];
     
-    self.userInteractionEnabled = YES;
-    
-    _isMoving = NO;
-    
     return self;
 }
 
 - (void)positionTrainAtStartPoint {
     if (_waypoints.count > 0) {
-        NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
-        [self setPosition:[firstPoint CGPointValue]];
+        CGPoint firstPoint = [(NSValue *)[_waypoints objectAtIndex:0] CGPointValue];
+        INCREMENT_POINT_BY_POINT(firstPoint, _centerOffset);
+        DECREMENT_POINT_BY_POINT(firstPoint, _pathSegments.pathOffsetFromZero);
+        [self setPosition:firstPoint];
     }
     else {
         [self setPosition:CGPointMake(-100, -100)];

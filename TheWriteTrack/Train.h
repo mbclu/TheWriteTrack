@@ -12,11 +12,12 @@
 
 @interface Train : SKSpriteNode
 
-@property (nonatomic) PathSegments *pathSegments;
-@property (nonatomic, retain) NSMutableArray *waypoints;
+@property PathSegments *pathSegments;
+@property NSMutableArray *waypoints;
+@property CGPoint centerOffset;
 @property BOOL isMoving;
 
-- (instancetype)initWithPathSegments:(PathSegments *)pathSegments;
+- (instancetype)initWithPathSegments:(PathSegments *)pathSegments andCenterOffset:(CGPoint)centerOffset;
 - (instancetype)init NS_UNAVAILABLE;
 - (void)positionTrainAtStartPoint;
 - (void)evaluateTouchesBeganAtPoint:(CGPoint)touchPoint;

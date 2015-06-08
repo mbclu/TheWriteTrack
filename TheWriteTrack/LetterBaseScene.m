@@ -31,7 +31,7 @@
 
 - (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
-        PathSegments *pathSegments = [[PathSegments alloc] init];
+        _pathSegments = [[PathSegments alloc] init];
         _letter = [letter characterAtIndex:0];
         
         [self setScaleMode:SKSceneScaleModeAspectFill];
@@ -40,17 +40,17 @@
         
         [self addChild:[self createBackground]];
         
-        SKShapeNode *trackOutline = [self createTrackOutlineNode:[pathSegments generateCombinedPathForLetter:self.name]];
-        [pathSegments generateObjectsWithType:CrossbarObjectType forLetter:self.name];
-        [pathSegments generateObjectsWithType:WaypointObjectType forLetter:self.name];
+        SKShapeNode *trackOutline = [self createTrackOutlineNode:[_pathSegments generateCombinedPathForLetter:self.name]];
+        [_pathSegments generateObjectsWithType:CrossbarObjectType forLetter:self.name];
+        [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:self.name];
         
         [self addChild:trackOutline];
 
-        [self addCrossbars:pathSegments.crossbars withTransform:pathSegments.translateToZeroTransform];
+        [self createSpritesForCrossbars:_pathSegments.crossbars withTransform:_pathSegments.translateToZeroTransform];
         
-        [self addWaypoints:pathSegments.waypoints withOffset:pathSegments.pathOffsetFromZero];
+        [self createSpritesForWaypoints:_pathSegments.waypoints withOffset:_pathSegments.pathOffsetFromZero];
         
-        [self addChild:[self createTrainNodeWithPathSegments:pathSegments]];
+        [self addChild:[self createTrainNodeWithPathSegments:_pathSegments]];
 
         [self createNavigationButtons];
         [self connectSceneTransitions];
@@ -135,7 +135,7 @@
     return outlineNode;
 }
 
-- (void)addCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero {
+- (void)createSpritesForCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero {
     for (NSUInteger i = 0; i < crossbars.count; i++) {
         [self addCrossbarWithPath:CGPathCreateCopyByTransformingPath((__bridge CGPathRef)[crossbars objectAtIndex:i], &translateToZero)];
     }
@@ -154,7 +154,7 @@
     [self addChild:crossbarNode];
 }
 
-- (void)addWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero {
+- (void)createSpritesForWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero {
     for (NSInteger i = 0; i < waypoints.count; i++) {
         CGPoint envelopePosition = [[waypoints objectAtIndex:i] CGPointValue];
         envelopePosition.x -= offsetFromZero.x;
@@ -174,7 +174,7 @@
 }
 
 - (Train *)createTrainNodeWithPathSegments:(PathSegments *)segments {
-    Train *trainNode = [[Train alloc] initWithPathSegments:segments];
+    Train *trainNode = [[Train alloc] initWithPathSegments:segments andCenterOffset:[self childNodeWithName:LetterOutlineName].position];
     trainNode.name = TrainNodeName;
     trainNode.zPosition = LetterBaseSceneTrainZPosition;
     return trainNode;

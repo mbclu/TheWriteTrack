@@ -365,6 +365,10 @@ const NSUInteger numberOfVFrameSegments = 8;
     [super tearDown];
 }
 
+- (void)testTheDefaultCenterIsZero {
+    XCTAssertEqualPoints(thePathSegments.centerShift, CGPointZero);
+}
+
 @end
 
 @interface PathSegmentsCrossbarTests : PathSegmentsIterpolatedObjectTests { } @end

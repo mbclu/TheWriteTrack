@@ -29,6 +29,7 @@ NS_ENUM(NSUInteger, EInterpolatableObjectTypes) {
 @property NSMutableArray *crossbars;
 @property NSMutableArray *waypoints;
 @property NSDictionary *letterSegmentDictionary;
+@property CGPoint centerShift;
 @property CGPoint pathOffsetFromZero;
 @property CGAffineTransform translateToZeroTransform;
 

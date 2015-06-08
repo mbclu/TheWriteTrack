@@ -48,6 +48,8 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     [self addDiagonalSegments];
     [self addCurvedSegments];
     
+    _centerShift = CGPointZero;
+    
     return self;
 }
 

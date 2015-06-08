@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "GenericSpriteButton.h"
 #import "Constants.h"
+#import "GenericSpriteButton.h"
+#import "PathSegments.h"
 #import <SpriteKit/SpriteKit.h>
 
 #ifdef DEBUG
@@ -39,14 +40,15 @@ typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
 }
 
 @property unichar letter;
-@property (nonatomic, readwrite, retain) GenericSpriteButton *nextButtonProperty;
-@property (nonatomic, readwrite, retain) GenericSpriteButton *previousButtonProperty;
+@property GenericSpriteButton *nextButtonProperty;
+@property GenericSpriteButton *previousButtonProperty;
+@property PathSegments *pathSegments;
 
 - (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter;
 - (void)transitionToNextScene;
 - (void)transitionToPreviousScene;
 - (void)connectSceneTransitions;
-- (void)addCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero;
-- (void)addWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero;
+- (void)createSpritesForCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero;
+- (void)createSpritesForWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero;
 
 @end

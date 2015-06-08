@@ -14,7 +14,11 @@
 #define FONT_POINTS_IN_ONE_INCH     72.0
 #define PIXELS_PER_INCH             326.0
 
-#define HALF_OF(value)  ((value) * 0.5)
+#define HALF_OF(value)              ((value) * 0.5)
+#define INCREMENT_POINT_BY_POINT(firstPoint, incrementPoint)    (firstPoint).x += (incrementPoint).x;   \
+                                                                (firstPoint).y += (incrementPoint).y
+#define DECREMENT_POINT_BY_POINT(firstPoint, incrementPoint)    (firstPoint).x -= (incrementPoint).x;   \
+                                                                (firstPoint).y -= (incrementPoint).y
 
 @interface LayoutMath : NSObject
 

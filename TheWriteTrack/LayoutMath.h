@@ -14,6 +14,8 @@
 #define FONT_POINTS_IN_ONE_INCH     72.0
 #define PIXELS_PER_INCH             326.0
 
+#define HALF_OF(value)  ((value) * 0.5)
+
 @interface LayoutMath : NSObject
 
 + (CGFloat)sizeOfSmallerDimension;

@@ -33,7 +33,6 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                               ([UIScreen mainScreen].bounds.size.width * boundingWidthPercentage),
                               ([UIScreen mainScreen].bounds.size.height * boundingHeightPercentage))];
     _letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
-    _center = CGPointZero;
     return self;
 }
 
@@ -182,8 +181,8 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
 /* Unfortunately, NOT much test coverage after this point  *
  * Everything was instead spiked out with trial and error. */
 
-- (CGPathRef)generateCombinedPathForLetter:(NSString *)letter {
-    _combinedPath = CGPathCreateMutable();
+- (CGPathRef)generateCombinedPathForLetter:(const NSString *)letter {
+    CGMutablePathRef combinedPaths = CGPathCreateMutable();
     CGMutablePathRef subPath = CGPathCreateMutable();
     
     NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
@@ -201,7 +200,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                 isSegmentDirectionReversed = YES;
                 break;
             case PATH_SEGMENT_END:
-                CGPathAddPath(_combinedPath, nil, subPath);
+                CGPathAddPath(combinedPaths, nil, subPath);
                 CGPathRelease(subPath);
                 subPath = CGPathCreateMutable();
                 break;
@@ -237,47 +236,21 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     }
     
     CGPathRelease(subPath);
-    return _combinedPath;
+    
+    return [self transformToZeroTheCombinedPaths:combinedPaths];
 }
 
-- (NSArray *)generateCrossbarsForLetter:(NSString *)letter {
-    _crossbars = [[NSMutableArray alloc] init];
-
-    NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
-    
-    for (NSUInteger i = 0; i < letterSegments.count; i++) {
-        NSInteger segmentIndex = [[letterSegments objectAtIndex:i] integerValue];
-        
-        switch (segmentIndex) {
-            case NORMAL_PATH_SEGMENT_DIRECTION:
-            case REVERSE_PATH_SEGMENT_DIRECTION:
-            case PATH_SEGMENT_END:
-                break;
-            default:
-            {
-                NSArray *points = [_segments objectAtIndex:segmentIndex];
-                if (points.count == 2) {
-                    [self createCrossbarsForStraightSegment:points];
-                }
-                else if (points.count == 3) {
-                    [self createCrossbarsForCurveSegment:(segmentIndex - [c64 integerValue])];
-                }
-                break;
-            }
-        }
+- (CGPathRef)transformToZeroTheCombinedPaths:(CGPathRef)combinedPaths {
+    if ( ! CGPathIsEmpty(combinedPaths) ) {
+        CGRect pathBoundingBox = CGPathGetPathBoundingBox(combinedPaths);
+        _pathOffsetFromZero = pathBoundingBox.origin;
+        _translateToZeroTransform = CGAffineTransformMakeTranslation(-_pathOffsetFromZero.x, -_pathOffsetFromZero.y);
+        _generatedSegmentPath = CGPathCreateCopyByTransformingPath(combinedPaths, &_translateToZeroTransform);
     }
     
-    return _crossbars;
-}
-
-- (void)createCrossbarsForStraightSegment:(NSArray *)points {
-    SEL addCrossbarsSelector = @selector(addCrossbarWithPosition:andSlope:);
-    [self interpolateStraightSegmentWithPoints:points usingSelector:addCrossbarsSelector andStepSizeInPercent:0.25];
-}
-
-- (void)createCrossbarsForCurveSegment:(NSUInteger)curveIndex {
-    SEL addCrossbarsSelector = @selector(addCrossbarWithPosition:andSlope:);
-    [self interpolateQuadCurveSegmentWithCurveIndex:curveIndex usingSelector:addCrossbarsSelector andStepSize:0.1];
+    CGPathRelease(combinedPaths);
+    
+    return _generatedSegmentPath;
 }
 
 - (void)addCrossbarWithPosition:(CGPoint)position andSlope:(CGFloat)slope {
@@ -286,9 +259,9 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
         angleInRadians = atanf(slope);
     }
     
-    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
     CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
-    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x + _center.x, position.y + _center.y);
+    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
+    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x, position.y);
     
     CGMutablePathRef crossbar = CGPathCreateMutable();
     CGPathMoveToPoint(crossbar, nil, -20, 0);
@@ -301,8 +274,19 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     [_crossbars addObject:(__bridge id)crossbar];
 }
 
-- (NSArray *)generateWaypointsForLetter:(NSString *)letter {
-    _waypoints = [[NSMutableArray alloc] init];
+- (void)addWaypointWithPosition:(CGPoint)position {
+    [_waypoints addObject:[NSValue valueWithCGPoint:position]];
+}
+
+- (void)generateObjectsWithType:(enum EInterpolatableObjectTypes)objectType forLetter:(NSString *)letter {
+    switch (objectType) {
+        case CrossbarObjectType:
+            _crossbars = [[NSMutableArray alloc] init];
+            break;
+        case WaypointObjectType:
+            _waypoints = [[NSMutableArray alloc] init];
+            break;
+    }
     
     NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
     
@@ -318,35 +302,29 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
             {
                 NSArray *points = [_segments objectAtIndex:segmentIndex];
                 if (points.count == 2) {
-                    [self createWaypointsForStraightSegment:points];
+                    switch (objectType) {
+                        case CrossbarObjectType:
+                            [self interpolateStraightSegmentWithPoints:points andStepSizeInPercent:0.25 forObjectType:objectType];
+                            break;
+                        case WaypointObjectType:
+                            [self interpolateStraightSegmentWithPoints:points andStepSizeInPercent:1.0 forObjectType:objectType];
+                            break;
+                    }
                 }
                 else if (points.count == 3) {
-                    [self createWaypointsForCurveSegment:(segmentIndex - [c64 integerValue])];
+                    switch (objectType) {
+                        case CrossbarObjectType:
+                            [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue]) andStepSizeInPercent:0.1 forObjectType:objectType];
+                            break;
+                        case WaypointObjectType:
+                            [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue]) andStepSizeInPercent:0.5 forObjectType:objectType];
+                            break;
+                    }
                 }
                 break;
             }
         }
     }
-    
-    return _waypoints;
-}
-
-- (void)createWaypointsForStraightSegment:(NSArray *)points {
-    SEL addWaypointsSelector = @selector(addWaypointWithPosition:);
-    [self interpolateStraightSegmentWithPoints:points usingSelector:addWaypointsSelector andStepSizeInPercent:0.50];
-}
-
-- (void)createWaypointsForCurveSegment:(NSUInteger)curveIndex {
-    SEL addWaypointsSelector = @selector(addWaypointWithPosition:);
-    [self interpolateQuadCurveSegmentWithCurveIndex:curveIndex usingSelector:addWaypointsSelector andStepSize:0.2];
-}
-
-- (void)addWaypointWithPosition:(CGPoint)position {
-    [_waypoints addObject:[NSValue valueWithCGPoint:position]];
-}
-
-- (NSArray *)getPathArrayFromStraightSegmentPathWithPoints:(NSArray *)points {
-    return [[[PathInfo alloc] init] TransformPathToArray:[self getPathFromSegementWithPoints:points]];
 }
 
 - (CGPathRef)getPathFromSegementWithPoints:(NSArray *)points {
@@ -364,7 +342,12 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     return path;
 }
 
-- (void)interpolateStraightSegmentWithPoints:(NSArray *)points usingSelector:(SEL)selector andStepSizeInPercent:(CGFloat)stepSize {
+
+- (NSArray *)getPathArrayFromStraightSegmentPathWithPoints:(NSArray *)points {
+    return [[[PathInfo alloc] init] TransformPathToArray:[self getPathFromSegementWithPoints:points]];
+}
+
+- (void)interpolateStraightSegmentWithPoints:(NSArray *)points andStepSizeInPercent:(CGFloat)stepSize forObjectType:(enum EInterpolatableObjectTypes)objectType {
     NSArray *pathArray = [self getPathArrayFromStraightSegmentPathWithPoints:points];
     
     for (NSUInteger i = 1; i < pathArray.count; i++) {
@@ -373,25 +356,31 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
         for (CGFloat t = 0.0; t <= 1.0; t += stepSize) {
             CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateLineWithStep:t start:start.x end:end.x],
                                                      [LayoutMath interpolateLineWithStep:t start:start.y end:end.y]);
-            NSNumber *slope = [NSNumber numberWithFloat:[LayoutMath slopeOfLineWithStartPoint:start endPoint:end]];
-            [self performSelector:selector withObject:(__bridge id)(&interpolationPoint) withObject:slope];
+            switch (objectType) {
+                case CrossbarObjectType:
+                    [self addCrossbarWithPosition:interpolationPoint andSlope:[LayoutMath slopeOfLineWithStartPoint:start endPoint:end]];
+                    break;
+                case WaypointObjectType:
+                    [self addWaypointWithPosition:interpolationPoint];
+                    break;
+            }
         }
     }
 }
 
-- (void)interpolateQuadCurveSegmentWithCurveIndex:(NSUInteger)curveIndex usingSelector:(SEL)selector andStepSize:(CGFloat)stepSize {
+- (void)interpolateQuadCurveSegmentWithCurveIndex:(NSUInteger)curveIndex andStepSizeInPercent:(CGFloat)stepSize forObjectType:(enum EInterpolatableObjectTypes)objectType {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
     
-    for (CGFloat t = 0.05; t <= 1.0; t += stepSize) {
+    for (CGFloat t = 0.0; t <= 1.0; t += stepSize) {
         CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateQuadBezierAtStep:t
                                                                                    start:curvePoints[curveIndex][0]
                                                                                  control:curvePoints[curveIndex][2]
-                                                                                     end:curvePoints[curveIndex][4]] + _center.x,
+                                                                                     end:curvePoints[curveIndex][4]],
                                                  [LayoutMath interpolateQuadBezierAtStep:t
                                                                                    start:curvePoints[curveIndex][1]
                                                                                  control:curvePoints[curveIndex][3]
-                                                                                     end:curvePoints[curveIndex][5]] + _center.y);
+                                                                                     end:curvePoints[curveIndex][5]]);
         
         CGPoint tangent = CGPointMake([LayoutMath tangentQuadBezierAtStep:t
                                                                     start:curvePoints[curveIndex][0]
@@ -407,10 +396,16 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
         float x2 = interpolationPoint.x + tangent.x;
         float x1 = interpolationPoint.x;
         
-        CGFloat slopeValue = (y2 - y1) / (x2 - x1);
-        NSNumber *slope = [NSNumber numberWithFloat:slopeValue];
+        CGFloat slope = (y2 - y1) / (x2 - x1);
         
-        [self performSelector:selector withObject:(__bridge id)(&interpolationPoint) withObject:slope];
+        switch (objectType) {
+            case CrossbarObjectType:
+                [self addCrossbarWithPosition:interpolationPoint andSlope:slope];
+                break;
+            case WaypointObjectType:
+                [self addWaypointWithPosition:interpolationPoint];
+                break;
+        }
     }
 }
 

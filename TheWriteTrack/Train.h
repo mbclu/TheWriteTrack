@@ -22,6 +22,5 @@
 - (void)evaluateTouchesBeganAtPoint:(CGPoint)touchPoint;
 - (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint;
 - (void)evaluateTouchesEndedAtPoint:(CGPoint)touchPoint;
-- (void)addWaypointsByInterpolatingPath;
 
 @end

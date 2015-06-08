@@ -9,7 +9,6 @@
 #import "LayoutMath.h"
 #import <UIKit/UIKit.h>
 
-#define HALF_OF(value)  (value * 0.5)
 @implementation LayoutMath
 
 + (CGFloat)sizeOfSmallerDimension {

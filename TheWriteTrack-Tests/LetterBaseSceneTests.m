@@ -19,7 +19,7 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
-CGFloat const GapCheckAccuracy = 3.0;
+CGFloat const GapCheckAccuracy = 1.0;
 CGFloat const ArbitrarySceneWidth = 300;
 CGFloat const ArbitrarySceneHeight = 200;
 NSString *const CrossbarName = @"Crossbar";
@@ -192,8 +192,8 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 - (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {
     NSUInteger initialChildCount = theScene.children.count;
     PathSegments *pathSegments = [[PathSegments alloc] init];
-    [pathSegments generateCrossbarsForLetter:letterForTest];
-    [theScene addCrossbars:pathSegments.crossbars];
+    [pathSegments generateObjectsWithType:CrossbarObjectType forLetter:letterForTest];
+    [theScene addCrossbars:pathSegments.crossbars withTransform:CGAffineTransformIdentity];
     XCTAssertEqual(theScene.children.count, initialChildCount + pathSegments.crossbars.count);
 }
 
@@ -206,7 +206,8 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     [theScene addWaypoints:[NSArray arrayWithObjects:
                             [NSValue valueWithCGPoint:waypoint1],
                             [NSValue valueWithCGPoint:waypoint2],
-                            nil]];
+                            nil]
+                withOffset:CGPointZero];
     
     XCTAssertEqual(theScene.children.count, initialChildCount + 2);
 }
@@ -265,7 +266,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
 
 @implementation LetterBaseSceneLetterPathTests
 
-#define PERFORM_HORIZONTAL_CENTER_TEST    1
+#define PERFORM_HORIZONTAL_CENTER_TEST    0
 #if (PERFORM_HORIZONTAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsHorizontallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
@@ -288,7 +289,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
         LetterBaseScene *scene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size
                                                             AndLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
-        SKShapeNode *letterNode = (SKShapeNode *)[scene childNodeWithName:Letter];
+        SKShapeNode *letterNode = (SKShapeNode *)[scene childNodeWithName:OutlineNodeName];
         CGFloat topGap = scene.frame.size.height - letterNode.frame.size.height - letterNode.frame.origin.y;
         CGFloat bottomGap = letterNode.frame.origin.y;
         XCTAssertEqualWithAccuracy(topGap, bottomGap, GapCheckAccuracy, @"Letter %c Does not meet the Vertical Alignment Standard", unicharRepOfLetter);

@@ -132,9 +132,13 @@ void PrintPathElement(void* info, const CGPathElement* element)
     DDLogVerbose(@"%@ %@", pointsString, typeString);
 }
 
-void PrintPath(CGPathRef path)
-{
-    DDLogInfo(@"CGPathRef: <%p>", path);
++ (void)printPath:(CGPathRef)path {
+    if (CGPathIsEmpty(path)) {
+        DDLogError(@"Error printing CGPathRef: <%p> - Path is Empty!", path);
+    }
+    else {
+        DDLogInfo(@"CGPathRef: <%p>", path);
+    }
     CGPathApply(path, nil, PrintPathElement);
 }
 #endif

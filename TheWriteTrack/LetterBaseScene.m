@@ -31,32 +31,26 @@
 
 - (instancetype)initWithSize:(CGSize)size AndLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
+        PathSegments *pathSegments = [[PathSegments alloc] init];
         _letter = [letter characterAtIndex:0];
         
         [self setScaleMode:SKSceneScaleModeAspectFill];
+
         [self setName:[self stringFromSceneUnicharLetter]];
         
         [self addChild:[self createBackground]];
         
-        AttributedStringPath *letterPath = [[AttributedStringPath alloc] initWithString:[self stringFromSceneUnicharLetter]];
-        SKShapeNode* letterNode = [self createLetterPathNode:letterPath];
-        CGPoint center = [self moveNodeToCenter:letterNode];
-        CGAffineTransform centerTranslateTransform = CGAffineTransformMakeTranslation(center.x, center.y);
+        SKShapeNode *trackOutline = [self createTrackOutlineNode:[pathSegments generateCombinedPathForLetter:self.name]];
+        [pathSegments generateObjectsWithType:CrossbarObjectType forLetter:self.name];
+        [pathSegments generateObjectsWithType:WaypointObjectType forLetter:self.name];
+        
+        [self addChild:trackOutline];
 
-        PathSegments *pathSegments = [[PathSegments alloc] init];
-        [pathSegments generateCombinedPathForLetter:self.name];
+        [self addCrossbars:pathSegments.crossbars withTransform:pathSegments.translateToZeroTransform];
         
-        SKShapeNode *letterOutline = [self createTrackOutlineNode:pathSegments.combinedPath withTransform:centerTranslateTransform];
+        [self addWaypoints:pathSegments.waypoints withOffset:pathSegments.pathOffsetFromZero];
         
-        [self addChild:letterOutline];
-        
-        [self addCrossbars:[pathSegments generateCrossbarsForLetter:self.name]];
-        
-        NSArray *waypoints = [pathSegments generateWaypointsForLetter:self.name];
-        [self addWaypoints:waypoints];
-        
-        Train *train = [self createTrainNodeWithPathSegments:pathSegments];
-        [self addChild:(SKNode *)train];
+        [self addChild:[self createTrainNodeWithPathSegments:pathSegments]];
 
         [self createNavigationButtons];
         [self connectSceneTransitions];
@@ -122,56 +116,75 @@
     return letterPathNode;
 }
 
-- (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath withTransform:(CGAffineTransform)transform {
-    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByStrokingPath(combinedPath, &transform, 25.0, kCGLineCapButt, kCGLineJoinBevel, 1.0)];
+- (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath {
+    SKShapeNode *outlineNode = [SKShapeNode shapeNodeWithPath:
+                                CGPathCreateCopyByStrokingPath(combinedPath,
+                                                               nil,
+                                                               25.0,
+                                                               kCGLineCapButt,
+                                                               kCGLineJoinBevel,
+                                                               1.0)
+                                ];
+    
     outlineNode.name = LetterOutlineName;
     outlineNode.lineWidth = 7.0;
     outlineNode.strokeColor = [SKColor darkGrayColor];
+    outlineNode.position = [self getCenterForShapeNode:outlineNode];
     outlineNode.zPosition = LetterBaseSceneTrackOutlineZPosition;
+    
     return outlineNode;
 }
 
-- (void)addCrossbars:(NSArray *)crossbars {
+- (void)addCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero {
     for (NSUInteger i = 0; i < crossbars.count; i++) {
-        [self addCrossbarWithPath:(__bridge CGPathRef)[crossbars objectAtIndex:i]];
+        [self addCrossbarWithPath:CGPathCreateCopyByTransformingPath((__bridge CGPathRef)[crossbars objectAtIndex:i], &translateToZero)];
     }
 }
 
 - (void)addCrossbarWithPath:(CGPathRef)crossbarPath {
-    SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:crossbarPath];
+    CGAffineTransform transform = CGAffineTransformMakeTranslation([self childNodeWithName:LetterOutlineName].position.x,
+                                                                   [self childNodeWithName:LetterOutlineName].position.y);
+    
+    SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByTransformingPath(crossbarPath, &transform)];
     crossbarNode.lineWidth = 8.0;
     crossbarNode.strokeColor = [SKColor brownColor];
     crossbarNode.name = @"Crossbar";
     crossbarNode.zPosition = LetterBaseSceneCrossbarZPosition;
+
     [self addChild:crossbarNode];
 }
 
-- (void)addWaypoints:(NSArray *)waypoints {
+- (void)addWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero {
     for (NSInteger i = 0; i < waypoints.count; i++) {
-        [self addEnvelopeAtPoint:[[waypoints objectAtIndex:i] CGPointValue]];
+        CGPoint envelopePosition = [[waypoints objectAtIndex:i] CGPointValue];
+        envelopePosition.x -= offsetFromZero.x;
+        envelopePosition.y -= offsetFromZero.y;
+        [self addEnvelopeAtPoint:envelopePosition];
     }
 }
 
 - (void)addEnvelopeAtPoint:(CGPoint)position {
     SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeName];
+    position.x += [self childNodeWithName:LetterOutlineName].position.x;
+    position.y += [self childNodeWithName:LetterOutlineName].position.y;
     envelope.position = position;
     envelope.name = @"Waypoint";
     envelope.zPosition = LetterBaseSceneWaypointZPosition;
     [self addChild:envelope];
 }
 
-- (Train *)createTrainNodeWithPathSegments:(PathSegments *)pathSegments {
-    Train *trainNode = [[Train alloc] initWithPathSegments:pathSegments];
+- (Train *)createTrainNodeWithPathSegments:(PathSegments *)segments {
+    Train *trainNode = [[Train alloc] initWithPathSegments:segments];
     trainNode.name = TrainNodeName;
     trainNode.zPosition = LetterBaseSceneTrainZPosition;
     return trainNode;
 }
 
-- (CGPoint)moveNodeToCenter:(SKNode *)node {
+- (CGPoint)getCenterForShapeNode:(SKShapeNode *)node {
     CGPoint center = [LayoutMath centerOfMainScreen];
-    center.x -= (node.frame.size.width * 0.5) - (LetterLineWidth * 0.1);
-    center.y -= (node.frame.size.height - LetterLineWidth) * 0.5;
-    node.position = center;
+    CGRect pathBoundingBox = CGPathGetPathBoundingBox(node.path);
+    center.x -= HALF_OF(pathBoundingBox.size.width) + pathBoundingBox.origin.x;
+    center.y -= HALF_OF(pathBoundingBox.size.height) + pathBoundingBox.origin.y;
     return center;
 }
 

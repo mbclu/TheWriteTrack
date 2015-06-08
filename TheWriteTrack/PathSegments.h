@@ -8,8 +8,12 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface PathSegments : NSObject {
-}
+NS_ENUM(NSUInteger, EInterpolatableObjectTypes) {
+    CrossbarObjectType,
+    WaypointObjectType
+};
+
+@interface PathSegments : NSObject
 
 @property CGRect segmentBounds;
 @property NSMutableArray *segments;
@@ -21,19 +25,19 @@
 @property CGFloat halfWidth;
 @property CGFloat threeQuarterWidth;
 @property CGFloat fullWidth;
-@property CGMutablePathRef combinedPath;
+@property CGPathRef generatedSegmentPath;
 @property NSMutableArray *crossbars;
 @property NSMutableArray *waypoints;
 @property NSDictionary *letterSegmentDictionary;
-@property CGPoint center;
+@property CGPoint pathOffsetFromZero;
+@property CGAffineTransform translateToZeroTransform;
 
 - (instancetype)initWithRect:(CGRect)rect;
 - (void)calculateGridDimensions;
 - (void)createRowSegmentsForColumn:(NSUInteger)column;
 - (void)createColumnSegmentsForRow:(NSUInteger)row;
 - (void)addQuadCurveDefinitionWithP1:(CGPoint)point1 ControlPoint:(CGPoint)control P2:(CGPoint)point2;
-- (CGPathRef)generateCombinedPathForLetter:(NSString *)letter;
-- (NSArray *)generateCrossbarsForLetter:(NSString *)letter;
-- (NSArray *)generateWaypointsForLetter:(NSString *)letter;
+- (CGPathRef)generateCombinedPathForLetter:(const NSString *)letter;
+- (void)generateObjectsWithType:(enum EInterpolatableObjectTypes)objectType forLetter:(const NSString *)letter;
 
 @end

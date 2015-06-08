@@ -21,9 +21,8 @@ NSString *const TrainName = @"Train";
     [self setName:TrainName];
     
     [self setPathSegments:pathSegments];
+    [self setWaypoints:pathSegments.waypoints];
     
-    [self addWaypointsByInterpolatingPath];
-
     [self positionTrainAtStartPoint];
     
     self.userInteractionEnabled = YES;
@@ -33,21 +32,14 @@ NSString *const TrainName = @"Train";
     return self;
 }
 
-- (void)addWaypointsByInterpolatingPath {
-    _waypoints = [[NSMutableArray alloc] init];
-    [_waypoints addObject:[_pathSegments.segments objectAtIndex:0]];
-}
-
 - (void)positionTrainAtStartPoint {
-    [self setPosition:CGPointMake(-100, -100)];
-//
-//    if (_waypoints.count > 0) {
-//        NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
-//        [self setPosition:[firstPoint CGPointValue]];
-//    }
-//    else {
-//        [self setPosition:CGPointMake(-100, -100)];
-//    }
+    if (_waypoints.count > 0) {
+        NSValue *firstPoint = (NSValue *)[_waypoints objectAtIndex:0];
+        [self setPosition:[firstPoint CGPointValue]];
+    }
+    else {
+        [self setPosition:CGPointMake(-100, -100)];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -65,7 +57,7 @@ NSString *const TrainName = @"Train";
 }
 
 - (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint {
-    if (_isMoving == YES && CGPathContainsPoint(_pathSegments.combinedPath, nil, touchPoint, NO)) {
+    if (_isMoving == YES && CGPathContainsPoint(_pathSegments.generatedSegmentPath, nil, touchPoint, NO)) {
         self.position = touchPoint;
     }
     else {

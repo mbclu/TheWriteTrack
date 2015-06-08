@@ -7,12 +7,16 @@
 //
 
 #import "Train.h"
+#import "LetterPathSegmentDictionary.h"
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "CGMatchers.h"
+#import "PathInfo.h"
 
 const uint pathWidth = 8;
 const uint pathHeight = 8;
+const NSString *RKEY = @"RectangleKey";
 
 @interface TrainTests : XCTestCase {
     Train *theTrain;
@@ -27,6 +31,15 @@ const uint pathHeight = 8;
 - (void)setUp {
     [super setUp];
     thePathSegments = [[PathSegments alloc] initWithRect:CGRectMake(0, 0, pathWidth, pathHeight)];
+    [thePathSegments setLetterSegmentDictionary:[NSDictionary dictionaryWithObject:
+                                                 [NSArray arrayWithObjects:
+                                                  v0, v1, v2, v3,
+                                                  h36, h37, h38, h39,
+                                                  v19, v18, v17, v16,
+                                                  h23, h22, h21, h20,
+                                                  SE, nil] forKey:RKEY]];
+    [thePathSegments generateCombinedPathForLetter:RKEY];
+    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:RKEY];
     theTrain = [[Train alloc] initWithPathSegments:thePathSegments];
     initialTrainPosition = theTrain.position;
 }
@@ -50,19 +63,18 @@ const uint pathHeight = 8;
     XCTAssertEqualObjects(theTrain.name, @"Train");
 }
 
-- (void)testTrainHasASetOfPointsToFollowWithAtLeastOnePointInIt {
-    XCTAssertNotNil(theTrain.waypoints);
-}
-
-- (void)testTheFirstWaypointIsAtAQuarterOfTheFirstPathSegmentDistance {
-    [thePathSegments generateCombinedPathForLetter:@"A"];
-    Train *trainForTest = [[Train alloc] initWithPathSegments:thePathSegments];
-    XCTAssertEqualPoints([[trainForTest.waypoints objectAtIndex:0] CGPointValue], CGPointMake(3, 6));
+- (void)testGivenThePathSegmentsHaveWaypointsWhenTheTrainIsInitializedThenWaypointsAreSetFromThePathSegments {
+    CGPoint expectedPoint = CGPointMake(1, 1);
+    id mockSegments = OCMClassMock([PathSegments class]);
+    NSArray *stubWaypoints = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:expectedPoint], nil];
+    OCMStub([mockSegments waypoints]).andReturn(stubWaypoints);
+    Train *thisTrain = [[Train alloc] initWithPathSegments:mockSegments];
+    XCTAssertEqualPoints([thisTrain.waypoints[0] CGPointValue], expectedPoint);
 }
 
 - (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsTheSameAsTheFirstWaypoint {
     CGPoint expectedPoint = CGPointMake(10, 15);
-    [theTrain setWaypoints:[NSArray arrayWithObject:[NSValue valueWithCGPoint:expectedPoint]]];
+    [theTrain setWaypoints:[NSMutableArray arrayWithObject:[NSValue valueWithCGPoint:expectedPoint]]];
     [theTrain positionTrainAtStartPoint];
     XCTAssertEqualPoints(theTrain.position, expectedPoint);
 }
@@ -94,8 +106,9 @@ const uint pathHeight = 8;
     XCTAssertEqualPoints(theTrain.position, initialTrainPosition);
 }
 
-- (void)testGivenTheTrainIsMovingWhenTouchesMovedThenTheTrainPositionWillUpdateToTheTouchPosition {
-    CGPoint touchPoint = [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth / 2) y:(pathHeight / 2)];
+- (void)testGivenTheTrainIsMovingAndTouchesAreOnThePathWhenTouchesMovedThenTheTrainPositionWillUpdateToTheTouchPosition {
+    CGPoint touchPoint = [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:0 y:2];
+    XCTAssertFalse(CGPathIsEmpty(thePathSegments.generatedSegmentPath));
     XCTAssertEqualPoints(theTrain.position, touchPoint);
     XCTAssertTrue(theTrain.isMoving);
 }

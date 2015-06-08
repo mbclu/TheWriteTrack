@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
 - (void)transitionToNextScene;
 - (void)transitionToPreviousScene;
 - (void)connectSceneTransitions;
-- (void)createSpritesForCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero;
-- (void)createSpritesForWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero;
+- (void)createSpritesForCrossbars:(NSArray *)crossbars;
+- (void)createSpritesForWaypoints:(NSArray *)waypoints;
 
 @end

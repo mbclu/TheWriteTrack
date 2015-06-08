@@ -211,7 +211,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     NSUInteger initialChildCount = theScene.children.count;
     PathSegments *pathSegments = [[PathSegments alloc] init];
     [pathSegments generateObjectsWithType:CrossbarObjectType forLetter:letterForTest];
-    [theScene createSpritesForCrossbars:pathSegments.crossbars withTransform:CGAffineTransformIdentity];
+    [theScene createSpritesForCrossbars:pathSegments.crossbars];
     XCTAssertEqual(theScene.children.count, initialChildCount + pathSegments.crossbars.count);
 }
 
@@ -224,8 +224,7 @@ NSString *const OutlineNodeName = @"LetterOutlineNode";
     [theScene createSpritesForWaypoints:[NSArray arrayWithObjects:
                             [NSValue valueWithCGPoint:waypoint1],
                             [NSValue valueWithCGPoint:waypoint2],
-                            nil]
-                withOffset:CGPointZero];
+                            nil]];
     
     XCTAssertEqual(theScene.children.count, initialChildCount + 2);
 }

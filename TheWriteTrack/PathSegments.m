@@ -245,8 +245,8 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
 - (CGPathRef)transformToZeroTheCombinedPaths:(CGPathRef)combinedPaths {
     if ( ! CGPathIsEmpty(combinedPaths) ) {
         CGRect pathBoundingBox = CGPathGetPathBoundingBox(combinedPaths);
-        _pathOffsetFromZero = pathBoundingBox.origin;
-        _translateToZeroTransform = CGAffineTransformMakeTranslation(-_pathOffsetFromZero.x, -_pathOffsetFromZero.y);
+        _pathOffsetFromZero = CGPointMake(-pathBoundingBox.origin.x, -pathBoundingBox.origin.y);
+        _translateToZeroTransform = CGAffineTransformMakeTranslation(_pathOffsetFromZero.x, _pathOffsetFromZero.y);
         _generatedSegmentPath = CGPathCreateCopyByTransformingPath(combinedPaths, &_translateToZeroTransform);
     }
     

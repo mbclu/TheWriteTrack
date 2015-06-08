@@ -38,8 +38,7 @@ NSString *const TrainName = @"Train";
 - (void)positionTrainAtStartPoint {
     if (_waypoints.count > 0) {
         CGPoint firstPoint = [(NSValue *)[_waypoints objectAtIndex:0] CGPointValue];
-        INCREMENT_POINT_BY_POINT(firstPoint, _centerOffset);
-        DECREMENT_POINT_BY_POINT(firstPoint, _pathSegments.pathOffsetFromZero);
+        INCREMENT_POINT_BY_POINT(firstPoint, _pathSegments.centerShift);
         [self setPosition:firstPoint];
     }
     else {

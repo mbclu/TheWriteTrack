@@ -140,19 +140,19 @@
     [_pathSegments generateObjectsWithType:CrossbarObjectType forLetter:self.name];
     [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:self.name];
     
-    [self createSpritesForCrossbars:_pathSegments.crossbars withTransform:_pathSegments.translateToZeroTransform];
-    [self createSpritesForWaypoints:_pathSegments.waypoints withOffset:_pathSegments.pathOffsetFromZero];
+    [self createSpritesForCrossbars:_pathSegments.crossbars];
+    [self createSpritesForWaypoints:_pathSegments.waypoints];
 }
 
-- (void)createSpritesForCrossbars:(NSArray *)crossbars withTransform:(CGAffineTransform)translateToZero {
+- (void)createSpritesForCrossbars:(NSArray *)crossbars {
     for (NSUInteger i = 0; i < crossbars.count; i++) {
-        [self addCrossbarWithPath:CGPathCreateCopyByTransformingPath((__bridge CGPathRef)[crossbars objectAtIndex:i], &translateToZero)];
+        [self addCrossbarWithPath:(__bridge CGPathRef)[crossbars objectAtIndex:i]];
     }
 }
 
 - (void)addCrossbarWithPath:(CGPathRef)crossbarPath {
-    CGAffineTransform transform = CGAffineTransformMakeTranslation([self childNodeWithName:LetterOutlineName].position.x,
-                                                                   [self childNodeWithName:LetterOutlineName].position.y);
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(_pathSegments.centerShift.x,
+                                                                   _pathSegments.centerShift.y);
     
     SKShapeNode *crossbarNode = [SKShapeNode shapeNodeWithPath:CGPathCreateCopyByTransformingPath(crossbarPath, &transform)];
     crossbarNode.lineWidth = 8.0;
@@ -163,19 +163,16 @@
     [self addChild:crossbarNode];
 }
 
-- (void)createSpritesForWaypoints:(NSArray *)waypoints withOffset:(CGPoint)offsetFromZero {
+- (void)createSpritesForWaypoints:(NSArray *)waypoints {
     for (NSInteger i = 0; i < waypoints.count; i++) {
         CGPoint envelopePosition = [[waypoints objectAtIndex:i] CGPointValue];
-        envelopePosition.x -= offsetFromZero.x;
-        envelopePosition.y -= offsetFromZero.y;
         [self addEnvelopeAtPoint:envelopePosition];
     }
 }
 
 - (void)addEnvelopeAtPoint:(CGPoint)position {
     SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeName];
-    position.x += [self childNodeWithName:LetterOutlineName].position.x;
-    position.y += [self childNodeWithName:LetterOutlineName].position.y;
+    INCREMENT_POINT_BY_POINT(position, _pathSegments.centerShift);
     envelope.position = position;
     envelope.name = @"Waypoint";
     envelope.zPosition = LetterBaseSceneWaypointZPosition;

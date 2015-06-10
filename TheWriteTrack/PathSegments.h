@@ -25,13 +25,11 @@ NS_ENUM(NSUInteger, EInterpolatableObjectTypes) {
 @property CGFloat halfWidth;
 @property CGFloat threeQuarterWidth;
 @property CGFloat fullWidth;
-@property CGPathRef generatedSegmentPath;
-@property NSMutableArray *crossbars;
-@property NSMutableArray *waypoints;
+@property CGMutablePathRef generatedSegmentPath;
+@property NSMutableArray *generatedCrossbars;
+@property NSMutableArray *generatedWaypoints;
 @property NSDictionary *letterSegmentDictionary;
-@property CGPoint centerShift;
-@property CGPoint pathOffsetFromZero;
-@property CGAffineTransform translateToZeroTransform;
+@property CGPoint zeroingPoint;
 
 - (instancetype)initWithRect:(CGRect)rect;
 - (void)calculateGridDimensions;

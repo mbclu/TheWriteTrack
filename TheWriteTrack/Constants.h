@@ -18,6 +18,7 @@ FOUNDATION_EXPORT NSString *const NextButtonName;
 FOUNDATION_EXPORT NSString *const PreviousButtonName;
 FOUNDATION_EXPORT NSString *const TrackTextureName;
 FOUNDATION_EXPORT NSString *const EnvelopeName;
+FOUNDATION_EXPORT NSString *const BaseSceneTrackContainerNodeName;
 FOUNDATION_EXPORT CGFloat const NextButtonXPadding;
 FOUNDATION_EXPORT CGFloat const TransitionLengthInSeconds;
 FOUNDATION_EXPORT NSUInteger const SingleLetterLength;

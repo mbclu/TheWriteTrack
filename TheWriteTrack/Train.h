@@ -10,14 +10,16 @@
 #import "PathSegments.h"
 #import <SpriteKit/SpriteKit.h>
 
-@interface Train : SKSpriteNode
+@interface Train : SKSpriteNode {
+    CGAffineTransform centeringTransform;
+}
 
 @property PathSegments *pathSegments;
 @property NSMutableArray *waypoints;
-@property CGPoint centerOffset;
+@property CGPathRef touchablePath;
 @property BOOL isMoving;
 
-- (instancetype)initWithPathSegments:(PathSegments *)pathSegments andCenterOffset:(CGPoint)centerOffset;
+- (instancetype)initWithPathSegments:(PathSegments *)pathSegments;
 - (instancetype)init NS_UNAVAILABLE;
 - (void)positionTrainAtStartPoint;
 - (void)evaluateTouchesBeganAtPoint:(CGPoint)touchPoint;

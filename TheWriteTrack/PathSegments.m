@@ -48,7 +48,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     [self addDiagonalSegments];
     [self addCurvedSegments];
     
-    _centerShift = CGPointZero;
+    _zeroingPoint = CGPointZero;
     
     return self;
 }
@@ -184,7 +184,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
  * Everything was instead spiked out with trial and error. */
 
 - (CGPathRef)generateCombinedPathForLetter:(const NSString *)letter {
-    CGMutablePathRef combinedPaths = CGPathCreateMutable();
+    _generatedSegmentPath = CGPathCreateMutable();
     CGMutablePathRef subPath = CGPathCreateMutable();
     
     NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
@@ -202,7 +202,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                 isSegmentDirectionReversed = YES;
                 break;
             case PATH_SEGMENT_END:
-                CGPathAddPath(combinedPaths, nil, subPath);
+                CGPathAddPath(_generatedSegmentPath, nil, subPath);
                 CGPathRelease(subPath);
                 subPath = CGPathCreateMutable();
                 break;
@@ -236,21 +236,10 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
             }
         }
     }
-    
-    CGPathRelease(subPath);
-    
-    return [self transformToZeroTheCombinedPaths:combinedPaths];
-}
 
-- (CGPathRef)transformToZeroTheCombinedPaths:(CGPathRef)combinedPaths {
-    if ( ! CGPathIsEmpty(combinedPaths) ) {
-        CGRect pathBoundingBox = CGPathGetPathBoundingBox(combinedPaths);
-        _pathOffsetFromZero = CGPointMake(-pathBoundingBox.origin.x, -pathBoundingBox.origin.y);
-        _translateToZeroTransform = CGAffineTransformMakeTranslation(_pathOffsetFromZero.x, _pathOffsetFromZero.y);
-        _generatedSegmentPath = CGPathCreateCopyByTransformingPath(combinedPaths, &_translateToZeroTransform);
-    }
-    
-    CGPathRelease(combinedPaths);
+    _zeroingPoint = CGPathGetPathBoundingBox(_generatedSegmentPath).origin;
+
+    CGPathRelease(subPath);
     
     return _generatedSegmentPath;
 }
@@ -273,20 +262,20 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
     
-    [_crossbars addObject:(__bridge id)crossbar];
+    [_generatedCrossbars addObject:(__bridge id)crossbar];
 }
 
 - (void)addWaypointWithPosition:(CGPoint)position {
-    [_waypoints addObject:[NSValue valueWithCGPoint:position]];
+    [_generatedWaypoints addObject:[NSValue valueWithCGPoint:position]];
 }
 
 - (void)generateObjectsWithType:(enum EInterpolatableObjectTypes)objectType forLetter:(NSString *)letter {
     switch (objectType) {
         case CrossbarObjectType:
-            _crossbars = [[NSMutableArray alloc] init];
+            _generatedCrossbars = [[NSMutableArray alloc] init];
             break;
         case WaypointObjectType:
-            _waypoints = [[NSMutableArray alloc] init];
+            _generatedWaypoints = [[NSMutableArray alloc] init];
             break;
     }
     

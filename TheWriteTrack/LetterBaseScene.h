@@ -43,6 +43,8 @@ typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
 @property GenericSpriteButton *nextButtonProperty;
 @property GenericSpriteButton *previousButtonProperty;
 @property PathSegments *pathSegments;
+@property SKNode *trackContainerNode;
+@property CGPoint centeringPoint;
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter;
 - (instancetype)initWithSize:(CGSize)size letter:(NSString *)letter andPathSegments:(PathSegments *)pathSegments;

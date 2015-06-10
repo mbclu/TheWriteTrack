@@ -101,7 +101,7 @@ const NSUInteger numberOfVFrameSegments = 8;
     XCTAssertEqualWithAccuracy(pathSegments.segmentBounds.size.height, 4, 0.0);
 }
 
-- (void)testThePathIsPlaceAtOriginZero {
+- (void)testWhenTheCombinedPathIsGeneratedThenTheZeroingPointIsSetToTheXYDifferenceFromTheCombinedPathOrigin {
     CGRect expectedFrame = CGRectMake(0, 0, 8, 8);
     PathSegments *pathSegments = [[PathSegments alloc] initWithRect:expectedFrame];
 
@@ -109,7 +109,7 @@ const NSUInteger numberOfVFrameSegments = 8;
     [pathSegments setLetterSegmentDictionary:[LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments]];
     [pathSegments generateCombinedPathForLetter:@"B"];
     
-    XCTAssertEqualPoints(CGPathGetPathBoundingBox(pathSegments.generatedSegmentPath).origin, CGPointZero);
+    XCTAssertEqualPoints(pathSegments.zeroingPoint, CGPointMake(2, 0));
 }
 
 - (void)testRow_1_Column_1_Vertical {
@@ -365,8 +365,8 @@ const NSUInteger numberOfVFrameSegments = 8;
     [super tearDown];
 }
 
-- (void)testTheDefaultCenterIsZero {
-    XCTAssertEqualPoints(thePathSegments.centerShift, CGPointZero);
+- (void)testTheDefaultZeroingPointIsZero {
+    XCTAssertEqualPoints(thePathSegments.zeroingPoint, CGPointZero);
 }
 
 @end
@@ -384,37 +384,37 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 - (void)testGivenALetterDefinitionDoesNotExistForKeyWhenCrossbarsAreGeneratedThenTheCountIsZero {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"!"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 0);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenAnyControlSegmentsAreIgnored {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"ControlPointsOnly"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 0);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForVerticalSegments {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"VericalOne"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 5);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForHorizontalSegments {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"HorizontalOne"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 5);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForDiagonalSegments {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"DiagonalOne"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 5);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenTenCrossbarsAreGeneratedForCurvedSegments {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"CurvedOne"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 11);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 11);
 }
 
 - (void)testGivenAValidLetterWithDifferentSegmentTypesWhenCrossbarsAreCreatedThenTheTotalNumberOfCrossbarsIncludesAllSegments {
     [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"AllCombined"];
-    XCTAssertEqual(thePathSegments.crossbars.count, 5 + 5 + 5 + 5 + 5 + 11 + 11);
+    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5 + 5 + 5 + 5 + 5 + 11 + 11);
 }
 
 @end
@@ -432,37 +432,37 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 - (void)testGivenALetterDefinitionDoesNotExistForKeyWhenWaypointsAreGeneratedThenTheCountIsZero {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"!"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 0);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenAnyControlSegmentsAreIgnored {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"ControlPointsOnly"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 0);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForVerticalSegments {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"VericalOne"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 2);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForHorizontalSegments {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"HorizontalOne"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 2);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForDiagonalSegments {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"DiagonalOne"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 2);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenFiveWaypointsAreGeneratedForCurvedSegments {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"CurvedOne"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 3);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 3);
 }
 
 - (void)testGivenAValidLetterWithDifferentSegmentTypesWhenWaypointsAreCreatedThenTheTotalNumberOfWaypointsIncludesAllSegments {
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"AllCombined"];
-    XCTAssertEqual(thePathSegments.waypoints.count, 2 + 2 + 2 + 2 + 2 + 3 + 3);
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2 + 2 + 2 + 2 + 2 + 3 + 3);
 }
 
 @end

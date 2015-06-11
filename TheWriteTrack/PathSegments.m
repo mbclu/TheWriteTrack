@@ -12,7 +12,6 @@
 #import "LetterPathSegmentDictionary.h"
 
 #if (DEBUG)
-    #import "PathDots.h"
     #import "PathInfo.h"
     #import <CocoaLumberjack/CocoaLumberjack.h>
 #endif

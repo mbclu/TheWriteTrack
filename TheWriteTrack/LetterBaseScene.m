@@ -16,10 +16,6 @@
 #import "Train.h"
 #import "PathSegments.h"
 
-#if (APP_SHOULD_DRAW_DOTS)
-    #import "PathDots.h"
-#endif
-
 @implementation LetterBaseScene
 
 @synthesize nextButtonProperty = nextButton;
@@ -47,15 +43,6 @@
         [self addLetterTrack];
 
         [self addNavigationButtons];
-        
-#if (APP_SHOULD_DRAW_DOTS)
-        PathDots *dots = [[PathDots alloc] init];
-        [dots drawDotsAtCenter:center OfPath:letterPath.letterPath inScene:self];
-#endif
-        
-#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
-        wpDropper = [[WaypointDropper alloc] initForLetter:[self stringFromSceneUnicharLetter]];
-#endif
     }
     return self;
 }
@@ -225,21 +212,6 @@
     [previousButton setTouchUpInsideTarget:self action:@selector(transitionToPreviousScene)];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInNode:self.parent];
-    
-#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
-    [wpDropper placeWaypointForTouches:touches inScene:self];
-#endif
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
-    [wpDropper moveWaypointForTouches:touches inScene:self];
-#endif
-}
-
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self.parent];
@@ -249,12 +221,6 @@
               NSStringFromClass([self class]),
               [self name]
               );
-    
-#if (APP_SHOULD_ALLOW_CREATING_WAYPOINTS)
-    [wpDropper addWaypointToArray:touchPoint inScene:self];
-    [wpDropper createWaypointPropertyList];
-    [wpDropper displayWaypointFileContent];
-#endif
     
     [self.nextButtonProperty touchesEnded:touches withEvent:event];
     [self.previousButtonProperty touchesEnded:touches withEvent:event];

@@ -35,10 +35,6 @@
 		C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
 		C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */; };
 		C72C213B1AF70A3700A85ABF /* StartStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */; };
-		C730181E1B14172E00266CB9 /* PathDots.m in Sources */ = {isa = PBXBuildFile; fileRef = C730181D1B14172E00266CB9 /* PathDots.m */; };
-		C730181F1B14172E00266CB9 /* PathDots.m in Sources */ = {isa = PBXBuildFile; fileRef = C730181D1B14172E00266CB9 /* PathDots.m */; };
-		C73018221B14197700266CB9 /* WaypointDropper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018211B14197700266CB9 /* WaypointDropper.m */; };
-		C73018231B14197700266CB9 /* WaypointDropper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018211B14197700266CB9 /* WaypointDropper.m */; };
 		C73018261B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C73018271B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C730182A1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
@@ -117,10 +113,6 @@
 		C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButton.m; path = TheWriteTrack/GenericSpriteButton.m; sourceTree = SOURCE_ROOT; };
 		C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButtonTests.m; path = "TheWriteTrack-Tests/GenericSpriteButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartStringSmoke.sks; path = TheWriteTrack/StartStringSmoke.sks; sourceTree = SOURCE_ROOT; };
-		C730181C1B14172E00266CB9 /* PathDots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathDots.h; path = TheWriteTrack/PathDots.h; sourceTree = SOURCE_ROOT; };
-		C730181D1B14172E00266CB9 /* PathDots.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathDots.m; path = TheWriteTrack/PathDots.m; sourceTree = SOURCE_ROOT; };
-		C73018201B14197700266CB9 /* WaypointDropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaypointDropper.h; path = TheWriteTrack/WaypointDropper.h; sourceTree = SOURCE_ROOT; };
-		C73018211B14197700266CB9 /* WaypointDropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaypointDropper.m; path = TheWriteTrack/WaypointDropper.m; sourceTree = SOURCE_ROOT; };
 		C73018241B148E5600266CB9 /* PathSegments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegments.h; path = TheWriteTrack/PathSegments.h; sourceTree = SOURCE_ROOT; };
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
 		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
@@ -291,10 +283,6 @@
 			children = (
 				C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */,
 				C77DF2ED1AC9BC62002A6251 /* PathInfo.h */,
-				C730181C1B14172E00266CB9 /* PathDots.h */,
-				C730181D1B14172E00266CB9 /* PathDots.m */,
-				C73018201B14197700266CB9 /* WaypointDropper.h */,
-				C73018211B14197700266CB9 /* WaypointDropper.m */,
 			);
 			name = Utils;
 			path = "The Write TrackTests";
@@ -698,7 +686,6 @@
 				C7B697551AF2460C0066086E /* StartButton.m in Sources */,
 				C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
-				C730181E1B14172E00266CB9 /* PathDots.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
 				C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */,
@@ -708,7 +695,6 @@
 				C73018261B148E5600266CB9 /* PathSegments.m in Sources */,
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* LetterBaseScene.m in Sources */,
-				C73018221B14197700266CB9 /* WaypointDropper.m in Sources */,
 				C730182A1B148FD400266CB9 /* Constants.m in Sources */,
 				C7360C571B04387500AEA146 /* StartButtonConstants.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
@@ -747,7 +733,6 @@
 				9f8087f8b26322ff5cb6a7f8 /* StartButton.m in Sources */,
 				C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				14d627ad861be84bef577fca /* AttributedStringPath.m in Sources */,
-				C730181F1B14172E00266CB9 /* PathDots.m in Sources */,
 				0aeb68f61d41660a7508bc58 /* LetterConverter.m in Sources */,
 				c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */,
 				82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */,
@@ -757,7 +742,6 @@
 				C73018271B148E5600266CB9 /* PathSegments.m in Sources */,
 				2bc1c89bef203c330e89d183 /* TitleTrain.m in Sources */,
 				bd5de2f53c1df7d85136a815 /* main.m in Sources */,
-				C73018231B14197700266CB9 /* WaypointDropper.m in Sources */,
 				C730182B1B148FD400266CB9 /* Constants.m in Sources */,
 				18b2c493a8303f37dd0e0516 /* LetterBaseScene.m in Sources */,
 				54b7d83e13b2ab087b7ba46b /* AppDelegate.m in Sources */,

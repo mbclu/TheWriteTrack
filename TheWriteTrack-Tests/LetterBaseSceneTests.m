@@ -21,8 +21,8 @@
 #import <OCMock/OCMock.h>
 
 CGFloat const GapCheckAccuracy = 1.0;
-CGFloat const ArbitrarySceneWidth = 300;
-CGFloat const ArbitrarySceneHeight = 200;
+CGFloat const ArbitrarySceneWidth = 400;
+CGFloat const ArbitrarySceneHeight = 400;
 NSString *const CrossbarName = @"Crossbar";
 NSString *const WaypointName = @"Waypoint";
 NSString *const OutlineNodeName = @"LetterOutlineNode";
@@ -198,40 +198,15 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     // Test strokeWidth?
 }
 
-- (void)testThePositionOfTheTrackContainerNodeCentersTheLetterOutlineNode {
-    CGPathRef pathForTest = CGPathCreateWithRect(CGRectMake(10, 10, 35, 35), nil);
-    CGPathRef pathOutlineForTest = CGPathCreateCopyByStrokingPath(pathForTest,
-                                                                  nil,
-                                                                  25.0,
-                                                                  kCGLineCapButt,
-                                                                  kCGLineJoinBevel,
-                                                                  1.0);
-    // Above is ugly, but how esle to get the outlined path for testing with?
-    
-    PathSegments *newPathSegments = [[PathSegments alloc] init];
-    id mockPathSegments = OCMClassMock(newPathSegments.class);
-    OCMStub([mockPathSegments generateCombinedPathForLetter:letterForTest]).andReturn(pathForTest);
-    
-    LetterBaseScene *newScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(100, 100)
-                                                               letter:letterForTest
-                                                      andPathSegments:mockPathSegments];
-    
-    SKNode *containerNode = [newScene childNodeWithName:ContainerNodeName];
-    SKShapeNode *outlineNode = (SKShapeNode *)[containerNode childNodeWithName:OutlineNodeName];
-    CGFloat leftGap = outlineNode.frame.origin.x + containerNode.frame.origin.x;
-    CGFloat bottomGap = outlineNode.frame.origin.y + containerNode.frame.origin.y;
-    CGFloat rightGap = newScene.frame.size.width - outlineNode.frame.size.width - outlineNode.frame.origin.x;
-    CGFloat topGap = newScene.frame.size.height - outlineNode.frame.size.height - outlineNode.frame.origin.y;
-    
-    XCTAssertTrue(CGPathEqualToPath(outlineNode.path, pathOutlineForTest));
-    
-    XCTAssertEqualWithAccuracy(leftGap, 25, GapCheckAccuracy);
-    XCTAssertEqualWithAccuracy(bottomGap, 25, GapCheckAccuracy);
-    XCTAssertEqualWithAccuracy(outlineNode.frame.size.width, 50, GapCheckAccuracy);
-    XCTAssertEqualWithAccuracy(outlineNode.frame.size.height, 50, GapCheckAccuracy);
-    XCTAssertEqualWithAccuracy(rightGap, 25, GapCheckAccuracy);
-    XCTAssertEqualWithAccuracy(topGap, 25, GapCheckAccuracy);
-}
+//- (void)testTheTrackContainerNodeIsCenteredWhileAccountingForZeroOffset {
+//    CGFloat leftGap = theLetterTrackOutlineNode.frame.origin.x + theContainerNode.frame.origin.x;
+//    CGFloat bottomGap = theLetterTrackOutlineNode.frame.origin.y + theContainerNode.frame.origin.y;
+//    CGFloat rightGap = theScene.frame.size.width - theLetterTrackOutlineNode.frame.size.width - leftGap;
+//    CGFloat topGap = theScene.frame.size.height - theLetterTrackOutlineNode.frame.size.height - bottomGap;
+//    
+//    XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy);
+//    XCTAssertEqualWithAccuracy(bottomGap, topGap, GapCheckAccuracy);
+//}
 
 - (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {
     NSUInteger initialChildCount = theContainerNode.children.count;
@@ -309,33 +284,51 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
 
 @implementation LetterBaseSceneLetterPathTests
 
-#define PERFORM_HORIZONTAL_CENTER_TEST    0
+#define PERFORM_HORIZONTAL_CENTER_TEST    1
 #if (PERFORM_HORIZONTAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsHorizontallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
+    
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
-        LetterBaseScene *scene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size
-                                                            AndLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
-        SKShapeNode *letterNode = (SKShapeNode *)[scene childNodeWithName:OutlineNodeName];
-        CGFloat leftGap = letterNode.frame.origin.x;
-        CGFloat rightGap = scene.frame.size.width - letterNode.frame.size.width - letterNode.frame.origin.x;
-        XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy, @"Letter %c Does not meet the Horizontal Alignment Standard", unicharRepOfLetter);
+        LetterBaseScene *scene = [[LetterBaseScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
+                                                            andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
+        SKShapeNode *trackOutlineNode = (SKShapeNode *)[[scene childNodeWithName:ContainerNodeName] childNodeWithName:LetterOutlineName];
+        CGRect pathBoundingBox = CGPathGetPathBoundingBox(trackOutlineNode.path);
+        
+        if ( ! CGRectIsNull(pathBoundingBox) ) {
+            CGRect pathBoundingBox = CGPathGetPathBoundingBox(trackOutlineNode.path);
+            CGPoint parentCoordinatesPoint = [trackOutlineNode convertPoint:pathBoundingBox.origin toNode:trackOutlineNode.parent.parent];
+            CGFloat leftGap = parentCoordinatesPoint.x;
+            CGFloat rightGap = scene.frame.size.width - parentCoordinatesPoint.x - pathBoundingBox.size.width;
+        
+            XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy, @"Letter %c Does not meet the Horizontal Alignment Standard", unicharRepOfLetter);
+        }
+        
         unicharRepOfLetter = (unichar)(unicharRepOfLetter + 1);
     }
 }
 #endif
 
-#define PERFORM_VERTICAL_CENTER_TEST    0
+#define PERFORM_VERTICAL_CENTER_TEST    1
 #if (PERFORM_VERTICAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsVerticallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
+    
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
-        LetterBaseScene *scene = [[LetterBaseScene alloc]initWithSize:[UIScreen mainScreen].bounds.size
-                                                            AndLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
-        SKShapeNode *letterNode = (SKShapeNode *)[scene childNodeWithName:OutlineNodeName];
-        CGFloat topGap = scene.frame.size.height - letterNode.frame.size.height - letterNode.frame.origin.y;
-        CGFloat bottomGap = letterNode.frame.origin.y;
-        XCTAssertEqualWithAccuracy(topGap, bottomGap, GapCheckAccuracy, @"Letter %c Does not meet the Vertical Alignment Standard", unicharRepOfLetter);
+        LetterBaseScene *scene = [[LetterBaseScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
+                                                            andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
+        
+        SKShapeNode *trackOutlineNode = (SKShapeNode *)[[scene childNodeWithName:ContainerNodeName] childNodeWithName:LetterOutlineName];
+        CGRect pathBoundingBox = CGPathGetPathBoundingBox(trackOutlineNode.path);
+        
+        if ( ! CGRectIsNull(pathBoundingBox) ) {
+            CGPoint parentCoordinatesPoint = [trackOutlineNode convertPoint:pathBoundingBox.origin toNode:trackOutlineNode.parent.parent];
+            CGFloat bottomGap = parentCoordinatesPoint.y;
+            CGFloat topGap = scene.frame.size.height - parentCoordinatesPoint.y - pathBoundingBox.size.height;
+            
+            XCTAssertEqualWithAccuracy(bottomGap, topGap, GapCheckAccuracy, @"Letter %c Does not meet the Vertical Alignment Standard", unicharRepOfLetter);
+        }
+        
         unicharRepOfLetter = (unichar)(unicharRepOfLetter + 1);
     }
 }

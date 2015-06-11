@@ -134,7 +134,7 @@ const NSString *RKEY = @"RectangleKey";
 }
 
 - (void)testWhenATouchIsMovedOutsideThePathThenTheTrainDoesNotMoveAndIsConsideredStill {
-    [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth * 2) y:(pathHeight * 2)];
+    [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth * 10) y:(pathHeight * 10)];
     
     XCTAssertFalse(theTrain.isMoving);
     XCTAssertEqualPoints(theTrain.position, initialTrainPosition);

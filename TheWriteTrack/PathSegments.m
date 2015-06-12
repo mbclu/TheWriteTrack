@@ -9,7 +9,7 @@
 #import "PathSegments.h"
 
 #import "LayoutMath.h"
-#import "LetterPathSegmentDictionary.h"
+#import "PathSegmentDictionary.h"
 
 #if (DEBUG)
     #import "PathInfo.h"
@@ -31,7 +31,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     self = [self initWithRect:CGRectMake(CGPointZero.x, CGPointZero.y,
                               ([UIScreen mainScreen].bounds.size.width * boundingWidthPercentage),
                               ([UIScreen mainScreen].bounds.size.height * boundingHeightPercentage))];
-    _letterSegmentDictionary = [LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments];
+    _letterSegmentDictionary = [PathSegmentDictionary dictionaryWithUpperCasePathSegments];
     return self;
 }
 

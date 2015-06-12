@@ -10,7 +10,7 @@
 
 #import "AttributedStringPath.h"
 #import "LayoutMath.h"
-#import "LetterBaseScene.h"
+#import "LetterScene.h"
 #import "StartButton.h"
 #import "TitleTrain.h"
 
@@ -45,7 +45,7 @@
 }
 
 - (void)transitionToAScene {
-    SKScene *aScene = [[LetterBaseScene alloc] initWithSize:self.size andLetter:@"A"];
+    SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:@"A"];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
     [self.view presentScene:aScene transition:transition];
     [self.view setIsAccessibilityElement:YES];

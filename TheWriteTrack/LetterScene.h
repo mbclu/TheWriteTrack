@@ -1,5 +1,5 @@
 //
-//  _BaseTrack.h
+//  LetterScene.h
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 2/11/15.
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
     LetterBaseScenePreviousButtonZPosition
 };
 
-@interface LetterBaseScene : SKScene {
+@interface LetterScene : SKScene {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;
 }

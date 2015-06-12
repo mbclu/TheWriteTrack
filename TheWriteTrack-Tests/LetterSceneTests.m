@@ -1,12 +1,12 @@
 //
-//  _BaseTrackTests.m
+//  LetterSceneTests.m
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 2/11/15.
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "LetterBaseScene.h"
+#import "LetterScene.h"
 
 #import "AttributedStringPath.h"
 #import "GenericSpriteButton.h"
@@ -30,8 +30,8 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
 NSString *const NextButtonNodeName = @"NextButton";
 NSString *const PreviousButtonNodeName = @"PreviousButton";
 
-@interface LetterBaseSceneTests : XCTestCase {
-    LetterBaseScene *theScene;
+@interface LetterSceneTests : XCTestCase {
+    LetterScene *theScene;
     CGSize arbitrarySceneSize;
     NSString *letterForTest;
     SKSpriteNode *theBackgroundNode;
@@ -45,13 +45,13 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
 
 @end
 
-@implementation LetterBaseSceneTests
+@implementation LetterSceneTests
 
 - (void)setUp {
     [super setUp];
     letterForTest = @"E";
     arbitrarySceneSize = CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight);
-    theScene = [[LetterBaseScene alloc]initWithSize:arbitrarySceneSize andLetter:letterForTest];
+    theScene = [[LetterScene alloc]initWithSize:arbitrarySceneSize andLetter:letterForTest];
     theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:@"RockyBackground"];
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NextButtonNodeName];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PreviousButtonNodeName];
@@ -87,7 +87,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
 
 - (void)testTheNameOfTheSceneMatchesTheNameOfTheInitializerConstant {
     NSString *letterToInitWith = @"K";
-    LetterBaseScene *anotherScene = [[LetterBaseScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:letterToInitWith];
+    LetterScene *anotherScene = [[LetterScene alloc]initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:letterToInitWith];
     XCTAssertEqualObjects(anotherScene.name, letterToInitWith);
 }
 
@@ -130,7 +130,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
 }
 
 - (void)testWhenTheLetterIsCapitalZThenNoNextButtonIsAvailable {
-    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"Z"];
+    LetterScene *zScene = [[LetterScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"Z"];
     XCTAssertNil([zScene childNodeWithName:NextButtonName]);
 }
 
@@ -173,7 +173,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
 }
 
 - (void)testWhenTheLetterIsCapitalAThenNoPrevButtonIsAvailable {
-    LetterBaseScene *zScene = [[LetterBaseScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"A"];
+    LetterScene *zScene = [[LetterScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"A"];
     XCTAssertNil([zScene childNodeWithName:PreviousButtonNodeName]);
 }
 
@@ -197,16 +197,6 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     // Test color?
     // Test strokeWidth?
 }
-
-//- (void)testTheTrackContainerNodeIsCenteredWhileAccountingForZeroOffset {
-//    CGFloat leftGap = theLetterTrackOutlineNode.frame.origin.x + theContainerNode.frame.origin.x;
-//    CGFloat bottomGap = theLetterTrackOutlineNode.frame.origin.y + theContainerNode.frame.origin.y;
-//    CGFloat rightGap = theScene.frame.size.width - theLetterTrackOutlineNode.frame.size.width - leftGap;
-//    CGFloat topGap = theScene.frame.size.height - theLetterTrackOutlineNode.frame.size.height - bottomGap;
-//    
-//    XCTAssertEqualWithAccuracy(leftGap, rightGap, GapCheckAccuracy);
-//    XCTAssertEqualWithAccuracy(bottomGap, topGap, GapCheckAccuracy);
-//}
 
 - (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {
     NSUInteger initialChildCount = theContainerNode.children.count;
@@ -290,7 +280,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
     
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
-        LetterBaseScene *scene = [[LetterBaseScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
+        LetterScene *scene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
                                                             andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
         SKShapeNode *trackOutlineNode = (SKShapeNode *)[[scene childNodeWithName:ContainerNodeName] childNodeWithName:LetterOutlineName];
         CGRect pathBoundingBox = CGPathGetPathBoundingBox(trackOutlineNode.path);
@@ -315,7 +305,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
     
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
-        LetterBaseScene *scene = [[LetterBaseScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
+        LetterScene *scene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
                                                             andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
         
         SKShapeNode *trackOutlineNode = (SKShapeNode *)[[scene childNodeWithName:ContainerNodeName] childNodeWithName:LetterOutlineName];

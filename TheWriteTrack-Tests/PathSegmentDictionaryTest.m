@@ -1,24 +1,24 @@
 //
-//      .m
+//  PathSegmentDictionaryTest.m
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 5/31/15.
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "LetterPathSegmentDictionary.h"
+#import "PathSegmentDictionary.h"
 #import <XCTest/XCTest.h>
 
-@interface LetterPathSegmentDictionaryTest : XCTestCase {
-    NSMutableArray *upperCaseKeys;
+@interface PathSegmentDictionaryTest : XCTestCase {
+    NSArray *upperCaseKeys;
 }
 
 @end
 
-@implementation LetterPathSegmentDictionaryTest
+@implementation PathSegmentDictionaryTest
 
 - (void)setUp {
-    upperCaseKeys = [LetterPathSegmentDictionary initializeUpperCaseKeys];
+    upperCaseKeys = [PathSegmentDictionary initializeUpperCaseKeys];
     [super setUp];
 }
 
@@ -27,7 +27,7 @@
 }
 
 - (void)assertArrayWithKey:(id)key hasObjectCount:(NSUInteger)count andSubSegmentCount:(NSUInteger)expectedSegmentEnds {
-    NSArray *array = [[LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments] objectForKey:key];
+    NSArray *array = [[PathSegmentDictionary dictionaryWithUpperCasePathSegments] objectForKey:key];
     XCTAssertNotNil(array);
     
     NSUInteger nonControlIndexCount = [[array indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {

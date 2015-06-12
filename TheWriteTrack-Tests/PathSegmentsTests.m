@@ -7,7 +7,7 @@
 //
 
 #import "PathSegments.h"
-#import "LetterPathSegmentDictionary.h"
+#import "PathSegmentDictionary.h"
 
 #import "CGMatchers.h"
 #import <XCTest/XCTest.h>
@@ -106,7 +106,7 @@ const NSUInteger numberOfVFrameSegments = 8;
     PathSegments *pathSegments = [[PathSegments alloc] initWithRect:expectedFrame];
 
     /* Could test this other ways, but we know that the letter 'B' has problems right now. */
-    [pathSegments setLetterSegmentDictionary:[LetterPathSegmentDictionary dictionaryWithUpperCasePathSegments]];
+    [pathSegments setLetterSegmentDictionary:[PathSegmentDictionary dictionaryWithUpperCasePathSegments]];
     [pathSegments generateCombinedPathForLetter:@"B"];
     
     XCTAssertEqualPoints(pathSegments.zeroingPoint, CGPointMake(2, 0));

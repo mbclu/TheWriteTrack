@@ -1,14 +1,14 @@
 //
-//  LetterPathSegmentDictionary.m
+//  PathSegmentDictionary.m
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 5/31/15.
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "LetterPathSegmentDictionary.h"
+#import "PathSegmentDictionary.h"
 
-@implementation LetterPathSegmentDictionary
+@implementation PathSegmentDictionary
 
 + (NSArray *)initializeUpperCaseKeys {
     NSMutableArray *letterKeys = [[NSMutableArray alloc] init];

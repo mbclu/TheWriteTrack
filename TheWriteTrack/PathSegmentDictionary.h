@@ -1,5 +1,5 @@
 //
-//  LetterPathSegmentDictionary.h
+//  PathSegmentDictionary.h
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 5/31/15.
@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LetterPathSegmentDictionary : NSObject {
+@interface PathSegmentDictionary : NSObject {
 }
 
 + (NSArray *)initializeUpperCaseKeys;

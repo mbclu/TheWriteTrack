@@ -1,12 +1,12 @@
 //
-//  _BaseTrack.m
+//  LetterScene.m
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 2/11/15.
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "LetterBaseScene.h"
+#import "LetterScene.h"
 
 #import "AttributedStringPath.h"
 #import "CocoaLumberjack.h"
@@ -16,7 +16,7 @@
 #import "Train.h"
 #import "PathSegments.h"
 
-@implementation LetterBaseScene
+@implementation LetterScene
 
 @synthesize nextButtonProperty = nextButton;
 @synthesize previousButtonProperty = previousButton;
@@ -191,7 +191,7 @@
 - (void)transitionToSceneWithLetter:(NSString *)letter {
     DDLogInfo(@"Transitioning to the %@ scene", letter);
     
-    SKScene *nextScene = [[LetterBaseScene alloc] initWithSize:self.size andLetter:letter];
+    SKScene *nextScene = [[LetterScene alloc] initWithSize:self.size andLetter:letter];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionLengthInSeconds];
     
     [self.view presentScene:nextScene transition:transition];

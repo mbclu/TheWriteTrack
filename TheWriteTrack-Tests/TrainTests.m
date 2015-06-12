@@ -7,7 +7,7 @@
 //
 
 #import "Train.h"
-#import "LetterPathSegmentDictionary.h"
+#import "PathSegmentDictionary.h"
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
@@ -20,7 +20,7 @@ const CGFloat xCenterOffset = 1.0;
 const CGFloat yCenterOffset = 3.0;
 const CGFloat xOriginShift = 2.0;
 const CGFloat yOriginShift = 4.0;
-const NSString *RKEY = @"RectangleKey";
+NSString *RKEY = @"RectangleKey";
 
 @interface TrainTests : XCTestCase {
     Train *theTrain;
@@ -138,6 +138,18 @@ const NSString *RKEY = @"RectangleKey";
     
     XCTAssertFalse(theTrain.isMoving);
     XCTAssertEqualPoints(theTrain.position, initialTrainPosition);
+}
+
+- (void)testWhenATrainMovesOverAWayPointThenTheWaypointIsRemoved {
+    NSArray *segmentArray = [thePathSegments.letterSegmentDictionary valueForKey:RKEY];
+    XCTAssertEqual(segmentArray.count, 17);
+    
+    [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition
+                                               x:[theTrain.waypoints[1] CGPointValue].x
+                                               y:[theTrain.waypoints[1] CGPointValue].y];
+    
+    XCTAssertEqual(segmentArray.count, 16);
+    XCTAssertEqual([segmentArray indexOfObjectIdenticalTo:v0], NSNotFound);
 }
 
 @end

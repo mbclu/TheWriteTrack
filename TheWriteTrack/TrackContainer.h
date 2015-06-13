@@ -6,8 +6,25 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "PathSegments.h"
+#import "Train.h"
+#import <SpriteKit/SpriteKit.h>
 
-@interface TrackContainer : NSObject
+typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
+    TrackContainerTrackOutlineZPosition,
+    TrackContainerCrossbarZPosition,
+    TrackContainerWaypointZPosition,
+    TrackContainerTrainZPosition
+};
+
+@interface TrackContainer : SKNode
+
+@property PathSegments *pathSegments;
+@property NSString *letterKey;
+@property CGPoint centeringPoint;
+@property NSMutableArray *waypoints;
+
+- (instancetype)initWithLetterKey:(NSString *)letterKey andPathSegments:(PathSegments *)pathSegments;
+- (void)positionTrainAtStartPoint:(Train *)train;
 
 @end

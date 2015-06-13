@@ -9,16 +9,14 @@
 #import "Constants.h"
 #import "GenericSpriteButton.h"
 #import "PathSegments.h"
+#import "TrackContainer.h"
 #import <SpriteKit/SpriteKit.h>
 
-typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
-    LetterBaseSceneBackgroundZPosition,
-    LetterBaseSceneTrackOutlineZPosition,
-    LetterBaseSceneCrossbarZPosition,
-    LetterBaseSceneWaypointZPosition,
-    LetterBaseSceneTrainZPosition,
-    LetterBaseSceneNextButtonZPosition,
-    LetterBaseScenePreviousButtonZPosition
+typedef NS_ENUM(NSUInteger, ELetterSceneZOrder) {
+    LetterSceneBackgroundZPosition,
+    LetterSceneTrackContainerZPosition,
+    LetterSceneNextButtonZPosition,
+    LetterScenePreviousButtonZPosition
 };
 
 @interface LetterScene : SKScene {
@@ -29,16 +27,11 @@ typedef NS_ENUM(NSUInteger, ELetterBaseSceneZOrder) {
 @property unichar letter;
 @property GenericSpriteButton *nextButtonProperty;
 @property GenericSpriteButton *previousButtonProperty;
-@property PathSegments *pathSegments;
-@property SKNode *trackContainerNode;
-@property CGPoint centeringPoint;
+
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter;
-- (instancetype)initWithSize:(CGSize)size letter:(NSString *)letter andPathSegments:(PathSegments *)pathSegments;
 - (void)transitionToNextScene;
 - (void)transitionToPreviousScene;
 - (void)connectSceneTransitions;
-- (void)createSpritesForCrossbars:(NSArray *)crossbars;
-- (void)createSpritesForWaypoints:(NSArray *)waypoints;
 
 @end

@@ -23,24 +23,19 @@
 CGFloat const GapCheckAccuracy = 1.0;
 CGFloat const ArbitrarySceneWidth = 400;
 CGFloat const ArbitrarySceneHeight = 400;
-NSString *const CrossbarName = @"Crossbar";
-NSString *const WaypointName = @"Waypoint";
-NSString *const OutlineNodeName = @"LetterOutlineNode";
-NSString *const ContainerNodeName = @"TrackContainerNode";
+NSString *const BackgroundName = @"RockyBackground";
 NSString *const NextButtonNodeName = @"NextButton";
 NSString *const PreviousButtonNodeName = @"PreviousButton";
+NSString *const ContainerNodeName = @"TrackContainerNode";
 
 @interface LetterSceneTests : XCTestCase {
     LetterScene *theScene;
     CGSize arbitrarySceneSize;
     NSString *letterForTest;
     SKSpriteNode *theBackgroundNode;
+    SKNode *theContainerNode;
     SKSpriteNode *theNextButtonNode;
     SKSpriteNode *thePrevButtonNode;
-    SKNode *theContainerNode;
-    SKShapeNode *theLetterNode;
-    SKSpriteNode *theTrainNode;
-    SKShapeNode *theLetterTrackOutlineNode;
 }
 
 @end
@@ -52,12 +47,10 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     letterForTest = @"E";
     arbitrarySceneSize = CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight);
     theScene = [[LetterScene alloc]initWithSize:arbitrarySceneSize andLetter:letterForTest];
-    theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:@"RockyBackground"];
+    theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:BackgroundName];
+    theContainerNode = [theScene childNodeWithName:ContainerNodeName];
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NextButtonNodeName];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PreviousButtonNodeName];
-    theContainerNode = [theScene childNodeWithName:ContainerNodeName];
-    theTrainNode = (SKSpriteNode *)[theContainerNode childNodeWithName:@"TrainNode"];
-    theLetterTrackOutlineNode = (SKShapeNode *)[theContainerNode childNodeWithName:OutlineNodeName];
 }
 
 - (void)tearDown {
@@ -78,7 +71,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
 }
 
 - (void)testTheRockyBackgroundIsComprisedOfTheRockyBackgroundPNG {
-    XCTAssertTrue([theBackgroundNode.texture.description containsString:@"RockyBackground"]);
+    XCTAssertTrue([theBackgroundNode.texture.description containsString:BackgroundName]);
 }
 
 - (void)testTheSizeOfTheBackgroundIsTheSameAsTheSceneSize {
@@ -177,51 +170,8 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     XCTAssertNil([zScene childNodeWithName:PreviousButtonNodeName]);
 }
 
-- (void)testAllSubcomponentsOfTheTrackAreAddedToAContainerNode {
-    SKNode *containerNode = [theScene childNodeWithName:ContainerNodeName];
-    XCTAssertNotNil(containerNode);
-}
-
-- (void)testForThePresenceOfATrainNode {
-    XCTAssertNotNil(theTrainNode);
-}
-
-- (void)testTheTrainNodeGetsPassedThePathSegments {
-    Train *train = (Train *)theTrainNode;
-    XCTAssertEqualObjects(train.pathSegments, theScene.pathSegments);
-}
-
-- (void)testAnOutlineShapeNodeIsAddedForTheLetterTrack {
-    XCTAssertNotNil(theLetterTrackOutlineNode);
-    XCTAssertTrue([theLetterTrackOutlineNode isKindOfClass:[SKShapeNode class]]);
-    // Test color?
-    // Test strokeWidth?
-}
-
-- (void)testTheNumberOfCrossbarsAddedIsEqualToTheNumberOfCrossbarsOnTheTrainPath {
-    NSUInteger initialChildCount = theContainerNode.children.count;
-    PathSegments *pathSegments = [[PathSegments alloc] init];
-    [pathSegments generateObjectsWithType:CrossbarObjectType forLetter:letterForTest];
-    [theScene createSpritesForCrossbars:pathSegments.generatedCrossbars];
-    XCTAssertEqual(theContainerNode.children.count, initialChildCount + pathSegments.generatedCrossbars.count);
-}
-
-- (void)testTheWaypointsAreAddedToTheLetterTrackAsNodes {
-    NSUInteger initialChildCount = theContainerNode.children.count;
-    
-    CGPoint waypoint1 = CGPointMake(0, 10);
-    CGPoint waypoint2 = CGPointMake(10, 0);
-    
-    [theScene createSpritesForWaypoints:[NSArray arrayWithObjects:
-                            [NSValue valueWithCGPoint:waypoint1],
-                            [NSValue valueWithCGPoint:waypoint2],
-                            nil]];
-    
-    XCTAssertEqual(theContainerNode.children.count, initialChildCount + 2);
-}
-
-- (void)testTheBackgroundIsDrawnBeforeTheTrackOutline {
-    XCTAssertLessThan(theBackgroundNode.zPosition, theLetterTrackOutlineNode.zPosition);
+- (void)testTheBackgroundIsDrawnBeforeTheTrackContainer {
+    XCTAssertLessThan(theBackgroundNode.zPosition, theContainerNode.zPosition);
 }
 
 - (void)testTheBackgroundIsDrawnBeforeTheNextButton {
@@ -232,47 +182,13 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     XCTAssertLessThan(theBackgroundNode.zPosition, thePrevButtonNode.zPosition);
 }
 
-- (void)testTheTrackOutlineIsDrawnBeforeTheCrossbars {
-    NSArray *containerChildren = [theContainerNode children];
-    
-    XCTAssertNotNil([theContainerNode childNodeWithName:CrossbarName]);
-    
-    [containerChildren enumerateObjectsWithOptions:NSEnumerationConcurrent
-                                    usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                        SKNode *crossbarNode = (SKNode *)obj;
-                                        if ([crossbarNode.name isEqualToString:CrossbarName]) {
-                                            XCTAssertLessThan(theLetterTrackOutlineNode.zPosition, crossbarNode.zPosition);
-                                        }
-                                    }];
-}
+@end
 
-- (void)testTheTheCrossbarsAreDrawnBeforeTheWaypoints {
-    SKNode *aCrossbar = (SKNode *)[theContainerNode childNodeWithName:CrossbarName];
-    NSArray *containerChildren = [theContainerNode children];
-    
-    XCTAssertNotNil([theContainerNode childNodeWithName:WaypointName]);
-    
-    [containerChildren enumerateObjectsWithOptions:NSEnumerationConcurrent
-                                    usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                                        SKNode *waypointNode = (SKNode *)obj;
-                                        if ([waypointNode.name isEqualToString:WaypointName]) {
-                                            XCTAssertLessThan(aCrossbar.zPosition, waypointNode.zPosition);
-                                        }
-                                    }];
-}
-
-- (void)testTheWaypointsAreDrawnBeforeTheTrain {
-    SKNode *aWaypoint = (SKNode *)[theContainerNode childNodeWithName:WaypointName];
-    XCTAssertLessThan(aWaypoint.zPosition, theTrainNode.zPosition);
-}
+@interface LetterSceneLetterCenteringTests : XCTestCase
 
 @end
 
-@interface LetterBaseSceneLetterPathTests : XCTestCase
-
-@end
-
-@implementation LetterBaseSceneLetterPathTests
+@implementation LetterSceneLetterCenteringTests
 
 #define PERFORM_HORIZONTAL_CENTER_TEST    1
 #if (PERFORM_HORIZONTAL_CENTER_TEST)
@@ -281,7 +197,8 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
         LetterScene *scene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
-                                                            andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
+                                                     andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
+        
         SKShapeNode *trackOutlineNode = (SKShapeNode *)[[scene childNodeWithName:ContainerNodeName] childNodeWithName:LetterOutlineName];
         CGRect pathBoundingBox = CGPathGetPathBoundingBox(trackOutlineNode.path);
         
@@ -306,7 +223,7 @@ NSString *const PreviousButtonNodeName = @"PreviousButton";
     
     while (unicharRepOfLetter <= [@"Z" characterAtIndex:0]) {
         LetterScene *scene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size
-                                                            andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
+                                                     andLetter:[NSString stringWithCharacters:&unicharRepOfLetter length:1]];
         
         SKShapeNode *trackOutlineNode = (SKShapeNode *)[[scene childNodeWithName:ContainerNodeName] childNodeWithName:LetterOutlineName];
         CGRect pathBoundingBox = CGPathGetPathBoundingBox(trackOutlineNode.path);

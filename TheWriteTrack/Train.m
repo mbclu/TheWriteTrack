@@ -29,24 +29,9 @@ NSString *const TrainName = @"Train";
     
     [self setName:TrainName];
     
-    [self setPathSegments:pathSegments];
-    [self setWaypoints:pathSegments.generatedWaypoints];
-
-    _touchablePath = CGPathCreateCopyByStrokingPath(_pathSegments.generatedSegmentPath, nil, 30.0, kCGLineCapRound, kCGLineJoinRound, 1.0);
-    
-    [self positionTrainAtStartPoint];
+    _touchablePath = CGPathCreateCopyByStrokingPath(pathSegments.generatedSegmentPath, nil, 30.0, kCGLineCapRound, kCGLineJoinRound, 1.0);
     
     return self;
-}
-
-- (void)positionTrainAtStartPoint {
-    if (_waypoints.count > 0) {
-        CGPoint firstPoint = [(NSValue *)[_waypoints objectAtIndex:0] CGPointValue];
-        [self setPosition:firstPoint];
-    }
-    else {
-        [self setPosition:CGPointMake(-100, -100)];
-    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

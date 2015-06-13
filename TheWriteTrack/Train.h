@@ -14,14 +14,11 @@
     CGAffineTransform centeringTransform;
 }
 
-@property PathSegments *pathSegments;
-@property NSMutableArray *waypoints;
 @property CGPathRef touchablePath;
 @property BOOL isMoving;
 
 - (instancetype)initWithPathSegments:(PathSegments *)pathSegments;
 - (instancetype)init NS_UNAVAILABLE;
-- (void)positionTrainAtStartPoint;
 - (void)evaluateTouchesBeganAtPoint:(CGPoint)touchPoint;
 - (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint;
 - (void)evaluateTouchesEndedAtPoint:(CGPoint)touchPoint;

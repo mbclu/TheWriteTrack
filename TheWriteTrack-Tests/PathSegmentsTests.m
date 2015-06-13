@@ -383,38 +383,38 @@ const NSUInteger numberOfVFrameSegments = 8;
 }
 
 - (void)testGivenALetterDefinitionDoesNotExistForKeyWhenCrossbarsAreGeneratedThenTheCountIsZero {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"!"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 0);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"!"];
+    XCTAssertEqual(generatedCrossbars.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenAnyControlSegmentsAreIgnored {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"ControlPointsOnly"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 0);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"ControlPointsOnly"];
+    XCTAssertEqual(generatedCrossbars.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForVerticalSegments {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"VericalOne"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"VericalOne"];
+    XCTAssertEqual(generatedCrossbars.count, 5);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForHorizontalSegments {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"HorizontalOne"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"HorizontalOne"];
+    XCTAssertEqual(generatedCrossbars.count, 5);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenFiveCrossbarsAreGeneratedForDiagonalSegments {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"DiagonalOne"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"DiagonalOne"];
+    XCTAssertEqual(generatedCrossbars.count, 5);
 }
 
 - (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenTenCrossbarsAreGeneratedForCurvedSegments {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"CurvedOne"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 11);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"CurvedOne"];
+    XCTAssertEqual(generatedCrossbars.count, 11);
 }
 
 - (void)testGivenAValidLetterWithDifferentSegmentTypesWhenCrossbarsAreCreatedThenTheTotalNumberOfCrossbarsIncludesAllSegments {
-    [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"AllCombined"];
-    XCTAssertEqual(thePathSegments.generatedCrossbars.count, 5 + 5 + 5 + 5 + 5 + 11 + 11);
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"AllCombined"];
+    XCTAssertEqual(generatedCrossbars.count, 5 + 5 + 5 + 5 + 5 + 11 + 11);
 }
 
 @end
@@ -431,38 +431,38 @@ const NSUInteger numberOfVFrameSegments = 8;
 }
 
 - (void)testGivenALetterDefinitionDoesNotExistForKeyWhenWaypointsAreGeneratedThenTheCountIsZero {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"!"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 0);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"!"];
+    XCTAssertEqual(generatedWaypoints.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenAnyControlSegmentsAreIgnored {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"ControlPointsOnly"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 0);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"ControlPointsOnly"];
+    XCTAssertEqual(generatedWaypoints.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForVerticalSegments {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"VericalOne"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"VericalOne"];
+    XCTAssertEqual(generatedWaypoints.count, 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForHorizontalSegments {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"HorizontalOne"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"HorizontalOne"];
+    XCTAssertEqual(generatedWaypoints.count, 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForDiagonalSegments {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"DiagonalOne"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"DiagonalOne"];
+    XCTAssertEqual(generatedWaypoints.count, 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenFiveWaypointsAreGeneratedForCurvedSegments {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"CurvedOne"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 3);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"CurvedOne"];
+    XCTAssertEqual(generatedWaypoints.count, 3);
 }
 
 - (void)testGivenAValidLetterWithDifferentSegmentTypesWhenWaypointsAreCreatedThenTheTotalNumberOfWaypointsIncludesAllSegments {
-    [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"AllCombined"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 2 + 2 + 2 + 2 + 2 + 3 + 3);
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"AllCombined"];
+    XCTAssertEqual(generatedWaypoints.count, 2 + 2 + 2 + 2 + 2 + 3 + 3);
 }
 
 @end

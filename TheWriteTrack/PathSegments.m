@@ -243,7 +243,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     return _generatedSegmentPath;
 }
 
-- (void)addCrossbarWithPosition:(CGPoint)position andSlope:(CGFloat)slope {
+- (void)addCrossbarWithPosition:(CGPoint)position andSlope:(CGFloat)slope toArray:(NSMutableArray *)generatedObject {
     CGFloat angleInRadians = degreesToRadians(90);
     if (!isnan(slope)) {
         angleInRadians = atanf(slope);
@@ -261,24 +261,18 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
     crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
     
-    [_generatedCrossbars addObject:(__bridge id)crossbar];
+    [generatedObject addObject:(__bridge id)crossbar];
 }
 
-- (void)addWaypointWithPosition:(CGPoint)position {
-    [_generatedWaypoints addObject:[NSValue valueWithCGPoint:position]];
+- (void)addWaypointWithPosition:(CGPoint)position toArray:(NSMutableArray *)generatedObject {
+    [generatedObject addObject:[NSValue valueWithCGPoint:position]];
 }
 
-- (void)generateObjectsWithType:(enum EInterpolatableObjectTypes)objectType forLetter:(NSString *)letter {
-    switch (objectType) {
-        case CrossbarObjectType:
-            _generatedCrossbars = [[NSMutableArray alloc] init];
-            break;
-        case WaypointObjectType:
-            _generatedWaypoints = [[NSMutableArray alloc] init];
-            break;
-    }
-    
+- (NSMutableArray *)generateObjectsWithType:(enum EInterpolatableObjectTypes)objectType forLetter:(NSString *)letter {
+    NSMutableArray *generatedObjects = [[NSMutableArray alloc] init];
     NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
+    CGFloat straightStepSize = (objectType == CrossbarObjectType) ? 0.25 : 1.0;
+    CGFloat curveStepSize = (objectType == CrossbarObjectType) ? 0.1 : 0.5;
     
     for (NSUInteger i = 0; i < letterSegments.count; i++) {
         NSInteger segmentIndex = [[letterSegments objectAtIndex:i] integerValue];
@@ -292,29 +286,23 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
             {
                 NSArray *points = [_segments objectAtIndex:segmentIndex];
                 if (points.count == 2) {
-                    switch (objectType) {
-                        case CrossbarObjectType:
-                            [self interpolateStraightSegmentWithPoints:points andStepSizeInPercent:0.25 forObjectType:objectType];
-                            break;
-                        case WaypointObjectType:
-                            [self interpolateStraightSegmentWithPoints:points andStepSizeInPercent:1.0 forObjectType:objectType];
-                            break;
-                    }
+                    [self interpolateStraightSegmentWithPoints:points
+                                          andStepSizeInPercent:straightStepSize
+                                               intoObjectArray:generatedObjects
+                                                 forObjectType:objectType];
                 }
                 else if (points.count == 3) {
-                    switch (objectType) {
-                        case CrossbarObjectType:
-                            [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue]) andStepSizeInPercent:0.1 forObjectType:objectType];
-                            break;
-                        case WaypointObjectType:
-                            [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue]) andStepSizeInPercent:0.5 forObjectType:objectType];
-                            break;
-                    }
+                    [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue])
+                                               andStepSizeInPercent:curveStepSize
+                                                    intoObjectArray:generatedObjects
+                                                      forObjectType:objectType];
                 }
                 break;
             }
         }
     }
+    
+    return generatedObjects;
 }
 
 - (CGPathRef)getPathFromSegementWithPoints:(NSArray *)points {
@@ -337,7 +325,8 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     return [[[PathInfo alloc] init] TransformPathToArray:[self getPathFromSegementWithPoints:points]];
 }
 
-- (void)interpolateStraightSegmentWithPoints:(NSArray *)points andStepSizeInPercent:(CGFloat)stepSize forObjectType:(enum EInterpolatableObjectTypes)objectType {
+- (void)interpolateStraightSegmentWithPoints:(NSArray *)points andStepSizeInPercent:(CGFloat)stepSize
+                             intoObjectArray:(NSMutableArray *)generatedObjects forObjectType:(enum EInterpolatableObjectTypes)objectType {
     NSArray *pathArray = [self getPathArrayFromStraightSegmentPathWithPoints:points];
     
     for (NSUInteger i = 1; i < pathArray.count; i++) {
@@ -348,17 +337,21 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                                                      [LayoutMath interpolateLineWithStep:t start:start.y end:end.y]);
             switch (objectType) {
                 case CrossbarObjectType:
-                    [self addCrossbarWithPosition:interpolationPoint andSlope:[LayoutMath slopeOfLineWithStartPoint:start endPoint:end]];
+                    [self addCrossbarWithPosition:interpolationPoint
+                                         andSlope:[LayoutMath slopeOfLineWithStartPoint:start endPoint:end]
+                                          toArray:generatedObjects];
                     break;
                 case WaypointObjectType:
-                    [self addWaypointWithPosition:interpolationPoint];
+                    [self addWaypointWithPosition:interpolationPoint
+                                          toArray:generatedObjects];
                     break;
             }
         }
     }
 }
 
-- (void)interpolateQuadCurveSegmentWithCurveIndex:(NSUInteger)curveIndex andStepSizeInPercent:(CGFloat)stepSize forObjectType:(enum EInterpolatableObjectTypes)objectType {
+- (void)interpolateQuadCurveSegmentWithCurveIndex:(NSUInteger)curveIndex andStepSizeInPercent:(CGFloat)stepSize
+                                  intoObjectArray:(NSMutableArray *)generatedObjects forObjectType:(enum EInterpolatableObjectTypes)objectType {
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
     
@@ -390,10 +383,10 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
         
         switch (objectType) {
             case CrossbarObjectType:
-                [self addCrossbarWithPosition:interpolationPoint andSlope:slope];
+                [self addCrossbarWithPosition:interpolationPoint andSlope:slope toArray:generatedObjects];
                 break;
             case WaypointObjectType:
-                [self addWaypointWithPosition:interpolationPoint];
+                [self addWaypointWithPosition:interpolationPoint toArray:generatedObjects];
                 break;
         }
     }

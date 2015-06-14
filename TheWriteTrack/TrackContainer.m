@@ -25,6 +25,8 @@
     
     self.name = LetterSceneTrackContainerNodeName;
     
+    [self addChild:[SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:_pathSegments.segmentBounds.size]];
+
     SKShapeNode *trackOutline = [self createTrackOutlineNode:[_pathSegments generateCombinedPathForLetter:_letterKey]];
     [self addChild:trackOutline];
     
@@ -49,6 +51,10 @@
         trainBody = contact.bodyB;
     }
     
+    [self evaluateContactForTrainBody:trainBody waypointBody:waypointBody];
+}
+
+- (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody {
     if ((trainBody.categoryBitMask & TRAIN_CATEGORY) != 0 &&
         (waypointBody.categoryBitMask & WAYPOINT_CATEGORY) != 0)
     {
@@ -58,11 +64,10 @@
 
 - (void)positionTrainAtStartPoint:(Train *)train {
     if (_waypoints.count > 0) {
-        CGPoint firstPoint = [(NSValue *)[_waypoints objectAtIndex:0] CGPointValue];
-        [train setPosition:firstPoint];
+        train.position = [(SKSpriteNode *)[_waypoints objectAtIndex:0] position];
     }
     else {
-        [train setPosition:CGPointMake(-100, -100)];
+        train.position = CGPointMake(-100, -100);
     }
 }
 
@@ -87,8 +92,8 @@
 - (void)addCrossbarsAndWaypointsToTrackContainer {
     [self createSpritesForCrossbars:[_pathSegments generateObjectsWithType:CrossbarObjectType forLetter:_letterKey]];
 
-    _waypoints = [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:_letterKey];
-    [self createSpritesForWaypoints:_waypoints];
+    NSArray *waypointValues = [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:_letterKey];
+    [self createSpritesForWaypoints:waypointValues];
 }
 
 - (void)createSpritesForCrossbars:(NSArray *)crossbars {
@@ -109,9 +114,9 @@
 }
 
 - (void)createSpritesForWaypoints:(NSArray *)waypoints {
+    _waypoints = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < waypoints.count; i++) {
-        CGPoint envelopePosition = [[waypoints objectAtIndex:i] CGPointValue];
-        [self addEnvelopeAtPoint:envelopePosition];
+        [self addEnvelopeAtPoint:[[waypoints objectAtIndex:i] CGPointValue]];
     }
 }
 
@@ -125,7 +130,9 @@
     envelope.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:envelope.size];
     envelope.physicsBody.categoryBitMask = WAYPOINT_CATEGORY;
     envelope.physicsBody.contactTestBitMask = TRAIN_CATEGORY;
+    envelope.physicsBody.collisionBitMask = 0;
     
+    [_waypoints addObject:envelope];
     [self addChild:envelope];
 }
 
@@ -137,6 +144,7 @@
     trainNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:trainNode.size];
     trainNode.physicsBody.categoryBitMask = TRAIN_CATEGORY;
     trainNode.physicsBody.contactTestBitMask = WAYPOINT_CATEGORY;
+    trainNode.physicsBody.collisionBitMask = 0;
 
     [self positionTrainAtStartPoint:trainNode];
     

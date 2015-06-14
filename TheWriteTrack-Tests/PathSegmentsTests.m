@@ -354,9 +354,15 @@ const NSUInteger numberOfVFrameSegments = 8;
                                  [NSArray arrayWithObjects:h20, nil],
                                  [NSArray arrayWithObjects:a40, nil],
                                  [NSArray arrayWithObjects:c64, nil],
-                                 [NSArray arrayWithObjects:RD, v1, h21, a41, v48, x59, c64, c65, SE, nil], nil]
+                                 [NSArray arrayWithObjects:RD, v3, h37, a40, v55, x61, c70, c75, SE, nil],
+                                 [NSArray arrayWithObjects:v0, v1, nil],
+                                 [NSArray arrayWithObjects:v1, c72, nil],
+                                 [NSArray arrayWithObjects:c72, c73, nil],
+                                 nil]
                                                            forKeys:
-                                [NSArray arrayWithObjects:@"ControlPointsOnly", @"VericalOne", @"HorizontalOne", @"DiagonalOne", @"CurvedOne", @"AllCombined", nil]];
+                                [NSArray arrayWithObjects:@"ControlPointsOnly", @"VericalOne", @"HorizontalOne",
+                                 @"DiagonalOne", @"CurvedOne", @"AllTypesCombined",
+                                 @"StraightToStraight", @"StraightToCurve", @"CurveToCurve", nil]];
     
     [thePathSegments setLetterSegmentDictionary:segmentDictionaryForTest];
 }
@@ -413,7 +419,7 @@ const NSUInteger numberOfVFrameSegments = 8;
 }
 
 - (void)testGivenAValidLetterWithDifferentSegmentTypesWhenCrossbarsAreCreatedThenTheTotalNumberOfCrossbarsIncludesAllSegments {
-    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"AllCombined"];
+    NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"AllTypesCombined"];
     XCTAssertEqual(generatedCrossbars.count, 5 + 5 + 5 + 5 + 5 + 11 + 11);
 }
 
@@ -460,9 +466,22 @@ const NSUInteger numberOfVFrameSegments = 8;
     XCTAssertEqual(generatedWaypoints.count, 3);
 }
 
-- (void)testGivenAValidLetterWithDifferentSegmentTypesWhenWaypointsAreCreatedThenTheTotalNumberOfWaypointsIncludesAllSegments {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"AllCombined"];
-    XCTAssertEqual(generatedWaypoints.count, 2 + 2 + 2 + 2 + 2 + 3 + 3);
+- (void)testDuplicatePointsAreNotAddedForTwoStraightSegmentsThatTouch {
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"StraightToStraight"];
+    XCTAssertEqual(generatedWaypoints.count, 3);
+    XCTAssertEqualPoints([[generatedWaypoints objectAtIndex:0] CGPointValue], CGPointMake(0, 2));
+    XCTAssertEqualPoints([[generatedWaypoints objectAtIndex:1] CGPointValue], CGPointMake(0, 0));
+    XCTAssertEqualPoints([[generatedWaypoints objectAtIndex:2] CGPointValue], CGPointMake(0, 4));
+}
+
+- (void)testDuplicatePointsAreNotAddedForAStraightAndACurveSegmentThatTouch {
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"StraightToCurve"];
+    XCTAssertEqual(generatedWaypoints.count, 4);
+}
+
+- (void)testDuplicatePointsAreNotAddedForTwoCurvedSegmentsThatTouch {
+    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"CurveToCurve"];
+    XCTAssertEqual(generatedWaypoints.count, 5);
 }
 
 @end

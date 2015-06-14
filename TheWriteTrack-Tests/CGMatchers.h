@@ -21,4 +21,12 @@
     XCTAssertEqual(size1.height, size2.height); \
 }
 
+#define XCTAssertEqualRects(rect1, rect2)                   \
+{                                                           \
+    XCTAssertEqual(rect1.origin.x, rect2.origin.x);         \
+    XCTAssertEqual(rect1.origin.y, rect2.origin.y);         \
+    XCTAssertEqual(rect1.size.height, rect2.size.height);   \
+    XCTAssertEqual(rect1.size.width, rect2.size.width);     \
+}
+
 #endif

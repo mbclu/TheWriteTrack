@@ -264,8 +264,14 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     [generatedObject addObject:(__bridge id)crossbar];
 }
 
-- (void)addWaypointWithPosition:(CGPoint)position toArray:(NSMutableArray *)generatedObject {
-    [generatedObject addObject:[NSValue valueWithCGPoint:position]];
+- (void)addWaypointWithPosition:(CGPoint)position toArray:(NSMutableArray *)generatedObjects {
+    NSUInteger foundPositionIndex = [generatedObjects
+                                     indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                                         return CGPointEqualToPoint([obj CGPointValue], position);
+                                     }];
+    if (foundPositionIndex == NSNotFound) {
+        [generatedObjects addObject:[NSValue valueWithCGPoint:position]];
+    }
 }
 
 - (NSMutableArray *)generateObjectsWithType:(enum EInterpolatableObjectTypes)objectType forLetter:(NSString *)letter {

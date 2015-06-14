@@ -15,13 +15,12 @@
 
 #import "CocoaLumberjack.h"
 
-NSString *const MagicTrainName = @"MagicTrain";
 NSString *const TrainName = @"Train";
 
 @implementation Train
 
 - (instancetype)initWithPathSegments:(PathSegments *)pathSegments {
-    self = [super initWithImageNamed:MagicTrainName];
+    self = [super initWithImageNamed:@"MagicTrain2"];
     
     _isMoving = NO;
     

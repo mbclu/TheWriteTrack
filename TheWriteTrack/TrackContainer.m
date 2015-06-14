@@ -39,6 +39,23 @@
     return self;
 }
 
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    SKPhysicsBody *trainBody = contact.bodyA;
+    SKPhysicsBody *waypointBody = contact.bodyB;
+    
+    if (contact.bodyA.categoryBitMask == WAYPOINT_CATEGORY)
+    {
+        waypointBody = contact.bodyA;
+        trainBody = contact.bodyB;
+    }
+    
+    if ((trainBody.categoryBitMask & TRAIN_CATEGORY) != 0 &&
+        (waypointBody.categoryBitMask & WAYPOINT_CATEGORY) != 0)
+    {
+        [waypointBody.node removeFromParent];
+    }
+}
+
 - (void)positionTrainAtStartPoint:(Train *)train {
     if (_waypoints.count > 0) {
         CGPoint firstPoint = [(NSValue *)[_waypoints objectAtIndex:0] CGPointValue];
@@ -105,6 +122,10 @@
     envelope.position = position;
     envelope.zPosition = TrackContainerWaypointZPosition;
     
+    envelope.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:envelope.size];
+    envelope.physicsBody.categoryBitMask = WAYPOINT_CATEGORY;
+    envelope.physicsBody.contactTestBitMask = TRAIN_CATEGORY;
+    
     [self addChild:envelope];
 }
 
@@ -112,6 +133,10 @@
     Train *trainNode = [[Train alloc] initWithPathSegments:segments];
     trainNode.name = TrainNodeName;
     trainNode.zPosition = TrackContainerTrainZPosition;
+    
+    trainNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:trainNode.size];
+    trainNode.physicsBody.categoryBitMask = TRAIN_CATEGORY;
+    trainNode.physicsBody.contactTestBitMask = WAYPOINT_CATEGORY;
 
     [self positionTrainAtStartPoint:trainNode];
     

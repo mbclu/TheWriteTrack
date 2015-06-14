@@ -182,6 +182,15 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     XCTAssertLessThan(theBackgroundNode.zPosition, thePrevButtonNode.zPosition);
 }
 
+- (void)testTheTrackContainerIsTheContactDelegate {
+    XCTAssertEqualObjects(theScene.physicsWorld.contactDelegate, theContainerNode);
+}
+
+- (void)testForZeroGravity {
+    XCTAssertEqual(theScene.physicsWorld.gravity.dx, 0.0);
+    XCTAssertEqual(theScene.physicsWorld.gravity.dy, 0.0);
+}
+
 @end
 
 @interface LetterSceneLetterCenteringTests : XCTestCase

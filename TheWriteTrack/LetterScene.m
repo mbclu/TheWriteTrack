@@ -29,13 +29,16 @@
         
         _letter = [letter characterAtIndex:0];
         
-        [self setScaleMode:SKSceneScaleModeAspectFill];
+        self.scaleMode = SKSceneScaleModeAspectFill;
 
         [self setName:[self stringFromSceneUnicharLetter]];
         
         [self addChild:[self createBackground]];
         
-        [self addChild:[self createLetterTrack]];
+        TrackContainer *trackContainer = [self createLetterTrack];
+        [self addChild:trackContainer];
+        self.physicsWorld.contactDelegate = trackContainer;
+        self.physicsWorld.gravity = CGVectorMake(0, 0);
 
         [self addNavigationButtons];
     }

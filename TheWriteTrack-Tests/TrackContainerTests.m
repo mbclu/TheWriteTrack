@@ -167,16 +167,29 @@ NSString *const TrainNodeName = @"Train";
     XCTAssertEqualPoints([containerWithNoWaypoints childNodeWithName:TrainNodeName].position, CGPointMake(-100, -100));
 }
 
+- (void)testTheTrainIsConfiguredAsATrainCollisionObject {
+    XCTAssertEqual(theTrain.physicsBody.categoryBitMask, TRAIN_CATEGORY);
+}
+
+- (void)testTheWaypointIsConfiguredAsAWaypointCollisionObject {
+    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointName];
+    XCTAssertEqual(aWaypoint.physicsBody.categoryBitMask, WAYPOINT_CATEGORY);
+}
+
+- (void)testTheTrainAndWaypointsTestForCollisionsWithEachOther {
+    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointName];
+    XCTAssertEqual(aWaypoint.physicsBody.contactTestBitMask, TRAIN_CATEGORY);
+    XCTAssertEqual(theTrain.physicsBody.contactTestBitMask, WAYPOINT_CATEGORY);
+}
+
 - (void)testWhenATrainMovesOverAWayPointThenTheWaypointIsRemoved {
-//    NSArray *segmentArray = [thePathSegments.letterSegmentDictionary valueForKey:RKEY];
-//    XCTAssertEqual(segmentArray.count, 17);
-//    
-//    [theTrain simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition
-//                                                   x:[theTrain.waypoints[1] CGPointValue].x
-//                                                   y:[theTrain.waypoints[1] CGPointValue].y];
-//    
-//    XCTAssertEqual(segmentArray.count, 16);
-//    XCTAssertEqual([segmentArray indexOfObjectIdenticalTo:v0], NSNotFound);
+    NSArray *segmentArray = [thePathSegments.letterSegmentDictionary valueForKey:theLetterKey];
+    XCTAssertEqual(theTrackContainer.waypoints.count, 32);  // 2 x 16 straight segments
+    
+    theTrain.position = [[theTrackContainer.waypoints objectAtIndex:1] CGPointValue];
+    
+    XCTAssertEqual(theTrackContainer.waypoints.count, 31);
+    XCTAssertEqual([segmentArray indexOfObjectIdenticalTo:v1], NSNotFound);
 }
 
 @end

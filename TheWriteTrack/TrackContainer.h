@@ -10,6 +10,9 @@
 #import "Train.h"
 #import <SpriteKit/SpriteKit.h>
 
+static const uint32_t TRAIN_CATEGORY    = 0x1 << 0;
+static const uint32_t WAYPOINT_CATEGORY = 0x1 << 1;
+
 typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
     TrackContainerTrackOutlineZPosition,
     TrackContainerCrossbarZPosition,
@@ -17,7 +20,7 @@ typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
     TrackContainerTrainZPosition
 };
 
-@interface TrackContainer : SKNode
+@interface TrackContainer : SKNode <SKPhysicsContactDelegate>
 
 @property PathSegments *pathSegments;
 @property NSString *letterKey;

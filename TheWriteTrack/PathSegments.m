@@ -47,8 +47,6 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     [self addDiagonalSegments];
     [self addCurvedSegments];
     
-    _zeroingPoint = CGPointZero;
-    
     return self;
 }
 
@@ -182,11 +180,12 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
 /* Unfortunately, NOT much test coverage after this point  *
  * Everything was instead spiked out with trial and error. */
 
-- (CGPathRef)generateCombinedPathForLetter:(const NSString *)letter {
-    _generatedSegmentPath = CGPathCreateMutable();
-    CGMutablePathRef subPath = CGPathCreateMutable();
-    
+- (void)generateCombinedPathAndWaypointsForLetter:(const NSString *)letter {
     NSArray *letterSegments = [_letterSegmentDictionary objectForKey:letter];
+
+    CGMutablePathRef subPath;
+    NSMutableArray *subArray;
+    [self initializePath:&subPath andWaypointsArray:&subArray];
     
     BOOL isSegmentDirectionReversed = NO;
     
@@ -201,76 +200,68 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                 isSegmentDirectionReversed = YES;
                 break;
             case PATH_SEGMENT_END:
-                CGPathAddPath(_generatedSegmentPath, nil, subPath);
-                CGPathRelease(subPath);
-                subPath = CGPathCreateMutable();
+                [self finalizeSubpath:&subPath andWaypointsArray:&subArray];
                 break;
             default:
-            {
-                NSArray *points = [_segments objectAtIndex:segmentIndex];
-                NSUInteger startIndex = 0;
-                NSInteger indexChange = +1;
-                
-                if (isSegmentDirectionReversed) {
-                    startIndex = points.count - 1;
-                    indexChange = -1;
-                }
-                
-                if (CGPathIsEmpty(subPath)) {
-                    CGPoint start = [[points objectAtIndex:startIndex] CGPointValue];
-                    CGPathMoveToPoint(subPath, nil, start.x, start.y);
-                }
-                
-                if (points.count == 2) {
-                    CGPoint point = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
-                    CGPathAddLineToPoint(subPath, nil, point.x, point.y);
-                }
-                else {
-                    CGPoint controlPoint = [[points objectAtIndex:startIndex + indexChange] CGPointValue];
-                    CGPoint endPoint = [[points objectAtIndex:startIndex + (2 * indexChange)] CGPointValue];
-                    CGPathAddQuadCurveToPoint(subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
-                }
-
+                [self updateSubpath:&subPath andWaypointsArray:&subArray
+                           forIndex:segmentIndex reversedDirection:isSegmentDirectionReversed];
                 break;
-            }
         }
     }
 
-    _zeroingPoint = CGPathGetPathBoundingBox(_generatedSegmentPath).origin;
-
     CGPathRelease(subPath);
-    
-    return _generatedSegmentPath;
 }
 
-- (void)addCrossbarWithPosition:(CGPoint)position andSlope:(CGFloat)slope toArray:(NSMutableArray *)generatedObject {
-    CGFloat angleInRadians = degreesToRadians(90);
-    if (!isnan(slope)) {
-        angleInRadians = atanf(slope);
+- (void)initializePath:(CGMutablePathRef *)subPath andWaypointsArray:(NSMutableArray **)subArray {
+    _generatedSegmentPath = CGPathCreateMutable();
+    _generatedWaypoints = [[NSMutableArray alloc] init];
+    *subPath = CGPathCreateMutable();
+    *subArray = [[NSMutableArray alloc] init];
+}
+
+- (void)finalizeSubpath:(CGMutablePathRef *)subPath andWaypointsArray:(NSMutableArray **)subArray {
+    CGPathAddPath(_generatedSegmentPath, nil, *subPath);
+    CGPathRelease(*subPath);
+    *subPath = CGPathCreateMutable();
+    
+    [_generatedWaypoints addObject:*subArray];
+    *subArray = [[NSMutableArray alloc] init];
+}
+
+- (void)updateSubpath:(CGMutablePathRef *)subPath andWaypointsArray:(NSMutableArray **)subArray
+             forIndex:(NSInteger)segmentIndex reversedDirection:(BOOL)isSegmentDirectionReversed {
+    NSArray *points = [_segments objectAtIndex:segmentIndex];
+    NSMutableArray *directionalPoints = [[NSMutableArray alloc] initWithArray:points];
+    
+    if (isSegmentDirectionReversed) {
+        [directionalPoints removeAllObjects];
+        NSEnumerator *enumerator = [points reverseObjectEnumerator];
+        for (id point in enumerator) {
+            [directionalPoints addObject:point];
+        }
     }
     
-    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
-    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
-    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x, position.y);
+    if (CGPathIsEmpty(*subPath)) {
+        CGPoint start = [[directionalPoints objectAtIndex:0] CGPointValue];
+        CGPathMoveToPoint(*subPath, nil, start.x, start.y);
+    }
     
-    CGMutablePathRef crossbar = CGPathCreateMutable();
-    CGPathMoveToPoint(crossbar, nil, -20, 0);
-    CGPathAddLineToPoint(crossbar, nil, 20, 0);
-    
-    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &zeroTransform);
-    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
-    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
-    
-    [generatedObject addObject:(__bridge id)crossbar];
-}
-
-- (void)addWaypointWithPosition:(CGPoint)position toArray:(NSMutableArray *)generatedObjects {
-    NSUInteger foundPositionIndex = [generatedObjects
-                                     indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-                                         return CGPointEqualToPoint([obj CGPointValue], position);
-                                     }];
-    if (foundPositionIndex == NSNotFound) {
-        [generatedObjects addObject:[NSValue valueWithCGPoint:position]];
+    if (directionalPoints.count == 2) {
+        CGPoint point = [[directionalPoints objectAtIndex:1] CGPointValue];
+        CGPathAddLineToPoint(*subPath, nil, point.x, point.y);
+        [self interpolateStraightSegmentWithPoints:directionalPoints
+                              andStepSizeInPercent:1.0
+                                   intoObjectArray:*subArray
+                                     forObjectType:WaypointObjectType];
+    }
+    else {
+        CGPoint controlPoint = [[directionalPoints objectAtIndex:1] CGPointValue];
+        CGPoint endPoint = [[directionalPoints objectAtIndex:2] CGPointValue];
+        CGPathAddQuadCurveToPoint(*subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
+        [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue])
+                                   andStepSizeInPercent:0.5
+                                        intoObjectArray:*subArray
+                                          forObjectType:WaypointObjectType];
     }
 }
 
@@ -338,7 +329,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     for (NSUInteger i = 1; i < pathArray.count; i++) {
         CGPoint start = [[pathArray objectAtIndex:i - 1] CGPointValue];
         CGPoint end = [[pathArray objectAtIndex:i] CGPointValue];
-        for (CGFloat t = 0.0; t <= 1.0; t += stepSize) {
+        for (CGFloat t = 1.0; t >= 0.0; t -= stepSize) {
             CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateLineWithStep:t start:start.x end:end.x],
                                                      [LayoutMath interpolateLineWithStep:t start:start.y end:end.y]);
             switch (objectType) {
@@ -395,6 +386,37 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                 [self addWaypointWithPosition:interpolationPoint toArray:generatedObjects];
                 break;
         }
+    }
+}
+
+- (void)addCrossbarWithPosition:(CGPoint)position andSlope:(CGFloat)slope toArray:(NSMutableArray *)generatedObject {
+    CGFloat angleInRadians = degreesToRadians(90);
+    if (!isnan(slope)) {
+        angleInRadians = atanf(slope);
+    }
+    
+    CGAffineTransform zeroTransform = CGAffineTransformMakeTranslation(0, 0);
+    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(angleInRadians + degreesToRadians(90));
+    CGAffineTransform moveTransform = CGAffineTransformMakeTranslation(position.x, position.y);
+    
+    CGMutablePathRef crossbar = CGPathCreateMutable();
+    CGPathMoveToPoint(crossbar, nil, -20, 0);
+    CGPathAddLineToPoint(crossbar, nil, 20, 0);
+    
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &zeroTransform);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &rotationTransform);
+    crossbar = CGPathCreateMutableCopyByTransformingPath(crossbar, &moveTransform);
+    
+    [generatedObject addObject:(__bridge id)crossbar];
+}
+
+- (void)addWaypointWithPosition:(CGPoint)position toArray:(NSMutableArray *)generatedObjects {
+    NSUInteger foundPositionIndex = [generatedObjects
+                                     indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                                         return CGPointEqualToPoint([obj CGPointValue], position);
+                                     }];
+    if (foundPositionIndex == NSNotFound) {
+        [generatedObjects addObject:[NSValue valueWithCGPoint:position]];
     }
 }
 

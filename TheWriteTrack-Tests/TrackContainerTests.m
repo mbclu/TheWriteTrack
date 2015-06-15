@@ -7,6 +7,7 @@
 //
 
 #import "TrackContainer.h"
+#import "Constants.h"
 #import "PathSegmentsIndeces.h"
 #import "Train.h"
 
@@ -14,11 +15,6 @@
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
-
-NSString *const CrossbarName = @"Crossbar";
-NSString *const WaypointName = @"Waypoint";
-NSString *const OutlineNodeName = @"LetterOutlineNode";
-NSString *const TrainNodeName = @"Train";
 
 @interface TrackContainerTests : XCTestCase {
     TrackContainer *theTrackContainer;
@@ -40,7 +36,7 @@ NSString *const TrainNodeName = @"Train";
     containerBounds = CGRectMake(0, 0, 8, 8);
     theLetterKey = @"RECT_KEY";
     theTrackContainer = [self createTrackContainerWithTestSegmentDictionary];
-    theLetterTrack = (SKShapeNode *)[theTrackContainer childNodeWithName:OutlineNodeName];
+    theLetterTrack = (SKShapeNode *)[theTrackContainer childNodeWithName:LetterOutlineName];
     theTrain = (Train *)[theTrackContainer childNodeWithName:TrainNodeName];
 }
 
@@ -53,11 +49,11 @@ NSString *const TrainNodeName = @"Train";
     
     thePathDictionary = [NSDictionary dictionaryWithObject:
                          [NSArray arrayWithObjects:
-                          v0, v1, v2, v3,
-                          h36, h37, h38, h39,
-                          v19, v18, v17, v16,
-                          h23, h22, h21, h20,
-                          SE, nil] forKey:theLetterKey];
+                          v0, v1, v2, v3, SE,
+                          h36, h37, h38, h39, SE,
+                          v19, v18, v17, v16, SE,
+                          h23, h22, h21, h20, SE,
+                          nil] forKey:theLetterKey];
     
     [thePathSegments setLetterSegmentDictionary:thePathDictionary];
     
@@ -85,67 +81,55 @@ NSString *const TrainNodeName = @"Train";
     OCMStub([mockPathSegments generateObjectsWithType:CrossbarObjectType forLetter:theLetterKey]).andReturn(objectArray);
     TrackContainer *container = [[TrackContainer alloc] initWithLetterKey:theLetterKey andPathSegments:mockPathSegments];
     
-    NSArray *filteredChildren = [self get:container nodesChildrenFilteredByName:CrossbarName];
+    NSArray *filteredChildren = [self get:container nodesChildrenFilteredByName:CrossbarNodeName];
     
     XCTAssertEqual(filteredChildren.count, objectArray.count);
 }
 
-- (void)testTheWaypointsAreAddedToTheLetterTrackAsNodes {
-    NSArray *objectArray = [NSArray arrayWithObjects:
-                            [NSValue valueWithCGPoint:CGPointMake(0, 10)],
-                            [NSValue valueWithCGPoint:CGPointMake(0, 20)],
-                            [NSValue valueWithCGPoint:CGPointMake(10, 30)],
-                            nil];
-    
-    id mockPathSegments = OCMClassMock([PathSegments class]);
-    
-    OCMStub([mockPathSegments generateObjectsWithType:WaypointObjectType forLetter:theLetterKey]).andReturn(objectArray);
-    TrackContainer *container = [[TrackContainer alloc] initWithLetterKey:theLetterKey andPathSegments:mockPathSegments];
-    
-    NSArray *filteredChildren = [self get:container nodesChildrenFilteredByName:WaypointName];
-    
-    XCTAssertEqual(filteredChildren.count, 3);
+- (void)testTheFirstSetOfWaypointsAreAddedToTheLetterTrackAsNodes {
+    XCTAssertEqual(theTrackContainer.waypoints.count, 5);
 }
 
 - (void)testTheTrackOutlineIsDrawnBeforeTheCrossbars {
     NSArray *containerChildren = [theTrackContainer children];
     
-    XCTAssertNotNil([theTrackContainer childNodeWithName:CrossbarName]);
+    XCTAssertNotNil([theTrackContainer childNodeWithName:CrossbarNodeName]);
     
     [containerChildren enumerateObjectsWithOptions:NSEnumerationConcurrent
                                         usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                             SKNode *crossbarNode = (SKNode *)obj;
-                                            if ([crossbarNode.name isEqualToString:CrossbarName]) {
+                                            if ([crossbarNode.name isEqualToString:CrossbarNodeName]) {
                                                 XCTAssertLessThan(theLetterTrack.zPosition, crossbarNode.zPosition);
                                             }
                                         }];
 }
 
 - (void)testTheTheCrossbarsAreDrawnBeforeTheWaypoints {
-    SKNode *aCrossbar = (SKNode *)[theTrackContainer childNodeWithName:CrossbarName];
+    SKNode *aCrossbar = (SKNode *)[theTrackContainer childNodeWithName:CrossbarNodeName];
     NSArray *containerChildren = [theTrackContainer children];
     
-    XCTAssertNotNil([theTrackContainer childNodeWithName:WaypointName]);
+    XCTAssertNotNil([theTrackContainer childNodeWithName:WaypointNodeName]);
     
     [containerChildren enumerateObjectsWithOptions:NSEnumerationConcurrent
                                         usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                             SKNode *waypointNode = (SKNode *)obj;
-                                            if ([waypointNode.name isEqualToString:WaypointName]) {
+                                            if ([waypointNode.name isEqualToString:WaypointNodeName]) {
                                                 XCTAssertLessThan(aCrossbar.zPosition, waypointNode.zPosition);
                                             }
                                         }];
 }
 
 - (void)testTheWaypointsAreDrawnBeforeTheTrain {
-    SKNode *aWaypoint = (SKNode *)[theTrackContainer childNodeWithName:WaypointName];
+    SKNode *aWaypoint = (SKNode *)[theTrackContainer childNodeWithName:WaypointNodeName];
     XCTAssertLessThan(aWaypoint.zPosition, theTrain.zPosition);
 }
 
-- (void)testTheWaypointsAreAddedIntoTheWaypointArray {
+- (void)testTheFirstSetOfWaypointsAreAddedIntoTheWaypointArray {
     XCTAssertNotNil(theTrackContainer.waypoints);
-    NSArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:theLetterKey];
-    XCTAssertGreaterThan(generatedWaypoints.count, 0);
-    XCTAssertEqual(theTrackContainer.waypoints.count, generatedWaypoints.count);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:theLetterKey];
+    XCTAssertGreaterThan(thePathSegments.generatedWaypoints.count, 0);
+    XCTAssertGreaterThan([thePathSegments.generatedWaypoints[0] count], 0);
+    XCTAssertEqual(theTrackContainer.waypoints.count, [thePathSegments.generatedWaypoints[0] count]);
 }
 
 - (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsEqualToTheFirstWaypoint {
@@ -166,34 +150,52 @@ NSString *const TrainNodeName = @"Train";
 }
 
 - (void)testTheWaypointIsConfiguredAsAWaypointCollisionObject {
-    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointName];
+    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointNodeName];
     XCTAssertEqual(aWaypoint.physicsBody.categoryBitMask, WAYPOINT_CATEGORY);
 }
 
 - (void)testTheTrainAndWaypointsTestForContactWithEachOther {
-    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointName];
+    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointNodeName];
     XCTAssertEqual(aWaypoint.physicsBody.contactTestBitMask, TRAIN_CATEGORY);
     XCTAssertEqual(theTrain.physicsBody.contactTestBitMask, WAYPOINT_CATEGORY);
 }
 
 - (void)testTheTrainAndWaypointsTestForCollisionsWithNothing {
-    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointName];
+    SKSpriteNode *aWaypoint = (SKSpriteNode *)[theTrackContainer childNodeWithName:WaypointNodeName];
     XCTAssertEqual(aWaypoint.physicsBody.collisionBitMask, 0);
     XCTAssertEqual(theTrain.physicsBody.collisionBitMask, 0);
 }
 
+- (void)simulateContactForPoints:(NSArray *)contactWaypoints {
+    for (SKSpriteNode *contactedWaypoint in contactWaypoints) {
+        [theTrackContainer evaluateContactForTrainBody:theTrain.physicsBody waypointBody:contactedWaypoint.physicsBody];
+    }
+}
+
 - (void)testWhenATrainMovesOverAWayPointThenTheWaypointIsRemoved {
-    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointName];
+    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
     
-    XCTAssertEqual(waypointNodesBefore.count, 16);  // 2 x 16 straight segments
+    XCTAssertEqual(waypointNodesBefore.count, 5);
 
-    SKPhysicsBody *contactedWaypoint = [[waypointNodesBefore objectAtIndex:1] physicsBody];
-    
-    [theTrackContainer evaluateContactForTrainBody:theTrain.physicsBody waypointBody:contactedWaypoint];
+    [self simulateContactForPoints:[NSArray arrayWithObject:waypointNodesBefore[1]]];
 
-    NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointName];
+    NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
     
-    XCTAssertEqual(waypointNodesAfter.count, 15);
+    XCTAssertEqual(waypointNodesAfter.count, 4);
+}
+
+- (void)testOnceAllOfTheFirstSetOfWaypointsHaveBeenRemovedThenTheNextSetOfWaypointsAreAdded {
+    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    XCTAssertEqual(waypointNodesBefore.count, 5);
+    
+    [self simulateContactForPoints:waypointNodesBefore];
+    
+    NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    XCTAssertEqual(waypointNodesAfter.count, 5);
+    XCTAssertEqual([[waypointNodesAfter objectAtIndex:0] position].y, 8);
+    XCTAssertEqual([[waypointNodesAfter objectAtIndex:1] position].y, 8);
 }
 
 @end

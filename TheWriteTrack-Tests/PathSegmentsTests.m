@@ -101,17 +101,6 @@ const NSUInteger numberOfVFrameSegments = 8;
     XCTAssertEqualWithAccuracy(pathSegments.segmentBounds.size.height, 4, 0.0);
 }
 
-- (void)testWhenTheCombinedPathIsGeneratedThenTheZeroingPointIsSetToTheXYDifferenceFromTheCombinedPathOrigin {
-    CGRect expectedFrame = CGRectMake(0, 0, 8, 8);
-    PathSegments *pathSegments = [[PathSegments alloc] initWithRect:expectedFrame];
-
-    /* Could test this other ways, but we know that the letter 'B' has problems right now. */
-    [pathSegments setLetterSegmentDictionary:[PathSegmentDictionary dictionaryWithUpperCasePathSegments]];
-    [pathSegments generateCombinedPathForLetter:@"B"];
-    
-    XCTAssertEqualPoints(pathSegments.zeroingPoint, CGPointMake(2, 0));
-}
-
 - (void)testRow_1_Column_1_Vertical {
     [self checkVerticalSegmentAtIndex:0];
 }
@@ -350,14 +339,14 @@ const NSUInteger numberOfVFrameSegments = 8;
     segmentDictionaryForTest = [NSDictionary dictionaryWithObjects:
                                 [NSArray arrayWithObjects:
                                  [NSArray arrayWithObjects:ND, RD, SE, nil],
-                                 [NSArray arrayWithObjects:v0, nil],
-                                 [NSArray arrayWithObjects:h20, nil],
-                                 [NSArray arrayWithObjects:a40, nil],
-                                 [NSArray arrayWithObjects:c64, nil],
+                                 [NSArray arrayWithObjects:v0, SE, nil],
+                                 [NSArray arrayWithObjects:h20, SE, nil],
+                                 [NSArray arrayWithObjects:a40, SE, nil],
+                                 [NSArray arrayWithObjects:c64, SE, nil],
                                  [NSArray arrayWithObjects:RD, v3, h37, a40, v55, x61, c70, c75, SE, nil],
-                                 [NSArray arrayWithObjects:v0, v1, nil],
-                                 [NSArray arrayWithObjects:v1, c72, nil],
-                                 [NSArray arrayWithObjects:c72, c73, nil],
+                                 [NSArray arrayWithObjects:v0, v1, SE, nil],
+                                 [NSArray arrayWithObjects:v1, c72, SE, nil],
+                                 [NSArray arrayWithObjects:c72, c73, SE, nil],
                                  nil]
                                                            forKeys:
                                 [NSArray arrayWithObjects:@"ControlPointsOnly", @"VericalOne", @"HorizontalOne",
@@ -369,10 +358,6 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 - (void)tearDown {
     [super tearDown];
-}
-
-- (void)testTheDefaultZeroingPointIsZero {
-    XCTAssertEqualPoints(thePathSegments.zeroingPoint, CGPointZero);
 }
 
 @end
@@ -437,51 +422,52 @@ const NSUInteger numberOfVFrameSegments = 8;
 }
 
 - (void)testGivenALetterDefinitionDoesNotExistForKeyWhenWaypointsAreGeneratedThenTheCountIsZero {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"!"];
-    XCTAssertEqual(generatedWaypoints.count, 0);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"!"];
+    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenAnyControlSegmentsAreIgnored {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"ControlPointsOnly"];
-    XCTAssertEqual(generatedWaypoints.count, 0);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"ControlPointsOnly"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForVerticalSegments {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"VericalOne"];
-    XCTAssertEqual(generatedWaypoints.count, 2);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"VericalOne"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForHorizontalSegments {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"HorizontalOne"];
-    XCTAssertEqual(generatedWaypoints.count, 2);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"HorizontalOne"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForDiagonalSegments {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"DiagonalOne"];
-    XCTAssertEqual(generatedWaypoints.count, 2);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"DiagonalOne"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenFiveWaypointsAreGeneratedForCurvedSegments {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"CurvedOne"];
-    XCTAssertEqual(generatedWaypoints.count, 3);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"CurvedOne"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 3);
 }
 
 - (void)testDuplicatePointsAreNotAddedForTwoStraightSegmentsThatTouch {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"StraightToStraight"];
-    XCTAssertEqual(generatedWaypoints.count, 3);
-    XCTAssertEqualPoints([[generatedWaypoints objectAtIndex:0] CGPointValue], CGPointMake(0, 2));
-    XCTAssertEqualPoints([[generatedWaypoints objectAtIndex:1] CGPointValue], CGPointMake(0, 0));
-    XCTAssertEqualPoints([[generatedWaypoints objectAtIndex:2] CGPointValue], CGPointMake(0, 4));
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"StraightToStraight"];
+    NSMutableArray *firstArray = [thePathSegments.generatedWaypoints objectAtIndex:0];
+    XCTAssertEqual(firstArray.count, 3);
+    XCTAssertEqualPoints([[firstArray objectAtIndex:0] CGPointValue], CGPointMake(0, 0));
+    XCTAssertEqualPoints([[firstArray objectAtIndex:1] CGPointValue], CGPointMake(0, 2));
+    XCTAssertEqualPoints([[firstArray objectAtIndex:2] CGPointValue], CGPointMake(0, 4));
 }
 
 - (void)testDuplicatePointsAreNotAddedForAStraightAndACurveSegmentThatTouch {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"StraightToCurve"];
-    XCTAssertEqual(generatedWaypoints.count, 4);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"StraightToCurve"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 4);
 }
 
 - (void)testDuplicatePointsAreNotAddedForTwoCurvedSegmentsThatTouch {
-    NSMutableArray *generatedWaypoints = [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:@"CurveToCurve"];
-    XCTAssertEqual(generatedWaypoints.count, 5);
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:@"CurveToCurve"];
+    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 5);
 }
 
 @end

@@ -22,6 +22,7 @@
 
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
+    [((TrackContainer *)[self childNodeWithName:LetterSceneTrackContainerNodeName]) beginDemonstration];
 }
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter {

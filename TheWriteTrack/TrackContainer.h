@@ -26,9 +26,11 @@ typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
 @property NSString *letterKey;
 @property CGPoint centeringPoint;
 @property NSMutableArray *waypoints;
+@property NSUInteger currentWaypointArrayIndex;
 
 - (instancetype)initWithLetterKey:(NSString *)letterKey andPathSegments:(PathSegments *)pathSegments;
 - (void)positionTrainAtStartPoint:(Train *)train;
 - (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody;
+- (void)beginDemonstration;
 
 @end

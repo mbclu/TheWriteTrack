@@ -22,15 +22,18 @@
     }
     
     _letterKey = letterKey;
+    _currentWaypointArrayIndex = 0;
     
     self.name = LetterSceneTrackContainerNodeName;
     
     [self addChild:[SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:_pathSegments.segmentBounds.size]];
 
-    SKShapeNode *trackOutline = [self createTrackOutlineNode:[_pathSegments generateCombinedPathForLetter:_letterKey]];
+    [_pathSegments generateCombinedPathAndWaypointsForLetter:_letterKey];
+    SKShapeNode *trackOutline = [self createTrackOutlineNode:_pathSegments.generatedSegmentPath];
     [self addChild:trackOutline];
     
-    [self addCrossbarsAndWaypointsToTrackContainer];
+    [self addCrossbarsToTrackContainer];
+    [self addWaypointsToTrackContainer];
     
     [self assignCenteringPointUsingShapeNode:trackOutline];
     
@@ -54,11 +57,20 @@
     [self evaluateContactForTrainBody:trainBody waypointBody:waypointBody];
 }
 
+- (NSArray *)getWaypointChildren {
+    return [[self children] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name == %@", WaypointNodeName]];
+}
+
 - (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody {
     if ((trainBody.categoryBitMask & TRAIN_CATEGORY) != 0 &&
         (waypointBody.categoryBitMask & WAYPOINT_CATEGORY) != 0)
     {
         [waypointBody.node removeFromParent];
+    }
+    
+    if ([self getWaypointChildren].count == 0) {
+        _currentWaypointArrayIndex++;
+        [self addWaypointsToTrackContainer];
     }
 }
 
@@ -89,11 +101,8 @@
     return outlineNode;
 }
 
-- (void)addCrossbarsAndWaypointsToTrackContainer {
+- (void)addCrossbarsToTrackContainer {
     [self createSpritesForCrossbars:[_pathSegments generateObjectsWithType:CrossbarObjectType forLetter:_letterKey]];
-
-    NSArray *waypointValues = [_pathSegments generateObjectsWithType:WaypointObjectType forLetter:_letterKey];
-    [self createSpritesForWaypoints:waypointValues];
 }
 
 - (void)createSpritesForCrossbars:(NSArray *)crossbars {
@@ -107,10 +116,17 @@
     
     crossbarNode.lineWidth = 8.0;
     crossbarNode.strokeColor = [SKColor brownColor];
-    crossbarNode.name = @"Crossbar";
+    crossbarNode.name = CrossbarNodeName;
     crossbarNode.zPosition = TrackContainerCrossbarZPosition;
     
     [self addChild:crossbarNode];
+}
+
+- (void)addWaypointsToTrackContainer {
+    if (_pathSegments.generatedWaypoints.count > _currentWaypointArrayIndex) {
+        NSArray *waypointValues = [_pathSegments.generatedWaypoints objectAtIndex:_currentWaypointArrayIndex];
+        [self createSpritesForWaypoints:waypointValues];
+    }
 }
 
 - (void)createSpritesForWaypoints:(NSArray *)waypoints {
@@ -121,9 +137,9 @@
 }
 
 - (void)addEnvelopeAtPoint:(CGPoint)position {
-    SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeName];
+    SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeTextureName];
     
-    envelope.name = @"Waypoint";
+    envelope.name = WaypointNodeName;
     envelope.position = position;
     envelope.zPosition = TrackContainerWaypointZPosition;
     
@@ -156,6 +172,23 @@
     _centeringPoint = [LayoutMath centerOfMainScreen];
     _centeringPoint.x -= HALF_OF(pathBoundingBox.size.width) + pathBoundingBox.origin.x;
     _centeringPoint.y -= HALF_OF(pathBoundingBox.size.height) + pathBoundingBox.origin.y;
+}
+
+- (void)beginDemonstration {
+    Train *train = (Train *)[self childNodeWithName:TrainNodeName];
+    NSMutableArray *actionSequence = [[NSMutableArray alloc] init];
+    
+    for (id array in _pathSegments.generatedWaypoints) {
+        
+        train.position = [array[0] CGPointValue];
+        
+        for (id point in array) {
+            SKAction *demoAction = [SKAction moveTo:[point CGPointValue] duration:0.3];
+            [actionSequence addObject:demoAction];
+        }
+        
+        [train runAction:[SKAction sequence:actionSequence]];
+    }
 }
 
 @end

@@ -44,9 +44,8 @@ const CGFloat yOriginShift = 4.0;
                                                   v19, v18, v17, v16,
                                                   h23, h22, h21, h20,
                                                   SE, nil] forKey:RKEY]];
-    [thePathSegments generateCombinedPathForLetter:RKEY];
+    [thePathSegments generateCombinedPathAndWaypointsForLetter:RKEY];
     [thePathSegments generateObjectsWithType:WaypointObjectType forLetter:RKEY];
-    [thePathSegments setZeroingPoint:CGPointMake(xOriginShift, yOriginShift)];
     
     theTrain = [[Train alloc] initWithPathSegments:thePathSegments];
     initialTrainPosition = theTrain.position;

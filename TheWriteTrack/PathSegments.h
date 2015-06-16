@@ -26,7 +26,7 @@ NS_ENUM(NSUInteger, EInterpolatableObjectTypes) {
 @property CGFloat threeQuarterWidth;
 @property CGFloat fullWidth;
 @property CGMutablePathRef generatedSegmentPath;
-@property NSMutableArray *generatedWaypoints;
+@property NSMutableArray *generatedWaypointArrays;
 @property NSDictionary *letterSegmentDictionary;
 
 - (instancetype)initWithRect:(CGRect)rect;

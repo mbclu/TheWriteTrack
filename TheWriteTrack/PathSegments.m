@@ -214,7 +214,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
 
 - (void)initializePath:(CGMutablePathRef *)subPath andWaypointsArray:(NSMutableArray **)subArray {
     _generatedSegmentPath = CGPathCreateMutable();
-    _generatedWaypoints = [[NSMutableArray alloc] init];
+    _generatedWaypointArrays = [[NSMutableArray alloc] init];
     *subPath = CGPathCreateMutable();
     *subArray = [[NSMutableArray alloc] init];
 }
@@ -224,7 +224,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     CGPathRelease(*subPath);
     *subPath = CGPathCreateMutable();
     
-    [_generatedWaypoints addObject:*subArray];
+    [_generatedWaypointArrays addObject:*subArray];
     *subArray = [[NSMutableArray alloc] init];
 }
 

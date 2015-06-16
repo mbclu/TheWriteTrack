@@ -33,13 +33,14 @@
     [self addChild:trackOutline];
     
     [self addCrossbarsToTrackContainer];
+    
     [self addWaypointsToTrackContainer];
     
-    [self assignCenteringPointUsingShapeNode:trackOutline];
+    [self centerThyself:trackOutline];
     
     [self addChild:[self createTrainNodeWithPathSegments:_pathSegments]];
     
-    self.position = _centeringPoint;
+    _isDemoing = YES;
     
     return self;
 }
@@ -57,10 +58,6 @@
     [self evaluateContactForTrainBody:trainBody waypointBody:waypointBody];
 }
 
-- (NSArray *)getWaypointChildren {
-    return [[self children] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name == %@", WaypointNodeName]];
-}
-
 - (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody {
     if ((trainBody.categoryBitMask & TRAIN_CATEGORY) != 0 &&
         (waypointBody.categoryBitMask & WAYPOINT_CATEGORY) != 0)
@@ -70,13 +67,24 @@
     
     if ([self getWaypointChildren].count == 0) {
         _currentWaypointArrayIndex++;
-        [self addWaypointsToTrackContainer];
+        
+        if (_currentWaypointArrayIndex < _pathSegments.generatedWaypointArrays.count) {
+            [self addWaypointsToTrackContainer];
+            trainBody.node.position = [[self getWaypointChildren][0] position];
+        }
+        else {
+            [self notifyLastWaypointWasRemoved];
+        }
     }
 }
 
+- (void)notifyLastWaypointWasRemoved {
+    [self.parent performSelector:@selector(transitionToNextScene)];
+}
+
 - (void)positionTrainAtStartPoint:(Train *)train {
-    if (_waypoints.count > 0) {
-        train.position = [(SKSpriteNode *)[_waypoints objectAtIndex:0] position];
+    if ([self getWaypointChildren].count > 0) {
+        train.position = [(SKSpriteNode *)[[self getWaypointChildren] objectAtIndex:0] position];
     }
     else {
         train.position = CGPointMake(-100, -100);
@@ -123,14 +131,13 @@
 }
 
 - (void)addWaypointsToTrackContainer {
-    if (_pathSegments.generatedWaypoints.count > _currentWaypointArrayIndex) {
-        NSArray *waypointValues = [_pathSegments.generatedWaypoints objectAtIndex:_currentWaypointArrayIndex];
+    if (_pathSegments.generatedWaypointArrays.count > _currentWaypointArrayIndex) {
+        NSArray *waypointValues = [_pathSegments.generatedWaypointArrays objectAtIndex:_currentWaypointArrayIndex];
         [self createSpritesForWaypoints:waypointValues];
     }
 }
 
 - (void)createSpritesForWaypoints:(NSArray *)waypoints {
-    _waypoints = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < waypoints.count; i++) {
         [self addEnvelopeAtPoint:[[waypoints objectAtIndex:i] CGPointValue]];
     }
@@ -138,6 +145,8 @@
 
 - (void)addEnvelopeAtPoint:(CGPoint)position {
     SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeTextureName];
+    
+    INCREMENT_POINT_BY_POINT(position, self.position);
     
     envelope.name = WaypointNodeName;
     envelope.position = position;
@@ -148,7 +157,6 @@
     envelope.physicsBody.contactTestBitMask = TRAIN_CATEGORY;
     envelope.physicsBody.collisionBitMask = 0;
     
-    [_waypoints addObject:envelope];
     [self addChild:envelope];
 }
 
@@ -167,28 +175,32 @@
     return trainNode;
 }
 
-- (void)assignCenteringPointUsingShapeNode:(SKShapeNode *)node {
+- (void)centerThyself:(SKShapeNode *)node {
     CGRect pathBoundingBox = CGPathGetPathBoundingBox(node.path);
-    _centeringPoint = [LayoutMath centerOfMainScreen];
-    _centeringPoint.x -= HALF_OF(pathBoundingBox.size.width) + pathBoundingBox.origin.x;
-    _centeringPoint.y -= HALF_OF(pathBoundingBox.size.height) + pathBoundingBox.origin.y;
+    CGPoint centeringPoint = [LayoutMath centerOfMainScreen];
+    centeringPoint.x -= HALF_OF(pathBoundingBox.size.width) + pathBoundingBox.origin.x;
+    centeringPoint.y -= HALF_OF(pathBoundingBox.size.height) + pathBoundingBox.origin.y;
+    self.position = centeringPoint;
 }
 
-- (void)beginDemonstration {
+- (void)demonstrateMoveToEachWaypointInSegmentArray {
     Train *train = (Train *)[self childNodeWithName:TrainNodeName];
     NSMutableArray *actionSequence = [[NSMutableArray alloc] init];
     
-    for (id array in _pathSegments.generatedWaypoints) {
-        
-        train.position = [array[0] CGPointValue];
-        
-        for (id point in array) {
-            SKAction *demoAction = [SKAction moveTo:[point CGPointValue] duration:0.3];
-            [actionSequence addObject:demoAction];
-        }
-        
-        [train runAction:[SKAction sequence:actionSequence]];
+    for (SKShapeNode *waypoint in [self getWaypointChildren]) {
+        SKAction *demoAction = [SKAction moveTo:waypoint.position duration:0.5];
+        [actionSequence addObject:demoAction];
     }
+    
+    [train runAction:[SKAction sequence:actionSequence]];
+}
+
+- (void)beginDemonstration {
+    [self demonstrateMoveToEachWaypointInSegmentArray];
+}
+
+- (NSArray *)getWaypointChildren {
+    return [[self children] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name == %@", WaypointNodeName]];
 }
 
 @end

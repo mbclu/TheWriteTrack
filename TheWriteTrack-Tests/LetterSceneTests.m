@@ -33,7 +33,7 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     CGSize arbitrarySceneSize;
     NSString *letterForTest;
     SKSpriteNode *theBackgroundNode;
-    SKNode *theContainerNode;
+    TrackContainer *theContainerNode;
     SKSpriteNode *theNextButtonNode;
     SKSpriteNode *thePrevButtonNode;
 }
@@ -48,7 +48,7 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     arbitrarySceneSize = CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight);
     theScene = [[LetterScene alloc]initWithSize:arbitrarySceneSize andLetter:letterForTest];
     theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:BackgroundName];
-    theContainerNode = [theScene childNodeWithName:ContainerNodeName];
+    theContainerNode = (TrackContainer *)[theScene childNodeWithName:ContainerNodeName];
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NextButtonNodeName];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PreviousButtonNodeName];
 }
@@ -191,6 +191,20 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     XCTAssertEqual(theScene.physicsWorld.gravity.dy, 0.0);
 }
 
+- (void)testWhenTheSceneIsNotifiedOfTheLastWaypointRemovalThenItTransitionsToTheNextScene {
+    id mockScene = OCMPartialMock(theScene);
+    [theContainerNode notifyLastWaypointWasRemoved];
+    OCMVerify([mockScene transitionToNextScene]);
+}
+
+- (void)testWhenFirstEnteringASceneThenTrackContainerIsAskedToPerformADemonstration {
+    id mockContainer = OCMPartialMock(theContainerNode);
+    [theScene didMoveToView:nil];
+    OCMVerify([mockContainer beginDemonstration]);
+}
+
+// waypoints are reset
+// train is reset to first waypoint
 @end
 
 @interface LetterSceneLetterCenteringTests : XCTestCase

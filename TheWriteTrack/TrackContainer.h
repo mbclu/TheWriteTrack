@@ -24,13 +24,13 @@ typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
 
 @property PathSegments *pathSegments;
 @property NSString *letterKey;
-@property CGPoint centeringPoint;
-@property NSMutableArray *waypoints;
 @property NSUInteger currentWaypointArrayIndex;
+@property BOOL isDemoing;
 
 - (instancetype)initWithLetterKey:(NSString *)letterKey andPathSegments:(PathSegments *)pathSegments;
 - (void)positionTrainAtStartPoint:(Train *)train;
 - (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody;
+- (void)notifyLastWaypointWasRemoved;
 - (void)beginDemonstration;
 
 @end

@@ -20,11 +20,6 @@
 @synthesize nextButtonProperty = nextButton;
 @synthesize previousButtonProperty = previousButton;
 
-- (void)didMoveToView:(SKView *)view {
-    [super didMoveToView:view];
-    [((TrackContainer *)[self childNodeWithName:LetterSceneTrackContainerNodeName]) beginDemonstration];
-}
-
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
         
@@ -44,6 +39,11 @@
         [self addNavigationButtons];
     }
     return self;
+}
+
+- (void)didMoveToView:(SKView *)view {
+    [super didMoveToView:view];
+    [((TrackContainer *)[self childNodeWithName:LetterSceneTrackContainerNodeName]) beginDemonstration];
 }
 
 - (SKSpriteNode *)createBackground {

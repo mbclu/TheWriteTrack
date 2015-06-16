@@ -8,6 +8,8 @@
 
 #import "TrackContainer.h"
 #import "Constants.h"
+#import "LayoutMath.h"
+#import "LetterScene.h"
 #import "PathSegmentsIndeces.h"
 #import "Train.h"
 
@@ -87,7 +89,21 @@
 }
 
 - (void)testTheFirstSetOfWaypointsAreAddedToTheLetterTrackAsNodes {
-    XCTAssertEqual(theTrackContainer.waypoints.count, 5);
+    XCTAssertEqual([self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName].count, 5);
+    [self assertDoesExistAtPositionAllChildWaypoints];
+}
+
+- (void)assertDoesExistAtPositionAllChildWaypoints {
+    NSArray *waypointNodes = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    XCTAssertEqual(waypointNodes.count, 5);
+    
+    CGPoint expectedPoint = CGPointMake(0, 0);
+    
+    for (NSUInteger i = 0; i < 5; i++) {
+        XCTAssertEqualPoints([[waypointNodes objectAtIndex:i] position], expectedPoint);
+        expectedPoint.y += 2;
+    }
 }
 
 - (void)testTheTrackOutlineIsDrawnBeforeTheCrossbars {
@@ -124,20 +140,8 @@
     XCTAssertLessThan(aWaypoint.zPosition, theTrain.zPosition);
 }
 
-- (void)testTheFirstSetOfWaypointsAreAddedIntoTheWaypointArray {
-    XCTAssertNotNil(theTrackContainer.waypoints);
-    [thePathSegments generateCombinedPathAndWaypointsForLetter:theLetterKey];
-    XCTAssertGreaterThan(thePathSegments.generatedWaypoints.count, 0);
-    XCTAssertGreaterThan([thePathSegments.generatedWaypoints[0] count], 0);
-    XCTAssertEqual(theTrackContainer.waypoints.count, [thePathSegments.generatedWaypoints[0] count]);
-}
-
 - (void)testWhenTheTrainHasBeenSetAtTheStartThenTheTrainPositionIsEqualToTheFirstWaypoint {
-    SKSpriteNode *firstWaypoint = [[SKSpriteNode alloc] init];
-    firstWaypoint.position = CGPointMake(10, 15);
-    [theTrackContainer setWaypoints:[NSMutableArray arrayWithObject:firstWaypoint]];
-    [theTrackContainer positionTrainAtStartPoint:theTrain];
-    XCTAssertEqualPoints(theTrain.position, firstWaypoint.position);
+    XCTAssertEqualPoints(theTrain.position, [[self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName][0] position]);
 }
 
 - (void)testTheTrainIsPositionedOffScreenWhenPathSegmentsIsNull {
@@ -166,12 +170,6 @@
     XCTAssertEqual(theTrain.physicsBody.collisionBitMask, 0);
 }
 
-- (void)simulateContactForPoints:(NSArray *)contactWaypoints {
-    for (SKSpriteNode *contactedWaypoint in contactWaypoints) {
-        [theTrackContainer evaluateContactForTrainBody:theTrain.physicsBody waypointBody:contactedWaypoint.physicsBody];
-    }
-}
-
 - (void)testWhenATrainMovesOverAWayPointThenTheWaypointIsRemoved {
     NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
     
@@ -187,15 +185,61 @@
 - (void)testOnceAllOfTheFirstSetOfWaypointsHaveBeenRemovedThenTheNextSetOfWaypointsAreAdded {
     NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
     
-    XCTAssertEqual(waypointNodesBefore.count, 5);
-    
     [self simulateContactForPoints:waypointNodesBefore];
     
+    [self assertDoesExistAtPositionPlusContainerPositionOffsetAllChildWaypoints];
+}
+
+- (void)assertDoesExistAtPositionPlusContainerPositionOffsetAllChildWaypoints {
     NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
-    
+
     XCTAssertEqual(waypointNodesAfter.count, 5);
-    XCTAssertEqual([[waypointNodesAfter objectAtIndex:0] position].y, 8);
-    XCTAssertEqual([[waypointNodesAfter objectAtIndex:1] position].y, 8);
+    
+    CGPoint expectedPoint = CGPointMake(0, 8);
+    INCREMENT_POINT_BY_POINT(expectedPoint, theTrackContainer.position);
+    
+    for (NSUInteger i = 0; i < 5; i++) {
+        XCTAssertEqualPoints([[waypointNodesAfter objectAtIndex:i] position], expectedPoint);
+        expectedPoint.x += 2;
+    }
+}
+
+- (void)testWhenAllOfASetOfWaypointsHaveBeenRemovedThenTheTrainIsPositionedAtTheFirstPointOfTheNextSetOfWaypoints {
+    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    [self simulateContactForPoints:waypointNodesBefore];
+
+    NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+
+    XCTAssertEqualPoints(theTrain.position, [waypointNodesAfter[0] position]);
+}
+
+- (void)testWhenTheLastWaypointIsRemovedAMessageIsSentToTheParent {
+    id mockTrackContainer = OCMPartialMock(theTrackContainer);
+
+    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    for (NSUInteger i = 0; i < 4; i++) {
+        [self simulateContactForPoints:waypointNodesBefore];
+        waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    }
+    
+    OCMVerify([mockTrackContainer notifyLastWaypointWasRemoved]);
+}
+
+- (void)simulateContactForPoints:(NSArray *)contactWaypoints {
+    for (SKSpriteNode *contactedWaypoint in contactWaypoints) {
+        [theTrackContainer evaluateContactForTrainBody:theTrain.physicsBody waypointBody:contactedWaypoint.physicsBody];
+    }
+}
+
+- (void)testWhenInitializedThenTrackContainerIsDemonstratingHowToMoveTheTrain {
+    XCTAssertTrue(theTrackContainer.isDemoing);
+}
+
+- (void)testWhenTheDemoIsCompleteThenTheFirstSetOfWaypointsIsReplaced {
+    [theTrackContainer beginDemonstration];
+    XCTAssertFalse(theTrackContainer.isDemoing);
 }
 
 @end

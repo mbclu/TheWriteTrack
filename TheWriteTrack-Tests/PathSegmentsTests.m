@@ -423,37 +423,37 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 - (void)testGivenALetterDefinitionDoesNotExistForKeyWhenWaypointsAreGeneratedThenTheCountIsZero {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"!"];
-    XCTAssertEqual(thePathSegments.generatedWaypoints.count, 0);
+    XCTAssertEqual(thePathSegments.generatedWaypointArrays.count, 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenAnyControlSegmentsAreIgnored {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"ControlPointsOnly"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 0);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 0);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForVerticalSegments {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"VericalOne"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 2);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForHorizontalSegments {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"HorizontalOne"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 2);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenThreeWaypointsAreGeneratedForDiagonalSegments {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"DiagonalOne"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 2);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 2);
 }
 
 - (void)testGivenAValidLetterWhenWaypointsAreCreatedThenFiveWaypointsAreGeneratedForCurvedSegments {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"CurvedOne"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 3);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 3);
 }
 
 - (void)testDuplicatePointsAreNotAddedForTwoStraightSegmentsThatTouch {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"StraightToStraight"];
-    NSMutableArray *firstArray = [thePathSegments.generatedWaypoints objectAtIndex:0];
+    NSMutableArray *firstArray = [thePathSegments.generatedWaypointArrays objectAtIndex:0];
     XCTAssertEqual(firstArray.count, 3);
     XCTAssertEqualPoints([[firstArray objectAtIndex:0] CGPointValue], CGPointMake(0, 0));
     XCTAssertEqualPoints([[firstArray objectAtIndex:1] CGPointValue], CGPointMake(0, 2));
@@ -462,12 +462,12 @@ const NSUInteger numberOfVFrameSegments = 8;
 
 - (void)testDuplicatePointsAreNotAddedForAStraightAndACurveSegmentThatTouch {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"StraightToCurve"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 4);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 4);
 }
 
 - (void)testDuplicatePointsAreNotAddedForTwoCurvedSegmentsThatTouch {
     [thePathSegments generateCombinedPathAndWaypointsForLetter:@"CurveToCurve"];
-    XCTAssertEqual([[thePathSegments.generatedWaypoints objectAtIndex:0] count], 5);
+    XCTAssertEqual([[thePathSegments.generatedWaypointArrays objectAtIndex:0] count], 5);
 }
 
 @end

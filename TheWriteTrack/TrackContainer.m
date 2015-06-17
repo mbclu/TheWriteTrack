@@ -63,23 +63,23 @@
         (waypointBody.categoryBitMask & WAYPOINT_CATEGORY) != 0)
     {
         [waypointBody.node removeFromParent];
+        [self determinePostWaypointRemovalAction];
     }
-    
+}
+
+- (void)determinePostWaypointRemovalAction {
     if ([self getWaypointChildren].count == 0) {
-        _currentWaypointArrayIndex++;
-        
-        if (_currentWaypointArrayIndex < _pathSegments.generatedWaypointArrays.count) {
-            [self addWaypointsToTrackContainer];
-            trainBody.node.position = [[self getWaypointChildren][0] position];
+        if (++_currentWaypointArrayIndex == _pathSegments.generatedWaypointArrays.count) {
+            if (_isDemoing) {
+                _isDemoing = NO;
+                _currentWaypointArrayIndex = 0;
+            }
+            else {
+                [self notifyLastWaypointWasRemoved];
+                return;
+            }
         }
-        else if (_isDemoing) {
-            _isDemoing = NO;
-            _currentWaypointArrayIndex = 0;
-            [self addWaypointsToTrackContainer];
-        }
-        else {
-            [self notifyLastWaypointWasRemoved];
-        }
+        [self addWaypointsToTrackContainer];
     }
 }
 
@@ -89,7 +89,11 @@
 
 - (void)positionTrainAtStartPoint:(Train *)train {
     if ([self getWaypointChildren].count > 0) {
-        train.position = [(SKSpriteNode *)[[self getWaypointChildren] objectAtIndex:0] position];
+        CGPoint position = [(SKSpriteNode *)[[self getWaypointChildren] objectAtIndex:0] position];
+        train.position = position;
+        if (_isDemoing) {
+            [self beginDemonstration];
+        }
     }
     else {
         train.position = CGPointMake(-100, -100);
@@ -188,24 +192,27 @@
     self.position = centeringPoint;
 }
 
-- (void)demonstrateMoveToEachWaypointInSegmentArray {
-    Train *train = (Train *)[self childNodeWithName:TrainNodeName];
+- (SKAction *)createDemonstrationActionSequenceWithDuration:(NSTimeInterval)seconds {
     NSMutableArray *actionSequence = [[NSMutableArray alloc] init];
     
     for (SKShapeNode *waypoint in [self getWaypointChildren]) {
-        SKAction *demoAction = [SKAction moveTo:waypoint.position duration:0.5];
+        SKAction *demoAction = [SKAction moveTo:waypoint.position duration:seconds];
         [actionSequence addObject:demoAction];
     }
-
-    [train runAction:[SKAction sequence:actionSequence]];
+    
+    return [SKAction sequence:actionSequence];
 }
 
 - (void)beginDemonstration {
-    if (_currentWaypointArrayIndex < _pathSegments.generatedWaypointArrays.count) {
-        [self demonstrateMoveToEachWaypointInSegmentArray];
-    }
-    else {
-        _isDemoing = NO;
+    [self beginDemonstrationWithDuration:0.5 andCompletionHandler:^{
+        [self positionTrainAtStartPoint:(Train *)[self childNodeWithName:TrainNodeName]];
+    }];
+}
+
+- (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler {
+    if (_isDemoing) {
+        Train *train = (Train *)[self childNodeWithName:TrainNodeName];
+        [train runAction:[self createDemonstrationActionSequenceWithDuration:0.5] completion:completionHandler];
     }
 }
 

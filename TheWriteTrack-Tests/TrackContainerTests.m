@@ -205,15 +205,20 @@
     }
 }
 
+/* // MAYBE COME BACK TO THIS SOMETIME, COULD BE FUN :) ....
 - (void)testWhenAllOfASetOfWaypointsHaveBeenRemovedThenTheTrainIsPositionedAtTheFirstPointOfTheNextSetOfWaypoints {
-    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    XCTestExpectation *demoCompletionExpectation = [self expectationWithDescription:@"Train moved to new first waypoint"];
     
-    [self simulateContactForPoints:waypointNodesBefore];
+    theTrackContainer.isDemoing = YES;
+    [theTrackContainer beginDemonstrationWithDuration:0.1 andCompletionHandler:^{
+        [demoCompletionExpectation fulfill];
+    }];
 
-    NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
-
-    XCTAssertEqualPoints(theTrain.position, [waypointNodesAfter[0] position]);
-}
+    [self waitForExpectationsWithTimeout:1 handler:^(NSError *error) {
+        NSArray *waypointNodesAfter = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+        XCTAssertEqualPoints(theTrain.position, [waypointNodesAfter[0] position]);
+    }];
+}*/
 
 - (void)testGivenNoDemonstrationWhenTheLastWaypointIsRemovedAMessageIsSentToTheParent {
     theTrackContainer.isDemoing = NO;
@@ -243,18 +248,6 @@
     XCTAssertTrue(theTrackContainer.isDemoing);
 }
 
-- (void)testWhenTheCurrentArrayIndexIsWithinTheBoundsOfThePathSegmentsArraysThenTheDemoContinues {
-    theTrackContainer.currentWaypointArrayIndex = 3;
-    [theTrackContainer beginDemonstration];
-    XCTAssertTrue(theTrackContainer.isDemoing);
-}
-
-- (void)testWhenTheCurrentArrayIndexIsOutOfBoundsForThePathSegmentsArraysThenTheDemoIsCompleted {
-    theTrackContainer.currentWaypointArrayIndex = 4;
-    [theTrackContainer beginDemonstration];
-    XCTAssertFalse(theTrackContainer.isDemoing);
-}
-
 - (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheSceneIsNOTNotifiedOfTheLastWaypointRemoval {
     theTrackContainer.isDemoing = YES;
     id mockTrackContainer = OCMPartialMock(theTrackContainer);
@@ -265,14 +258,29 @@
     [mockTrackContainer verify];
 }
 
-- (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheFirstSetOfWaypointsIsReplacedAndTheDemoIsCompleted {
+- (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheDemoIsCompleted {
     theTrackContainer.isDemoing = YES;
     
     [self simulateRemovalOfAllWaypoints];
 
     XCTAssertFalse(theTrackContainer.isDemoing);
+}
 
+- (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheFirstSetOfWaypointsIsReplaced {
+    theTrackContainer.isDemoing = YES;
+    
+    [self simulateRemovalOfAllWaypoints];
+    
     [self assertAllWaypointsInFirstArrayExistWithOffset:theTrackContainer.position];
 }
+
+/* NOW OCCURS AS PART OF COMPLETION BLOCK, NEED TO FIGURE OUT HOW TO TEST ....
+- (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheTrainIsRepositionedAtTheFirstWaypoint {
+    theTrackContainer.isDemoing = YES;
+    
+    [self simulateRemovalOfAllWaypoints];
+    
+    XCTAssertEqualPoints(theTrain.position, [[self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName][0] position]);
+}*/
 
 @end

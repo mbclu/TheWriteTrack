@@ -20,6 +20,8 @@ typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
     TrackContainerTrainZPosition
 };
 
+typedef void(^demoCompletion)(void);
+
 @interface TrackContainer : SKNode <SKPhysicsContactDelegate>
 
 @property PathSegments *pathSegments;
@@ -31,6 +33,8 @@ typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
 - (void)positionTrainAtStartPoint:(Train *)train;
 - (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody;
 - (void)notifyLastWaypointWasRemoved;
+- (SKAction *)createDemonstrationActionSequenceWithDuration:(NSTimeInterval)seconds;
 - (void)beginDemonstration;
+- (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler;
 
 @end

@@ -36,7 +36,7 @@
 #if (DEBUG)
     skView.showsFPS = YES;
     skView.showsFields = YES;
-    skView.showsPhysics = YES;
+//    skView.showsPhysics = YES;
     skView.showsDrawCount = YES;
     skView.showsNodeCount = YES;
     skView.showsQuadCount = YES;

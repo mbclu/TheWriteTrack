@@ -72,6 +72,11 @@
             [self addWaypointsToTrackContainer];
             trainBody.node.position = [[self getWaypointChildren][0] position];
         }
+        else if (_isDemoing) {
+            _isDemoing = NO;
+            _currentWaypointArrayIndex = 0;
+            [self addWaypointsToTrackContainer];
+        }
         else {
             [self notifyLastWaypointWasRemoved];
         }
@@ -191,12 +196,17 @@
         SKAction *demoAction = [SKAction moveTo:waypoint.position duration:0.5];
         [actionSequence addObject:demoAction];
     }
-    
+
     [train runAction:[SKAction sequence:actionSequence]];
 }
 
 - (void)beginDemonstration {
-    [self demonstrateMoveToEachWaypointInSegmentArray];
+    if (_currentWaypointArrayIndex < _pathSegments.generatedWaypointArrays.count) {
+        [self demonstrateMoveToEachWaypointInSegmentArray];
+    }
+    else {
+        _isDemoing = NO;
+    }
 }
 
 - (NSArray *)getWaypointChildren {

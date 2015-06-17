@@ -90,15 +90,16 @@
 
 - (void)testTheFirstSetOfWaypointsAreAddedToTheLetterTrackAsNodes {
     XCTAssertEqual([self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName].count, 5);
-    [self assertDoesExistAtPositionAllChildWaypoints];
+    [self assertAllWaypointsInFirstArrayExistWithOffset:CGPointZero];
 }
 
-- (void)assertDoesExistAtPositionAllChildWaypoints {
+- (void)assertAllWaypointsInFirstArrayExistWithOffset:(CGPoint)offset {
     NSArray *waypointNodes = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
     
     XCTAssertEqual(waypointNodes.count, 5);
     
     CGPoint expectedPoint = CGPointMake(0, 0);
+    INCREMENT_POINT_BY_POINT(expectedPoint, offset);
     
     for (NSUInteger i = 0; i < 5; i++) {
         XCTAssertEqualPoints([[waypointNodes objectAtIndex:i] position], expectedPoint);
@@ -214,15 +215,11 @@
     XCTAssertEqualPoints(theTrain.position, [waypointNodesAfter[0] position]);
 }
 
-- (void)testWhenTheLastWaypointIsRemovedAMessageIsSentToTheParent {
+- (void)testGivenNoDemonstrationWhenTheLastWaypointIsRemovedAMessageIsSentToTheParent {
+    theTrackContainer.isDemoing = NO;
     id mockTrackContainer = OCMPartialMock(theTrackContainer);
 
-    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
-    
-    for (NSUInteger i = 0; i < 4; i++) {
-        [self simulateContactForPoints:waypointNodesBefore];
-        waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
-    }
+    [self simulateRemovalOfAllWaypoints];
     
     OCMVerify([mockTrackContainer notifyLastWaypointWasRemoved]);
 }
@@ -233,13 +230,49 @@
     }
 }
 
+- (void)simulateRemovalOfAllWaypoints {
+    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    for (NSUInteger i = 0; i < 4; i++) {
+        [self simulateContactForPoints:waypointNodesBefore];
+        waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    }
+}
+
 - (void)testWhenInitializedThenTrackContainerIsDemonstratingHowToMoveTheTrain {
     XCTAssertTrue(theTrackContainer.isDemoing);
 }
 
-- (void)testWhenTheDemoIsCompleteThenTheFirstSetOfWaypointsIsReplaced {
+- (void)testWhenTheCurrentArrayIndexIsWithinTheBoundsOfThePathSegmentsArraysThenTheDemoContinues {
+    theTrackContainer.currentWaypointArrayIndex = 3;
+    [theTrackContainer beginDemonstration];
+    XCTAssertTrue(theTrackContainer.isDemoing);
+}
+
+- (void)testWhenTheCurrentArrayIndexIsOutOfBoundsForThePathSegmentsArraysThenTheDemoIsCompleted {
+    theTrackContainer.currentWaypointArrayIndex = 4;
     [theTrackContainer beginDemonstration];
     XCTAssertFalse(theTrackContainer.isDemoing);
+}
+
+- (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheSceneIsNOTNotifiedOfTheLastWaypointRemoval {
+    theTrackContainer.isDemoing = YES;
+    id mockTrackContainer = OCMPartialMock(theTrackContainer);
+    [[mockTrackContainer reject] notifyLastWaypointWasRemoved];
+
+    [self simulateRemovalOfAllWaypoints];
+    
+    [mockTrackContainer verify];
+}
+
+- (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheFirstSetOfWaypointsIsReplacedAndTheDemoIsCompleted {
+    theTrackContainer.isDemoing = YES;
+    
+    [self simulateRemovalOfAllWaypoints];
+
+    XCTAssertFalse(theTrackContainer.isDemoing);
+
+    [self assertAllWaypointsInFirstArrayExistWithOffset:theTrackContainer.position];
 }
 
 @end

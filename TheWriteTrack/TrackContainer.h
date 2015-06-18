@@ -28,6 +28,9 @@ typedef void(^demoCompletion)(void);
 @property NSString *letterKey;
 @property NSUInteger currentWaypointArrayIndex;
 @property BOOL isDemoing;
+@property BOOL shouldResetTrain;
+@property BOOL shouldChangeScenes;
+@property NSTimeInterval sceneTransitionWaitInSeconds;
 
 - (instancetype)initWithLetterKey:(NSString *)letterKey andPathSegments:(PathSegments *)pathSegments;
 - (void)positionTrainAtStartPoint:(Train *)train;
@@ -36,5 +39,6 @@ typedef void(^demoCompletion)(void);
 - (SKAction *)createDemonstrationActionSequenceWithDuration:(NSTimeInterval)seconds;
 - (void)beginDemonstration;
 - (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler;
+- (void)evaluateTouchesEnded;
 
 @end

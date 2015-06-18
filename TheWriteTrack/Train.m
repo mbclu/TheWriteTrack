@@ -60,6 +60,7 @@ NSString *const TrainName = @"Train";
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self evaluateTouchesEndedAtPoint:[[touches anyObject] locationInNode:self.parent]];
+    [self.parent touchesEnded:touches withEvent:event];
 }
 
 - (void)evaluateTouchesEndedAtPoint:(CGPoint)touchPoint {

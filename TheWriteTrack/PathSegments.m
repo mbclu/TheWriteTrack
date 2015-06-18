@@ -352,7 +352,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
     [self getCurveDefintions:curvePoints];
     
-    for (CGFloat t = 0.0; t <= 1.0; t += stepSize) {
+    for (CGFloat t = 1.0; t >= 0.0; t -= stepSize) {
         CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateQuadBezierAtStep:t
                                                                                    start:curvePoints[curveIndex][0]
                                                                                  control:curvePoints[curveIndex][2]

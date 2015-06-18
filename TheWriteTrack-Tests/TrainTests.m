@@ -119,4 +119,14 @@ const CGFloat yOriginShift = 4.0;
     XCTAssertEqualPoints(theTrain.position, initialTrainPosition);
 }
 
+- (void)testTheTrainNotifiesItsParentWhenTouchesEnded {
+    SKNode *parent = [SKNode node];
+    [parent addChild:theTrain];
+    
+    id mockParent = OCMPartialMock(parent);
+    [theTrain touchesEnded:[NSSet set] withEvent:[[UIEvent alloc] init]];
+    
+    OCMVerify([mockParent touchesEnded:OCMOCK_ANY withEvent:OCMOCK_ANY]);
+}
+
 @end

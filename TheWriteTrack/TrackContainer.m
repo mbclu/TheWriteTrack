@@ -11,23 +11,44 @@
 #import "LayoutMath.h"
 #import "Train.h"
 
+#if (DEBUG)
+NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.1;
+NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.1;
+#else
+NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.5;
+NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
+#endif
+
 @implementation TrackContainer
 
 - (instancetype)initWithLetterKey:(NSString *)letterKey andPathSegments:(PathSegments *)pathSegments {
     self = [super init];
     
+    [self initializeProperties:letterKey pathSegments:pathSegments];
+
+    [self initializeChildren];
+
+    [self centerThyself:(SKShapeNode *)[self childNodeWithName:LetterOutlineName]];
+
+    self.name = LetterSceneTrackContainerNodeName;
+    
+    return self;
+}
+
+- (void)initializeProperties:(NSString *)letterKey pathSegments:(PathSegments *)pathSegments {
+    _letterKey = letterKey;
     _pathSegments = pathSegments;
     if (_pathSegments == nil) {
         _pathSegments = [[PathSegments alloc] init];
     }
-    
-    _letterKey = letterKey;
     _currentWaypointArrayIndex = 0;
-    
-    self.name = LetterSceneTrackContainerNodeName;
-    
-    [self addChild:[SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:_pathSegments.segmentBounds.size]];
+    _isDemoing = YES;
+    _shouldResetTrain = NO;
+    _shouldChangeScenes = NO;
+    _sceneTransitionWaitInSeconds = defaultSceneTransitionWaitInSeconds;
+}
 
+- (void)initializeChildren {
     [_pathSegments generateCombinedPathAndWaypointsForLetter:_letterKey];
     SKShapeNode *trackOutline = [self createTrackOutlineNode:_pathSegments.generatedSegmentPath];
     [self addChild:trackOutline];
@@ -36,13 +57,7 @@
     
     [self addWaypointsToTrackContainer];
     
-    [self centerThyself:trackOutline];
-    
     [self addChild:[self createTrainNodeWithPathSegments:_pathSegments]];
-    
-    _isDemoing = YES;
-    
-    return self;
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact {
@@ -56,6 +71,10 @@
     }
     
     [self evaluateContactForTrainBody:trainBody waypointBody:waypointBody];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self evaluateTouchesEnded];
 }
 
 - (void)evaluateContactForTrainBody:(SKPhysicsBody *)trainBody waypointBody:(SKPhysicsBody *)waypointBody {
@@ -75,16 +94,28 @@
                 _currentWaypointArrayIndex = 0;
             }
             else {
-                [self notifyLastWaypointWasRemoved];
+                _shouldChangeScenes = YES;
                 return;
             }
         }
         [self addWaypointsToTrackContainer];
+        _shouldResetTrain = YES;
     }
 }
 
 - (void)notifyLastWaypointWasRemoved {
     [self.parent performSelector:@selector(transitionToNextScene)];
+}
+
+- (void)evaluateTouchesEnded {
+    if (_shouldChangeScenes) {
+        [self waitAndNotifyParentOfSceneChange];
+    }
+    
+    if (_shouldResetTrain) {
+        _shouldResetTrain = NO;
+        [self positionTrainAtStartPoint:(Train *)[self childNodeWithName:TrainNodeName]];
+    }
 }
 
 - (void)positionTrainAtStartPoint:(Train *)train {
@@ -97,6 +128,17 @@
     }
     else {
         train.position = CGPointMake(-100, -100);
+    }
+}
+
+- (void)waitAndNotifyParentOfSceneChange {
+    if (_sceneTransitionWaitInSeconds > 0.0) {
+        [self runAction:[SKAction waitForDuration:_sceneTransitionWaitInSeconds] completion:^{
+            [self notifyLastWaypointWasRemoved];
+        }];
+    }
+    else {
+        [self notifyLastWaypointWasRemoved];
     }
 }
 
@@ -204,7 +246,7 @@
 }
 
 - (void)beginDemonstration {
-    [self beginDemonstrationWithDuration:0.5 andCompletionHandler:^{
+    [self beginDemonstrationWithDuration:defaultTrainMoveIntervalInSeconds andCompletionHandler:^{
         [self positionTrainAtStartPoint:(Train *)[self childNodeWithName:TrainNodeName]];
     }];
 }
@@ -212,7 +254,7 @@
 - (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler {
     if (_isDemoing) {
         Train *train = (Train *)[self childNodeWithName:TrainNodeName];
-        [train runAction:[self createDemonstrationActionSequenceWithDuration:0.5] completion:completionHandler];
+        [train runAction:[self createDemonstrationActionSequenceWithDuration:defaultTrainMoveIntervalInSeconds] completion:completionHandler];
     }
 }
 

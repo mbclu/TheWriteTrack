@@ -220,13 +220,17 @@
     }];
 }*/
 
-- (void)testGivenNoDemonstrationWhenTheLastWaypointIsRemovedAMessageIsSentToTheParent {
+- (void)testGivenNoDemonstrationWhenTheLastWaypointIsRemovedAndTouchesHaveEndedThenAMessageIsSentToTheParent {
+    LetterScene *scene = [[LetterScene alloc] initWithSize:CGSizeMake(1, 1)];
+    [scene addChild:theTrackContainer];
     theTrackContainer.isDemoing = NO;
-    id mockTrackContainer = OCMPartialMock(theTrackContainer);
+    theTrackContainer.sceneTransitionWaitInSeconds = 0.0;
+    id mockScene = OCMPartialMock(scene);
 
     [self simulateRemovalOfAllWaypoints];
+    [theTrackContainer evaluateTouchesEnded];
     
-    OCMVerify([mockTrackContainer notifyLastWaypointWasRemoved]);
+    OCMVerify([mockScene transitionToNextScene]);
 }
 
 - (void)simulateContactForPoints:(NSArray *)contactWaypoints {
@@ -282,5 +286,14 @@
     
     XCTAssertEqualPoints(theTrain.position, [[self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName][0] position]);
 }*/
+
+- (void)testGivenTheTrainLastWaypointInASetIsRemoveWhenTouchesEndThenTheTrainIsMovedToTheNextStartPoint {
+    NSArray *waypointNodesBefore = [self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName];
+    
+    [self simulateContactForPoints:waypointNodesBefore];
+    [theTrackContainer evaluateTouchesEnded];
+
+    XCTAssertEqualPoints(theTrain.position, [[self get:theTrackContainer nodesChildrenFilteredByName:WaypointNodeName][0] position]);
+}
 
 @end

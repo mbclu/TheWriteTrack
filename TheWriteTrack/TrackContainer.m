@@ -12,7 +12,7 @@
 #import "Train.h"
 
 #if (DEBUG)
-NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.1;
+NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.2;
 NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.1;
 #else
 NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.5;

@@ -16,6 +16,12 @@
 
 #import "CocoaLumberjack.h"
 
+#if (DEBUG)
+NSString *const defaultStartLetter = @"B";
+#else
+NSString *const defaultStartLetter = @"A";
+#endif
+
 @implementation TitleScene
 
 - (void) anchorNode:(SKSpriteNode*)node atZeroAndZPosition:(NSInteger)zPosition {
@@ -45,7 +51,7 @@
 }
 
 - (void)transitionToAScene {
-    SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:@"A"];
+    SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:defaultStartLetter];
     SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
     [self.view presentScene:aScene transition:transition];
     [self.view setIsAccessibilityElement:YES];

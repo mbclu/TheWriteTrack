@@ -258,7 +258,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
         CGPoint controlPoint = [[directionalPoints objectAtIndex:1] CGPointValue];
         CGPoint endPoint = [[directionalPoints objectAtIndex:2] CGPointValue];
         CGPathAddQuadCurveToPoint(*subPath, nil, controlPoint.x, controlPoint.y, endPoint.x, endPoint.y);
-        [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue])
+        [self interpolateQuadCurveSegmentWithCurveIndex:directionalPoints
                                    andStepSizeInPercent:0.5
                                         intoObjectArray:*subArray
                                           forObjectType:WaypointObjectType];
@@ -289,7 +289,7 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
                                                  forObjectType:objectType];
                 }
                 else if (points.count == 3) {
-                    [self interpolateQuadCurveSegmentWithCurveIndex:(segmentIndex - [c64 integerValue])
+                    [self interpolateQuadCurveSegmentWithCurveIndex:points
                                                andStepSizeInPercent:curveStepSize
                                                     intoObjectArray:generatedObjects
                                                       forObjectType:objectType];
@@ -347,29 +347,26 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
     }
 }
 
-- (void)interpolateQuadCurveSegmentWithCurveIndex:(NSUInteger)curveIndex andStepSizeInPercent:(CGFloat)stepSize
+- (void)interpolateQuadCurveSegmentWithCurveIndex:(NSArray *)points andStepSizeInPercent:(CGFloat)stepSize
                                   intoObjectArray:(NSMutableArray *)generatedObjects forObjectType:(enum EInterpolatableObjectTypes)objectType {
-    CGFloat curvePoints[numberOfCurvedSegments][numberOfValuesDefiningQuadCurve];
-    [self getCurveDefintions:curvePoints];
-    
-    for (CGFloat t = 1.0; t >= 0.0; t -= stepSize) {
+    for (CGFloat t = 0.0; t <= 1.0; t += stepSize) {
         CGPoint interpolationPoint = CGPointMake([LayoutMath interpolateQuadBezierAtStep:t
-                                                                                   start:curvePoints[curveIndex][0]
-                                                                                 control:curvePoints[curveIndex][2]
-                                                                                     end:curvePoints[curveIndex][4]],
+                                                                                   start:[points[0] CGPointValue].x
+                                                                                 control:[points[1] CGPointValue].x
+                                                                                     end:[points[2] CGPointValue].x],
                                                  [LayoutMath interpolateQuadBezierAtStep:t
-                                                                                   start:curvePoints[curveIndex][1]
-                                                                                 control:curvePoints[curveIndex][3]
-                                                                                     end:curvePoints[curveIndex][5]]);
+                                                                                   start:[points[0] CGPointValue].y
+                                                                                 control:[points[1] CGPointValue].y
+                                                                                     end:[points[2] CGPointValue].y]);
         
         CGPoint tangent = CGPointMake([LayoutMath tangentQuadBezierAtStep:t
-                                                                    start:curvePoints[curveIndex][0]
-                                                                  control:curvePoints[curveIndex][2]
-                                                                      end:curvePoints[curveIndex][4]],
+                                                                    start:[points[0] CGPointValue].x
+                                                                  control:[points[1] CGPointValue].x
+                                                                      end:[points[2] CGPointValue].x],
                                       [LayoutMath tangentQuadBezierAtStep:t
-                                                                    start:curvePoints[curveIndex][1]
-                                                                  control:curvePoints[curveIndex][3]
-                                                                      end:curvePoints[curveIndex][5]]);
+                                                                    start:[points[0] CGPointValue].y
+                                                                  control:[points[1] CGPointValue].y
+                                                                      end:[points[2] CGPointValue].y]);
         
         float y2 = interpolationPoint.y + tangent.y;
         float y1 = interpolationPoint.y;

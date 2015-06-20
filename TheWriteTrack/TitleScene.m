@@ -17,7 +17,7 @@
 #import "CocoaLumberjack.h"
 
 #if (DEBUG)
-NSString *const defaultStartLetter = @"B";
+NSString *const defaultStartLetter = @"M";
 #else
 NSString *const defaultStartLetter = @"A";
 #endif

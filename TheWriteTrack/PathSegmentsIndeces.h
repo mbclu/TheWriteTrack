@@ -104,5 +104,7 @@
 #define c73 [NSNumber numberWithInteger:73]
 #define c74 [NSNumber numberWithInteger:74]
 #define c75 [NSNumber numberWithInteger:75]
+#define c76 [NSNumber numberWithInteger:76]
+#define c77 [NSNumber numberWithInteger:77]
 
 #endif

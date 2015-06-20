@@ -17,7 +17,7 @@
 #endif
 
 const NSUInteger segmentsPerDimension = 4;
-const NSUInteger numberOfCurvedSegments = 12;
+const NSUInteger numberOfCurvedSegments = 14;
 const NSUInteger numberOfValuesDefiningQuadCurve = 6;
 const CGFloat oneOverTheNumberOfSegments = 1.0 / segmentsPerDimension;
 const CGFloat boundingWidthPercentage = 0.35;
@@ -121,7 +121,11 @@ static inline CGFloat degreesToRadians(CGFloat degrees) { return degrees * M_PI 
         { _halfWidth, 0, _fullWidth, 0, _fullWidth, _halfHeight },
         
         //Top right quadrant:
-        { _fullWidth, _halfHeight, _fullWidth, _fullHeight, _halfWidth, _fullHeight }
+        { _fullWidth, _halfHeight, _fullWidth, _fullHeight, _halfWidth, _fullHeight },
+
+        // J Segments
+        { _halfWidth, _quarterHeight, _halfWidth, 0, _quarterWidth, 0 },
+        { _quarterWidth, 0, 0, 0, 0, _quarterHeight }
     };
     
     for (NSUInteger i = 0; i < numberOfCurvedSegments; i++) {

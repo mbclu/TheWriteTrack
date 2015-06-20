@@ -40,5 +40,6 @@ typedef void(^demoCompletion)(void);
 - (void)beginDemonstration;
 - (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler;
 - (void)evaluateTouchesEnded;
+- (void)evaluateTouchesBegan;
 
 @end

@@ -73,6 +73,10 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
     [self evaluateContactForTrainBody:trainBody waypointBody:waypointBody];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self evaluateTouchesBegan];
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [self evaluateTouchesEnded];
 }
@@ -98,7 +102,6 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
                 return;
             }
         }
-        [self addWaypointsToTrackContainer];
         _shouldResetTrain = YES;
     }
 }
@@ -113,9 +116,12 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
     }
     
     if (_shouldResetTrain) {
-        _shouldResetTrain = NO;
-        [self positionTrainAtStartPoint:(Train *)[self childNodeWithName:TrainNodeName]];
+        [self resetWaypointsAndTrain];
     }
+}
+
+- (void)evaluateTouchesBegan {
+    [self childNodeWithName:TrainNodeName].physicsBody.contactTestBitMask = WAYPOINT_CATEGORY;
 }
 
 - (void)positionTrainAtStartPoint:(Train *)train {
@@ -140,6 +146,13 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
     else {
         [self notifyLastWaypointWasRemoved];
     }
+}
+
+- (void)resetWaypointsAndTrain {
+    _shouldResetTrain = NO;
+    [self childNodeWithName:TrainNodeName].physicsBody.contactTestBitMask = 0;
+    [self addWaypointsToTrackContainer];
+    [self positionTrainAtStartPoint:(Train *)[self childNodeWithName:TrainNodeName]];
 }
 
 - (SKShapeNode *)createTrackOutlineNode:(CGPathRef)combinedPath {
@@ -197,8 +210,6 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
 - (void)addEnvelopeAtPoint:(CGPoint)position {
     SKSpriteNode *envelope = [[SKSpriteNode alloc] initWithImageNamed:EnvelopeTextureName];
     
-    INCREMENT_POINT_BY_POINT(position, self.position);
-    
     envelope.name = WaypointNodeName;
     envelope.position = position;
     envelope.zPosition = TrackContainerWaypointZPosition;
@@ -218,7 +229,7 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
     
     trainNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:trainNode.size];
     trainNode.physicsBody.categoryBitMask = TRAIN_CATEGORY;
-    trainNode.physicsBody.contactTestBitMask = WAYPOINT_CATEGORY;
+    trainNode.physicsBody.contactTestBitMask = 0;
     trainNode.physicsBody.collisionBitMask = 0;
 
     [self positionTrainAtStartPoint:trainNode];
@@ -247,13 +258,14 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
 
 - (void)beginDemonstration {
     [self beginDemonstrationWithDuration:defaultTrainMoveIntervalInSeconds andCompletionHandler:^{
-        [self positionTrainAtStartPoint:(Train *)[self childNodeWithName:TrainNodeName]];
+        [self resetWaypointsAndTrain];
     }];
 }
 
 - (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler {
     if (_isDemoing) {
         Train *train = (Train *)[self childNodeWithName:TrainNodeName];
+        train.physicsBody.contactTestBitMask = WAYPOINT_CATEGORY;
         [train runAction:[self createDemonstrationActionSequenceWithDuration:defaultTrainMoveIntervalInSeconds] completion:completionHandler];
     }
 }

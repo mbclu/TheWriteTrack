@@ -14,6 +14,7 @@
 - (instancetype)init {
     self = [super init];
     self.userInteractionEnabled = YES;
+    self.anchorPoint = CGPointZero;
     return self;
 }
 

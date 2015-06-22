@@ -8,6 +8,7 @@
 
 #import "GenericSpriteButton.h"
 #import "FakeTargetScene.h"
+#import "CGMatchers.h"
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
@@ -45,6 +46,10 @@
 - (void)testPressingAnAreaOutsideTheButtonDoesNotSendAMessageToTheTarget {
     [genericButton evaluateTouchAtPoint:CGPointMake(genericButton.size.width + 1, 0)];
     XCTAssertFalse([fakeScene didReceiveMessage]);
+}
+
+- (void)testAnchorIsZero {
+    XCTAssertEqualPoints(genericButton.anchorPoint, CGPointZero);
 }
 
 @end

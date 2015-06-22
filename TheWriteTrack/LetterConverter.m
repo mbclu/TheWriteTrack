@@ -98,7 +98,7 @@
     return [self createPathAtLocation:CGPointZero UsingAttrString:attrString];
 }
 
-- (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size {
+- (CGMutablePathRef)createPathFromString:(NSString *)string andSize:(CGFloat)size {
     NSAttributedString *attrString = [self createAttributedString:string withFontType:DefaultLetterFont andSize:size];
     return [self createPathAtZeroUsingAttrString:attrString];
 }

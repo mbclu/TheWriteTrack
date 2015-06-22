@@ -20,7 +20,7 @@
 
 - (NSAttributedString *)createAttributedString:(NSString *)attributelessString withFontType:(CFStringRef)fontType andSize:(CGFloat)fontSize;
 
-- (CGMutablePathRef)createPathFromString:(NSString *)string AndSize:(CGFloat)size;
+- (CGMutablePathRef)createPathFromString:(NSString *)string andSize:(CGFloat)size;
 - (CGMutablePathRef)createPathAtLocation:(CGPoint)location UsingAttrString:(NSAttributedString *)attrString;
 - (CGMutablePathRef)createPathAtZeroUsingAttrString:(NSAttributedString *)attrString;
 

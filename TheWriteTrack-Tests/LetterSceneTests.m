@@ -27,6 +27,7 @@ NSString *const BackgroundName = @"RockyBackground";
 NSString *const NextButtonNodeName = @"NextButton";
 NSString *const PreviousButtonNodeName = @"PreviousButton";
 NSString *const ContainerNodeName = @"TrackContainerNode";
+NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 @interface LetterSceneTests : XCTestCase {
     LetterScene *theScene;
@@ -36,6 +37,7 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     TrackContainer *theContainerNode;
     SKSpriteNode *theNextButtonNode;
     SKSpriteNode *thePrevButtonNode;
+    SKNode *theLetterSelectButton;
 }
 
 @end
@@ -51,6 +53,7 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     theContainerNode = (TrackContainer *)[theScene childNodeWithName:ContainerNodeName];
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NextButtonNodeName];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PreviousButtonNodeName];
+    theLetterSelectButton = [theScene childNodeWithName:LetterSelectNodeName];
 }
 
 - (void)tearDown {
@@ -203,8 +206,34 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
     OCMVerify([mockContainer beginDemonstration]);
 }
 
-// waypoints are reset
-// train is reset to first waypoint
+- (void)testThereIsALetterSelectionButtonOnTheScene {
+    XCTAssertNotNil(theLetterSelectButton);
+}
+
+- (void)testTheLetterSelectButtonaHasGreaterZPositionThanTheBackground {
+    XCTAssertGreaterThan(theLetterSelectButton.zPosition, theBackgroundNode.zPosition);
+}
+
+- (void)testTheLetterSelectButtonIsPositionedSlightlyAboveTheBottomLeftOfTheScreen {
+    CGPoint expectedPosition = theScene.position;
+    INCREMENT_POINT_BY_POINT(expectedPosition, CGPointMake(20, 20));
+    XCTAssertEqualPoints(theLetterSelectButton.position, expectedPosition);
+}
+
+- (void)testWhenTheLetterSelectButtonIsPressedThenTheLetterSelectSceneIsPresented {
+    id mockButton = OCMClassMock([GenericSpriteButton class]);
+    [theScene setLetterSelectButtonProperty:mockButton];
+    [theScene connectSceneTransitions];
+    OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToLetterSelectScene)]);
+}
+
+- (void)testWhenTouchesEndedItIsThenATransitionToTheLetterSelectSceneIsMade {
+    id mockScene = OCMPartialMock(theScene);
+    DDLogDebug(@"Letter Select Button Position on Scene : %@", NSStringFromCGPoint(theScene.letterSelectButtonProperty.position));
+    [theScene.letterSelectButtonProperty evaluateTouchAtPoint:theScene.letterSelectButtonProperty.position];
+    OCMVerify([mockScene transitionToLetterSelectScene]);
+}
+
 @end
 
 @interface LetterSceneLetterCenteringTests : XCTestCase
@@ -213,8 +242,6 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
 
 @implementation LetterSceneLetterCenteringTests
 
-#define PERFORM_HORIZONTAL_CENTER_TEST    1
-#if (PERFORM_HORIZONTAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsHorizontallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
     
@@ -237,10 +264,7 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
         unicharRepOfLetter = (unichar)(unicharRepOfLetter + 1);
     }
 }
-#endif
 
-#define PERFORM_VERTICAL_CENTER_TEST    1
-#if (PERFORM_VERTICAL_CENTER_TEST)
 - (void)testWhenTheSceneIsTheSizeOfAFullScreenThenTheLetterPathIsVerticallyCenteredInTheScene {
     unichar unicharRepOfLetter = [@"A" characterAtIndex:0];
     
@@ -262,6 +286,5 @@ NSString *const ContainerNodeName = @"TrackContainerNode";
         unicharRepOfLetter = (unichar)(unicharRepOfLetter + 1);
     }
 }
-#endif
 
 @end

@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString *const LetterOutlineName;
 FOUNDATION_EXPORT NSString *const RockyBackgroundName;
 FOUNDATION_EXPORT NSString *const NextButtonName;
 FOUNDATION_EXPORT NSString *const PreviousButtonName;
+FOUNDATION_EXPORT NSString *const LetterSelectButtonName;
 FOUNDATION_EXPORT NSString *const TrackTextureName;
 FOUNDATION_EXPORT NSString *const EnvelopeTextureName;
 FOUNDATION_EXPORT NSString *const LetterSceneTrackContainerNodeName;
@@ -24,3 +25,16 @@ FOUNDATION_EXPORT CGFloat const NextButtonXPadding;
 FOUNDATION_EXPORT CGFloat const TransitionLengthInSeconds;
 FOUNDATION_EXPORT NSUInteger const SingleLetterLength;
 FOUNDATION_EXPORT CFStringRef const DefaultLetterFont;
+
+/* Start Button */
+FOUNDATION_EXPORT NSString *const StartText;
+FOUNDATION_EXPORT NSString *const StartStringSmokeSKS;
+FOUNDATION_EXPORT CGFloat const StartStringSize;
+FOUNDATION_EXPORT CGFloat const LetterHoriztontalOffset;
+FOUNDATION_EXPORT CGFloat const ButtonOffsetMultiplier;
+FOUNDATION_EXPORT CGFloat const FollowPathDuration;
+
+/* Letter Select Button */
+FOUNDATION_EXPORT NSString *const ANodeName;
+FOUNDATION_EXPORT NSString *const BNodeName;
+FOUNDATION_EXPORT NSString *const CNodeName;

@@ -49,7 +49,7 @@
 }
 
 - (CGMutablePathRef)createPathWithString:(NSString *)string andSize:(CGFloat)size {
-    letterPath = [letterConverter createPathFromString:string AndSize:size];
+    letterPath = [letterConverter createPathFromString:string andSize:size];
     return letterPath;
 }
 

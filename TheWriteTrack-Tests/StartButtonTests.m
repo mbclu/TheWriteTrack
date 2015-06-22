@@ -7,7 +7,7 @@
 //
 
 #import "StartButton.h"
-#import "StartButtonConstants.h"
+#import "Constants.h"
 #import "LayoutMath.h"
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
@@ -136,11 +136,11 @@
     XCTAssertNotNil(buttonWithMockLetterConverter);
     XCTAssertEqualWithAccuracy(StartStringSize, 125.0, 0.0);
     
-    OCMVerify([lcMock createPathFromString:@"s" AndSize:StartStringSize]);
-    OCMVerify([lcMock createPathFromString:@"t" AndSize:StartStringSize]);
-    OCMVerify([lcMock createPathFromString:@"a" AndSize:StartStringSize]);
-    OCMVerify([lcMock createPathFromString:@"r" AndSize:StartStringSize]);
-    OCMVerify([lcMock createPathFromString:@"t" AndSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"s" andSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"t" andSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"a" andSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"r" andSize:StartStringSize]);
+    OCMVerify([lcMock createPathFromString:@"t" andSize:StartStringSize]);
 }
 
 // Using a mock so that the next position value is not modified during the addEmitters function

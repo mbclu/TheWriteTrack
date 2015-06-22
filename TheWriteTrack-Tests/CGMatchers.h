@@ -9,10 +9,10 @@
 #ifndef OnTheWriteTrack_Header_h
 #define OnTheWriteTrack_Header_h
 
-#define XCTAssertEqualPoints(point1, point2)    \
-{                                               \
-    XCTAssertEqual(point1.x, point2.x);         \
-    XCTAssertEqual(point1.y, point2.y);         \
+#define XCTAssertEqualPoints(point1, point2)                \
+{                                                           \
+    XCTAssertEqualWithAccuracy(point1.x, point2.x, 0.001);  \
+    XCTAssertEqualWithAccuracy(point1.y, point2.y, 0.001);  \
 }
 
 #define XCTAssertEqualSizes(size1, size2)       \

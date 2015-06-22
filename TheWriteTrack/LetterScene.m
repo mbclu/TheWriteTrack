@@ -12,13 +12,17 @@
 #import "CocoaLumberjack.h"
 #import "GenericSpriteButton.h"
 #import "LayoutMath.h"
+#import "LetterSelectScene.h"
 #import "Constants.h"
 #import "Train.h"
+
+NSTimeInterval const LetterSelectTransitionInSeconds = 0.65;
 
 @implementation LetterScene
 
 @synthesize nextButtonProperty = nextButton;
 @synthesize previousButtonProperty = previousButton;
+@synthesize letterSelectButtonProperty = letterSelectButton;
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
@@ -31,14 +35,18 @@
         
         [self addChild:[self createBackground]];
         
-        TrackContainer *trackContainer = [self createLetterTrack];
-        [self addChild:trackContainer];
-        self.physicsWorld.contactDelegate = trackContainer;
-        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        [self setupTrackContainerAndPhysics];
 
         [self addNavigationButtons];
     }
     return self;
+}
+
+- (void)setupTrackContainerAndPhysics {
+    TrackContainer *trackContainer = [self createLetterTrack];
+    [self addChild:trackContainer];
+    self.physicsWorld.contactDelegate = trackContainer;
+    self.physicsWorld.gravity = CGVectorMake(0, 0);
 }
 
 - (void)didMoveToView:(SKView *)view {
@@ -73,6 +81,11 @@
         [self addChild:previousButton];
     }
     
+    LetterSelectButton *lsButton = [self createLetterSelectButton];
+    [self addChild:lsButton];
+    letterSelectButton = [self createOverlayForButton:lsButton];
+    [self addChild:letterSelectButton];
+    
     [self connectSceneTransitions];
 }
 
@@ -81,8 +94,8 @@
     button.name = NextButtonName;
     button.anchorPoint = CGPointZero;
     button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
-                                  (self.size.height - button.size.height) * 0.5);
-    button.zPosition = LetterSceneNextButtonZPosition;
+                                  HALF_OF((self.size.height - button.size.height)));
+    button.zPosition = LetterSceneButtonZPosition;
     return button;
 }
 
@@ -91,18 +104,54 @@
     button.name = PreviousButtonName;
     button.anchorPoint = CGPointZero;
     button.position = CGPointMake(self.frame.origin.x + NextButtonXPadding,
-                                  (self.size.height - button.size.height) * 0.5);
-    button.zPosition = LetterScenePreviousButtonZPosition;
+                                  HALF_OF((self.size.height - button.size.height)));
+    button.zPosition = LetterSceneButtonZPosition;
     return button;
+}
+
+- (LetterSelectButton *)createLetterSelectButton {
+    LetterSelectButton *button = [[LetterSelectButton alloc] init];
+    button.name = LetterSelectButtonName;
+    CGPoint position = self.position;
+    INCREMENT_POINT_BY_POINT(position, CGPointMake(20, 20));
+    button.position = position;
+    button.zPosition = LetterSceneButtonZPosition;
+    return button;
+}
+
+- (GenericSpriteButton *)createOverlayForButton:(LetterSelectButton *)lsButton {
+    GenericSpriteButton *button = [[GenericSpriteButton alloc] init];
+    
+    button.size = CGSizeMake([[lsButton childNodeWithName:ANodeName] frame].origin.x +
+                             [[lsButton childNodeWithName:CNodeName] frame].origin.x +
+                             [[lsButton childNodeWithName:CNodeName] frame].size.width,
+                             [[lsButton childNodeWithName:ANodeName] frame].origin.y +
+                             [[lsButton childNodeWithName:BNodeName] frame].origin.y +
+                             [[lsButton childNodeWithName:BNodeName] frame].size.height);
+
+    button.name = LetterSelectButtonName;
+    CGPoint position = self.position;
+    INCREMENT_POINT_BY_POINT(position, CGPointMake(20, 20));
+    button.position = position;
+    button.zPosition = LetterSceneButtonZPosition;
+    button.color = [SKColor clearColor];
+    return button;
+}
+
+- (SKTransition *)getSceneTransition:(NSString *)letter {
+    SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:TransitionLengthInSeconds];;
+    if ([letter characterAtIndex:0] < [self.name characterAtIndex:0]) {
+        transition = [SKTransition pushWithDirection:SKTransitionDirectionRight duration:TransitionLengthInSeconds];
+    }
+    return transition;
 }
 
 - (void)transitionToSceneWithLetter:(NSString *)letter {
     DDLogInfo(@"Transitioning to the %@ scene", letter);
     
     SKScene *nextScene = [[LetterScene alloc] initWithSize:self.size andLetter:letter];
-    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionLengthInSeconds];
     
-    [self.view presentScene:nextScene transition:transition];
+    [self.view presentScene:nextScene transition:[self getSceneTransition:letter]];
     [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:nextScene.name];
 }
@@ -115,9 +164,20 @@
     [self transitionToSceneWithLetter:[self previousLetterString]];
 }
 
+- (void)transitionToLetterSelectScene {
+    DDLogInfo(@"Transitioning to the Letter Selection scene");
+    
+    SKScene *letterSelectionScene = [[LetterSelectScene alloc] init];
+    
+    [self.view presentScene:letterSelectionScene transition:[SKTransition doorsOpenHorizontalWithDuration:LetterSelectTransitionInSeconds]];
+    [self.view setIsAccessibilityElement:YES];
+    [self.view setAccessibilityIdentifier:letterSelectionScene.name];
+}
+
 - (void)connectSceneTransitions {
     [nextButton setTouchUpInsideTarget:self action:@selector(transitionToNextScene)];
     [previousButton setTouchUpInsideTarget:self action:@selector(transitionToPreviousScene)];
+    [letterSelectButton setTouchUpInsideTarget:self action:@selector(transitionToLetterSelectScene)];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -132,6 +192,7 @@
     
     [self.nextButtonProperty touchesEnded:touches withEvent:event];
     [self.previousButtonProperty touchesEnded:touches withEvent:event];
+    [self.letterSelectButtonProperty touchesEnded:touches withEvent:event];
 }
 
 - (NSString *)stringFromSceneUnicharLetter {

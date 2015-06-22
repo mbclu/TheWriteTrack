@@ -9,29 +9,31 @@
 #import "Constants.h"
 #import "GenericSpriteButton.h"
 #import "PathSegments.h"
+#import "LetterSelectButton.h"
 #import "TrackContainer.h"
 #import <SpriteKit/SpriteKit.h>
 
 typedef NS_ENUM(NSUInteger, ELetterSceneZOrder) {
     LetterSceneBackgroundZPosition,
     LetterSceneTrackContainerZPosition,
-    LetterSceneNextButtonZPosition,
-    LetterScenePreviousButtonZPosition
+    LetterSceneButtonZPosition
 };
 
 @interface LetterScene : SKScene {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;
+    GenericSpriteButton *letterSelectButton;
 }
 
 @property unichar letter;
 @property GenericSpriteButton *nextButtonProperty;
 @property GenericSpriteButton *previousButtonProperty;
-
+@property GenericSpriteButton *letterSelectButtonProperty;
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter;
 - (void)transitionToNextScene;
 - (void)transitionToPreviousScene;
+- (void)transitionToLetterSelectScene;
 - (void)connectSceneTransitions;
 
 @end

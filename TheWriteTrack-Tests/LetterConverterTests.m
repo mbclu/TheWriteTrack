@@ -120,9 +120,9 @@ void getGlyphAndPositionFromAttrString(LetterConverter *letterConverter, NSAttri
 
 - (void)testGivenAnAttributedStringWithMultipleCharactersThenMoreThanOneLetterIsInThePath {
     CGFloat fontSize = 10;
-    CGPathRef aLetterPath = [letterConverter createPathFromString:@"A" AndSize:fontSize];
-    CGPathRef bLetterPath = [letterConverter createPathFromString:@"B" AndSize:fontSize];
-    CGPathRef multiLetterPath = [letterConverter createPathFromString:@"AB" AndSize:fontSize];
+    CGPathRef aLetterPath = [letterConverter createPathFromString:@"A" andSize:fontSize];
+    CGPathRef bLetterPath = [letterConverter createPathFromString:@"B" andSize:fontSize];
+    CGPathRef multiLetterPath = [letterConverter createPathFromString:@"AB" andSize:fontSize];
     
     XCTAssertFalse(CGPathEqualToPath(aLetterPath, bLetterPath));
     XCTAssertFalse(CGPathEqualToPath(aLetterPath, multiLetterPath));

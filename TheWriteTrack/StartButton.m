@@ -7,9 +7,28 @@
 //
 
 #import "StartButton.h"
-#import "StartButtonConstants.h"
+#import "Constants.h"
 
 @implementation StartButton
+
+- (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath {
+    self = [super init];
+    
+    _attributedStringPath = strPath;
+    if (_attributedStringPath == nil) {
+        _attributedStringPath = [[AttributedStringPath alloc] init];
+    }
+    
+    _letterArray = [[_attributedStringPath letterConverter] getLetterArrayFromString:StartText];
+    [self addEmitters];
+    
+    return self;
+}
+
+- (instancetype)init {
+    self = [self initWithAttributedStringPath:nil];
+    return self;
+}
 
 - (SKAction *)createRepeatFollowActionForPath:(CGPathRef)path {
     SKAction *followStringPath = [SKAction followPath:path
@@ -58,27 +77,6 @@
         [self adjustOverallButtonSizeForLetterPath:path];
         [self addChild:node];
     }
-}
-
-- (instancetype)initWithAttributedStringPath:(AttributedStringPath *)strPath {
-    self = [super init];
-    
-    _attributedStringPath = strPath;
-    if (_attributedStringPath == nil) {
-        _attributedStringPath = [[AttributedStringPath alloc] init];
-    }
-    
-    _letterArray = [[_attributedStringPath letterConverter] getLetterArrayFromString:StartText];
-    [self addEmitters];
-    
-    self.anchorPoint = CGPointZero;
-    
-    return self;
-}
-
-- (instancetype)init {
-    self = [self initWithAttributedStringPath:nil];
-    return self;
 }
 
 @end

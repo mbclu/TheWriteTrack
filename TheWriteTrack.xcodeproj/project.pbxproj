@@ -22,7 +22,6 @@
 		82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		86ba380426a0da7d0693edef /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
 		908403fe8b4fcb41713948b5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
-		9B4DB71D8E2CAB13BE5077EC /* libPods-OnTheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */; };
 		9c0705e240b3870e3e11d957 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06e84e33b57bee0211ce863b /* calabash.framework */; };
 		9caf53473e3ba09f0d35d2d0 /* StartSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C7340E751AF77F2400915C8C /* StartSmoke.png */; };
 		9f8087f8b26322ff5cb6a7f8 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
@@ -83,6 +82,7 @@
 		C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */; };
 		C7F894191AF78C3900F2A27D /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
+		ECCAE33056F3D2636BAEC8D0 /* libPods-TheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */; };
 		ba5f3bb416ccda30ae7dee04 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
 		bd5de2f53c1df7d85136a815 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
 		c0c86b6a4c49a09b967fd398 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
@@ -108,6 +108,7 @@
 		43d0afec4f925143f9f92ad9 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.release.xcconfig"; sourceTree = "<group>"; };
+		BAB9FD649FC26D0F17DE72FD /* Pods-TheWriteTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheWriteTrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheWriteTrackTests/Pods-TheWriteTrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C710AB611A9ECA43002E7B79 /* LetterConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterConverter.h; path = TheWriteTrack/LetterConverter.h; sourceTree = SOURCE_ROOT; };
 		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
@@ -145,7 +146,7 @@
 		C77347431AE733F5005C2950 /* TitleTrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleTrain.h; path = TheWriteTrack/TitleTrain.h; sourceTree = SOURCE_ROOT; };
 		C77347441AE733F5005C2950 /* TitleTrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrain.m; path = TheWriteTrack/TitleTrain.m; sourceTree = SOURCE_ROOT; };
 		C77DF2ED1AC9BC62002A6251 /* PathInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PathInfo.h; path = TheWriteTrack/PathInfo.h; sourceTree = SOURCE_ROOT; };
-		C7839DEC1AF9B76400BC94FA /* OnTheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7839DEC1AF9B76400BC94FA /* TheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = TheWriteTrack/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		C79E71BA1B2AFCCE00F46EC8 /* TrackContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackContainer.h; path = TheWriteTrack/TrackContainer.h; sourceTree = SOURCE_ROOT; };
@@ -164,8 +165,8 @@
 		C7C4B8A81A8C2C4F009FA11B /* LetterScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterScene.h; path = TheWriteTrack/LetterScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* LetterScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterScene.m; path = TheWriteTrack/LetterScene.m; sourceTree = SOURCE_ROOT; };
 		C7C4B8AC1A8C2CBF009FA11B /* LetterSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LetterSceneTests.m; path = "TheWriteTrack-Tests/LetterSceneTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheWriteTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CED0501A86B9DA00A4DCC3 /* TheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7CED06E1A86B9DA00A4DCC3 /* TheWriteTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWriteTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D081731A8A312700DE5ECC /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TheWriteTrack/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		C7D081791A8A312700DE5ECC /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TheWriteTrack/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		C7D0817C1A8A312700DE5ECC /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameViewController.h; path = TheWriteTrack/GameViewController.h; sourceTree = SOURCE_ROOT; };
@@ -184,6 +185,8 @@
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA67C40235CDA4F031132A14 /* Pods-TheWriteTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheWriteTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheWriteTrackTests/Pods-TheWriteTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheWriteTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */,
-				9B4DB71D8E2CAB13BE5077EC /* libPods-OnTheWriteTrackTests.a in Frameworks */,
+				ECCAE33056F3D2636BAEC8D0 /* libPods-TheWriteTrackTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +233,8 @@
 				CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */,
 				76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */,
 				A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */,
+				DA67C40235CDA4F031132A14 /* Pods-TheWriteTrackTests.debug.xcconfig */,
+				BAB9FD649FC26D0F17DE72FD /* Pods-TheWriteTrackTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */,
 				43d0afec4f925143f9f92ad9 /* CFNetwork.framework */,
 				06e84e33b57bee0211ce863b /* calabash.framework */,
+				F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -399,9 +405,9 @@
 		C7CED0511A86B9DA00A4DCC3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */,
-				C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */,
-				C7839DEC1AF9B76400BC94FA /* OnTheWriteTrack.app */,
+				C7CED0501A86B9DA00A4DCC3 /* TheWriteTrack.app */,
+				C7CED06E1A86B9DA00A4DCC3 /* TheWriteTrackTests.xctest */,
+				C7839DEC1AF9B76400BC94FA /* TheWriteTrack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,9 +498,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2e0de9bebb895304458b464e /* OnTheWriteTrack-cal */ = {
+		2e0de9bebb895304458b464e /* TheWriteTrack-cal */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4a592609210a753fb1550296 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack-cal" */;
+			buildConfigurationList = 4a592609210a753fb1550296 /* Build configuration list for PBXNativeTarget "TheWriteTrack-cal" */;
 			buildPhases = (
 				2aa79896643d8a2ac1a41e02 /* Check Pods Manifest.lock */,
 				e229a25ea8dc2c66bfc0c583 /* Sources */,
@@ -506,14 +512,14 @@
 			);
 			dependencies = (
 			);
-			name = "OnTheWriteTrack-cal";
+			name = "TheWriteTrack-cal";
 			productName = "The Write Track-cal";
-			productReference = C7839DEC1AF9B76400BC94FA /* OnTheWriteTrack.app */;
+			productReference = C7839DEC1AF9B76400BC94FA /* TheWriteTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */ = {
+		C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack" */;
+			buildConfigurationList = C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "TheWriteTrack" */;
 			buildPhases = (
 				AA627B92010C4CC291E769EF /* Check Pods Manifest.lock */,
 				C7CED04C1A86B9DA00A4DCC3 /* Sources */,
@@ -525,14 +531,14 @@
 			);
 			dependencies = (
 			);
-			name = OnTheWriteTrack;
+			name = TheWriteTrack;
 			productName = "The Write Track";
-			productReference = C7CED0501A86B9DA00A4DCC3 /* OnTheWriteTrack.app */;
+			productReference = C7CED0501A86B9DA00A4DCC3 /* TheWriteTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C7CED06D1A86B9DA00A4DCC3 /* OnTheWriteTrackTests */ = {
+		C7CED06D1A86B9DA00A4DCC3 /* TheWriteTrackTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrackTests" */;
+			buildConfigurationList = C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "TheWriteTrackTests" */;
 			buildPhases = (
 				C474C894CF940B7CD52F048B /* Check Pods Manifest.lock */,
 				C7CED06A1A86B9DA00A4DCC3 /* Sources */,
@@ -545,9 +551,9 @@
 			dependencies = (
 				C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */,
 			);
-			name = OnTheWriteTrackTests;
+			name = TheWriteTrackTests;
 			productName = "The Write TrackTests";
-			productReference = C7CED06E1A86B9DA00A4DCC3 /* OnTheWriteTrackTests.xctest */;
+			productReference = C7CED06E1A86B9DA00A4DCC3 /* TheWriteTrackTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -561,6 +567,7 @@
 				TargetAttributes = {
 					C7CED04F1A86B9DA00A4DCC3 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = WYMPA75CX8;
 					};
 					C7CED06D1A86B9DA00A4DCC3 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -568,7 +575,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "OnTheWriteTrack" */;
+			buildConfigurationList = C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "TheWriteTrack" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -581,9 +588,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */,
-				C7CED06D1A86B9DA00A4DCC3 /* OnTheWriteTrackTests */,
-				2e0de9bebb895304458b464e /* OnTheWriteTrack-cal */,
+				C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */,
+				C7CED06D1A86B9DA00A4DCC3 /* TheWriteTrackTests */,
+				2e0de9bebb895304458b464e /* TheWriteTrack-cal */,
 			);
 		};
 /* End PBXProject section */
@@ -640,7 +647,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheWriteTrackTests/Pods-TheWriteTrackTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2aa79896643d8a2ac1a41e02 /* Check Pods Manifest.lock */ = {
@@ -803,7 +810,7 @@
 /* Begin PBXTargetDependency section */
 		C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C7CED04F1A86B9DA00A4DCC3 /* OnTheWriteTrack */;
+			target = C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */;
 			targetProxy = C7CED06F1A86B9DA00A4DCC3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -829,7 +836,7 @@
 					"\"$(SRCROOT)/calabash.framework/calabash\"",
 					"-lstdc++",
 				);
-				PRODUCT_NAME = OnTheWriteTrack;
+				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -873,7 +880,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -913,7 +920,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -927,14 +934,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TheWriteTrack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"Pods-OCMock\"",
 				);
-				PRODUCT_NAME = OnTheWriteTrack;
+				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -946,14 +955,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TheWriteTrack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-l\"Pods-OCMock\"",
 				);
-				PRODUCT_NAME = OnTheWriteTrack;
+				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -961,7 +972,7 @@
 		};
 		C7CED07C1A86B9DA00A4DCC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */;
+			baseConfigurationReference = DA67C40235CDA4F031132A14 /* Pods-TheWriteTrackTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -989,15 +1000,15 @@
 					XCTest,
 					"-ObjC",
 				);
-				PRODUCT_NAME = OnTheWriteTrackTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheWriteTrack.app/OnTheWriteTrack";
+				PRODUCT_NAME = TheWriteTrackTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 				USER_HEADER_SEARCH_PATHS = "\"/Users/clutter/projects/theWriteTrack/TheWriteTrack-Tests\"/** \"/Users/clutter/projects/theWriteTrack/TheWriteTrack\"/** \"/Users/clutter/projects/theWriteTrack/Pods/Headers\"/**";
 			};
 			name = Debug;
 		};
 		C7CED07D1A86B9DA00A4DCC3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */;
+			baseConfigurationReference = BAB9FD649FC26D0F17DE72FD /* Pods-TheWriteTrackTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1021,8 +1032,8 @@
 					XCTest,
 					"-ObjC",
 				);
-				PRODUCT_NAME = OnTheWriteTrackTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnTheWriteTrack.app/OnTheWriteTrack";
+				PRODUCT_NAME = TheWriteTrackTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 				USER_HEADER_SEARCH_PATHS = "\"/Users/clutter/projects/theWriteTrack/TheWriteTrack-Tests\"/** \"/Users/clutter/projects/theWriteTrack/TheWriteTrack\"/** \"/Users/clutter/projects/theWriteTrack/Pods/Headers\"/**";
 			};
 			name = Release;
@@ -1047,7 +1058,7 @@
 					"\"$(SRCROOT)/calabash.framework/calabash\"",
 					"-lstdc++",
 				);
-				PRODUCT_NAME = OnTheWriteTrack;
+				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1056,7 +1067,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4a592609210a753fb1550296 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack-cal" */ = {
+		4a592609210a753fb1550296 /* Build configuration list for PBXNativeTarget "TheWriteTrack-cal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				f618a0b8d56660f3105effdd /* Debug */,
@@ -1065,7 +1076,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "OnTheWriteTrack" */ = {
+		C7CED04B1A86B9DA00A4DCC3 /* Build configuration list for PBXProject "TheWriteTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C7CED0761A86B9DA00A4DCC3 /* Debug */,
@@ -1074,7 +1085,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrack" */ = {
+		C7CED0781A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "TheWriteTrack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C7CED0791A86B9DA00A4DCC3 /* Debug */,
@@ -1083,7 +1094,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "OnTheWriteTrackTests" */ = {
+		C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "TheWriteTrackTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C7CED07C1A86B9DA00A4DCC3 /* Debug */,

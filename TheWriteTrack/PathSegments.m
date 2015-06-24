@@ -11,10 +11,8 @@
 #import "LayoutMath.h"
 #import "PathSegmentDictionary.h"
 
-#if (DEBUG)
-    #import "PathInfo.h"
-    #import <CocoaLumberjack/CocoaLumberjack.h>
-#endif
+#import "PathInfo.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 const NSUInteger segmentsPerDimension = 4;
 const NSUInteger numberOfCurvedSegments = 14;

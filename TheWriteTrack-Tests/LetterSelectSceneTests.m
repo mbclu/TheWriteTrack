@@ -11,7 +11,9 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface LetterSelectSceneTest : XCTestCase
+@interface LetterSelectSceneTest : XCTestCase {
+    LetterSelectScene *theLetterSelectScene;
+}
 
 @end
 
@@ -19,13 +21,15 @@
 
 - (void)setUp {
     [super setUp];
+    theLetterSelectScene = [[LetterSelectScene alloc] init];
 }
 
 - (void)tearDown {
     [super tearDown];
 }
 
-- (void)test {
+- (void)testScaleModeIsAspectFit {
+    XCTAssertEqual(theLetterSelectScene.scaleMode, SKSceneScaleModeAspectFill);
 }
 
 @end

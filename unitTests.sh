@@ -7,15 +7,15 @@ killall 'iOS Simulator' 1&>/dev/null
 bundle install
 bundle exec pod install
 
-xctool -workspace OnTheWriteTrack.xcworkspace/ \
-	 -scheme OnTheWriteTrack \
+xctool -workspace TheWriteTrack.xcworkspace/ \
+	 -scheme TheWriteTrack \
 	 -configuration Debug \
 	 -destination "platform=iOS Simulator,name=iPhone 6,OS=8.3" \
 	 -reporter pretty \
 	 -reporter junit:unitTestResults.xml \
 	 clean \
 	 test \
-	 -only OnTheWriteTrackTests $TEST_CLASS\
+	 -only TheWriteTrackTests $TEST_CLASS\
 	 -freshSimulator \
 	 -resetSimulator \
 	 -freshInstall \

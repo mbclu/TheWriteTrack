@@ -10,8 +10,8 @@ bundle exec pod install
 
 echo 'y' | bundle exec calabash-ios download
 
-xctool -workspace OnTheWriteTrack.xcworkspace/ \
-	 -scheme OnTheWriteTrack-cal \
+xctool -workspace TheWriteTrack.xcworkspace/ \
+	 -scheme TheWriteTrack-cal \
 	 -configuration Debug \
 	 -destination "platform=iOS Simulator,name=iPhone 6,OS=8.3" \
 	 clean \

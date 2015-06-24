@@ -115,7 +115,7 @@ NSTimeInterval const LetterSelectTransitionInSeconds = 0.65;
     CGPoint position = self.position;
     INCREMENT_POINT_BY_POINT(position, CGPointMake(20, 20));
     button.position = position;
-    button.zPosition = LetterSceneButtonZPosition;
+    button.zPosition = LetterSceneButtonZPosition - 1;
     return button;
 }
 

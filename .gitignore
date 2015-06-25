@@ -1,18 +1,14 @@
 #xcode
 build/
 xcuserdata/ 
+*.xcworkspace
 
 # cocoapads
 Pods/
 
-# sprite builder
-theWriteTrack.spritebuilder/
-
-# corona project
-theWriteTrack.corona/
-
 # raw image files before conversion to assets
 images/raw
+images/sketches
 
 # irb
 .irb-history
@@ -26,3 +22,4 @@ test-servers/
 
 # test results
 unitTestResults.xml
+

@@ -11,6 +11,8 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
+#import "CGMatchers.h"
+
 @interface LetterSelectSceneTest : XCTestCase {
     LetterSelectScene *theLetterSelectScene;
 }
@@ -30,6 +32,14 @@
 
 - (void)testScaleModeIsAspectFit {
     XCTAssertEqual(theLetterSelectScene.scaleMode, SKSceneScaleModeAspectFill);
+}
+
+- (void)testSceneSizeIsMainScreenSize {
+    XCTAssertEqualSizes(theLetterSelectScene.size, [UIScreen mainScreen].bounds.size);
+}
+
+- (void)testBlendModeIsReplace {
+    XCTAssertEqual(theLetterSelectScene.blendMode, SKBlendModeReplace);
 }
 
 @end

@@ -16,7 +16,7 @@
 #import "Constants.h"
 #import "Train.h"
 
-NSTimeInterval const LetterSelectTransitionInSeconds = 0.65;
+NSTimeInterval const LetterSelectTransitionInSeconds = 0.55;
 
 @implementation LetterScene
 

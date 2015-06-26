@@ -9,7 +9,7 @@
 #import "GenericSpriteButton.h"
 #import "LetterConverter.h"
 
-@interface ChosenLetterButton : GenericSpriteButton {
+@interface ChosenLetterButton : SKSpriteNode {
     LetterConverter *letterConverter;
 }
 

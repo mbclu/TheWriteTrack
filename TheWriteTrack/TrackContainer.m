@@ -15,8 +15,8 @@
 NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.2;
 NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.1;
 #else
-NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.5;
-NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.5;
+NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.4;
+NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
 #endif
 
 @implementation TrackContainer

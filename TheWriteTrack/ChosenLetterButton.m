@@ -40,7 +40,7 @@
     CGMutablePathRef path = [letterConverter createPathFromString:letter andSize:LetterSelectButtonFontSize];
     SKShapeNode *node = [SKShapeNode shapeNodeWithPath:path];
     node.name = name;
-    node.userInteractionEnabled = YES;
+    node.userInteractionEnabled = NO;
     node.strokeColor = [UIColor colorWithWhite:0.2 alpha:0.8];
     node.lineWidth = 0.5;
     return node;

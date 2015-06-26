@@ -149,7 +149,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInNode:self.parent];
+    CGPoint touchPoint = [touch locationInNode:self];
     
     DDLogInfo(@"Touches ended at point : %@ on the Letter Select Scene",
               NSStringFromCGPoint(touchPoint));
@@ -159,7 +159,9 @@
 
 - (void)evaluateTouchAtPoint:(CGPoint)touchPoint {
     for (SKNode* child in self.children) {
-        if (CGRectContainsPoint(child.frame, touchPoint) && [child.name containsString:ChosenLetterOverlay]) {
+        if ([child containsPoint:touchPoint] && [child.name containsString:ChosenLetterOverlay]) {
+            DDLogDebug(@"Child with name %@ and AccessibilityValue %@ Touched on the LetterSelectScene",
+                       child.name, child.accessibilityValue);
             [self transitionToLetterScene:child.accessibilityValue];
         }
     }
@@ -170,7 +172,7 @@
     
     SKScene *letterScene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size andLetter:letter];
     
-    [self.view presentScene:letterScene transition:[SKTransition doorwayWithDuration:0.5]];
+    [self.view presentScene:letterScene transition:[SKTransition fadeWithDuration:1.0]];
     [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:letterScene.name];
 }

@@ -25,6 +25,9 @@ CGFloat const TransitionLengthInSeconds = 0.6;
 NSUInteger const SingleLetterLength = 1;
 CFStringRef const DefaultLetterFont = (CFStringRef)@"Thonburi";
 
+/* Buttons */
+CGFloat const LetterSelectButtonFontSize = 40.0;
+
 /* Start Button */
 NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";
@@ -38,3 +41,11 @@ CGFloat const FollowPathDuration = 2.0;     // The smaller the number
 NSString *const ANodeName = @"ANode";
 NSString *const BNodeName = @"BNode";
 NSString *const CNodeName = @"CNode";
+
+/* Chosen Letter Button */
+NSString *const ChosenLetterNode = @"LetterNode";
+
+/* Scenes */
+/* Letter Select Scene */
+double const MinMountainHeightChangePercentage = 0.30;
+NSString *const ChosenLetterOverlay = @"LetterOverlayNode";

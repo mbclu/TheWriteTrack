@@ -11,8 +11,6 @@
 #import "Constants.h"
 #import "LetterConverter.h"
 
-const CGFloat LetterSelectButtonFontSize = 40.0;
-
 @implementation LetterSelectButton
 
 - (instancetype)init {

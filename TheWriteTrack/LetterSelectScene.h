@@ -6,8 +6,13 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
+#import "GenericSpriteButton.h"
 #import <SpriteKit/SpriteKit.h>
 
-@interface LetterSelectScene : SKScene
+@interface LetterSelectScene : SKScene {
+    GenericSpriteButton *chosenLetterButton;
+}
+
+@property GenericSpriteButton *chosenLetterButtonProperty;
 
 @end

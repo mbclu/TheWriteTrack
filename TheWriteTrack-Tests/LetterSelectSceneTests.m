@@ -38,8 +38,8 @@
     XCTAssertEqualSizes(theLetterSelectScene.size, [UIScreen mainScreen].bounds.size);
 }
 
-- (void)testBlendModeIsReplace {
-    XCTAssertEqual(theLetterSelectScene.blendMode, SKBlendModeReplace);
+- (void)testBlendModeIsAlpha {
+    XCTAssertEqual(theLetterSelectScene.blendMode, SKBlendModeAlpha);
 }
 
 @end

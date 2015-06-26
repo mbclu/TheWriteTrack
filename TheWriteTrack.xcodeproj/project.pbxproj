@@ -64,6 +64,9 @@
 		C79E71C51B2AFF6A00F46EC8 /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */; };
 		C79E71C61B2AFF6A00F46EC8 /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */; };
 		C79E71C81B2AFFAD00F46EC8 /* TitleSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71C71B2AFFAD00F46EC8 /* TitleSceneTests.m */; };
+		C7A627AA1B3C1A7C00E966EF /* ChosenLetterButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A627A91B3C1A7C00E966EF /* ChosenLetterButtonTests.m */; };
+		C7A627AD1B3C1ABB00E966EF /* ChosenLetterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */; };
+		C7A627AE1B3C1ACB00E966EF /* ChosenLetterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */; };
 		C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
 		C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */; };
 		C7B697551AF2460C0066086E /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
@@ -155,6 +158,9 @@
 		C79E71C11B2AFF6A00F46EC8 /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScene.h; path = TheWriteTrack/TitleScene.h; sourceTree = SOURCE_ROOT; };
 		C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleScene.m; path = TheWriteTrack/TitleScene.m; sourceTree = SOURCE_ROOT; };
 		C79E71C71B2AFFAD00F46EC8 /* TitleSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleSceneTests.m; path = "TheWriteTrack-Tests/TitleSceneTests.m"; sourceTree = SOURCE_ROOT; };
+		C7A627A91B3C1A7C00E966EF /* ChosenLetterButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChosenLetterButtonTests.m; path = "TheWriteTrack-Tests/ChosenLetterButtonTests.m"; sourceTree = SOURCE_ROOT; };
+		C7A627AB1B3C1ABB00E966EF /* ChosenLetterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChosenLetterButton.h; path = TheWriteTrack/ChosenLetterButton.h; sourceTree = SOURCE_ROOT; };
+		C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChosenLetterButton.m; path = TheWriteTrack/ChosenLetterButton.m; sourceTree = SOURCE_ROOT; };
 		C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttributedStringPath.h; path = TheWriteTrack/AttributedStringPath.h; sourceTree = SOURCE_ROOT; };
 		C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPath.m; path = TheWriteTrack/AttributedStringPath.m; sourceTree = SOURCE_ROOT; };
 		C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AttributedStringPathTests.m; path = "TheWriteTrack-Tests/AttributedStringPathTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -312,6 +318,8 @@
 				C7B697541AF2460C0066086E /* StartButton.m */,
 				C7554D981B373B1000E13027 /* LetterSelectButton.h */,
 				C7554D991B373B1000E13027 /* LetterSelectButton.m */,
+				C7A627AB1B3C1ABB00E966EF /* ChosenLetterButton.h */,
+				C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 				C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */,
 				C7554D9D1B373B3200E13027 /* LetterSelectButtonTests.m */,
 				C7B697561AF246330066086E /* StartButtonTests.m */,
+				C7A627A91B3C1A7C00E966EF /* ChosenLetterButtonTests.m */,
 			);
 			name = "Button-Tests";
 			sourceTree = "<group>";
@@ -740,6 +749,7 @@
 				C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */,
 				C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */,
+				C7A627AD1B3C1ABB00E966EF /* ChosenLetterButton.m in Sources */,
 				C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */,
 				C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */,
 				C75D0E0E1B0C2A08006A71C8 /* Train.m in Sources */,
@@ -761,6 +771,7 @@
 			files = (
 				C75D0E0B1B0C285B006A71C8 /* TrainTests.m in Sources */,
 				C79E71BF1B2AFE9400F46EC8 /* TrackContainerTests.m in Sources */,
+				C7A627AA1B3C1A7C00E966EF /* ChosenLetterButtonTests.m in Sources */,
 				C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */,
 				C7554D9E1B373B3200E13027 /* LetterSelectButtonTests.m in Sources */,
 				C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */,
@@ -790,6 +801,7 @@
 				C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
 				14d627ad861be84bef577fca /* AttributedStringPath.m in Sources */,
 				0aeb68f61d41660a7508bc58 /* LetterConverter.m in Sources */,
+				C7A627AE1B3C1ACB00E966EF /* ChosenLetterButton.m in Sources */,
 				c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */,
 				82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */,
 				C75D0E0F1B0C2A08006A71C8 /* Train.m in Sources */,

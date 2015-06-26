@@ -26,6 +26,9 @@ FOUNDATION_EXPORT CGFloat const TransitionLengthInSeconds;
 FOUNDATION_EXPORT NSUInteger const SingleLetterLength;
 FOUNDATION_EXPORT CFStringRef const DefaultLetterFont;
 
+/* Buttons */
+FOUNDATION_EXPORT CGFloat const LetterSelectButtonFontSize;
+
 /* Start Button */
 FOUNDATION_EXPORT NSString *const StartText;
 FOUNDATION_EXPORT NSString *const StartStringSmokeSKS;
@@ -38,3 +41,11 @@ FOUNDATION_EXPORT CGFloat const FollowPathDuration;
 FOUNDATION_EXPORT NSString *const ANodeName;
 FOUNDATION_EXPORT NSString *const BNodeName;
 FOUNDATION_EXPORT NSString *const CNodeName;
+
+/* Chosen Letter Button */
+FOUNDATION_EXPORT NSString *const ChosenLetterNode;
+
+/* Scenes */
+/* Letter Select Scene */
+FOUNDATION_EXPORT double const MinMountainHeightChangePercentage;
+FOUNDATION_EXPORT NSString *const ChosenLetterOverlay;

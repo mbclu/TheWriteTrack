@@ -9,9 +9,11 @@
 #import "LetterSelectScene.h"
 #import "LayoutMath.h"
 #import "LetterSelectButton.h"
+#import "ChosenLetterButton.h"
+#import "Constants.h"
+#import "LetterScene.h"
 
-#define ARC4RANDOM_MAX      0x100000000
-double const minMountainHeightChangePercentage = 0.30;
+#import "CocoaLumberjack.h"
 
 @implementation LetterSelectScene {
     UIColor *backgroundColor;
@@ -70,7 +72,7 @@ double const minMountainHeightChangePercentage = 0.30;
     CGPathRef mountainsPath = [self createMountainsPathWithVectorCount:60.0 andMaxHeightChange:0.600];
 
     SKShapeNode *backgroundMountainsNode = [SKShapeNode shapeNodeWithPath:backgroundMountainsPath];
-    backgroundMountainsNode.name = @"mountains";
+    backgroundMountainsNode.name = @"backgroundMountains";
     backgroundMountainsNode.lineWidth = 0.0;
     backgroundMountainsNode.fillColor = backgroundMountainsColor;
     backgroundMountainsNode.yScale = 0.7;
@@ -88,22 +90,18 @@ double const minMountainHeightChangePercentage = 0.30;
 }
 
 - (void)grass {
-    SKShapeNode *grassNode = [SKShapeNode shapeNodeWithRect:CGRectMake(0, 0, self.size.width, self.size.height * 0.21)];
+    SKShapeNode *grassNode = [SKShapeNode shapeNodeWithRect:CGRectMake(0, 0, self.size.width, self.size.height * 0.20)];
     grassNode.name = @"grass";
     grassNode.lineWidth = 0.0;
     grassNode.fillColor = grassColor;
     [self addChild:grassNode];
 }
 
-- (void)letters {
-//    GenericSpriteButton
-}
-
 - (CGPathRef)createMountainsPathWithVectorCount:(double)vectorCount andMaxHeightChange:(double)maxHeightChange {
     CGMutablePathRef mountainsPath = CGPathCreateMutable();
-    CGPathMoveToPoint(mountainsPath, nil, 0.0, self.size.height * minMountainHeightChangePercentage);
+    CGPathMoveToPoint(mountainsPath, nil, 0.0, self.size.height * MinMountainHeightChangePercentage);
     
-    double heightPercentage = minMountainHeightChangePercentage;
+    double heightPercentage = MinMountainHeightChangePercentage;
     double widthPercentage = 0.0;
     
     double numberOfMountainVectors = vectorCount;
@@ -116,7 +114,7 @@ double const minMountainHeightChangePercentage = 0.30;
     CGPathAddLineToPoint(mountainsPath, nil, self.size.width, (self.size.height * heightPercentage));
     CGPathAddLineToPoint(mountainsPath, nil, self.size.width, (self.size.height * 0.20));
     CGPathAddLineToPoint(mountainsPath, nil, 0.0, (self.size.height * 0.20));
-    CGPathAddLineToPoint(mountainsPath, nil, 0.0, self.size.height * minMountainHeightChangePercentage);
+    CGPathAddLineToPoint(mountainsPath, nil, 0.0, self.size.height * MinMountainHeightChangePercentage);
     
     return (CGPathRef)mountainsPath;
 }
@@ -127,8 +125,8 @@ double const minMountainHeightChangePercentage = 0.30;
 
     percentage += (percentageChange * percentageChangeDirection);
     
-    if (percentage < minMountainHeightChangePercentage) {
-        percentage = minMountainHeightChangePercentage;
+    if (percentage < MinMountainHeightChangePercentage) {
+        percentage = MinMountainHeightChangePercentage;
         percentageChangeDirection = +1.0;
     } else if (percentage > max) {
         percentage = max;
@@ -136,6 +134,45 @@ double const minMountainHeightChangePercentage = 0.30;
     }
     
     return percentage;
+}
+
+- (void)letters {
+    CGPoint buttonPosition = CGPointMake(15, self.size.height * 0.08);
+    for (unichar letter = 'A'; letter <= 'Z'; letter++) {
+        ChosenLetterButton *letterButton = [[ChosenLetterButton alloc] initWithLetter:letter];
+        letterButton.position = buttonPosition;
+        [self addChild:letterButton];
+        
+        INCREMENT_POINT_BY_POINT(buttonPosition, CGPointMake(LetterSelectButtonFontSize * 0.90, 0));
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInNode:self.parent];
+    
+    DDLogInfo(@"Touches ended at point : %@ on the Letter Select Scene",
+              NSStringFromCGPoint(touchPoint));
+    
+    [self evaluateTouchAtPoint:touchPoint];
+}
+
+- (void)evaluateTouchAtPoint:(CGPoint)touchPoint {
+    for (SKNode* child in self.children) {
+        if (CGRectContainsPoint(child.frame, touchPoint) && [child.name containsString:ChosenLetterOverlay]) {
+            [self transitionToLetterScene:child.accessibilityValue];
+        }
+    }
+}
+
+- (void)transitionToLetterScene:(NSString *)letter {
+    DDLogInfo(@"Transitioning to the Letter <%@> scene", letter);
+    
+    SKScene *letterScene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size andLetter:letter];
+    
+    [self.view presentScene:letterScene transition:[SKTransition doorwayWithDuration:0.5]];
+    [self.view setIsAccessibilityElement:YES];
+    [self.view setAccessibilityIdentifier:letterScene.name];
 }
 
 @end

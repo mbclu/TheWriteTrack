@@ -16,8 +16,6 @@
 #import "Constants.h"
 #import "Train.h"
 
-NSTimeInterval const LetterSelectTransitionInSeconds = 0.55;
-
 @implementation LetterScene
 
 @synthesize nextButtonProperty = nextButton;
@@ -169,7 +167,9 @@ NSTimeInterval const LetterSelectTransitionInSeconds = 0.55;
     
     SKScene *letterSelectionScene = [[LetterSelectScene alloc] init];
     
-    [self.view presentScene:letterSelectionScene transition:[SKTransition doorsOpenHorizontalWithDuration:LetterSelectTransitionInSeconds]];
+    UIColor *const FadeColorDarkGray = [UIColor colorWithRed:0.26 green:0.26 blue:0.26 alpha:0.9];
+    NSTimeInterval const FadeDurationHalfSecond = 0.50;
+    [self.view presentScene:letterSelectionScene transition:[SKTransition fadeWithColor:FadeColorDarkGray duration:FadeDurationHalfSecond]];
     [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:letterSelectionScene.name];
 }

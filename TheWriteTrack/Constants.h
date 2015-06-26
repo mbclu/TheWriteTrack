@@ -27,8 +27,6 @@ FOUNDATION_EXPORT NSUInteger const SingleLetterLength;
 FOUNDATION_EXPORT CFStringRef const DefaultLetterFont;
 
 /* Buttons */
-FOUNDATION_EXPORT CGFloat const LetterSelectButtonFontSize;
-
 /* Start Button */
 FOUNDATION_EXPORT NSString *const StartText;
 FOUNDATION_EXPORT NSString *const StartStringSmokeSKS;

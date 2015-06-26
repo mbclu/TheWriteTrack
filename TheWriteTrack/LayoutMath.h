@@ -24,6 +24,7 @@
 
 + (CGFloat)sizeOfSmallerDimension;
 + (CGFloat)maximumViableFontSize;
++ (CGFloat)letterButtonFontSizeByForDevice;
 + (CGFloat)xCenterForMainScreen;
 + (CGFloat)yCenterForMainScreen;
 + (CGPoint)centerOfMainScreen;

@@ -34,7 +34,6 @@
     skyColor = [UIColor colorWithRed:0.40 green:0.70 blue:0.97 alpha:1.0];
     sunColor = [UIColor colorWithRed:1.00 green:1.00 blue:0.52 alpha:0.80];
     sunStrokeColor = [UIColor colorWithRed:1.00 green:0.95 blue:0.62 alpha:0.30];
-//    mountainsColor = [UIColor colorWithRed:0.70 green:0.70 blue:0.99 alpha:1.0];
     mountainsColor = [UIColor colorWithRed:0.46 green:0.65 blue:0.69 alpha:1.0];
     backgroundMountainsColor = [UIColor colorWithRed:0.85 green:0.80 blue:0.96 alpha:1.0];
     grassColor = [UIColor colorWithRed:0.73 green:0.93 blue:0.65 alpha:1.0];
@@ -68,8 +67,8 @@
 }
 
 - (void)mountains {
-    CGPathRef backgroundMountainsPath = [self createMountainsPathWithVectorCount:60.0 andMaxHeightChange:0.700];
-    CGPathRef mountainsPath = [self createMountainsPathWithVectorCount:60.0 andMaxHeightChange:0.600];
+    CGPathRef backgroundMountainsPath = [self createMountainsPathWithVectorCount:60.0 andMaxHeightChange:0.7];
+    CGPathRef mountainsPath = [self createMountainsPathWithVectorCount:60.0 andMaxHeightChange:0.6];
 
     SKShapeNode *backgroundMountainsNode = [SKShapeNode shapeNodeWithPath:backgroundMountainsPath];
     backgroundMountainsNode.name = @"backgroundMountains";
@@ -137,13 +136,22 @@
 }
 
 - (void)letters {
-    CGPoint buttonPosition = CGPointMake(15, self.size.height * 0.08);
-    for (unichar letter = 'A'; letter <= 'Z'; letter++) {
+    CGPoint buttonPosition = CGPointMake(self.size.width * 0.2, self.size.height * 0.7);
+    
+    [self AddLettersInRange:('A' + 13) :'Z' withStartPosition:buttonPosition];
+    
+    INCREMENT_POINT_BY_POINT(buttonPosition, CGPointMake(0, [LayoutMath letterButtonFontSizeByForDevice]));
+    
+    [self AddLettersInRange:'A' :('A' + 12) withStartPosition:buttonPosition];
+}
+
+- (void)AddLettersInRange:(unichar)startLetter :(unichar)endLetter withStartPosition:(CGPoint)position {
+    for (unichar letter = startLetter; letter <= endLetter; letter++) {
         ChosenLetterButton *letterButton = [[ChosenLetterButton alloc] initWithLetter:letter];
-        letterButton.position = buttonPosition;
+        letterButton.position = position;
         [self addChild:letterButton];
         
-        INCREMENT_POINT_BY_POINT(buttonPosition, CGPointMake(LetterSelectButtonFontSize * 0.90, 0));
+        INCREMENT_POINT_BY_POINT(position, CGPointMake([LayoutMath letterButtonFontSizeByForDevice] * 0.90, 0));
     }
 }
 
@@ -172,7 +180,10 @@
     
     SKScene *letterScene = [[LetterScene alloc] initWithSize:[UIScreen mainScreen].bounds.size andLetter:letter];
     
-    [self.view presentScene:letterScene transition:[SKTransition fadeWithDuration:1.0]];
+    UIColor *const FadeColorDarkGray = [UIColor colorWithRed:0.26 green:0.26 blue:0.26 alpha:0.9];
+    NSTimeInterval const FadeDurationHalfSecond = 0.50;
+    
+    [self.view presentScene:letterScene transition:[SKTransition fadeWithColor:FadeColorDarkGray duration:FadeDurationHalfSecond]];
     [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:letterScene.name];
 }

@@ -11,8 +11,8 @@
 #import <XCTest/XCTest.h>
 
 @interface ChosenLetterButtonTests : XCTestCase {
-    ChosenLetterButton *theButton;
-    SKNode *theLetterNode;
+    ChosenLetterButton *aButton;
+    SKNode *aLetterNode;
 }
 
 @end
@@ -22,8 +22,8 @@
 - (void)setUp {
     [super setUp];
     unichar aLetter = 'A';
-    theButton = [[ChosenLetterButton alloc] initWithLetter:aLetter];
-    theLetterNode = [theButton childNodeWithName:@"LetterNode"];
+    aButton = [[ChosenLetterButton alloc] initWithLetter:aLetter];
+    aLetterNode = [aButton childNodeWithName:@"LetterNode"];
 }
 
 - (void)tearDown {
@@ -32,28 +32,30 @@
 
 - (void)testTheLetterIsAsignedToTheButtonWhenInitialized {
     unichar aLetter = 'A';
-    theButton = [[ChosenLetterButton alloc] initWithLetter:aLetter];
-    XCTAssertEqual(theButton.letter, aLetter);
+    aButton = [[ChosenLetterButton alloc] initWithLetter:aLetter];
+    XCTAssertEqual(aButton.letter, aLetter);
 }
 
 - (void)testTheButtonHasANodeRepresentingALetter {
-    XCTAssertNotNil(theLetterNode);
+    XCTAssertNotNil(aLetterNode);
 }
 
-- (void)testUserInteractionIsEnabledForTheLetterNode {
-    XCTAssertTrue(theLetterNode.userInteractionEnabled);
+- (void)testUserInteractionIsDisabledForTheLetterNode {
+    XCTAssertFalse(aLetterNode.userInteractionEnabled);
 }
 
 - (void)testLineWidthIsHalfAPointForTheLetterNode {
-    XCTAssertEqual(((SKShapeNode *)theLetterNode).lineWidth, 0.5);
+    XCTAssertEqual(((SKShapeNode *)aLetterNode).lineWidth, 0.5);
 }
 
 - (void)testTheAccessibilityValueOfTheButtonIsSetToTheLetter {
-    XCTAssertEqualObjects(theButton.accessibilityValue, @"A");
+    XCTAssertEqualObjects(aButton.accessibilityValue, @"A");
+    ChosenLetterButton *button = [[ChosenLetterButton alloc] initWithLetter:'B'];
+    XCTAssertEqualObjects(button.accessibilityValue, @"B");
 }
 
 - (void)testTheNameOfTheButtonIsLetterOverlayNode {
-    XCTAssertEqualObjects(theButton.name, @"LetterOverlayNode");
+    XCTAssertEqualObjects(aButton.name, @"LetterOverlayNode");
 }
 
 @end

@@ -23,6 +23,10 @@
     return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING);
 }
 
++ (CGFloat)letterButtonFontSizeByForDevice {
+    return ([LayoutMath sizeOfSmallerDimension] * 0.10);
+}
+
 + (CGFloat)xCenterForMainScreen {
     CGFloat center = HALF_OF([[UIScreen mainScreen] bounds].size.width);
     UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];

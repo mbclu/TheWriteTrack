@@ -9,6 +9,7 @@
 #import "ChosenLetterButton.h"
 
 #import "Constants.h"
+#import "LayoutMath.h"
 #import "LetterConverter.h"
 
 @implementation ChosenLetterButton
@@ -37,7 +38,7 @@
 }
 
 - (SKShapeNode *)createNodeNamed:(NSString *)name withLetter:(NSString *)letter {
-    CGMutablePathRef path = [letterConverter createPathFromString:letter andSize:LetterSelectButtonFontSize];
+    CGMutablePathRef path = [letterConverter createPathFromString:letter andSize:[LayoutMath letterButtonFontSizeByForDevice]];
     SKShapeNode *node = [SKShapeNode shapeNodeWithPath:path];
     node.name = name;
     node.userInteractionEnabled = NO;

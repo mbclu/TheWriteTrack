@@ -26,8 +26,6 @@ NSUInteger const SingleLetterLength = 1;
 CFStringRef const DefaultLetterFont = (CFStringRef)@"Thonburi";
 
 /* Buttons */
-CGFloat const LetterSelectButtonFontSize = 40.0;
-
 /* Start Button */
 NSString *const StartText = @"start";
 NSString *const StartStringSmokeSKS = @"StartStringSmoke";

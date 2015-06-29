@@ -136,13 +136,13 @@
 }
 
 - (void)letters {
-    CGPoint buttonPosition = CGPointMake(self.size.width * 0.2, self.size.height * 0.7);
+    CGPoint buttonPosition = CGPointMake(self.size.width * 0.2, self.size.height * 0.65);
     
-    [self AddLettersInRange:('A' + 13) :'Z' withStartPosition:buttonPosition];
+    [self AddLettersInRange:'N' :'Z' withStartPosition:buttonPosition];
     
     INCREMENT_POINT_BY_POINT(buttonPosition, CGPointMake(0, [LayoutMath letterButtonFontSizeByForDevice]));
     
-    [self AddLettersInRange:'A' :('A' + 12) withStartPosition:buttonPosition];
+    [self AddLettersInRange:'A' :'M' withStartPosition:buttonPosition];
 }
 
 - (void)AddLettersInRange:(unichar)startLetter :(unichar)endLetter withStartPosition:(CGPoint)position {
@@ -151,7 +151,20 @@
         letterButton.position = position;
         [self addChild:letterButton];
         
-        INCREMENT_POINT_BY_POINT(position, CGPointMake([LayoutMath letterButtonFontSizeByForDevice] * 0.90, 0));
+        switch (letter) {
+            case 'H':
+                INCREMENT_POINT_BY_POINT(position, CGPointMake([LayoutMath letterButtonFontSizeByForDevice] * 1, 0));
+                break;
+            case 'I':
+                INCREMENT_POINT_BY_POINT(position, CGPointMake([LayoutMath letterButtonFontSizeByForDevice] * 0.50, 0));
+                break;
+            case 'W':
+                INCREMENT_POINT_BY_POINT(position, CGPointMake([LayoutMath letterButtonFontSizeByForDevice] * 1, 0));
+                break;
+            default:
+                INCREMENT_POINT_BY_POINT(position, CGPointMake([LayoutMath letterButtonFontSizeByForDevice] * 0.80, 0));
+                break;
+        }
     }
 }
 

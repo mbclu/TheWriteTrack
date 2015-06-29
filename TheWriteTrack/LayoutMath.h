@@ -23,6 +23,7 @@
 @interface LayoutMath : NSObject
 
 + (CGFloat)sizeOfSmallerDimension;
++ (CGFloat)sizeOfLargerDimension;
 + (CGFloat)maximumViableFontSize;
 + (CGFloat)letterButtonFontSizeByForDevice;
 + (CGFloat)xCenterForMainScreen;

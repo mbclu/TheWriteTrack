@@ -19,12 +19,20 @@
     return size;
 }
 
++ (CGFloat)sizeOfLargerDimension {
+    CGFloat size = [UIScreen mainScreen].bounds.size.width;
+    if (size < [UIScreen mainScreen].bounds.size.height) {
+        size = [UIScreen mainScreen].bounds.size.height;
+    }
+    return size;
+}
+
 + (CGFloat)maximumViableFontSize {
     return ([LayoutMath sizeOfSmallerDimension] - TOP_PADDING - BOTTOM_PADDING);
 }
 
 + (CGFloat)letterButtonFontSizeByForDevice {
-    return ([LayoutMath sizeOfSmallerDimension] * 0.10);
+    return ([LayoutMath sizeOfLargerDimension] * 0.80 / 13);
 }
 
 + (CGFloat)xCenterForMainScreen {

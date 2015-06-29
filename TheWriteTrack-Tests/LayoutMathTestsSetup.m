@@ -108,6 +108,14 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     XCTAssertEqual([LayoutMath interpolateLineWithStep:0.1 start:start.x end:end.x], 9);
 }
 
+- (void)testTheLetterButtonFontSizeAllowsFor13LettersIn75To85PercentOfTheScreen {
+    CGFloat minSize = [UIScreen mainScreen].bounds.size.width * 0.75 / 13;
+    CGFloat maxSize = [UIScreen mainScreen].bounds.size.width * 0.85 / 13;
+    CGFloat size = [LayoutMath letterButtonFontSizeByForDevice];
+    XCTAssertGreaterThan(size, minSize);
+    XCTAssertLessThan(size, maxSize);
+}
+
 @end
 
 @interface LayoutMathTests_Landscape : LayoutMathTestsSetup
@@ -131,6 +139,13 @@ CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     XCTAssertLessThan(height, width);
     XCTAssertEqualWithAccuracy([LayoutMath sizeOfSmallerDimension], height, defaultAccuracy);
+}
+
+- (void)testGivenALandscapeLayoutTheLargerOfWidthOrHeightIsFoundToBeWidth {
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    XCTAssertLessThan(height, width);
+    XCTAssertEqualWithAccuracy([LayoutMath sizeOfLargerDimension], width, defaultAccuracy);
 }
 
 - (void)testGivenALandscapeOrientationThenTheCenterXValueIsHalfTheWidth {

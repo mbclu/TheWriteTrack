@@ -16,10 +16,13 @@
 #import "CocoaLumberjack.h"
 
 NSString *const TrainName = @"Train";
+CGFloat const maxMoveAmount = 10.0;
 
 @implementation Train
 
-- (instancetype)initWithPathSegments:(PathSegments *)pathSegments {
+@synthesize pathSegments;
+
+- (instancetype)initWithPathSegments:(PathSegments *)somePathSegments {
     self = [super initWithImageNamed:@"MagicTrain2"];
     
     _isMoving = NO;
@@ -28,9 +31,14 @@ NSString *const TrainName = @"Train";
     
     [self setName:TrainName];
     
-    _touchablePath = CGPathCreateCopyByStrokingPath(pathSegments.generatedSegmentPath, nil, 30.0, kCGLineCapRound, kCGLineJoinRound, 1.0);
+    [self setPathSegments:somePathSegments];
     
     return self;
+}
+
+- (void)setPathSegments:(PathSegments *)newPathSegments {
+    pathSegments = newPathSegments;
+    _touchablePath = CGPathCreateCopyByStrokingPath(pathSegments.generatedSegmentPath, nil, 30.0, kCGLineCapRound, kCGLineJoinRound, 1.0);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -50,12 +58,21 @@ NSString *const TrainName = @"Train";
 }
 
 - (void)evaluateTouchesMovedAtPoint:(CGPoint)touchPoint {
-    if (_isMoving == YES && CGPathContainsPoint(_touchablePath, nil, touchPoint, NO)) {
+    if (_isMoving == YES && CGPathContainsPoint(_touchablePath, nil, touchPoint, NO) && [self didMoveIncrementallyWithPosition:touchPoint]) {
         self.position = touchPoint;
     }
-    else {
-        _isMoving = NO;
+}
+
+- (BOOL)didMoveIncrementallyWithPosition:(CGPoint)touchPoint {
+    BOOL ressult = NO;
+    if (CGRectContainsPoint(CGRectMake(self.frame.origin.x - maxMoveAmount,
+                                       self.frame.origin.y - maxMoveAmount,
+                                       self.frame.size.width + maxMoveAmount,
+                                       self.frame.size.height + maxMoveAmount),
+                            touchPoint)) {
+        ressult = YES;
     }
+    return ressult;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

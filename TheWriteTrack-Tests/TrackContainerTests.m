@@ -241,6 +241,17 @@
 //    OCMVerify([mockScene transitionToNextScene]);
 //}
 
+- (void)testGivenTheTrackIsCompletedWhenTheLetterIs_Z_ThenTheLetterSelectSceneIsPresented {
+    theTrackContainer = [[TrackContainer alloc] initWithLetterKey:@"Z" andPathSegments:thePathSegments];
+    LetterScene *scene = [[LetterScene alloc] initWithSize:CGSizeMake(1, 1) andLetter:@"Z"];
+    [scene addChild:theTrackContainer];
+    id mockScene = OCMPartialMock(scene);
+
+    [theTrackContainer notifyLastWaypointWasRemoved];
+
+    OCMVerify([mockScene transitionToLetterSelectScene]);
+}
+
 - (void)testWhenInitializedThenTrackContainerIsDemonstratingHowToMoveTheTrain {
     XCTAssertTrue(theTrackContainer.isDemoing);
 }

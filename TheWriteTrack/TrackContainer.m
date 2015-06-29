@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "LayoutMath.h"
 #import "Train.h"
+#import "LetterScene.h"
 
 #if (DEBUG)
 NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.2;
@@ -107,7 +108,11 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
 }
 
 - (void)notifyLastWaypointWasRemoved {
-    [self.parent performSelector:@selector(transitionToNextScene)];
+    if ([_letterKey  isEqual: @"Z"]) {
+        [(LetterScene *)self.parent performSelector:@selector(transitionToLetterSelectScene)];
+    } else {
+        [(LetterScene *)self.parent performSelector:@selector(transitionToNextScene)];
+    }
 }
 
 - (void)evaluateTouchesEnded {

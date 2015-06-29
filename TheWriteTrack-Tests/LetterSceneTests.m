@@ -220,14 +220,14 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     XCTAssertEqualPoints(theLetterSelectButton.position, expectedPosition);
 }
 
-- (void)testWhenTheLetterSelectButtonIsPressedThenTheLetterSelectSceneIsPresented {
+- (void)testWhenTheLetterSelectButtonAddedToTheSceneThenItIsConfiguredToNotifyTheLetterSelectSceneOfTransitionEvents {
     id mockButton = OCMClassMock([GenericSpriteButton class]);
     [theScene setLetterSelectButtonProperty:mockButton];
     [theScene connectSceneTransitions];
     OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToLetterSelectScene)]);
 }
 
-- (void)testWhenTouchesEndedItIsThenATransitionToTheLetterSelectSceneIsMade {
+- (void)testGivenTouchesEndedWhenTheLocationIsTheLetterSelectButtonThenATransitionToTheLetterSelectSceneIsMade {
     id mockScene = OCMPartialMock(theScene);
     DDLogDebug(@"Letter Select Button Position on Scene : %@", NSStringFromCGPoint(theScene.letterSelectButtonProperty.position));
     [theScene.letterSelectButtonProperty evaluateTouchAtPoint:theScene.letterSelectButtonProperty.position];

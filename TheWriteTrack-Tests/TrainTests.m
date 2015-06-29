@@ -14,8 +14,8 @@
 #import "CGMatchers.h"
 #import "PathInfo.h"
 
-const uint pathWidth = 8;
-const uint pathHeight = 8;
+const uint pathWidth = 16;
+const uint pathHeight = 16;
 const CGFloat xCenterOffset = 1.0;
 const CGFloat yCenterOffset = 3.0;
 const CGFloat xOriginShift = 2.0;
@@ -70,8 +70,10 @@ const CGFloat yOriginShift = 4.0;
     XCTAssertEqualObjects(theTrain.name, @"Train");
 }
 
-- (void)testTheTrainIsAssignedANonEmptyTouchablePath {
+- (void)testTheTrainIsAssignedANonEmptyTouchablePathWithTheCorrectProperties {
     XCTAssertFalse(CGPathIsEmpty(theTrain.touchablePath));
+    CGPathRef expectedTouchablePath = CGPathCreateCopyByStrokingPath(thePathSegments.generatedSegmentPath, nil, 30.0, kCGLineCapRound, kCGLineJoinRound, 1.0);
+    XCTAssertTrue(CGPathEqualToPath(theTrain.touchablePath, expectedTouchablePath));
 }
 
 - (void)testTheTrainIsInitiallyStill {
@@ -112,10 +114,9 @@ const CGFloat yOriginShift = 4.0;
     XCTAssertTrue(theTrain.isUserInteractionEnabled);
 }
 
-- (void)testWhenATouchIsMovedOutsideThePathThenTheTrainDoesNotMoveAndIsConsideredStill {
+- (void)testWhenATouchIsMovedOutsideThePathThenTheTrainDoesNotMove {
     [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth * 10) y:(pathHeight * 10)];
     
-    XCTAssertFalse(theTrain.isMoving);
     XCTAssertEqualPoints(theTrain.position, initialTrainPosition);
 }
 
@@ -127,6 +128,24 @@ const CGFloat yOriginShift = 4.0;
     [theTrain touchesEnded:[NSSet set] withEvent:[[UIEvent alloc] init]];
     
     OCMVerify([mockParent touchesEnded:OCMOCK_ANY withEvent:OCMOCK_ANY]);
+}
+
+- (void)testTheGeneratedPathSegmentsGetStoredAsATrainProperty {
+    XCTAssertEqual(theTrain.pathSegments, thePathSegments);
+}
+
+- (void)testWhenThePathSegmentsAreUpdatedThenTheTouchablePathIsUpdatedWithTheCorrectProperties {
+    thePathSegments = thePathSegments = [[PathSegments alloc] initWithRect:CGRectMake(1, 1, pathWidth, pathHeight)];
+    [theTrain setPathSegments:thePathSegments];
+    CGPathRef expectedTouchablePath = CGPathCreateCopyByStrokingPath(thePathSegments.generatedSegmentPath, nil, 30.0, kCGLineCapRound, kCGLineJoinRound, 1.0);
+    XCTAssertTrue(CGPathEqualToPath(theTrain.touchablePath, expectedTouchablePath));
+}
+
+- (void)testWhenTouchesMovedAtANewPositionThenTheTrainIsNotMovedUnlessThePointIsWithin5PixelsOfTheLastTrainPosition {
+    [self simulateTrainMoveWithXYOffsetFromPoint:initialTrainPosition x:(pathWidth) y:(pathHeight)]; // move to a good position
+    [self simulateTrainMoveWithXYOffsetFromPoint:theTrain.position x:(pathWidth) y:(0)]; // move to a BAD position, train should NOT go here
+    
+    XCTAssertEqualPoints(theTrain.position, CGPointMake(pathWidth, pathHeight));
 }
 
 @end

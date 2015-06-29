@@ -14,6 +14,7 @@
     CGAffineTransform centeringTransform;
 }
 
+@property (nonatomic) PathSegments *pathSegments;
 @property CGPathRef touchablePath;
 @property BOOL isMoving;
 

@@ -1,44 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+        <view contentMode="scaleAspectFit" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="95" y="626" width="272" height="33"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Mitchell Clutter. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="164" y="559" width="272" height="33"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="272" id="7kP-PQ-ZKD"/>
-                        <constraint firstAttribute="height" constant="33" id="BS9-HV-hps"/>
+                        <constraint firstAttribute="width" constant="272" id="E3X-Ae-LQJ"/>
+                        <constraint firstAttribute="height" constant="33" id="Jid-5E-7ky"/>
                     </constraints>
-                    <attributedString key="attributedText">
-                        <fragment content="  Copyright (c) 2015 Mitch Clutter. All rights reserved.">
-                            <attributes>
-                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Write Track" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNh-j7-bT7">
+                    <rect key="frame" x="130" y="257" width="341" height="86"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="86" id="jlO-rQ-Tbd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="72"/>
+                    <color key="textColor" red="0.0" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="38" y="-18" width="398" height="103"/>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxm-am-2Zl">
+                    <rect key="frame" x="71" y="257" width="51" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="51" id="9Qs-iL-Yao"/>
+                        <constraint firstAttribute="height" constant="45" id="eET-Sc-ZO4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="30"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <accessibility key="accessibilityConfiguration">
                 <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
             </accessibility>
             <constraints>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="95" id="VBx-fa-aF6"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="626" id="Wjt-nD-4Gm"/>
+                <constraint firstItem="Sxm-am-2Zl" firstAttribute="top" secondItem="UNh-j7-bT7" secondAttribute="top" id="1j7-X7-GXV"/>
+                <constraint firstItem="UNh-j7-bT7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="130" id="3Dr-Hq-BdL"/>
+                <constraint firstItem="UNh-j7-bT7" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Hlv-56-X28"/>
+                <constraint firstAttribute="centerX" secondItem="UNh-j7-bT7" secondAttribute="centerX" constant="-0.5" id="LEL-YE-veE"/>
+                <constraint firstAttribute="centerX" secondItem="Sxm-am-2Zl" secondAttribute="centerX" constant="203.5" id="MpZ-vN-BJM"/>
+                <constraint firstAttribute="centerX" secondItem="UNh-j7-bT7" secondAttribute="centerX" constant="-0.5" id="aaQ-Vh-HJM"/>
+                <constraint firstItem="Sxm-am-2Zl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="116" id="e4p-6V-AEn"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="k8a-Qh-ftZ"/>
+                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="qu2-Nb-NZZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="547.5" y="454.5"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="e4p-6V-AEn"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="572" y="575"/>
         </view>
     </objects>
 </document>

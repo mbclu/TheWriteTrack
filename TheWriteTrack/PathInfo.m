@@ -10,8 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "CocoaLumberjack.h"
 
-@implementation PathInfo
-
 static BOOL pathClosed = NO;
 void AddPathElementPointsToArray(void* info, const CGPathElement* element) {
     NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;
@@ -65,6 +63,8 @@ void AddPathElementTypesToArray(void* info, const CGPathElement* element) {
             break;
     }
 }
+
+@implementation PathInfo
 
 - (NSMutableArray *)TransformPathToArray:(CGPathRef)path {
     NSMutableArray *array = [NSMutableArray array];

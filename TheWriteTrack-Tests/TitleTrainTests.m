@@ -13,6 +13,7 @@
 #import <OCMock/OCMock.h>
 #import "CocoaLumberjack.h"
 
+NSString *const TitleTrainName = @"LaunchTrain";
 @interface TitleTrainTests : XCTestCase
 
 @property TitleTrain *train;
@@ -26,7 +27,7 @@
 @synthesize exitRightAction;
 
 - (void)setUp {
-    train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
+    train = [[TitleTrain alloc] initWithImageNamed:TitleTrainName];
     exitRightAction = [train actionForKey:EXIT_SCENE_RIGHT];
     [super setUp];
 }
@@ -38,7 +39,7 @@
 - (void)testTheTitleTrainIsLoadedFromTheTitleTrainImage {
     XCTAssertNotNil(train);
     XCTAssertNotNil(train.texture);
-    XCTAssertEqualObjects(train.name, TITLE_TRAIN);
+    XCTAssertEqualObjects(train.name, TitleTrainName);
 }
 
 - (void)testTheTitleTrainStartsAtTheCorrectPosition {
@@ -66,7 +67,7 @@
     CGFloat xPoint = 10;
     CGFloat yPoint = 20;
     [train applySmokeEmitterAtPosition:CGPointMake(xPoint, yPoint)];
-    SKEmitterNode *emitter = (SKEmitterNode *)[train childNodeWithName:ORANGE_SMOKE];
+    SKEmitterNode *emitter = (SKEmitterNode *)[train childNodeWithName:@"OrangeSmoke"];
     XCTAssertEqual(emitter.position.x, xPoint);
     XCTAssertEqual(emitter.position.y, yPoint);
 }

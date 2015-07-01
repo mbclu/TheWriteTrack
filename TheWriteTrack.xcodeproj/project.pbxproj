@@ -82,7 +82,7 @@
 		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
 		C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */; };
 		C7E298261AFEEAA4007F593C /* PathInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E298251AFEEAA4007F593C /* PathInfoTests.m */; };
-		C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */; };
+		C7F09F531ACCEF3A00B53F66 /* GameViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F09F521ACCEF3A00B53F66 /* GameViewControllerTests.m */; };
 		C7F894191AF78C3900F2A27D /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		ECCAE33056F3D2636BAEC8D0 /* libPods-TheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */; };
@@ -185,7 +185,7 @@
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
 		C7E298231AFEB1D3007F593C /* CGMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGMatchers.h; path = "TheWriteTrack-Tests/CGMatchers.h"; sourceTree = SOURCE_ROOT; };
 		C7E298251AFEEAA4007F593C /* PathInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfoTests.m; path = "TheWriteTrack-Tests/PathInfoTests.m"; sourceTree = SOURCE_ROOT; };
-		C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GameViewControllerIntegrationTests.m; path = "TheWriteTrack-Tests/GameViewControllerIntegrationTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C7F09F521ACCEF3A00B53F66 /* GameViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GameViewControllerTests.m; path = "TheWriteTrack-Tests/GameViewControllerTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C7F894171AF78C3900F2A27D /* FakeTargetScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeTargetScene.h; path = "TheWriteTrack-Tests/FakeTargetScene.h"; sourceTree = SOURCE_ROOT; };
 		C7F894181AF78C3900F2A27D /* FakeTargetScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeTargetScene.m; path = "TheWriteTrack-Tests/FakeTargetScene.m"; sourceTree = SOURCE_ROOT; };
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
@@ -499,7 +499,7 @@
 		C7F09F511ACCEEEE00B53F66 /* Integration-Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C7F09F521ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m */,
+				C7F09F521ACCEF3A00B53F66 /* GameViewControllerTests.m */,
 			);
 			name = "Integration-Tests";
 			sourceTree = "<group>";
@@ -785,7 +785,7 @@
 				C79E71C81B2AFFAD00F46EC8 /* TitleSceneTests.m in Sources */,
 				C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */,
 				C76529FD1B1B732D0075456A /* PathSegmentDictionaryTest.m in Sources */,
-				C7F09F531ACCEF3A00B53F66 /* GameViewControllerIntegrationTests.m in Sources */,
+				C7F09F531ACCEF3A00B53F66 /* GameViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

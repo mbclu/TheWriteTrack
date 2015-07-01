@@ -11,22 +11,14 @@
 
 #define START_SMOKE_TEXT        @"start"
 
-#define TITLE_SCENE             @"TitleScene"
-#define TITLE_BACKGROUND        @"TitleBackground"
-#define TITLE_FOREGROUND        @"TitleForeground"
-#define START_BUTTON            @"StartButton"
-
-#define SMOKE_HORIZONTAL_OFFSET -10
-#define SMOKE_VERTICAL_OFFSET   -5
 #define START_BUTTON_VERTICAL_OFFSET    20
 
 @interface TitleScene : SKScene
 
 typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
-    TitleBackgroundZOrder,
-    TitleTrainZOrder,
-    TitleForegroundZOrder,
-    StartButtonZOrder
+    BackgroundZOrder,
+    TrainZOrder,
+    SignalLightZOrder
 };
 
 - (void)transitionToAScene;

@@ -9,6 +9,7 @@
 #import "TitleScene.h"
 
 #import "AttributedStringPath.h"
+#import "Constants.h"
 #import "LayoutMath.h"
 #import "LetterScene.h"
 #import "StartButton.h"
@@ -22,6 +23,10 @@ NSString *const defaultStartLetter = @"M";
 NSString *const defaultStartLetter = @"A";
 #endif
 
+CGFloat const SmokeHorizontalOffset = -10;
+CGFloat const SmokeVerticalOffset = -5;
+NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
+
 @implementation TitleScene
 
 - (void) anchorNode:(SKSpriteNode*)node atZeroAndZPosition:(NSInteger)zPosition {
@@ -31,37 +36,23 @@ NSString *const defaultStartLetter = @"A";
 }
 
 - (void)addBackground {
-    SKTexture *texture = [SKTexture textureWithImageNamed:TITLE_BACKGROUND];
+    SKTexture *texture = [SKTexture textureWithImageNamed:@"LaunchScreen667x375"];
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithTexture:texture size:self.size];
-    background.name = TITLE_BACKGROUND;
-    [self anchorNode:background atZeroAndZPosition:TitleBackgroundZOrder];
+    background.name = @"TitleBackground";
+    [self anchorNode:background atZeroAndZPosition:BackgroundZOrder];
 }
 
 - (void)addTrain {
-    TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:TITLE_TRAIN];
-    [train applySmokeEmitterAtPosition:CGPointMake(train.size.width + SMOKE_HORIZONTAL_OFFSET,
-                                                   train.size.height + SMOKE_VERTICAL_OFFSET)];
-    [self anchorNode:train atZeroAndZPosition:TitleTrainZOrder];
+    TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:@"LaunchTrain"];
+    [train applySmokeEmitterAtPosition:CGPointMake(train.size.width + SmokeHorizontalOffset,
+                                                   train.size.height + SmokeVerticalOffset)];
+    [self anchorNode:train atZeroAndZPosition:TrainZOrder];
 }
 
-- (void)addForeground {
-    SKSpriteNode *foreground = [[SKSpriteNode alloc] initWithImageNamed:TITLE_FOREGROUND];
-    foreground.name = TITLE_FOREGROUND;
-    [self anchorNode:foreground atZeroAndZPosition:TitleForegroundZOrder];
-}
-
-- (void)transitionToAScene {
-    SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:defaultStartLetter];
-    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:0.8];
-    [self.view presentScene:aScene transition:transition];
-    [self.view setIsAccessibilityElement:YES];
-    [self.view setAccessibilityIdentifier:aScene.name];
-}
-
-- (void)addStartButtonSmoke {
+- (void)addSignalLight {
     StartButton *startButton = [[StartButton alloc] init];
-    startButton.name = START_BUTTON;
-    startButton.zPosition = StartButtonZOrder;
+    startButton.name = @"SingalLight";
+    startButton.zPosition = SignalLightZOrder;
     CGFloat xPoint = ([UIScreen mainScreen].bounds.size.width - startButton.frame.size.width) * 0.5;
     CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
     startButton.position = CGPointMake(xPoint, yPoint);
@@ -71,14 +62,21 @@ NSString *const defaultStartLetter = @"A";
     [self addChild:startButton];
 }
 
+- (void)transitionToAScene {
+    SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:defaultStartLetter];
+    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionToASceneTimeInSeconds];
+    [self.view presentScene:aScene transition:transition];
+    [self.view setIsAccessibilityElement:YES];
+    [self.view setAccessibilityIdentifier:aScene.name];
+}
+
 - (instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        [self setName:TITLE_SCENE];
+        [self setName:@"TitleScene"];
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
         [self addTrain];
-        [self addForeground];
-        [self addStartButtonSmoke];
+        [self addSignalLight];
     }
     return self;
 }

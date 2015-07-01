@@ -1,5 +1,5 @@
 //
-//  GameViewControllerIntegrationTests.m
+//  GameViewControllerTests.m
 //  OnTheWriteTrack
 //
 //  Created by Mitch Clutter on 4/1/15.
@@ -11,11 +11,11 @@
 #import "GameViewController.h"
 #import "TitleScene.h"
 
-@interface GameViewControllerIntegrationTests : XCTestCase
+@interface GameViewControllerTests : XCTestCase
 
 @end
 
-@implementation GameViewControllerIntegrationTests {
+@implementation GameViewControllerTests {
     GameViewController *gvc;
     SKView *titleView;
 }
@@ -40,8 +40,8 @@
 }
 
 - (void)testTheGameViewControllerPresentsTheTitleScene {
-    XCTAssertEqualObjects([titleView scene].name, TITLE_SCENE,
-                          @"Name mismsatch: %@ != %@", [titleView scene].name, TITLE_SCENE);
+    XCTAssertEqualObjects([titleView scene].name, @"TitleScene",
+                          @"Name mismsatch: %@ != %@", [titleView scene].name, @"TitleScene");
 }
 
 - (void)testTheTitleSceneIsPresentedTheSameSizeAsTheMainScreen {

@@ -47,3 +47,6 @@ FOUNDATION_EXPORT NSString *const ChosenLetterNode;
 /* Letter Select Scene */
 FOUNDATION_EXPORT double const MinMountainHeightChangePercentage;
 FOUNDATION_EXPORT NSString *const ChosenLetterOverlay;
+
+/* Title Scene */
+

@@ -11,6 +11,7 @@
 
 typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
     BackgroundZOrder,
+    TrackZOrder,
     SignalLightZOrder,
     TrainZOrder
 };

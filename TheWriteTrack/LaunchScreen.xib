@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" misplaced="YES" image="LaunchScreen667x375" translatesAutoresizingMaskIntoConstraints="NO" id="dDd-oW-DQC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" misplaced="YES" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="dDd-oW-DQC">
                     <rect key="frame" x="0.0" y="280" width="480" height="320"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Mitchell Clutter. All rights reserved." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
@@ -45,6 +45,6 @@
         </view>
     </objects>
     <resources>
-        <image name="LaunchScreen667x375" width="333" height="187"/>
+        <image name="LaunchScreen" width="667" height="375"/>
     </resources>
 </document>

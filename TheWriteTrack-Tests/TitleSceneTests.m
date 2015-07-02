@@ -20,6 +20,7 @@
 @interface TitleSceneTests : XCTestCase {
     TitleScene *theTitleScene;
     SKSpriteNode *backgroundNode;
+    SKSpriteNode *trackNode;
     SKSpriteNode *trainNode;
     SKEmitterNode *smokeNode;
     StartButton *startButtonNode;
@@ -33,6 +34,7 @@
     [super setUp];
     theTitleScene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
     backgroundNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleBackground"];
+    trackNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleTrack"];
     trainNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleTrain"];
     smokeNode = (SKEmitterNode *)[trainNode childNodeWithName:@"TitleSmoke"];
     startButtonNode = (StartButton *)[theTitleScene childNodeWithName:@"StartButton"];
@@ -59,6 +61,10 @@
     XCTAssertEqual(backgroundNode.anchorPoint.y, 0);
 }
 
+- (void)testThereIsATrack {
+    XCTAssertNotNil(trackNode);
+}
+
 - (void)testTheTitleTrainIsLoadedOnTheTitleScene {
     XCTAssertNotNil(trainNode);
 }
@@ -68,12 +74,8 @@
     XCTAssertEqual(trainNode.anchorPoint.y, 0);
 }
 
-- (void)testTheTrainIsLoadedOnTopOfTheBackground {
-    XCTAssertGreaterThan(trainNode.zPosition, backgroundNode.zPosition);
-}
-
-- (void)testTheTitleTrainStartsOffTheScreenAtAHeightOfSixtyPercent {
-    XCTAssertEqualPoints(trainNode.position, CGPointMake(-trainNode.size.width, theTitleScene.frame.size.height * 0.5));
+- (void)testTheTitleTrainStartsHalfwayOffTheScreenAtTheHeightOfTheTrack {
+    XCTAssertEqualPoints(trainNode.position, CGPointMake(-trainNode.size.width * 0.5, trackNode.frame.size.height));
 }
 
 - (void)testAnActionCanMoveTheTrainWithDurationFourSeconds {
@@ -98,27 +100,28 @@
     XCTAssertTrue(trainNode.hasActions);
     XCTAssertNotNil([trainNode actionForKey:@"ScaleUp"]);
     XCTAssertNotNil([trainNode actionForKey:@"MoveLeftToRight"]);
+    XCTAssertNotNil([startButtonNode actionForKey:@"FlashyLights"]);
 }
 
 - (void)testThereIsAButtonToBeginWritingPractice {
     XCTAssertNotNil(startButtonNode);
 }
 
-- (void)testTheZOrderIs_Background_SignalLight_Train {
-    XCTAssertGreaterThan(startButtonNode.zPosition, backgroundNode.zPosition);
-    XCTAssertGreaterThan(trainNode.zPosition, startButtonNode.zPosition);
+- (void)testTheZOrderIs_Background_Track_SignalLight_Train {
+    XCTAssertLessThan(backgroundNode.zPosition, trackNode.zPosition);
+    XCTAssertLessThan(trackNode.zPosition, startButtonNode.zPosition);
+    XCTAssertLessThan(startButtonNode.zPosition, trainNode.zPosition);
 }
 
 - (void)testTheStartButtonIsPositionedCorrectlyInRelationToTheScene {
     TitleScene *sizeConstrainedTitleScene = [[TitleScene alloc] initWithSize:CGSizeMake(100, 100)];
     StartButton *startButton = (StartButton *)[sizeConstrainedTitleScene childNodeWithName:@"StartButton"];
-    XCTAssertEqualPoints(startButton.position, CGPointMake(85, 55));
+    XCTAssertEqualPoints(startButton.position, CGPointMake(85, 45));
 }
 
-- (void)testPressingTheStartButtonHooksToATransitionToTheAScene {
+- (void)testPressingAnywhereOnTheSreenHooksToATransitionToTheAScene {
     id mockTitleScene = OCMPartialMock(theTitleScene);
-    StartButton *startButton = (StartButton *)startButtonNode;
-    [startButton evaluateTouchAtPoint:startButtonNode.position];
+    [theTitleScene touchesEnded:nil withEvent:nil];
     OCMVerify([mockTitleScene transitionToAScene]);
 }
 

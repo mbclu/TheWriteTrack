@@ -26,6 +26,7 @@ NSString *const defaultStartLetter = @"A";
 CGFloat const SmokeHorizontalOffset = -10;
 CGFloat const SmokeVerticalOffset = -5;
 NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
+NSTimeInterval const SceneActionTimeInSeconds = 3;
 
 @implementation TitleScene
 
@@ -34,6 +35,7 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
         [self setName:@"TitleScene"];
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
+        [self addTrack];
         [self addTrain];
         [self createTrainActions];
         [self addSignalLight];
@@ -52,23 +54,30 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 }
 
 - (void)addBackground {
-    SKTexture *texture = [SKTexture textureWithImageNamed:@"LaunchScreen667x375"];
+    SKTexture *texture = [SKTexture textureWithImageNamed:@"LaunchScreen"];
     SKSpriteNode *background = [SKSpriteNode spriteNodeWithTexture:texture size:self.size];
     background.name = @"TitleBackground";
     [self anchorNode:background atZeroAndZPosition:BackgroundZOrder];
 }
 
+- (void)addTrack {
+    SKTexture *texture = [SKTexture textureWithImageNamed:@"LaunchScreenTrack-1"];
+    SKSpriteNode *track = [SKSpriteNode spriteNodeWithTexture:texture size:CGSizeMake(self.size.width, HALF_OF(self.size.height))];
+    track.name = @"TitleTrack";
+    [self anchorNode:track atZeroAndZPosition:TrackZOrder];
+}
+
 - (void)addTrain {
     TitleTrain *train = [[TitleTrain alloc] init];
-    train.position = CGPointMake(-train.size.width, HALF_OF(self.frame.size.height));
+    train.position = CGPointMake(-HALF_OF(train.size.width), [self getTrack].frame.size.height);
     [self anchorNode:train atZeroAndZPosition:TrainZOrder];
 }
 
 - (void)addSignalLight {
     StartButton *startButton = [[StartButton alloc] init];
-    startButton.name = @"SingalLight";
+    startButton.name = @"SignalLight";
     startButton.zPosition = SignalLightZOrder;
-    startButton.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.55);
+    startButton.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.45);
     
     [startButton setTouchUpInsideTarget:self action:@selector(transitionToAScene)];
     
@@ -84,17 +93,47 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 }
 
 - (void)createTrainActions {
-    SKNode *train = [self childNodeWithName:@"TitleTrain"];
-    CGPoint exitEndPosition = CGPointMake(HALF_OF(self.size.width) - train.frame.size.width, HALF_OF(self.size.height) - train.frame.size.height);
-    _moveLeftToRightAction = [SKAction moveTo:exitEndPosition duration:3];
-    _scaleUpAction = [SKAction scaleTo:1.5 duration:3];
+    SKNode *train = [self getTrain];
+    SKNode *track = [self getTrack];
+    CGPoint exitEndPosition = CGPointMake(HALF_OF(track.frame.size.width) - HALF_OF(train.frame.size.width),
+                                          HALF_OF(track.frame.size.height) - HALF_OF(train.frame.size.height));
+    _moveLeftToRightAction = [SKAction moveTo:exitEndPosition duration:SceneActionTimeInSeconds];
+    _scaleUpAction = [SKAction scaleTo:1.5 duration:SceneActionTimeInSeconds];
 }
 
 - (void)runTrainActions {
     SKNode *train = [self childNodeWithName:@"TitleTrain"];
     [train runAction:_scaleUpAction withKey:@"ScaleUp"];
     [train runAction:_moveLeftToRightAction withKey:@"MoveLeftToRight"];
+    
+    StartButton *signal = (StartButton *)[self childNodeWithName:@"SignalLight"];
+    [signal runAction:[SKAction customActionWithDuration:SceneActionTimeInSeconds actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        [self flashLight:[signal getRedLight] on:0.5 off:1.0 elapsed:elapsedTime];
+        [self flashLight:[signal getYellowLight] on:1.0 off:1.5 elapsed:elapsedTime];
+        [self flashLight:[signal getGreenLight] on:1.5 off:2.0 elapsed:elapsedTime];
+        [self flashLight:[signal getGreenLight] on:2.5 off:(SceneActionTimeInSeconds + 1) elapsed:elapsedTime];
+    }] withKey:@"FlashyLights"];
 }
 
+- (TitleTrain *)getTrain {
+    return (TitleTrain *)[self childNodeWithName:@"TitleTrain"];
+}
+
+- (SKSpriteNode *)getTrack {
+    return (SKSpriteNode *)[self childNodeWithName:@"TitleTrack"];
+}
+
+- (void)flashLight:(SKShapeNode *)light on:(CGFloat)onTime off:(CGFloat)offTime elapsed:(CGFloat)elapsedTime {
+    if (elapsedTime > onTime && elapsedTime < offTime) {
+        light.glowWidth = 8.0;
+    }
+    if (elapsedTime > offTime) {
+        light.glowWidth = 2.0;
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self transitionToAScene];
+}
 
 @end

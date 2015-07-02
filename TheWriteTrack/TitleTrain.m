@@ -10,27 +10,32 @@
 
 @implementation TitleTrain
 
-- (instancetype)initWithImageNamed:(NSString *)name {
-    self = [super initWithImageNamed:name];
+- (instancetype)init {
+    self = [super initWithImageNamed:@"LaunchTrain"];
+
     self.name = @"TitleTrain";
-    self.position = TITLE_TRAIN_START_POSITION;
-    CGPoint exitEndPosition = CGPointMake([UIScreen mainScreen].bounds.size.width + self.size.width, EXIT_RIGHT_END_Y_POSITION);
-    SKAction *exitStageRight = [SKAction moveTo:exitEndPosition duration:EXIT_DURATION];
-    [self runAction:exitStageRight withKey:EXIT_SCENE_RIGHT];
+    
+    [self addSmokeEmitter];
+    
+    [self runActions];
+    
     return self;
 }
 
-- (void)applySmokeEmitterAtPosition:(CGPoint)position {
-    SKEmitterNode *emitter = [TitleTrain createTrainSmokeEmitter];
-    emitter.name = @"OrageSmoke";
-    emitter.position = position;
+- (void)addSmokeEmitter {
+    SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                              [[NSBundle mainBundle] pathForResource:@"OrangeSmoke" ofType:@"sks"]];
+    emitter.name = @"SmokeEmitter";
+    emitter.position = CGPointMake(self.size.width, self.size.height);
     [self addChild:emitter];
 }
 
-+ (SKEmitterNode *)createTrainSmokeEmitter {
-    SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                              [[NSBundle mainBundle] pathForResource:@"OrangeSmoke" ofType:@"sks"]];
-    return emitter;
+- (void)runActions {
+    CGPoint exitEndPosition = CGPointMake([UIScreen mainScreen].bounds.size.width + self.size.width * 0.6, self.size.height * -0.2);
+    SKAction *exitStageRight = [SKAction moveTo:exitEndPosition duration:4];
+    SKAction *increaseInSize = [SKAction scaleTo:2.5 duration:4];
+    [self runAction:increaseInSize withKey:@"ScaleUp"];
+    [self runAction:exitStageRight withKey:@"MoveLeftToRight"];
 }
 
 @end

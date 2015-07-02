@@ -398,7 +398,7 @@ const NSUInteger numberOfVFrameSegments = 8;
     XCTAssertEqual(generatedCrossbars.count, 5);
 }
 
-- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenTenCrossbarsAreGeneratedForCurvedSegments {
+- (void)testGivenAValidLetterWhenCrossbarsAreCreatedThenElevenCrossbarsAreGeneratedForCurvedSegments {
     NSMutableArray *generatedCrossbars = [thePathSegments generateObjectsWithType:CrossbarObjectType forLetter:@"CurvedOne"];
     XCTAssertEqual(generatedCrossbars.count, 11);
 }

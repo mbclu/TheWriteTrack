@@ -11,24 +11,27 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
-#import "CocoaLumberjack.h"
+#import "CGMatchers.h"
 
-NSString *const TitleTrainName = @"LaunchTrain";
-@interface TitleTrainTests : XCTestCase
+NSString *const TitleTrainName = @"TitleTrain";
+NSString *const TitleTrainImageName = @"LaunchTrain";
 
-@property TitleTrain *train;
-@property SKAction *exitRightAction;
+@interface TitleTrainTests : XCTestCase {
+    TitleTrain *theTitleTrain;
+    SKNode *theSmokeEmitter;
+    SKAction *moveAction;
+    SKAction *growAction;
+}
 
 @end
 
 @implementation TitleTrainTests
 
-@synthesize train;
-@synthesize exitRightAction;
-
 - (void)setUp {
-    train = [[TitleTrain alloc] initWithImageNamed:TitleTrainName];
-    exitRightAction = [train actionForKey:EXIT_SCENE_RIGHT];
+    theTitleTrain = [[TitleTrain alloc] init];
+    theSmokeEmitter = [theTitleTrain childNodeWithName:@"SmokeEmitter"];
+    moveAction = [theTitleTrain actionForKey:@"MoveLeftToRight"];
+    growAction = [theTitleTrain actionForKey:@"ScaleUp"];
     [super setUp];
 }
 
@@ -36,40 +39,47 @@ NSString *const TitleTrainName = @"LaunchTrain";
     [super tearDown];
 }
 
-- (void)testTheTitleTrainIsLoadedFromTheTitleTrainImage {
-    XCTAssertNotNil(train);
-    XCTAssertNotNil(train.texture);
-    XCTAssertEqualObjects(train.name, TitleTrainName);
+- (void)testTheTitleTrainIsNameTitleTrain {
+    XCTAssertNotNil(theTitleTrain);
+    XCTAssertEqualObjects(theTitleTrain.name, @"TitleTrain");
 }
 
-- (void)testTheTitleTrainStartsAtTheCorrectPosition {
-    XCTAssertEqual(train.position.x, TITLE_TRAIN_START_POSITION.x);
-    XCTAssertEqual(train.position.y, TITLE_TRAIN_START_POSITION.y);
+- (void)testTheTitleTrainIsLoadedFromThePassedInImage {
+    XCTAssertNotNil(theTitleTrain.texture);
+    XCTAssertTrue([theTitleTrain.texture.description containsString:TitleTrainImageName]);
 }
 
 - (void)testTheTitleTrainHasAnActionToMove {
-    XCTAssertNotNil(exitRightAction);
-    XCTAssertNotEqual([exitRightAction.description rangeOfString:@"SKMove"].location, NSNotFound);
+    XCTAssertNotNil(moveAction);
+    XCTAssertNotEqual([moveAction.description rangeOfString:@"SKMove"].location, NSNotFound);
 }
 
-- (void)testTheTitleTrainMoveActionHasADurationOfEight {
-    XCTAssertEqual(exitRightAction.duration, 8);
+- (void)testTheTitleTrainMoveActionHasADurationOfFourSeconds {
+    XCTAssertEqual(moveAction.duration, 4);
 }
 
-- (void)testASmokeEmitterCanBeCreatedWithTheOrangeSmokePng {
-    SKEmitterNode *emitter = [TitleTrain createTrainSmokeEmitter];
-    SKTexture *texture = [SKTexture textureWithImageNamed:@"OrangeSmoke.png"];
-    XCTAssertEqual(emitter.particleTexture.size.height, texture.size.height);
-    XCTAssertEqual(emitter.particleTexture.size.width, texture.size.width);
+- (void)testTheTitleTrainHasAnActionToGrowLarger {
+    XCTAssertNotNil(growAction);
+    XCTAssertNotEqual([growAction.description rangeOfString:@"SKScale"].location, NSNotFound);
 }
 
-- (void)testWhenAppliedAtALocationThenTheTrainHasAChildSmokeEmitter {
-    CGFloat xPoint = 10;
-    CGFloat yPoint = 20;
-    [train applySmokeEmitterAtPosition:CGPointMake(xPoint, yPoint)];
-    SKEmitterNode *emitter = (SKEmitterNode *)[train childNodeWithName:@"OrangeSmoke"];
-    XCTAssertEqual(emitter.position.x, xPoint);
-    XCTAssertEqual(emitter.position.y, yPoint);
+- (void)testTheTitleTrainGrowActionHasADurationOfFourSeconds {
+    XCTAssertEqual(growAction.duration, 4);
+}
+
+- (void)testASmokeEmitterExistsOnTheTrainWithOrangeSmokeTexture {
+    XCTAssertNotNil(theSmokeEmitter);
+    XCTAssertTrue([theSmokeEmitter isKindOfClass:[SKEmitterNode class]]);
+}
+
+- (void)testTheSmokeEmitterLoadsTheOrangeSmokeTexture {
+    SKEmitterNode *smokeEmitter = (SKEmitterNode *)theSmokeEmitter;
+    XCTAssertTrue([smokeEmitter.particleTexture.description containsString:@"OrangeSmoke"]);
+    XCTAssertEqualSizes(smokeEmitter.particleTexture.size, [SKTexture textureWithImageNamed:@"OrangeSmoke"].size);
+}
+
+- (void)testTheSmokeEmitterIsLocatedAtCorrectPosition {
+    XCTAssertEqualPoints(theSmokeEmitter.position, CGPointMake(theTitleTrain.size.width, theTitleTrain.size.height));
 }
 
 @end

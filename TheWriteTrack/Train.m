@@ -29,7 +29,7 @@ CGFloat const maxMoveAmount = 10.0;
     
     self.userInteractionEnabled = YES;
     
-    [self setName:TrainName];
+    self.name = TrainName;
     
     [self setPathSegments:somePathSegments];
     

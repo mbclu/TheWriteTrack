@@ -43,9 +43,8 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 }
 
 - (void)addTrain {
-    TitleTrain *train = [[TitleTrain alloc] initWithImageNamed:@"LaunchTrain"];
-    [train applySmokeEmitterAtPosition:CGPointMake(train.size.width + SmokeHorizontalOffset,
-                                                   train.size.height + SmokeVerticalOffset)];
+    TitleTrain *train = [[TitleTrain alloc] init];
+    train.position = CGPointMake(-train.size.width, self.frame.size.height * 0.6);
     [self anchorNode:train atZeroAndZPosition:TrainZOrder];
 }
 

@@ -18,7 +18,7 @@
 #import "CGMatchers.h"
 
 @interface TitleSceneTests : XCTestCase {
-    TitleScene *scene;
+    TitleScene *theTitleScene;
     SKSpriteNode *backgroundNode;
     SKSpriteNode *trainNode;
     SKEmitterNode *smokeNode;
@@ -31,11 +31,11 @@
 
 - (void)setUp {
     [super setUp];
-    scene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
-    backgroundNode = (SKSpriteNode *)[scene childNodeWithName:@"TitleBackground"];
-    trainNode = (SKSpriteNode *)[scene childNodeWithName:@"TitleTrain"];
+    theTitleScene = [TitleScene sceneWithSize:CGSizeMake(100, 100)];
+    backgroundNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleBackground"];
+    trainNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleTrain"];
     smokeNode = (SKEmitterNode *)[trainNode childNodeWithName:@"TitleSmoke"];
-    startButtonNode = (SKEmitterNode *)[scene childNodeWithName:@"StartButton"];
+    startButtonNode = (SKEmitterNode *)[theTitleScene childNodeWithName:@"StartButton"];
 }
 
 - (void)tearDown {
@@ -43,7 +43,7 @@
 }
 
 - (void)testTheTitleSceneScaleModeIsConfiguredToFill {
-    XCTAssertEqual([scene scaleMode], SKSceneScaleModeAspectFill);
+    XCTAssertEqual([theTitleScene scaleMode], SKSceneScaleModeAspectFill);
 }
 
 - (void)testTheTitleSceneLoadsTheTitleBackground {
@@ -51,7 +51,7 @@
 }
 
 - (void)testTheTitleSceneBackgroundIsTheSameSizeAsTheScene {
-    XCTAssertEqualSizes(backgroundNode.size, scene.size);
+    XCTAssertEqualSizes(backgroundNode.size, theTitleScene.size);
 }
 
 - (void)testTheTitleBackgroundIsAnchoredAtZeroXZeroY {
@@ -72,9 +72,9 @@
     XCTAssertGreaterThan(trainNode.zPosition, backgroundNode.zPosition);
 }
 
-- (void)testTheTrainStartsAtTheCorrectPoint {
-    XCTAssertEqualWithAccuracy(trainNode.position.x, 123, 1.0);
-    XCTAssertEqualWithAccuracy(trainNode.position.y, 138, 1.0);
+
+- (void)testTheTitleTrainStartsOffTheScreenAtAHeightOfSixtyPercent {
+    XCTAssertEqualPoints(trainNode.position, CGPointMake(-trainNode.size.width, theTitleScene.frame.size.height * 0.6));
 }
 
 - (void)testThereIsAButtonToBeginWritingPractice {
@@ -82,7 +82,7 @@
 }
 
 - (void)testTheStartButtonIsTheHighestZOrder {
-    NSArray *children = [scene children];
+    NSArray *children = [theTitleScene children];
     for (NSUInteger i; i < children.count; i++) {
         XCTAssertGreaterThanOrEqual(startButtonNode.zPosition, ((SKNode *)[children objectAtIndex:i]).zPosition);
     }
@@ -104,7 +104,7 @@
 }
 
 - (void)testPressingTheStartButtonHooksToATransitionToTheAScene {
-    id mockTitleScene = OCMPartialMock(scene);
+    id mockTitleScene = OCMPartialMock(theTitleScene);
     StartButton *startButton = (StartButton *)startButtonNode;
     [startButton evaluateTouchAtPoint:startButtonNode.position];
     OCMVerify([mockTitleScene transitionToAScene]);

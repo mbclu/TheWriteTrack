@@ -23,7 +23,7 @@ CGFloat const maxMoveAmount = 10.0;
 @synthesize pathSegments;
 
 - (instancetype)initWithPathSegments:(PathSegments *)somePathSegments {
-    self = [super initWithImageNamed:@"MagicTrain2"];
+    self = [super initWithImageNamed:@"MagicTrain"];
     
     _isMoving = NO;
     

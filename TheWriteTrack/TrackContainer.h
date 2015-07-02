@@ -14,8 +14,8 @@ static const uint32_t TRAIN_CATEGORY    = 0x1 << 0;
 static const uint32_t WAYPOINT_CATEGORY = 0x1 << 1;
 
 typedef NS_ENUM(NSUInteger, ETrackContainerSceneZOrder) {
-    TrackContainerTrackOutlineZPosition,
     TrackContainerCrossbarZPosition,
+    TrackContainerTrackOutlineZPosition,
     TrackContainerWaypointZPosition,
     TrackContainerTrainZPosition
 };

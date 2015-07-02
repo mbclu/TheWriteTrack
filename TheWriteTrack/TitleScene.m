@@ -61,7 +61,7 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 }
 
 - (void)addTrack {
-    SKTexture *texture = [SKTexture textureWithImageNamed:@"LaunchScreenTrack-1"];
+    SKTexture *texture = [SKTexture textureWithImageNamed:@"LaunchScreenTrack"];
     SKSpriteNode *track = [SKSpriteNode spriteNodeWithTexture:texture size:CGSizeMake(self.size.width, HALF_OF(self.size.height))];
     track.name = @"TitleTrack";
     [self anchorNode:track atZeroAndZPosition:TrackZOrder];
@@ -86,7 +86,7 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 
 - (void)transitionToAScene {
     SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:defaultStartLetter];
-    SKTransition *transition = [SKTransition revealWithDirection:SKTransitionDirectionLeft duration:TransitionToASceneTimeInSeconds];
+    SKTransition *transition = [SKTransition flipHorizontalWithDuration:TransitionToASceneTimeInSeconds];
     [self.view presentScene:aScene transition:transition];
     [self.view setIsAccessibilityElement:YES];
     [self.view setAccessibilityIdentifier:aScene.name];
@@ -108,10 +108,10 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
     
     StartButton *signal = (StartButton *)[self childNodeWithName:@"SignalLight"];
     [signal runAction:[SKAction customActionWithDuration:SceneActionTimeInSeconds actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-        [self flashLight:[signal getRedLight] on:0.5 off:1.0 elapsed:elapsedTime];
-        [self flashLight:[signal getYellowLight] on:1.0 off:1.5 elapsed:elapsedTime];
-        [self flashLight:[signal getGreenLight] on:1.5 off:2.0 elapsed:elapsedTime];
-        [self flashLight:[signal getGreenLight] on:2.5 off:(SceneActionTimeInSeconds + 1) elapsed:elapsedTime];
+        [self flashLight:[signal getRedLight] on:0.5 off:1.0 glow:8.0 elapsed:elapsedTime];
+        [self flashLight:[signal getYellowLight] on:1.0 off:1.5 glow:8.0 elapsed:elapsedTime];
+        [self flashLight:[signal getGreenLight] on:1.5 off:2.0 glow:8.0 elapsed:elapsedTime];
+        [self flashLight:[signal getGreenLight] on:2.5 off:(SceneActionTimeInSeconds + 1) glow:15.0 elapsed:elapsedTime];
     }] withKey:@"FlashyLights"];
 }
 
@@ -123,9 +123,9 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
     return (SKSpriteNode *)[self childNodeWithName:@"TitleTrack"];
 }
 
-- (void)flashLight:(SKShapeNode *)light on:(CGFloat)onTime off:(CGFloat)offTime elapsed:(CGFloat)elapsedTime {
+- (void)flashLight:(SKShapeNode *)light on:(CGFloat)onTime off:(CGFloat)offTime glow:(CGFloat)glowWidth elapsed:(CGFloat)elapsedTime {
     if (elapsedTime > onTime && elapsedTime < offTime) {
-        light.glowWidth = 8.0;
+        light.glowWidth = glowWidth;
     }
     if (elapsedTime > offTime) {
         light.glowWidth = 2.0;

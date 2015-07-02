@@ -137,7 +137,7 @@
                                         usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                                             SKNode *crossbarNode = (SKNode *)obj;
                                             if ([crossbarNode.name isEqualToString:CrossbarNodeName]) {
-                                                XCTAssertLessThan(theLetterTrack.zPosition, crossbarNode.zPosition);
+                                                XCTAssertGreaterThan(theLetterTrack.zPosition, crossbarNode.zPosition);
                                             }
                                         }];
 }

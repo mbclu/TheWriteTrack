@@ -11,8 +11,8 @@
 
 typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
     BackgroundZOrder,
-    TrainZOrder,
-    SignalLightZOrder
+    SignalLightZOrder,
+    TrainZOrder
 };
 
 @interface TitleScene : SKScene

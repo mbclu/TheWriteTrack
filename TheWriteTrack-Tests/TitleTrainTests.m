@@ -61,7 +61,7 @@ NSString *const TitleTrainImageName = @"LaunchTrain";
 }
 
 - (void)testTheSmokeEmitterIsLocatedAtCorrectPosition {
-    XCTAssertEqualPoints(theSmokeEmitter.position, CGPointMake(theTitleTrain.size.width, theTitleTrain.size.height));
+    XCTAssertEqualPoints(theSmokeEmitter.position, CGPointMake(theTitleTrain.size.width * 0.70, theTitleTrain.size.height));
 }
 
 @end

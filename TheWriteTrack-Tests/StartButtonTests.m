@@ -30,4 +30,8 @@
     XCTAssertTrue([theStartButton.texture.description containsString:@"SignalLight"]);
 }
 
+- (void)testUserInteractionIsEnabledForTheStartButton {
+    XCTAssertTrue(theStartButton.userInteractionEnabled);
+}
+
 @end

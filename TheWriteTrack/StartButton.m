@@ -12,6 +12,7 @@
 
 - (instancetype)init {
     self = [super initWithImageNamed:@"SignalLight"];
+    self.userInteractionEnabled = YES;
     return self;
 }
 

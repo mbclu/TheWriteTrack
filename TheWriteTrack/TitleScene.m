@@ -84,9 +84,10 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 }
 
 - (void)createTrainActions {
-    CGPoint exitEndPosition = CGPointMake([UIScreen mainScreen].bounds.size.width + self.size.width * 0.6, self.size.height * -0.2);
-    _moveLeftToRightAction = [SKAction moveTo:exitEndPosition duration:4];
-    _scaleUpAction = [SKAction scaleTo:2.5 duration:4];
+    SKNode *train = [self childNodeWithName:@"TitleTrain"];
+    CGPoint exitEndPosition = CGPointMake(HALF_OF(self.size.width) - train.frame.size.width, HALF_OF(self.size.height) - train.frame.size.height);
+    _moveLeftToRightAction = [SKAction moveTo:exitEndPosition duration:3];
+    _scaleUpAction = [SKAction scaleTo:1.5 duration:3];
 }
 
 - (void)runTrainActions {

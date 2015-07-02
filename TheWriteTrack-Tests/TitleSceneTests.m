@@ -79,13 +79,13 @@
 - (void)testAnActionCanMoveTheTrainWithDurationFourSeconds {
     XCTAssertNotNil(theTitleScene.moveLeftToRightAction);
     XCTAssertNotEqual([theTitleScene.moveLeftToRightAction.description rangeOfString:@"SKMove"].location, NSNotFound);
-    XCTAssertEqual(theTitleScene.moveLeftToRightAction.duration, 4);
+    XCTAssertEqual(theTitleScene.moveLeftToRightAction.duration, 3);
 }
 
 - (void)testAnActionCanCauseAnObjectToGrowLargerOverFourSeconds {
     XCTAssertNotNil(theTitleScene.scaleUpAction);
     XCTAssertNotEqual([theTitleScene.scaleUpAction.description rangeOfString:@"SKScale"].location, NSNotFound);
-    XCTAssertEqual(theTitleScene.scaleUpAction.duration, 4);
+    XCTAssertEqual(theTitleScene.scaleUpAction.duration, 3);
 }
 
 - (void)testTheMoveAndGrowActionsHaveTheSameDuration {
@@ -104,11 +104,9 @@
     XCTAssertNotNil(startButtonNode);
 }
 
-- (void)testTheStartButtonIsTheHighestZOrder {
-    NSArray *children = [theTitleScene children];
-    for (NSUInteger i; i < children.count; i++) {
-        XCTAssertGreaterThanOrEqual(startButtonNode.zPosition, ((SKNode *)[children objectAtIndex:i]).zPosition);
-    }
+- (void)testTheZOrderIs_Background_SignalLight_Train {
+    XCTAssertGreaterThan(startButtonNode.zPosition, backgroundNode.zPosition);
+    XCTAssertGreaterThan(trainNode.zPosition, startButtonNode.zPosition);
 }
 
 - (void)testTheStartButtonIsPositionedCorrectlyInRelationToTheScene {

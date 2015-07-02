@@ -23,3 +23,6 @@ test-servers/
 # test results
 unitTestResults.xml
 
+# other
+**/*_bak.*
+

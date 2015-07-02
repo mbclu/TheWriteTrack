@@ -31,7 +31,7 @@
     if (!skView.scene) {
         TitleScene *titleScene = [[TitleScene alloc] initWithSize:skView.bounds.size];
         [skView setAccessibilityIdentifier:titleScene.name];
-        [skView presentScene:titleScene];
+        [skView presentScene:titleScene transition:[SKTransition fadeWithColor:[SKColor lightGrayColor] duration:0.5]];
     }
 #if (DEBUG)
     skView.showsFPS = YES;

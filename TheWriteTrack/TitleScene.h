@@ -9,17 +9,16 @@
 #import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
 
-#define START_SMOKE_TEXT        @"start"
-
-#define START_BUTTON_VERTICAL_OFFSET    20
-
-@interface TitleScene : SKScene
-
 typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
     BackgroundZOrder,
     TrainZOrder,
     SignalLightZOrder
 };
+
+@interface TitleScene : SKScene
+
+@property SKAction *moveLeftToRightAction;
+@property SKAction *scaleUpAction;
 
 - (void)transitionToAScene;
 

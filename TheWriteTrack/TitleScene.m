@@ -29,6 +29,22 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 
 @implementation TitleScene
 
+- (instancetype)initWithSize:(CGSize)size {
+    if (self = [super initWithSize:size]) {
+        [self setName:@"TitleScene"];
+        [self setScaleMode:SKSceneScaleModeAspectFill];
+        [self addBackground];
+        [self addTrain];
+        [self createTrainActions];
+        [self addSignalLight];
+    }
+    return self;
+}
+
+- (void)didMoveToView:(SKView *)view {
+    [self runTrainActions];
+}
+
 - (void) anchorNode:(SKSpriteNode*)node atZeroAndZPosition:(NSInteger)zPosition {
     node.anchorPoint = CGPointZero;
     node.zPosition = zPosition;
@@ -44,7 +60,7 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 
 - (void)addTrain {
     TitleTrain *train = [[TitleTrain alloc] init];
-    train.position = CGPointMake(-train.size.width, self.frame.size.height * 0.6);
+    train.position = CGPointMake(-train.size.width, HALF_OF(self.frame.size.height));
     [self anchorNode:train atZeroAndZPosition:TrainZOrder];
 }
 
@@ -52,9 +68,7 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
     StartButton *startButton = [[StartButton alloc] init];
     startButton.name = @"SingalLight";
     startButton.zPosition = SignalLightZOrder;
-    CGFloat xPoint = ([UIScreen mainScreen].bounds.size.width - startButton.frame.size.width) * 0.5;
-    CGFloat yPoint = [UIScreen mainScreen].bounds.size.height - (startButton.frame.size.height + START_BUTTON_VERTICAL_OFFSET);
-    startButton.position = CGPointMake(xPoint, yPoint);
+    startButton.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.55);
     
     [startButton setTouchUpInsideTarget:self action:@selector(transitionToAScene)];
     
@@ -69,15 +83,17 @@ NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
     [self.view setAccessibilityIdentifier:aScene.name];
 }
 
-- (instancetype)initWithSize:(CGSize)size {
-    if (self = [super initWithSize:size]) {
-        [self setName:@"TitleScene"];
-        [self setScaleMode:SKSceneScaleModeAspectFill];
-        [self addBackground];
-        [self addTrain];
-        [self addSignalLight];
-    }
-    return self;
+- (void)createTrainActions {
+    CGPoint exitEndPosition = CGPointMake([UIScreen mainScreen].bounds.size.width + self.size.width * 0.6, self.size.height * -0.2);
+    _moveLeftToRightAction = [SKAction moveTo:exitEndPosition duration:4];
+    _scaleUpAction = [SKAction scaleTo:2.5 duration:4];
 }
+
+- (void)runTrainActions {
+    SKNode *train = [self childNodeWithName:@"TitleTrain"];
+    [train runAction:_scaleUpAction withKey:@"ScaleUp"];
+    [train runAction:_moveLeftToRightAction withKey:@"MoveLeftToRight"];
+}
+
 
 @end

@@ -49,24 +49,6 @@ NSString *const TitleTrainImageName = @"LaunchTrain";
     XCTAssertTrue([theTitleTrain.texture.description containsString:TitleTrainImageName]);
 }
 
-- (void)testTheTitleTrainHasAnActionToMove {
-    XCTAssertNotNil(moveAction);
-    XCTAssertNotEqual([moveAction.description rangeOfString:@"SKMove"].location, NSNotFound);
-}
-
-- (void)testTheTitleTrainMoveActionHasADurationOfFourSeconds {
-    XCTAssertEqual(moveAction.duration, 4);
-}
-
-- (void)testTheTitleTrainHasAnActionToGrowLarger {
-    XCTAssertNotNil(growAction);
-    XCTAssertNotEqual([growAction.description rangeOfString:@"SKScale"].location, NSNotFound);
-}
-
-- (void)testTheTitleTrainGrowActionHasADurationOfFourSeconds {
-    XCTAssertEqual(growAction.duration, 4);
-}
-
 - (void)testASmokeEmitterExistsOnTheTrainWithOrangeSmokeTexture {
     XCTAssertNotNil(theSmokeEmitter);
     XCTAssertTrue([theSmokeEmitter isKindOfClass:[SKEmitterNode class]]);

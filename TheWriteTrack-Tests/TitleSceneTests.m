@@ -22,7 +22,7 @@
     SKSpriteNode *backgroundNode;
     SKSpriteNode *trainNode;
     SKEmitterNode *smokeNode;
-    SKEmitterNode *startButtonNode;
+    StartButton *startButtonNode;
 }
 
 @end
@@ -35,7 +35,7 @@
     backgroundNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleBackground"];
     trainNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleTrain"];
     smokeNode = (SKEmitterNode *)[trainNode childNodeWithName:@"TitleSmoke"];
-    startButtonNode = (SKEmitterNode *)[theTitleScene childNodeWithName:@"StartButton"];
+    startButtonNode = (StartButton *)[theTitleScene childNodeWithName:@"StartButton"];
 }
 
 - (void)tearDown {
@@ -72,9 +72,32 @@
     XCTAssertGreaterThan(trainNode.zPosition, backgroundNode.zPosition);
 }
 
-
 - (void)testTheTitleTrainStartsOffTheScreenAtAHeightOfSixtyPercent {
-    XCTAssertEqualPoints(trainNode.position, CGPointMake(-trainNode.size.width, theTitleScene.frame.size.height * 0.6));
+    XCTAssertEqualPoints(trainNode.position, CGPointMake(-trainNode.size.width, theTitleScene.frame.size.height * 0.5));
+}
+
+- (void)testAnActionCanMoveTheTrainWithDurationFourSeconds {
+    XCTAssertNotNil(theTitleScene.moveLeftToRightAction);
+    XCTAssertNotEqual([theTitleScene.moveLeftToRightAction.description rangeOfString:@"SKMove"].location, NSNotFound);
+    XCTAssertEqual(theTitleScene.moveLeftToRightAction.duration, 4);
+}
+
+- (void)testAnActionCanCauseAnObjectToGrowLargerOverFourSeconds {
+    XCTAssertNotNil(theTitleScene.scaleUpAction);
+    XCTAssertNotEqual([theTitleScene.scaleUpAction.description rangeOfString:@"SKScale"].location, NSNotFound);
+    XCTAssertEqual(theTitleScene.scaleUpAction.duration, 4);
+}
+
+- (void)testTheMoveAndGrowActionsHaveTheSameDuration {
+    XCTAssertEqual(theTitleScene.moveLeftToRightAction.duration, theTitleScene.scaleUpAction.duration);
+}
+
+- (void)testWhenMovingToTheViewThenTheTrainRunsTheMoveAndGrowActions {
+    id mockView = OCMClassMock([SKView class]);
+    [theTitleScene didMoveToView:mockView];
+    XCTAssertTrue(trainNode.hasActions);
+    XCTAssertNotNil([trainNode actionForKey:@"ScaleUp"]);
+    XCTAssertNotNil([trainNode actionForKey:@"MoveLeftToRight"]);
 }
 
 - (void)testThereIsAButtonToBeginWritingPractice {
@@ -88,19 +111,10 @@
     }
 }
 
-- (void)testTheStartButtonIsHorizontallyCentered {
-    XCTAssertEqual([UIScreen mainScreen].bounds.origin.x, 0);
-    
-    CGFloat leftSpan = startButtonNode.position.x - [UIScreen mainScreen].bounds.origin.x;
-    CGFloat rightSpan = [UIScreen mainScreen].bounds.size.width -
-                            (startButtonNode.position.x + startButtonNode.frame.size.width);
-
-    XCTAssertEqual(leftSpan, rightSpan);
-}
-
-- (void)testTheStartButtonIsVeritcallyPlacedTwentyPixelsUnderTheTopOfTheScreen {
-    CGFloat topOffset = [UIScreen mainScreen].bounds.size.height - startButtonNode.frame.size.height - 20;
-    XCTAssertEqual(startButtonNode.position.y, topOffset);
+- (void)testTheStartButtonIsPositionedCorrectlyInRelationToTheScene {
+    TitleScene *sizeConstrainedTitleScene = [[TitleScene alloc] initWithSize:CGSizeMake(100, 100)];
+    StartButton *startButton = (StartButton *)[sizeConstrainedTitleScene childNodeWithName:@"StartButton"];
+    XCTAssertEqualPoints(startButton.position, CGPointMake(85, 55));
 }
 
 - (void)testPressingTheStartButtonHooksToATransitionToTheAScene {

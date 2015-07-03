@@ -18,12 +18,11 @@
 		33F0F7F8451C437A96FC1B51 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
 		48f1d93187db71baeb6f0b52 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		54b7d83e13b2ab087b7ba46b /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D081731A8A312700DE5ECC /* AppDelegate.m */; };
-		5beae8f0d90d2532b2328aaf /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
+		5beae8f0d90d2532b2328aaf /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* Smoke.sks */; };
 		82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		86ba380426a0da7d0693edef /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
 		908403fe8b4fcb41713948b5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
 		9c0705e240b3870e3e11d957 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06e84e33b57bee0211ce863b /* calabash.framework */; };
-		9caf53473e3ba09f0d35d2d0 /* StartSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C7340E751AF77F2400915C8C /* StartSmoke.png */; };
 		9f8087f8b26322ff5cb6a7f8 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
 		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
@@ -31,13 +30,11 @@
 		C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
 		C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
 		C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */; };
-		C72C213B1AF70A3700A85ABF /* StartStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */; };
 		C73018261B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C73018271B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C730182A1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
 		C730182B1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
 		C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C730182C1B14907500266CB9 /* PathSegmentsTests.m */; };
-		C7340E761AF77F2400915C8C /* StartSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C7340E751AF77F2400915C8C /* StartSmoke.png */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		C73700191AB7D5790035C4A3 /* LayoutMathTestsSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */; };
 		C7554D921B364B7700E13027 /* LetterSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D911B364B7700E13027 /* LetterSelectScene.m */; };
@@ -52,8 +49,7 @@
 		C76529FA1B1B722E0075456A /* PathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* PathSegmentDictionary.m */; };
 		C76529FB1B1B722E0075456A /* PathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* PathSegmentDictionary.m */; };
 		C76529FD1B1B732D0075456A /* PathSegmentDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529FC1B1B732D0075456A /* PathSegmentDictionaryTest.m */; };
-		C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* OrangeSmoke.sks */; };
-		C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
+		C77347371AE72936005C2950 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* Smoke.sks */; };
 		C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347411AE73361005C2950 /* TitleTrainTests.m */; };
 		C77347451AE733F5005C2950 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
@@ -86,12 +82,10 @@
 		C7F894191AF78C3900F2A27D /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		ECCAE33056F3D2636BAEC8D0 /* libPods-TheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */; };
-		ba5f3bb416ccda30ae7dee04 /* OrangeSmoke.png in Resources */ = {isa = PBXBuildFile; fileRef = C773473E1AE72E3D005C2950 /* OrangeSmoke.png */; };
 		bd5de2f53c1df7d85136a815 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
 		c0c86b6a4c49a09b967fd398 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
 		c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
 		e52337c475e1ac1064badc16 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
-		e9a49b6208297aedef9e5e08 /* StartStringSmoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */; };
 		ff4e17987515595ed69cdc57 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,13 +114,11 @@
 		C72939921B01A2F100A10AB2 /* GenericSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericSpriteButton.h; path = TheWriteTrack/GenericSpriteButton.h; sourceTree = SOURCE_ROOT; };
 		C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButton.m; path = TheWriteTrack/GenericSpriteButton.m; sourceTree = SOURCE_ROOT; };
 		C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButtonTests.m; path = "TheWriteTrack-Tests/GenericSpriteButtonTests.m"; sourceTree = SOURCE_ROOT; };
-		C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartStringSmoke.sks; path = TheWriteTrack/StartStringSmoke.sks; sourceTree = SOURCE_ROOT; };
 		C73018241B148E5600266CB9 /* PathSegments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegments.h; path = TheWriteTrack/PathSegments.h; sourceTree = SOURCE_ROOT; };
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
 		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
 		C73018291B148FD400266CB9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = TheWriteTrack/Constants.m; sourceTree = SOURCE_ROOT; };
 		C730182C1B14907500266CB9 /* PathSegmentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentsTests.m; path = "TheWriteTrack-Tests/PathSegmentsTests.m"; sourceTree = SOURCE_ROOT; };
-		C7340E751AF77F2400915C8C /* StartSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StartSmoke.png; path = images/particles/StartSmoke.png; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
 		C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LayoutMathTestsSetup.m; path = "TheWriteTrack-Tests/LayoutMathTestsSetup.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -143,8 +135,7 @@
 		C76529F81B1B722E0075456A /* PathSegmentDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegmentDictionary.h; path = TheWriteTrack/PathSegmentDictionary.h; sourceTree = SOURCE_ROOT; };
 		C76529F91B1B722E0075456A /* PathSegmentDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentDictionary.m; path = TheWriteTrack/PathSegmentDictionary.m; sourceTree = SOURCE_ROOT; };
 		C76529FC1B1B732D0075456A /* PathSegmentDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentDictionaryTest.m; path = "TheWriteTrack-Tests/PathSegmentDictionaryTest.m"; sourceTree = SOURCE_ROOT; };
-		C77347351AE72936005C2950 /* OrangeSmoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = OrangeSmoke.sks; path = TheWriteTrack/OrangeSmoke.sks; sourceTree = SOURCE_ROOT; };
-		C773473E1AE72E3D005C2950 /* OrangeSmoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeSmoke.png; path = images/particles/OrangeSmoke.png; sourceTree = SOURCE_ROOT; };
+		C77347351AE72936005C2950 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Smoke.sks; path = TheWriteTrack/Smoke.sks; sourceTree = SOURCE_ROOT; };
 		C77347411AE73361005C2950 /* TitleTrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TitleTrainTests.m; path = "TheWriteTrack-Tests/TitleTrainTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C77347431AE733F5005C2950 /* TitleTrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleTrain.h; path = TheWriteTrack/TitleTrain.h; sourceTree = SOURCE_ROOT; };
 		C77347441AE733F5005C2950 /* TitleTrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrain.m; path = TheWriteTrack/TitleTrain.m; sourceTree = SOURCE_ROOT; };
@@ -289,6 +280,7 @@
 		C7554D8F1B364B1D00E13027 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C77347351AE72936005C2950 /* Smoke.sks */,
 				C79E71C11B2AFF6A00F46EC8 /* TitleScene.h */,
 				C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */,
 				C7C4B8A81A8C2C4F009FA11B /* LetterScene.h */,
@@ -354,17 +346,6 @@
 			name = Trains;
 			sourceTree = "<group>";
 		};
-		C77347471AE735F1005C2950 /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				C7340E751AF77F2400915C8C /* StartSmoke.png */,
-				C773473E1AE72E3D005C2950 /* OrangeSmoke.png */,
-				C77347351AE72936005C2950 /* OrangeSmoke.sks */,
-				C72C21391AF70A3700A85ABF /* StartStringSmoke.sks */,
-			);
-			name = assets;
-			sourceTree = "<group>";
-		};
 		C77DF2EA1AC88FA8002A6251 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,7 +405,6 @@
 		C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXGroup;
 			children = (
-				C77347471AE735F1005C2950 /* assets */,
 				C7554D971B373AF100E13027 /* Buttons */,
 				C73700131AB7D49A0035C4A3 /* Common */,
 				C7554D8F1B364B1D00E13027 /* Scenes */,
@@ -612,10 +592,7 @@
 				17c2763946b7df9f769a2bcb /* Images.xcassets in Resources */,
 				c0c86b6a4c49a09b967fd398 /* Main.storyboard in Resources */,
 				908403fe8b4fcb41713948b5 /* LaunchScreen.xib in Resources */,
-				ba5f3bb416ccda30ae7dee04 /* OrangeSmoke.png in Resources */,
-				e9a49b6208297aedef9e5e08 /* StartStringSmoke.sks in Resources */,
-				5beae8f0d90d2532b2328aaf /* OrangeSmoke.sks in Resources */,
-				9caf53473e3ba09f0d35d2d0 /* StartSmoke.png in Resources */,
+				5beae8f0d90d2532b2328aaf /* Smoke.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,10 +603,7 @@
 				C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */,
 				C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */,
 				C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */,
-				C773473F1AE72E3D005C2950 /* OrangeSmoke.png in Resources */,
-				C72C213B1AF70A3700A85ABF /* StartStringSmoke.sks in Resources */,
-				C77347371AE72936005C2950 /* OrangeSmoke.sks in Resources */,
-				C7340E761AF77F2400915C8C /* StartSmoke.png in Resources */,
+				C77347371AE72936005C2950 /* Smoke.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

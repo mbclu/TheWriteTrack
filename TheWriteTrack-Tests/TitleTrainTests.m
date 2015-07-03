@@ -49,15 +49,15 @@ NSString *const TitleTrainImageName = @"LaunchTrain";
     XCTAssertTrue([theTitleTrain.texture.description containsString:TitleTrainImageName]);
 }
 
-- (void)testASmokeEmitterExistsOnTheTrainWithOrangeSmokeTexture {
+- (void)testASmokeEmitterExistsOnTheTrainWithSmokeTexture {
     XCTAssertNotNil(theSmokeEmitter);
     XCTAssertTrue([theSmokeEmitter isKindOfClass:[SKEmitterNode class]]);
 }
 
-- (void)testTheSmokeEmitterLoadsTheOrangeSmokeTexture {
+- (void)testTheSmokeEmitterLoadsTheSmokeTexture {
     SKEmitterNode *smokeEmitter = (SKEmitterNode *)theSmokeEmitter;
-    XCTAssertTrue([smokeEmitter.particleTexture.description containsString:@"OrangeSmoke"]);
-    XCTAssertEqualSizes(smokeEmitter.particleTexture.size, [SKTexture textureWithImageNamed:@"OrangeSmoke"].size);
+    XCTAssertTrue([smokeEmitter.particleTexture.description containsString:@"Smoke"]);
+    XCTAssertEqualSizes(smokeEmitter.particleTexture.size, [SKTexture textureWithImageNamed:@"Smoke"].size);
 }
 
 - (void)testTheSmokeEmitterIsLocatedAtCorrectPosition {

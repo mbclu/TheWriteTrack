@@ -17,14 +17,7 @@
 
 #import "CocoaLumberjack.h"
 
-#if (DEBUG)
-NSString *const defaultStartLetter = @"M";
-#else
 NSString *const defaultStartLetter = @"A";
-#endif
-
-CGFloat const SmokeHorizontalOffset = -10;
-CGFloat const SmokeVerticalOffset = -5;
 NSTimeInterval const TransitionToASceneTimeInSeconds = 0.8;
 NSTimeInterval const SceneActionTimeInSeconds = 3;
 

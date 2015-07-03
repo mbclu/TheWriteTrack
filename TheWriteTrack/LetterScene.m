@@ -15,6 +15,7 @@
 #import "LetterSelectScene.h"
 #import "Constants.h"
 #import "Train.h"
+#import "TitleScene.h"
 
 @implementation LetterScene
 
@@ -166,12 +167,15 @@
     DDLogInfo(@"Transitioning to the Letter Selection scene");
     
     SKScene *letterSelectionScene = [[LetterSelectScene alloc] init];
-    
+    [self transitionToScene:letterSelectionScene];
+}
+
+- (void)transitionToScene:(SKScene *)scene {
     UIColor *const FadeColorDarkGray = [UIColor colorWithRed:0.26 green:0.26 blue:0.26 alpha:0.9];
     NSTimeInterval const FadeDurationHalfSecond = 0.50;
-    [self.view presentScene:letterSelectionScene transition:[SKTransition fadeWithColor:FadeColorDarkGray duration:FadeDurationHalfSecond]];
+    [self.view presentScene:scene transition:[SKTransition fadeWithColor:FadeColorDarkGray duration:FadeDurationHalfSecond]];
     [self.view setIsAccessibilityElement:YES];
-    [self.view setAccessibilityIdentifier:letterSelectionScene.name];
+    [self.view setAccessibilityIdentifier:scene.name];
 }
 
 - (void)connectSceneTransitions {

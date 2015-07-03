@@ -26,15 +26,6 @@ NSUInteger const SingleLetterLength = 1;
 CFStringRef const DefaultLetterFont = (CFStringRef)@"Thonburi";
 
 /* Buttons */
-/* Start Button */
-NSString *const StartText = @"start";
-NSString *const StartStringSmokeSKS = @"StartStringSmoke";
-CGFloat const StartStringSize = 125.0;
-CGFloat const LetterHoriztontalOffset = 10.0;
-CGFloat const ButtonOffsetMultiplier = 1.5;
-CGFloat const FollowPathDuration = 2.0;     // The smaller the number
-                                            // the faster the letters get filled in
-
 /* Letter Select Button */
 NSString *const ANodeName = @"ANode";
 NSString *const BNodeName = @"BNode";

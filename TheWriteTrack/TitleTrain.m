@@ -22,7 +22,7 @@
 
 - (void)addSmokeEmitter {
     SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                              [[NSBundle mainBundle] pathForResource:@"OrangeSmoke" ofType:@"sks"]];
+                              [[NSBundle mainBundle] pathForResource:@"Smoke" ofType:@"sks"]];
     emitter.name = @"SmokeEmitter";
     emitter.position = CGPointMake(self.size.width * 0.70, self.size.height);
     [self addChild:emitter];

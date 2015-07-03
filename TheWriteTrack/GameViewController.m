@@ -33,14 +33,6 @@
         [skView setAccessibilityIdentifier:titleScene.name];
         [skView presentScene:titleScene transition:[SKTransition fadeWithColor:[SKColor lightGrayColor] duration:0.5]];
     }
-#if (DEBUG)
-    skView.showsFPS = YES;
-    skView.showsFields = YES;
-//    skView.showsPhysics = YES;
-    skView.showsDrawCount = YES;
-    skView.showsNodeCount = YES;
-    skView.showsQuadCount = YES;
-#endif
 }
 
 - (BOOL)shouldAutorotate

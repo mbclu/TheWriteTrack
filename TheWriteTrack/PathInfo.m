@@ -79,7 +79,6 @@ void AddPathElementTypesToArray(void* info, const CGPathElement* element) {
     return array;
 }
 
-#ifdef DEBUG
 void PrintPathElement(void* info, const CGPathElement* element)
 {
     NSString *pointsString = @"";
@@ -141,6 +140,5 @@ void PrintPathElement(void* info, const CGPathElement* element)
     }
     CGPathApply(path, nil, PrintPathElement);
 }
-#endif
 
 @end

@@ -11,7 +11,6 @@
 
 @interface PathInfo : NSObject
 
-void PrintPath(CGPathRef path);
 - (NSMutableArray *)TransformPathToArray:(CGPathRef)path;
 - (NSMutableArray *)TransformPathToElementTypes:(CGPathRef)path;
 + (void)printPath:(CGPathRef)path;

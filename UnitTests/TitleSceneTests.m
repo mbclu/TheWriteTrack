@@ -14,7 +14,6 @@
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
-#import "CocoaLumberjack.h"
 #import "CGMatchers.h"
 
 @interface TitleSceneTests : XCTestCase {
@@ -23,7 +22,7 @@
     SKSpriteNode *trackNode;
     SKSpriteNode *trainNode;
     SKEmitterNode *smokeNode;
-    StartButton *startButtonNode;
+    StartButton *signalLightNode;
 }
 
 @end
@@ -37,7 +36,7 @@
     trackNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleTrack"];
     trainNode = (SKSpriteNode *)[theTitleScene childNodeWithName:@"TitleTrain"];
     smokeNode = (SKEmitterNode *)[trainNode childNodeWithName:@"TitleSmoke"];
-    startButtonNode = (StartButton *)[theTitleScene childNodeWithName:@"StartButton"];
+    signalLightNode = (StartButton *)[theTitleScene childNodeWithName:@"StartButton"];
 }
 
 - (void)tearDown {
@@ -100,17 +99,17 @@
     XCTAssertTrue(trainNode.hasActions);
     XCTAssertNotNil([trainNode actionForKey:@"ScaleUp"]);
     XCTAssertNotNil([trainNode actionForKey:@"MoveLeftToRight"]);
-    XCTAssertNotNil([startButtonNode actionForKey:@"FlashyLights"]);
+    XCTAssertNotNil([signalLightNode actionForKey:@"FlashyLights"]);
 }
 
 - (void)testThereIsAButtonToBeginWritingPractice {
-    XCTAssertNotNil(startButtonNode);
+    XCTAssertNotNil(signalLightNode);
 }
 
 - (void)testTheZOrderIs_Background_Track_SignalLight_Train {
     XCTAssertLessThan(backgroundNode.zPosition, trackNode.zPosition);
-    XCTAssertLessThan(trackNode.zPosition, startButtonNode.zPosition);
-    XCTAssertLessThan(startButtonNode.zPosition, trainNode.zPosition);
+    XCTAssertLessThan(trackNode.zPosition, signalLightNode.zPosition);
+    XCTAssertLessThan(signalLightNode.zPosition, trainNode.zPosition);
 }
 
 - (void)testTheStartButtonIsPositionedCorrectlyInRelationToTheScene {

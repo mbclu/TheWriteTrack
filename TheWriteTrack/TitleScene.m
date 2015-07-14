@@ -37,6 +37,8 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 }
 
 - (void)didMoveToView:(SKView *)view {
+    [view setAccessibilityLabel:@"TitleScene"];
+    [view setIsAccessibilityElement:YES];
     [self runTrainActions];
 }
 
@@ -81,8 +83,6 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
     SKScene *aScene = [[LetterScene alloc] initWithSize:self.size andLetter:defaultStartLetter];
     SKTransition *transition = [SKTransition flipHorizontalWithDuration:TransitionToASceneTimeInSeconds];
     [self.view presentScene:aScene transition:transition];
-    [self.view setIsAccessibilityElement:YES];
-    [self.view setAccessibilityIdentifier:aScene.name];
 }
 
 - (void)createTrainActions {

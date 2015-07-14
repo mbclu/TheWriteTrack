@@ -7,89 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0aeb68f61d41660a7508bc58 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
-		14d627ad861be84bef577fca /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
-		17c2763946b7df9f769a2bcb /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
-		18b2c493a8303f37dd0e0516 /* LetterScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* LetterScene.m */; };
-		1cbe32b00f98159a24bd2411 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
-		2bc1c89bef203c330e89d183 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
-		2f84204df49077677cf3b096 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43d0afec4f925143f9f92ad9 /* CFNetwork.framework */; };
-		30559a6be018832e48653bae /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		33F0F7F8451C437A96FC1B51 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
-		48f1d93187db71baeb6f0b52 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
-		54b7d83e13b2ab087b7ba46b /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D081731A8A312700DE5ECC /* AppDelegate.m */; };
-		5beae8f0d90d2532b2328aaf /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* Smoke.sks */; };
-		82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
-		86ba380426a0da7d0693edef /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
-		908403fe8b4fcb41713948b5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
-		9c0705e240b3870e3e11d957 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06e84e33b57bee0211ce863b /* calabash.framework */; };
-		9f8087f8b26322ff5cb6a7f8 /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
+		63F482AA073A7AACF68EB9F2 /* libPods-AcceptanceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAC2FFE0264A6A117C07439 /* libPods-AcceptanceTests.a */; };
+		6C7A5D92D71FE506C6AE19FF /* libPods-UnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 351A5C21742EF258B3648EFE /* libPods-UnitTests.a */; };
 		C710AB631A9ECA43002E7B79 /* LetterConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB621A9ECA43002E7B79 /* LetterConverter.m */; };
-		C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */; };
 		C710AB671A9ECCFD002E7B79 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
 		C72939941B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
-		C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */; };
-		C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */; };
 		C73018261B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
-		C73018271B148E5600266CB9 /* PathSegments.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018251B148E5600266CB9 /* PathSegments.m */; };
 		C730182A1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
-		C730182B1B148FD400266CB9 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = C73018291B148FD400266CB9 /* Constants.m */; };
-		C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C730182C1B14907500266CB9 /* PathSegmentsTests.m */; };
+		C731D65F1B549B5A00A8BBFF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C78E253E1B5498C800158C23 /* Info.plist */; };
+		C731D6601B549B6500A8BBFF /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25181B5498B600158C23 /* FakeTargetScene.m */; };
+		C731D6611B549B7500A8BBFF /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25291B5498B600158C23 /* TrainTests.m */; };
+		C731D6621B549B7C00A8BBFF /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25141B5498B600158C23 /* AttributedStringPathTests.m */; };
+		C731D6631B549B7C00A8BBFF /* ChosenLetterButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25161B5498B600158C23 /* ChosenLetterButtonTests.m */; };
+		C731D6641B549B7C00A8BBFF /* GameViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25191B5498B600158C23 /* GameViewControllerTests.m */; };
+		C731D6651B549B7C00A8BBFF /* GenericSpriteButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E251A1B5498B600158C23 /* GenericSpriteButtonTests.m */; };
+		C731D6661B549B7C00A8BBFF /* LayoutMathTestsSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E251B1B5498B600158C23 /* LayoutMathTestsSetup.m */; };
+		C731D6671B549B7C00A8BBFF /* LetterConverterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E251C1B5498B600158C23 /* LetterConverterTests.m */; };
+		C731D6681B549B7C00A8BBFF /* LetterSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E251D1B5498B600158C23 /* LetterSceneTests.m */; };
+		C731D6691B549B7C00A8BBFF /* LetterSelectButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E251E1B5498B600158C23 /* LetterSelectButtonTests.m */; };
+		C731D66A1B549B7C00A8BBFF /* LetterSelectSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E251F1B5498B600158C23 /* LetterSelectSceneTests.m */; };
+		C731D66B1B549B7C00A8BBFF /* PathInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25201B5498B600158C23 /* PathInfoTests.m */; };
+		C731D66C1B549B7C00A8BBFF /* PathSegmentDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25211B5498B600158C23 /* PathSegmentDictionaryTest.m */; };
+		C731D66D1B549B7C00A8BBFF /* PathSegmentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25221B5498B600158C23 /* PathSegmentsTests.m */; };
+		C731D66E1B549B7C00A8BBFF /* StartButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25241B5498B600158C23 /* StartButtonTests.m */; };
+		C731D66F1B549B7C00A8BBFF /* TitleSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25261B5498B600158C23 /* TitleSceneTests.m */; };
+		C731D6701B549B7C00A8BBFF /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25271B5498B600158C23 /* TitleTrainTests.m */; };
+		C731D6711B549B7C00A8BBFF /* TrackContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25281B5498B600158C23 /* TrackContainerTests.m */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
-		C73700191AB7D5790035C4A3 /* LayoutMathTestsSetup.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */; };
+		C73CC2D51B52AFE400EC097A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C73CC2D41B52AFE400EC097A /* libPods.a */; };
 		C7554D921B364B7700E13027 /* LetterSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D911B364B7700E13027 /* LetterSelectScene.m */; };
-		C7554D931B364B7700E13027 /* LetterSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D911B364B7700E13027 /* LetterSelectScene.m */; };
-		C7554D961B364C0400E13027 /* LetterSelectSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D951B364C0400E13027 /* LetterSelectSceneTests.m */; };
 		C7554D9A1B373B1000E13027 /* LetterSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D991B373B1000E13027 /* LetterSelectButton.m */; };
-		C7554D9B1B373B1000E13027 /* LetterSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D991B373B1000E13027 /* LetterSelectButton.m */; };
-		C7554D9E1B373B3200E13027 /* LetterSelectButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D9D1B373B3200E13027 /* LetterSelectButtonTests.m */; };
-		C75D0E0B1B0C285B006A71C8 /* TrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0A1B0C285B006A71C8 /* TrainTests.m */; };
 		C75D0E0E1B0C2A08006A71C8 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0D1B0C2A08006A71C8 /* Train.m */; };
-		C75D0E0F1B0C2A08006A71C8 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0D1B0C2A08006A71C8 /* Train.m */; };
 		C76529FA1B1B722E0075456A /* PathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* PathSegmentDictionary.m */; };
-		C76529FB1B1B722E0075456A /* PathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* PathSegmentDictionary.m */; };
-		C76529FD1B1B732D0075456A /* PathSegmentDictionaryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529FC1B1B732D0075456A /* PathSegmentDictionaryTest.m */; };
 		C77347371AE72936005C2950 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* Smoke.sks */; };
-		C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347411AE73361005C2950 /* TitleTrainTests.m */; };
 		C77347451AE733F5005C2950 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
 		C78C6F901AA3A8BC0077DE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
+		C78E25131B54987E00158C23 /* TitleSceneUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25121B54987E00158C23 /* TitleSceneUITests.m */; };
 		C79E71BC1B2AFCCE00F46EC8 /* TrackContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71BB1B2AFCCE00F46EC8 /* TrackContainer.m */; };
-		C79E71BD1B2AFCCE00F46EC8 /* TrackContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71BB1B2AFCCE00F46EC8 /* TrackContainer.m */; };
-		C79E71BF1B2AFE9400F46EC8 /* TrackContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71BE1B2AFE9400F46EC8 /* TrackContainerTests.m */; };
 		C79E71C51B2AFF6A00F46EC8 /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */; };
-		C79E71C61B2AFF6A00F46EC8 /* TitleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */; };
-		C79E71C81B2AFFAD00F46EC8 /* TitleSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C79E71C71B2AFFAD00F46EC8 /* TitleSceneTests.m */; };
-		C7A627AA1B3C1A7C00E966EF /* ChosenLetterButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A627A91B3C1A7C00E966EF /* ChosenLetterButtonTests.m */; };
 		C7A627AD1B3C1ABB00E966EF /* ChosenLetterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */; };
-		C7A627AE1B3C1ACB00E966EF /* ChosenLetterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */; };
 		C7B0EF211AED2C23007300D3 /* AttributedStringPath.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */; };
-		C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */; };
 		C7B697551AF2460C0066086E /* StartButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697541AF2460C0066086E /* StartButton.m */; };
-		C7B697571AF246330066086E /* StartButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B697561AF246330066086E /* StartButtonTests.m */; };
 		C7C4B8A51A8C22DD009FA11B /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */; };
 		C7C4B8AA1A8C2C4F009FA11B /* LetterScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8A91A8C2C4F009FA11B /* LetterScene.m */; };
-		C7C4B8AD1A8C2CBF009FA11B /* LetterSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C4B8AC1A8C2CBF009FA11B /* LetterSceneTests.m */; };
 		C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D081731A8A312700DE5ECC /* AppDelegate.m */; };
 		C7D081861A8A312700DE5ECC /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
 		C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
 		C7D081881A8A312700DE5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
 		C7D081921A8A322A00DE5ECC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7D081911A8A322A00DE5ECC /* Info.plist */; };
 		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
-		C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */; };
-		C7E298261AFEEAA4007F593C /* PathInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E298251AFEEAA4007F593C /* PathInfoTests.m */; };
-		C7F09F531ACCEF3A00B53F66 /* GameViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F09F521ACCEF3A00B53F66 /* GameViewControllerTests.m */; };
-		C7F894191AF78C3900F2A27D /* FakeTargetScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F894181AF78C3900F2A27D /* FakeTargetScene.m */; };
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
-		ECCAE33056F3D2636BAEC8D0 /* libPods-TheWriteTrackTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */; };
-		bd5de2f53c1df7d85136a815 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
-		c0c86b6a4c49a09b967fd398 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
-		c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817D1A8A312700DE5ECC /* GameViewController.m */; };
-		e52337c475e1ac1064badc16 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCE25A996CEA4B7C8B7FBC33 /* libPods.a */; };
-		ff4e17987515595ed69cdc57 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C710AB661A9ECCFD002E7B79 /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C73CC2E31B52FE5200EC097A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7CED0481A86B9DA00A4DCC3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7CED04F1A86B9DA00A4DCC3;
+			remoteInfo = TheWriteTrack;
+		};
 		C7CED06F1A86B9DA00A4DCC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C7CED0481A86B9DA00A4DCC3 /* Project object */;
@@ -102,66 +81,79 @@
 /* Begin PBXFileReference section */
 		06e84e33b57bee0211ce863b /* calabash.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OnTheWriteTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		351A5C21742EF258B3648EFE /* libPods-UnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43d0afec4f925143f9f92ad9 /* CFNetwork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		76197CAECD24DBDC09936F90 /* Pods-OnTheWriteTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
+		99B6069A4539053D008F7B74 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheWriteTrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheWriteTrackTests/Pods-OnTheWriteTrackTests.release.xcconfig"; sourceTree = "<group>"; };
 		BAB9FD649FC26D0F17DE72FD /* Pods-TheWriteTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheWriteTrackTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheWriteTrackTests/Pods-TheWriteTrackTests.release.xcconfig"; sourceTree = "<group>"; };
+		BBAC2FFE0264A6A117C07439 /* libPods-AcceptanceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AcceptanceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C244E61A8604BDFD4AA6772D /* Pods-AcceptanceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcceptanceTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AcceptanceTests/Pods-AcceptanceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C710AB611A9ECA43002E7B79 /* LetterConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterConverter.h; path = TheWriteTrack/LetterConverter.h; sourceTree = SOURCE_ROOT; };
 		C710AB621A9ECA43002E7B79 /* LetterConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverter.m; path = TheWriteTrack/LetterConverter.m; sourceTree = SOURCE_ROOT; };
-		C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LetterConverterTests.m; path = "TheWriteTrack-Tests/LetterConverterTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C710AB661A9ECCFD002E7B79 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C72939921B01A2F100A10AB2 /* GenericSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericSpriteButton.h; path = TheWriteTrack/GenericSpriteButton.h; sourceTree = SOURCE_ROOT; };
 		C72939931B01A2F100A10AB2 /* GenericSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButton.m; path = TheWriteTrack/GenericSpriteButton.m; sourceTree = SOURCE_ROOT; };
-		C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButtonTests.m; path = "TheWriteTrack-Tests/GenericSpriteButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C73018241B148E5600266CB9 /* PathSegments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegments.h; path = TheWriteTrack/PathSegments.h; sourceTree = SOURCE_ROOT; };
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
 		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
 		C73018291B148FD400266CB9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = TheWriteTrack/Constants.m; sourceTree = SOURCE_ROOT; };
-		C730182C1B14907500266CB9 /* PathSegmentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentsTests.m; path = "TheWriteTrack-Tests/PathSegmentsTests.m"; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
-		C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LayoutMathTestsSetup.m; path = "TheWriteTrack-Tests/LayoutMathTestsSetup.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C73CC2D41B52AFE400EC097A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C73CC2DD1B52FE5200EC097A /* AcceptanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AcceptanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C73CC2E01B52FE5200EC097A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7554D901B364B7700E13027 /* LetterSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterSelectScene.h; path = TheWriteTrack/LetterSelectScene.h; sourceTree = SOURCE_ROOT; };
 		C7554D911B364B7700E13027 /* LetterSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSelectScene.m; path = TheWriteTrack/LetterSelectScene.m; sourceTree = SOURCE_ROOT; };
-		C7554D951B364C0400E13027 /* LetterSelectSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSelectSceneTests.m; path = "TheWriteTrack-Tests/LetterSelectSceneTests.m"; sourceTree = SOURCE_ROOT; };
 		C7554D981B373B1000E13027 /* LetterSelectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterSelectButton.h; path = TheWriteTrack/LetterSelectButton.h; sourceTree = SOURCE_ROOT; };
 		C7554D991B373B1000E13027 /* LetterSelectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSelectButton.m; path = TheWriteTrack/LetterSelectButton.m; sourceTree = SOURCE_ROOT; };
-		C7554D9D1B373B3200E13027 /* LetterSelectButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSelectButtonTests.m; path = "TheWriteTrack-Tests/LetterSelectButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C755E7851B1919F60045E05D /* PathSegmentsIndeces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegmentsIndeces.h; path = TheWriteTrack/PathSegmentsIndeces.h; sourceTree = SOURCE_ROOT; };
-		C75D0E0A1B0C285B006A71C8 /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = "TheWriteTrack-Tests/TrainTests.m"; sourceTree = SOURCE_ROOT; };
 		C75D0E0C1B0C2A08006A71C8 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Train.h; path = TheWriteTrack/Train.h; sourceTree = SOURCE_ROOT; };
 		C75D0E0D1B0C2A08006A71C8 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Train.m; path = TheWriteTrack/Train.m; sourceTree = SOURCE_ROOT; };
 		C76529F81B1B722E0075456A /* PathSegmentDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegmentDictionary.h; path = TheWriteTrack/PathSegmentDictionary.h; sourceTree = SOURCE_ROOT; };
 		C76529F91B1B722E0075456A /* PathSegmentDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentDictionary.m; path = TheWriteTrack/PathSegmentDictionary.m; sourceTree = SOURCE_ROOT; };
-		C76529FC1B1B732D0075456A /* PathSegmentDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentDictionaryTest.m; path = "TheWriteTrack-Tests/PathSegmentDictionaryTest.m"; sourceTree = SOURCE_ROOT; };
 		C77347351AE72936005C2950 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Smoke.sks; path = TheWriteTrack/Smoke.sks; sourceTree = SOURCE_ROOT; };
-		C77347411AE73361005C2950 /* TitleTrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TitleTrainTests.m; path = "TheWriteTrack-Tests/TitleTrainTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C77347431AE733F5005C2950 /* TitleTrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleTrain.h; path = TheWriteTrack/TitleTrain.h; sourceTree = SOURCE_ROOT; };
 		C77347441AE733F5005C2950 /* TitleTrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrain.m; path = TheWriteTrack/TitleTrain.m; sourceTree = SOURCE_ROOT; };
 		C77DF2ED1AC9BC62002A6251 /* PathInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PathInfo.h; path = TheWriteTrack/PathInfo.h; sourceTree = SOURCE_ROOT; };
-		C7839DEC1AF9B76400BC94FA /* TheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = TheWriteTrack/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		C78E25121B54987E00158C23 /* TitleSceneUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleSceneUITests.m; sourceTree = "<group>"; };
+		C78E25141B5498B600158C23 /* AttributedStringPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPathTests.m; path = UnitTests/AttributedStringPathTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25151B5498B600158C23 /* CGMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGMatchers.h; path = UnitTests/CGMatchers.h; sourceTree = SOURCE_ROOT; };
+		C78E25161B5498B600158C23 /* ChosenLetterButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChosenLetterButtonTests.m; path = UnitTests/ChosenLetterButtonTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25171B5498B600158C23 /* FakeTargetScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeTargetScene.h; path = UnitTests/FakeTargetScene.h; sourceTree = SOURCE_ROOT; };
+		C78E25181B5498B600158C23 /* FakeTargetScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeTargetScene.m; path = UnitTests/FakeTargetScene.m; sourceTree = SOURCE_ROOT; };
+		C78E25191B5498B600158C23 /* GameViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameViewControllerTests.m; path = UnitTests/GameViewControllerTests.m; sourceTree = SOURCE_ROOT; };
+		C78E251A1B5498B600158C23 /* GenericSpriteButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GenericSpriteButtonTests.m; path = UnitTests/GenericSpriteButtonTests.m; sourceTree = SOURCE_ROOT; };
+		C78E251B1B5498B600158C23 /* LayoutMathTestsSetup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMathTestsSetup.m; path = UnitTests/LayoutMathTestsSetup.m; sourceTree = SOURCE_ROOT; };
+		C78E251C1B5498B600158C23 /* LetterConverterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterConverterTests.m; path = UnitTests/LetterConverterTests.m; sourceTree = SOURCE_ROOT; };
+		C78E251D1B5498B600158C23 /* LetterSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSceneTests.m; path = UnitTests/LetterSceneTests.m; sourceTree = SOURCE_ROOT; };
+		C78E251E1B5498B600158C23 /* LetterSelectButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSelectButtonTests.m; path = UnitTests/LetterSelectButtonTests.m; sourceTree = SOURCE_ROOT; };
+		C78E251F1B5498B600158C23 /* LetterSelectSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterSelectSceneTests.m; path = UnitTests/LetterSelectSceneTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25201B5498B600158C23 /* PathInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfoTests.m; path = UnitTests/PathInfoTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25211B5498B600158C23 /* PathSegmentDictionaryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentDictionaryTest.m; path = UnitTests/PathSegmentDictionaryTest.m; sourceTree = SOURCE_ROOT; };
+		C78E25221B5498B600158C23 /* PathSegmentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentsTests.m; path = UnitTests/PathSegmentsTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25241B5498B600158C23 /* StartButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButtonTests.m; path = UnitTests/StartButtonTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25261B5498B600158C23 /* TitleSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleSceneTests.m; path = UnitTests/TitleSceneTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25271B5498B600158C23 /* TitleTrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrainTests.m; path = UnitTests/TitleTrainTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25281B5498B600158C23 /* TrackContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackContainerTests.m; path = UnitTests/TrackContainerTests.m; sourceTree = SOURCE_ROOT; };
+		C78E25291B5498B600158C23 /* TrainTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrainTests.m; path = UnitTests/TrainTests.m; sourceTree = SOURCE_ROOT; };
+		C78E253E1B5498C800158C23 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = UnitTests/Info.plist; sourceTree = SOURCE_ROOT; };
 		C79E71BA1B2AFCCE00F46EC8 /* TrackContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackContainer.h; path = TheWriteTrack/TrackContainer.h; sourceTree = SOURCE_ROOT; };
 		C79E71BB1B2AFCCE00F46EC8 /* TrackContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackContainer.m; path = TheWriteTrack/TrackContainer.m; sourceTree = SOURCE_ROOT; };
-		C79E71BE1B2AFE9400F46EC8 /* TrackContainerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackContainerTests.m; path = "TheWriteTrack-Tests/TrackContainerTests.m"; sourceTree = SOURCE_ROOT; };
 		C79E71C11B2AFF6A00F46EC8 /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleScene.h; path = TheWriteTrack/TitleScene.h; sourceTree = SOURCE_ROOT; };
 		C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleScene.m; path = TheWriteTrack/TitleScene.m; sourceTree = SOURCE_ROOT; };
-		C79E71C71B2AFFAD00F46EC8 /* TitleSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleSceneTests.m; path = "TheWriteTrack-Tests/TitleSceneTests.m"; sourceTree = SOURCE_ROOT; };
-		C7A627A91B3C1A7C00E966EF /* ChosenLetterButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChosenLetterButtonTests.m; path = "TheWriteTrack-Tests/ChosenLetterButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C7A627AB1B3C1ABB00E966EF /* ChosenLetterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChosenLetterButton.h; path = TheWriteTrack/ChosenLetterButton.h; sourceTree = SOURCE_ROOT; };
 		C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChosenLetterButton.m; path = TheWriteTrack/ChosenLetterButton.m; sourceTree = SOURCE_ROOT; };
 		C7B0EF1F1AED2C23007300D3 /* AttributedStringPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttributedStringPath.h; path = TheWriteTrack/AttributedStringPath.h; sourceTree = SOURCE_ROOT; };
 		C7B0EF201AED2C23007300D3 /* AttributedStringPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AttributedStringPath.m; path = TheWriteTrack/AttributedStringPath.m; sourceTree = SOURCE_ROOT; };
-		C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AttributedStringPathTests.m; path = "TheWriteTrack-Tests/AttributedStringPathTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C7B697531AF2460C0066086E /* StartButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StartButton.h; path = TheWriteTrack/StartButton.h; sourceTree = SOURCE_ROOT; };
 		C7B697541AF2460C0066086E /* StartButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButton.m; path = TheWriteTrack/StartButton.m; sourceTree = SOURCE_ROOT; };
-		C7B697561AF246330066086E /* StartButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StartButtonTests.m; path = "TheWriteTrack-Tests/StartButtonTests.m"; sourceTree = SOURCE_ROOT; };
 		C7C4B8A41A8C22DD009FA11B /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		C7C4B8A81A8C2C4F009FA11B /* LetterScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LetterScene.h; path = TheWriteTrack/LetterScene.h; sourceTree = SOURCE_ROOT; };
 		C7C4B8A91A8C2C4F009FA11B /* LetterScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LetterScene.m; path = TheWriteTrack/LetterScene.m; sourceTree = SOURCE_ROOT; };
-		C7C4B8AC1A8C2CBF009FA11B /* LetterSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LetterSceneTests.m; path = "TheWriteTrack-Tests/LetterSceneTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C7CED0501A86B9DA00A4DCC3 /* TheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CED06E1A86B9DA00A4DCC3 /* TheWriteTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheWriteTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D081731A8A312700DE5ECC /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TheWriteTrack/AppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -170,23 +162,27 @@
 		C7D0817D1A8A312700DE5ECC /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameViewController.m; path = TheWriteTrack/GameViewController.m; sourceTree = SOURCE_ROOT; };
 		C7D0817E1A8A312700DE5ECC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TheWriteTrack/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		C7D0817F1A8A312700DE5ECC /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TheWriteTrack/main.m; sourceTree = SOURCE_ROOT; };
-		C7D0818B1A8A315A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "TheWriteTrack-Tests/Info.plist"; sourceTree = SOURCE_ROOT; };
 		C7D081911A8A322A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TheWriteTrack/Info.plist; sourceTree = SOURCE_ROOT; };
 		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
-		C7E298231AFEB1D3007F593C /* CGMatchers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGMatchers.h; path = "TheWriteTrack-Tests/CGMatchers.h"; sourceTree = SOURCE_ROOT; };
-		C7E298251AFEEAA4007F593C /* PathInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfoTests.m; path = "TheWriteTrack-Tests/PathInfoTests.m"; sourceTree = SOURCE_ROOT; };
-		C7F09F521ACCEF3A00B53F66 /* GameViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GameViewControllerTests.m; path = "TheWriteTrack-Tests/GameViewControllerTests.m"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		C7F894171AF78C3900F2A27D /* FakeTargetScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeTargetScene.h; path = "TheWriteTrack-Tests/FakeTargetScene.h"; sourceTree = SOURCE_ROOT; };
-		C7F894181AF78C3900F2A27D /* FakeTargetScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FakeTargetScene.m; path = "TheWriteTrack-Tests/FakeTargetScene.m"; sourceTree = SOURCE_ROOT; };
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25F5527AA660219B24645DA /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA67C40235CDA4F031132A14 /* Pods-TheWriteTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheWriteTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheWriteTrackTests/Pods-TheWriteTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheWriteTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC683C711198A746B358C5F7 /* Pods-AcceptanceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AcceptanceTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AcceptanceTests/Pods-AcceptanceTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C73CC2DA1B52FE5200EC097A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				63F482AA073A7AACF68EB9F2 /* libPods-AcceptanceTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7CED04D1A86B9DA00A4DCC3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,21 +198,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7D29A1E1AA3BC7500A45D83 /* libPods-OCMock.a in Frameworks */,
-				ECCAE33056F3D2636BAEC8D0 /* libPods-TheWriteTrackTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		e45f8b13c6e8400b94f26c23 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1cbe32b00f98159a24bd2411 /* CoreGraphics.framework in Frameworks */,
-				ff4e17987515595ed69cdc57 /* CoreText.framework in Frameworks */,
-				48f1d93187db71baeb6f0b52 /* SpriteKit.framework in Frameworks */,
-				e52337c475e1ac1064badc16 /* libPods.a in Frameworks */,
-				2f84204df49077677cf3b096 /* CFNetwork.framework in Frameworks */,
-				9c0705e240b3870e3e11d957 /* calabash.framework in Frameworks */,
+				C73CC2D51B52AFE400EC097A /* libPods.a in Frameworks */,
+				6C7A5D92D71FE506C6AE19FF /* libPods-UnitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +215,10 @@
 				A47540A347110EA2FBD9E7C2 /* Pods-OnTheWriteTrackTests.release.xcconfig */,
 				DA67C40235CDA4F031132A14 /* Pods-TheWriteTrackTests.debug.xcconfig */,
 				BAB9FD649FC26D0F17DE72FD /* Pods-TheWriteTrackTests.release.xcconfig */,
+				C244E61A8604BDFD4AA6772D /* Pods-AcceptanceTests.debug.xcconfig */,
+				FC683C711198A746B358C5F7 /* Pods-AcceptanceTests.release.xcconfig */,
+				D25F5527AA660219B24645DA /* Pods-UnitTests.debug.xcconfig */,
+				99B6069A4539053D008F7B74 /* Pods-UnitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -239,6 +226,7 @@
 		9DA64499BB4D4962B0368B47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C73CC2D41B52AFE400EC097A /* libPods.a */,
 				C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */,
 				CCE25A996CEA4B7C8B7FBC33 /* libPods.a */,
 				2E7F6D1458124244E147A260 /* libPods-OnTheWriteTrackTests.a */,
@@ -248,6 +236,8 @@
 				43d0afec4f925143f9f92ad9 /* CFNetwork.framework */,
 				06e84e33b57bee0211ce863b /* calabash.framework */,
 				F337E6AC06F65C27AC615289 /* libPods-TheWriteTrackTests.a */,
+				BBAC2FFE0264A6A117C07439 /* libPods-AcceptanceTests.a */,
+				351A5C21742EF258B3648EFE /* libPods-UnitTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -267,14 +257,21 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
-		C73700171AB7D5530035C4A3 /* Common-Tests */ = {
+		C73CC2DE1B52FE5200EC097A /* AcceptanceTests */ = {
 			isa = PBXGroup;
 			children = (
-				C710AB641A9ECA6E002E7B79 /* LetterConverterTests.m */,
-				C73700181AB7D5790035C4A3 /* LayoutMathTestsSetup.m */,
-				C7B0EF221AED2C48007300D3 /* AttributedStringPathTests.m */,
+				C78E25121B54987E00158C23 /* TitleSceneUITests.m */,
+				C73CC2DF1B52FE5200EC097A /* Supporting Files */,
 			);
-			name = "Common-Tests";
+			path = AcceptanceTests;
+			sourceTree = "<group>";
+		};
+		C73CC2DF1B52FE5200EC097A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C73CC2E01B52FE5200EC097A /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C7554D8F1B364B1D00E13027 /* Scenes */ = {
@@ -291,16 +288,6 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
-		C7554D941B364BB600E13027 /* Scene-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C79E71C71B2AFFAD00F46EC8 /* TitleSceneTests.m */,
-				C7C4B8AC1A8C2CBF009FA11B /* LetterSceneTests.m */,
-				C7554D951B364C0400E13027 /* LetterSelectSceneTests.m */,
-			);
-			name = "Scene-Tests";
-			sourceTree = "<group>";
-		};
 		C7554D971B373AF100E13027 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,25 +301,6 @@
 				C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */,
 			);
 			name = Buttons;
-			sourceTree = "<group>";
-		};
-		C7554D9C1B373B1700E13027 /* Button-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C72939961B01A36600A10AB2 /* GenericSpriteButtonTests.m */,
-				C7554D9D1B373B3200E13027 /* LetterSelectButtonTests.m */,
-				C7B697561AF246330066086E /* StartButtonTests.m */,
-				C7A627A91B3C1A7C00E966EF /* ChosenLetterButtonTests.m */,
-			);
-			name = "Button-Tests";
-			sourceTree = "<group>";
-		};
-		C7554D9F1B373C6D00E13027 /* Train-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C77347411AE73361005C2950 /* TitleTrainTests.m */,
-			);
-			name = "Train-Tests";
 			sourceTree = "<group>";
 		};
 		C7554DA01B373C7D00E13027 /* Trains */ = {
@@ -370,25 +338,15 @@
 			name = Track;
 			sourceTree = "<group>";
 		};
-		C7C4B8AB1A8C2C87009FA11B /* Track-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C75D0E0A1B0C285B006A71C8 /* TrainTests.m */,
-				C730182C1B14907500266CB9 /* PathSegmentsTests.m */,
-				C76529FC1B1B732D0075456A /* PathSegmentDictionaryTest.m */,
-				C79E71BE1B2AFE9400F46EC8 /* TrackContainerTests.m */,
-			);
-			name = "Track-Tests";
-			sourceTree = "<group>";
-		};
 		C7CED0471A86B9DA00A4DCC3 = {
 			isa = PBXGroup;
 			children = (
+				C73CC2DE1B52FE5200EC097A /* AcceptanceTests */,
 				9DA64499BB4D4962B0368B47 /* Frameworks */,
 				011576BBE50EDA8894D40229 /* Pods */,
 				C7CED0511A86B9DA00A4DCC3 /* Products */,
 				C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */,
-				C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */,
+				C7CED0711A86B9DA00A4DCC3 /* UnitTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -397,7 +355,7 @@
 			children = (
 				C7CED0501A86B9DA00A4DCC3 /* TheWriteTrack.app */,
 				C7CED06E1A86B9DA00A4DCC3 /* TheWriteTrackTests.xctest */,
-				C7839DEC1AF9B76400BC94FA /* TheWriteTrack.app */,
+				C73CC2DD1B52FE5200EC097A /* AcceptanceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -433,27 +391,37 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C7CED0711A86B9DA00A4DCC3 /* TheWriteTrack-Tests */ = {
+		C7CED0711A86B9DA00A4DCC3 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				C7554D9C1B373B1700E13027 /* Button-Tests */,
-				C73700171AB7D5530035C4A3 /* Common-Tests */,
-				C7F09F511ACCEEEE00B53F66 /* Integration-Tests */,
-				C7554D941B364BB600E13027 /* Scene-Tests */,
-				C7554D9F1B373C6D00E13027 /* Train-Tests */,
-				C7C4B8AB1A8C2C87009FA11B /* Track-Tests */,
-				C7E298241AFEEA80007F593C /* Utils-Tests */,
+				C78E25141B5498B600158C23 /* AttributedStringPathTests.m */,
+				C78E25161B5498B600158C23 /* ChosenLetterButtonTests.m */,
+				C78E25191B5498B600158C23 /* GameViewControllerTests.m */,
+				C78E251A1B5498B600158C23 /* GenericSpriteButtonTests.m */,
+				C78E251B1B5498B600158C23 /* LayoutMathTestsSetup.m */,
+				C78E251C1B5498B600158C23 /* LetterConverterTests.m */,
+				C78E251D1B5498B600158C23 /* LetterSceneTests.m */,
+				C78E251E1B5498B600158C23 /* LetterSelectButtonTests.m */,
+				C78E251F1B5498B600158C23 /* LetterSelectSceneTests.m */,
+				C78E25201B5498B600158C23 /* PathInfoTests.m */,
+				C78E25211B5498B600158C23 /* PathSegmentDictionaryTest.m */,
+				C78E25221B5498B600158C23 /* PathSegmentsTests.m */,
+				C78E25241B5498B600158C23 /* StartButtonTests.m */,
+				C78E25261B5498B600158C23 /* TitleSceneTests.m */,
+				C78E25271B5498B600158C23 /* TitleTrainTests.m */,
+				C78E25281B5498B600158C23 /* TrackContainerTests.m */,
+				C78E25291B5498B600158C23 /* TrainTests.m */,
 				C7E298221AFEB13A007F593C /* TestHelpers */,
 				C7CED0721A86B9DA00A4DCC3 /* Supporting Files */,
 			);
-			name = "TheWriteTrack-Tests";
+			name = UnitTests;
 			path = "The Write TrackTests";
 			sourceTree = "<group>";
 		};
 		C7CED0721A86B9DA00A4DCC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C7D0818B1A8A315A00DE5ECC /* Info.plist */,
+				C78E253E1B5498C800158C23 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -461,50 +429,35 @@
 		C7E298221AFEB13A007F593C /* TestHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				C7E298231AFEB1D3007F593C /* CGMatchers.h */,
-				C7F894171AF78C3900F2A27D /* FakeTargetScene.h */,
-				C7F894181AF78C3900F2A27D /* FakeTargetScene.m */,
+				C78E25151B5498B600158C23 /* CGMatchers.h */,
+				C78E25171B5498B600158C23 /* FakeTargetScene.h */,
+				C78E25181B5498B600158C23 /* FakeTargetScene.m */,
 			);
 			name = TestHelpers;
-			sourceTree = "<group>";
-		};
-		C7E298241AFEEA80007F593C /* Utils-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C7E298251AFEEAA4007F593C /* PathInfoTests.m */,
-			);
-			name = "Utils-Tests";
-			sourceTree = "<group>";
-		};
-		C7F09F511ACCEEEE00B53F66 /* Integration-Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C7F09F521ACCEF3A00B53F66 /* GameViewControllerTests.m */,
-			);
-			name = "Integration-Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2e0de9bebb895304458b464e /* TheWriteTrack-cal */ = {
+		C73CC2DC1B52FE5200EC097A /* AcceptanceTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4a592609210a753fb1550296 /* Build configuration list for PBXNativeTarget "TheWriteTrack-cal" */;
+			buildConfigurationList = C73CC2E71B52FE5200EC097A /* Build configuration list for PBXNativeTarget "AcceptanceTests" */;
 			buildPhases = (
-				2aa79896643d8a2ac1a41e02 /* Check Pods Manifest.lock */,
-				e229a25ea8dc2c66bfc0c583 /* Sources */,
-				e45f8b13c6e8400b94f26c23 /* Frameworks */,
-				8bb2ebc85ef58f01ee86eb84 /* Resources */,
-				ccd329dd9c4cb96041afe8ed /* Copy Pods Resources */,
+				7F73908971F875A7925FA988 /* Check Pods Manifest.lock */,
+				C73CC2D91B52FE5200EC097A /* Sources */,
+				C73CC2DA1B52FE5200EC097A /* Frameworks */,
+				C73CC2DB1B52FE5200EC097A /* Resources */,
+				F5B09AC0D408BABC20CE45CE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C73CC2E41B52FE5200EC097A /* PBXTargetDependency */,
 			);
-			name = "TheWriteTrack-cal";
-			productName = "The Write Track-cal";
-			productReference = C7839DEC1AF9B76400BC94FA /* TheWriteTrack.app */;
-			productType = "com.apple.product-type.application";
+			name = AcceptanceTests;
+			productName = AcceptanceTests;
+			productReference = C73CC2DD1B52FE5200EC097A /* AcceptanceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */ = {
 			isa = PBXNativeTarget;
@@ -525,9 +478,9 @@
 			productReference = C7CED0501A86B9DA00A4DCC3 /* TheWriteTrack.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C7CED06D1A86B9DA00A4DCC3 /* TheWriteTrackTests */ = {
+		C7CED06D1A86B9DA00A4DCC3 /* UnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "TheWriteTrackTests" */;
+			buildConfigurationList = C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
 				C474C894CF940B7CD52F048B /* Check Pods Manifest.lock */,
 				C7CED06A1A86B9DA00A4DCC3 /* Sources */,
@@ -540,7 +493,7 @@
 			dependencies = (
 				C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */,
 			);
-			name = TheWriteTrackTests;
+			name = UnitTests;
 			productName = "The Write TrackTests";
 			productReference = C7CED06E1A86B9DA00A4DCC3 /* TheWriteTrackTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -554,6 +507,10 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mitch Clutter";
 				TargetAttributes = {
+					C73CC2DC1B52FE5200EC097A = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = C7CED04F1A86B9DA00A4DCC3;
+					};
 					C7CED04F1A86B9DA00A4DCC3 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = WYMPA75CX8;
@@ -578,21 +535,17 @@
 			projectRoot = "";
 			targets = (
 				C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */,
-				C7CED06D1A86B9DA00A4DCC3 /* TheWriteTrackTests */,
-				2e0de9bebb895304458b464e /* TheWriteTrack-cal */,
+				C73CC2DC1B52FE5200EC097A /* AcceptanceTests */,
+				C7CED06D1A86B9DA00A4DCC3 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8bb2ebc85ef58f01ee86eb84 /* Resources */ = {
+		C73CC2DB1B52FE5200EC097A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17c2763946b7df9f769a2bcb /* Images.xcassets in Resources */,
-				c0c86b6a4c49a09b967fd398 /* Main.storyboard in Resources */,
-				908403fe8b4fcb41713948b5 /* LaunchScreen.xib in Resources */,
-				5beae8f0d90d2532b2328aaf /* Smoke.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +564,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C731D65F1B549B5A00A8BBFF /* Info.plist in Resources */,
 				C7D081921A8A322A00DE5ECC /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,22 +584,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheWriteTrackTests/Pods-TheWriteTrackTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2aa79896643d8a2ac1a41e02 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6619CAACEF444BC28D2DE667 /* Copy Pods Resources */ = {
@@ -661,6 +600,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F73908971F875A7925FA988 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AA627B92010C4CC291E769EF /* Check Pods Manifest.lock */ = {
@@ -693,7 +647,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		ccd329dd9c4cb96041afe8ed /* Copy Pods Resources */ = {
+		F5B09AC0D408BABC20CE45CE /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -705,12 +659,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AcceptanceTests/Pods-AcceptanceTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C73CC2D91B52FE5200EC097A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C78E25131B54987E00158C23 /* TitleSceneUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7CED04C1A86B9DA00A4DCC3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -735,7 +697,6 @@
 				C730182A1B148FD400266CB9 /* Constants.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
-				C7F894191AF78C3900F2A27D /* FakeTargetScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,57 +704,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C75D0E0B1B0C285B006A71C8 /* TrainTests.m in Sources */,
-				C79E71BF1B2AFE9400F46EC8 /* TrackContainerTests.m in Sources */,
-				C7A627AA1B3C1A7C00E966EF /* ChosenLetterButtonTests.m in Sources */,
-				C72939971B01A36600A10AB2 /* GenericSpriteButtonTests.m in Sources */,
-				C7554D9E1B373B3200E13027 /* LetterSelectButtonTests.m in Sources */,
-				C77347421AE73361005C2950 /* TitleTrainTests.m in Sources */,
-				C710AB651A9ECA6E002E7B79 /* LetterConverterTests.m in Sources */,
-				C7B697571AF246330066086E /* StartButtonTests.m in Sources */,
-				C7554D961B364C0400E13027 /* LetterSelectSceneTests.m in Sources */,
-				C7B0EF231AED2C48007300D3 /* AttributedStringPathTests.m in Sources */,
-				C73700191AB7D5790035C4A3 /* LayoutMathTestsSetup.m in Sources */,
-				C7C4B8AD1A8C2CBF009FA11B /* LetterSceneTests.m in Sources */,
-				C7E298261AFEEAA4007F593C /* PathInfoTests.m in Sources */,
-				C79E71C81B2AFFAD00F46EC8 /* TitleSceneTests.m in Sources */,
-				C730182D1B14907500266CB9 /* PathSegmentsTests.m in Sources */,
-				C76529FD1B1B732D0075456A /* PathSegmentDictionaryTest.m in Sources */,
-				C7F09F531ACCEF3A00B53F66 /* GameViewControllerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		e229a25ea8dc2c66bfc0c583 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C79E71C61B2AFF6A00F46EC8 /* TitleScene.m in Sources */,
-				C7554D931B364B7700E13027 /* LetterSelectScene.m in Sources */,
-				C76529FB1B1B722E0075456A /* PathSegmentDictionary.m in Sources */,
-				9f8087f8b26322ff5cb6a7f8 /* StartButton.m in Sources */,
-				C79E71BD1B2AFCCE00F46EC8 /* TrackContainer.m in Sources */,
-				C72939951B01A2F100A10AB2 /* GenericSpriteButton.m in Sources */,
-				14d627ad861be84bef577fca /* AttributedStringPath.m in Sources */,
-				0aeb68f61d41660a7508bc58 /* LetterConverter.m in Sources */,
-				C7A627AE1B3C1ACB00E966EF /* ChosenLetterButton.m in Sources */,
-				c444dcab0b4151d43bc090ac /* GameViewController.m in Sources */,
-				82b1f85541299ad9e879cbc7 /* PathInfo.m in Sources */,
-				C75D0E0F1B0C2A08006A71C8 /* Train.m in Sources */,
-				C73018271B148E5600266CB9 /* PathSegments.m in Sources */,
-				2bc1c89bef203c330e89d183 /* TitleTrain.m in Sources */,
-				C7554D9B1B373B1000E13027 /* LetterSelectButton.m in Sources */,
-				bd5de2f53c1df7d85136a815 /* main.m in Sources */,
-				C730182B1B148FD400266CB9 /* Constants.m in Sources */,
-				18b2c493a8303f37dd0e0516 /* LetterScene.m in Sources */,
-				54b7d83e13b2ab087b7ba46b /* AppDelegate.m in Sources */,
-				30559a6be018832e48653bae /* LayoutMath.m in Sources */,
-				86ba380426a0da7d0693edef /* FakeTargetScene.m in Sources */,
+				C731D6701B549B7C00A8BBFF /* TitleTrainTests.m in Sources */,
+				C731D66A1B549B7C00A8BBFF /* LetterSelectSceneTests.m in Sources */,
+				C731D6651B549B7C00A8BBFF /* GenericSpriteButtonTests.m in Sources */,
+				C731D66D1B549B7C00A8BBFF /* PathSegmentsTests.m in Sources */,
+				C731D6661B549B7C00A8BBFF /* LayoutMathTestsSetup.m in Sources */,
+				C731D6611B549B7500A8BBFF /* TrainTests.m in Sources */,
+				C731D6691B549B7C00A8BBFF /* LetterSelectButtonTests.m in Sources */,
+				C731D66C1B549B7C00A8BBFF /* PathSegmentDictionaryTest.m in Sources */,
+				C731D66E1B549B7C00A8BBFF /* StartButtonTests.m in Sources */,
+				C731D6601B549B6500A8BBFF /* FakeTargetScene.m in Sources */,
+				C731D6671B549B7C00A8BBFF /* LetterConverterTests.m in Sources */,
+				C731D6641B549B7C00A8BBFF /* GameViewControllerTests.m in Sources */,
+				C731D6681B549B7C00A8BBFF /* LetterSceneTests.m in Sources */,
+				C731D6621B549B7C00A8BBFF /* AttributedStringPathTests.m in Sources */,
+				C731D66B1B549B7C00A8BBFF /* PathInfoTests.m in Sources */,
+				C731D6631B549B7C00A8BBFF /* ChosenLetterButtonTests.m in Sources */,
+				C731D66F1B549B7C00A8BBFF /* TitleSceneTests.m in Sources */,
+				C731D6711B549B7C00A8BBFF /* TrackContainerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C73CC2E41B52FE5200EC097A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */;
+			targetProxy = C73CC2E31B52FE5200EC097A /* PBXContainerItemProxy */;
+		};
 		C7CED0701A86B9DA00A4DCC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C7CED04F1A86B9DA00A4DCC3 /* TheWriteTrack */;
@@ -802,29 +741,46 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		61c00b4ead7729771c9c9bd6 /* Release */ = {
+		C73CC2E51B52FE5200EC097A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */;
+			baseConfigurationReference = C244E61A8604BDFD4AA6772D /* Pods-AcceptanceTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = TheWriteTrack/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
 					"$(inherited)",
-					"-l\"Pods-OCMock\"",
-					"-force_load",
-					"\"$(SRCROOT)/calabash.framework/calabash\"",
-					"-lstdc++",
 				);
-				PRODUCT_NAME = TheWriteTrack;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = AcceptanceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
+			};
+			name = Debug;
+		};
+		C73CC2E61B52FE5200EC097A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC683C711198A746B358C5F7 /* Pods-AcceptanceTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AcceptanceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 			};
 			name = Release;
 		};
@@ -925,13 +881,10 @@
 				INFOPLIST_FILE = TheWriteTrack/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-l\"Pods-OCMock\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
 			};
 			name = Debug;
 		};
@@ -946,19 +899,16 @@
 				INFOPLIST_FILE = TheWriteTrack/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-l\"Pods-OCMock\"",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
 			};
 			name = Release;
 		};
 		C7CED07C1A86B9DA00A4DCC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA67C40235CDA4F031132A14 /* Pods-TheWriteTrackTests.debug.xcconfig */;
+			baseConfigurationReference = D25F5527AA660219B24645DA /* Pods-UnitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -974,12 +924,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "TheWriteTrack-Tests/Info.plist";
+				INFOPLIST_FILE = UnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -988,13 +935,13 @@
 				);
 				PRODUCT_NAME = TheWriteTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
-				USER_HEADER_SEARCH_PATHS = "\"/Users/clutter/projects/theWriteTrack/TheWriteTrack-Tests\"/** \"/Users/clutter/projects/theWriteTrack/TheWriteTrack\"/** \"/Users/clutter/projects/theWriteTrack/Pods/Headers\"/**";
+				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
 			};
 			name = Debug;
 		};
 		C7CED07D1A86B9DA00A4DCC3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAB9FD649FC26D0F17DE72FD /* Pods-TheWriteTrackTests.release.xcconfig */;
+			baseConfigurationReference = 99B6069A4539053D008F7B74 /* Pods-UnitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1006,12 +953,9 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = "TheWriteTrack-Tests/Info.plist";
+				INFOPLIST_FILE = UnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1020,44 +964,18 @@
 				);
 				PRODUCT_NAME = TheWriteTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
-				USER_HEADER_SEARCH_PATHS = "\"/Users/clutter/projects/theWriteTrack/TheWriteTrack-Tests\"/** \"/Users/clutter/projects/theWriteTrack/TheWriteTrack\"/** \"/Users/clutter/projects/theWriteTrack/Pods/Headers\"/**";
+				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
 			};
 			name = Release;
-		};
-		f618a0b8d56660f3105effdd /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4F07B3FDED4E02F6CF07D18 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = TheWriteTrack/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-l\"Pods-OCMock\"",
-					"-force_load",
-					"\"$(SRCROOT)/calabash.framework/calabash\"",
-					"-lstdc++",
-				);
-				PRODUCT_NAME = TheWriteTrack;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "";
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4a592609210a753fb1550296 /* Build configuration list for PBXNativeTarget "TheWriteTrack-cal" */ = {
+		C73CC2E71B52FE5200EC097A /* Build configuration list for PBXNativeTarget "AcceptanceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				f618a0b8d56660f3105effdd /* Debug */,
-				61c00b4ead7729771c9c9bd6 /* Release */,
+				C73CC2E51B52FE5200EC097A /* Debug */,
+				C73CC2E61B52FE5200EC097A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1080,7 +998,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "TheWriteTrackTests" */ = {
+		C7CED07B1A86B9DA00A4DCC3 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C7CED07C1A86B9DA00A4DCC3 /* Debug */,

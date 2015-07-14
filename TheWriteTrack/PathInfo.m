@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "CocoaLumberjack.h"
 
+static DDLogLevel ddLogLevel = DDLogLevelAll;
+
 static BOOL pathClosed = NO;
 void AddPathElementPointsToArray(void* info, const CGPathElement* element) {
     NSMutableArray *pathPoints = (__bridge NSMutableArray *)info;

@@ -13,7 +13,6 @@
 #import "LetterConverter.h"
 #import "LayoutMath.h"
 #import "PathInfo.h"
-#import "CocoaLumberjack.h"
 
 CFStringRef const FONT = (CFStringRef)@"Thonburi";
 

@@ -15,6 +15,8 @@
 
 #import "CocoaLumberjack.h"
 
+static DDLogLevel ddLogLevel = DDLogLevelAll;
+
 NSString *const TrainName = @"Train";
 CGFloat const maxMoveAmount = 10.0;
 

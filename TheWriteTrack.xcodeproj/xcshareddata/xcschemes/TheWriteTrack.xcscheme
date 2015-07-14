@@ -30,7 +30,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C7CED06D1A86B9DA00A4DCC3"
                BuildableName = "TheWriteTrackTests.xctest"
-               BlueprintName = "TheWriteTrackTests"
+               BlueprintName = "UnitTests"
                ReferencedContainer = "container:TheWriteTrack.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -48,7 +48,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C7CED06D1A86B9DA00A4DCC3"
                BuildableName = "TheWriteTrackTests.xctest"
-               BlueprintName = "TheWriteTrackTests"
+               BlueprintName = "UnitTests"
                ReferencedContainer = "container:TheWriteTrack.xcodeproj">
             </BuildableReference>
          </TestableReference>

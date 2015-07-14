@@ -9,13 +9,16 @@
 #import "LetterScene.h"
 
 #import "AttributedStringPath.h"
-#import "CocoaLumberjack.h"
 #import "GenericSpriteButton.h"
 #import "LayoutMath.h"
 #import "LetterSelectScene.h"
 #import "Constants.h"
 #import "Train.h"
 #import "TitleScene.h"
+
+#import "CocoaLumberjack.h"
+
+static DDLogLevel ddLogLevel = DDLogLevelAll;
 
 @implementation LetterScene
 
@@ -28,6 +31,7 @@
         
         _letter = [letter characterAtIndex:0];
         
+        self.name = letter;
         self.scaleMode = SKSceneScaleModeAspectFill;
 
         [self setName:[self stringFromSceneUnicharLetter]];
@@ -50,6 +54,8 @@
 
 - (void)didMoveToView:(SKView *)view {
     [super didMoveToView:view];
+    [view setIsAccessibilityElement:YES];
+    [view setAccessibilityLabel:self.name];
     [((TrackContainer *)[self childNodeWithName:LetterSceneTrackContainerNodeName]) beginDemonstration];
 }
 

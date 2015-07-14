@@ -14,11 +14,10 @@
 #import "LayoutMath.h"
 #import "Train.h"
 
-#import "CGMatchers.h"
-#import "CocoaLumberjack.h"
-
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
+
+#import "CGMatchers.h"
 
 CGFloat const GapCheckAccuracy = 1.0;
 CGFloat const ArbitrarySceneWidth = 400;
@@ -120,7 +119,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testPressingTheNextButtonSendsAMessageToTheTransitionToNextSceneAction {
     id mockScene = OCMPartialMock(theScene);
-    DDLogDebug(@"Next Button Position on Scene : %@", NSStringFromCGPoint(theScene.nextButtonProperty.position));
     [theScene.nextButtonProperty evaluateTouchAtPoint:theScene.nextButtonProperty.position];
     OCMVerify([mockScene transitionToNextScene]);
 }
@@ -163,7 +161,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testPressingThePrevButtonSendsAMessageToTheTransitionToPrevSceneAction {
     id mockScene = OCMPartialMock(theScene);
-    DDLogDebug(@"Prev Button Position on Scene : %@", NSStringFromCGPoint(theScene.previousButtonProperty.position));
     [theScene.previousButtonProperty evaluateTouchAtPoint:theScene.previousButtonProperty.position];
     OCMVerify([mockScene transitionToPreviousScene]);
 }
@@ -229,7 +226,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testGivenTouchesEndedWhenTheLocationIsTheLetterSelectButtonThenATransitionToTheLetterSelectSceneIsMade {
     id mockScene = OCMPartialMock(theScene);
-    DDLogDebug(@"Letter Select Button Position on Scene : %@", NSStringFromCGPoint(theScene.letterSelectButtonProperty.position));
     [theScene.letterSelectButtonProperty evaluateTouchAtPoint:theScene.letterSelectButtonProperty.position];
     OCMVerify([mockScene transitionToLetterSelectScene]);
 }

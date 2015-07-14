@@ -1,6 +1,11 @@
-pod 'OCMock'
-platform :ios, '5.0'
+platform :ios, '8.0'
 pod 'CocoaLumberjack'
-target :TheWriteTrackTests, :exclusive => true do
-  pod 'SPYTestLog'
+
+target 'UnitTests', :exclusive => true do
+  pod 'OCMock', :configurations => ['Debug']
 end
+
+target 'AcceptanceTests', :exclusive => true do
+  pod 'KIF', '~> 3.0', :configurations => ['Debug']
+end
+

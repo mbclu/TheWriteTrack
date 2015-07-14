@@ -15,6 +15,8 @@
 
 #import "CocoaLumberjack.h"
 
+static DDLogLevel ddLogLevel = DDLogLevelAll;
+
 @implementation LetterSelectScene {
     UIColor *backgroundColor;
     UIColor *skyColor;

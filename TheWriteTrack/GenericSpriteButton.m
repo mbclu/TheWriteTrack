@@ -9,6 +9,8 @@
 #import "GenericSpriteButton.h"
 #import "CocoaLumberjack.h"
 
+static DDLogLevel ddLogLevel = DDLogLevelAll;
+
 @implementation GenericSpriteButton
 
 - (instancetype)init {

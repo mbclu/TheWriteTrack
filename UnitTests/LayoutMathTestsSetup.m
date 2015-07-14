@@ -11,7 +11,6 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "LetterConverter.h"
-#import "CocoaLumberjack.h"
 
 @interface LayoutMathTestsSetup : XCTestCase {
     @protected CGFloat defaultAccuracy;
@@ -25,7 +24,7 @@
 
 CGRect printBoundingBoxForLetter(CGMutablePathRef path, NSString *letter) {
     CGRect bounds = CGPathGetPathBoundingBox(path);
-    DDLogInfo(@"\nBounds for the letter \"%@\":\n"
+    NSLog(@"\nBounds for the letter \"%@\":\n"
           "\t x = %1.2f \t y= %1.2f\n"
           "\t width = %1.2f \t height = %1.2f",
           letter,

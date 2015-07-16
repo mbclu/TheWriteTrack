@@ -21,10 +21,11 @@ This is a spelling a writing app for children that will allow them to use their 
 
 ## Version ##
 2.0 - Dev
- - Major changes from user feedback include:
- 	Make the train more forgiving to move
-	Add sounds
-	Skip the demo
+
+Major changes from user feedback include:
+ 	- Make the train more forgiving to move
+	- Add sounds
+	- Skip the demo
 	
 1.0 - Released
 

@@ -25,4 +25,5 @@ unitTestResults.xml
 
 # other
 **/*_bak.*
+build_acceptanceTest/
 

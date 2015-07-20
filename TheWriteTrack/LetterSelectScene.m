@@ -12,6 +12,7 @@
 #import "ChosenLetterButton.h"
 #import "Constants.h"
 #import "LetterScene.h"
+#import "AccessibilityHelper.h"
 
 #import "CocoaLumberjack.h"
 
@@ -44,6 +45,7 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
 }
 
 - (void)didMoveToView:(SKView *)view {
+    [AccessibilityHelper setAccessibilityName:@"Letter Select Screen" forView:view];
     [self sky];
     [self sun];
     [self mountains];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <KIF/KIF.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface TitleSceneUITests : KIFTestCase
 
@@ -25,7 +26,17 @@
 
 - (void)testWhenTitleSceneTappedThenASceneIsLoaded {
     [tester tapViewWithAccessibilityLabel:@"TitleScene"];
-    [tester waitForTappableViewWithAccessibilityLabel:@"A"];
+    [tester waitForViewWithAccessibilityLabel:@"A"];
+}
+
+- (void)testWhenTitleSceneIsLoadedThenATrainMovesAcrossTheScreen {
+    UIView *view = [tester waitForTappableViewWithAccessibilityLabel:@"TitleScene"];
+    UIAccessibilityElement *element = [view accessibilityElements][0];
+    XCTAssertGreaterThan([view accessibilityElements].count, 0);
+    for (UIAccessibilityElement *e in [view accessibilityElements]) {
+        NSLog(@"AE ID: %@\nAE Label: %@", e.accessibilityIdentifier, e.accessibilityLabel);
+    }
+    [tester waitForAccessibilityElement:&element view:&view withIdentifier:@"TitleScene" tappable:YES];
 }
 
 @end

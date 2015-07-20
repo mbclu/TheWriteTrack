@@ -15,7 +15,7 @@
 #import "Constants.h"
 #import "Train.h"
 #import "TitleScene.h"
-
+#import "AccessibilityHelper.h"
 #import "CocoaLumberjack.h"
 
 static DDLogLevel ddLogLevel = DDLogLevelAll;
@@ -53,9 +53,7 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
 }
 
 - (void)didMoveToView:(SKView *)view {
-    [super didMoveToView:view];
-    [view setIsAccessibilityElement:YES];
-    [view setAccessibilityLabel:self.name];
+    [AccessibilityHelper setAccessibilityName:self.name forView:view];
     [((TrackContainer *)[self childNodeWithName:LetterSceneTrackContainerNodeName]) beginDemonstration];
 }
 
@@ -101,6 +99,10 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
                                   HALF_OF((self.size.height - button.size.height)));
     button.zPosition = LetterSceneButtonZPosition;
+
+    button.isAccessibilityElement = YES;
+    button.accessibilityLabel = @"Next Button";
+    
     return button;
 }
 
@@ -180,8 +182,6 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     UIColor *const FadeColorDarkGray = [UIColor colorWithRed:0.26 green:0.26 blue:0.26 alpha:0.9];
     NSTimeInterval const FadeDurationHalfSecond = 0.50;
     [self.view presentScene:scene transition:[SKTransition fadeWithColor:FadeColorDarkGray duration:FadeDurationHalfSecond]];
-    [self.view setIsAccessibilityElement:YES];
-    [self.view setAccessibilityIdentifier:scene.name];
 }
 
 - (void)connectSceneTransitions {

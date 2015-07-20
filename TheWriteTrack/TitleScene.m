@@ -14,6 +14,7 @@
 #import "LetterScene.h"
 #import "StartButton.h"
 #import "TitleTrain.h"
+#import "AccessibilityHelper.h"
 
 #import "CocoaLumberjack.h"
 
@@ -37,8 +38,7 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 }
 
 - (void)didMoveToView:(SKView *)view {
-    [view setAccessibilityLabel:@"TitleScene"];
-    [view setIsAccessibilityElement:YES];
+    [AccessibilityHelper setAccessibilityName:@"Title Screen" forView:view];
     [self runTrainActions];
 }
 
@@ -64,6 +64,8 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 
 - (void)addTrain {
     TitleTrain *train = [[TitleTrain alloc] init];
+    train.accessibilityLabel = @"TitleTrain";
+    train.isAccessibilityElement = YES;
     train.position = CGPointMake(-HALF_OF(train.size.width), [self getTrack].frame.size.height);
     [self anchorNode:train atZeroAndZPosition:TrainZOrder];
 }

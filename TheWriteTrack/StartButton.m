@@ -22,7 +22,7 @@
     
     [self positionLights];
     
-    self.userInteractionEnabled = YES;
+    self.userInteractionEnabled = NO;
     
     return self;
 }
@@ -30,14 +30,12 @@
 - (void)addTopHalfSignalLight {
     SKSpriteNode *top = [SKSpriteNode spriteNodeWithImageNamed:@"SignalLightTop"];
     top.name = @"SignalTopHalf";
-    top.userInteractionEnabled = YES;
     [self addChild:top];
 }
 
 - (void)addBottomHalfSignalLight {
     SKSpriteNode *bottom = [SKSpriteNode spriteNodeWithImageNamed:@"SignalLightBottom"];
     bottom.name = @"SignalBottomHalf";
-    bottom.userInteractionEnabled = YES;
     [self addChild:bottom];
 }
 

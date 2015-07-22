@@ -40,8 +40,8 @@
     XCTAssertTrue([bottom.texture.description containsString:@"SignalLightBottom"]);
 }
 
-- (void)testUserInteractionIsEnabledForTheStartButton {
-    XCTAssertTrue(theStartButton.userInteractionEnabled);
+- (void)testUserInteractionIsDisabledForTheStartButton {
+    XCTAssertFalse(theStartButton.userInteractionEnabled);
 }
 
 - (void)testTheTopHalfHasAGreenYellowAndRedLight {

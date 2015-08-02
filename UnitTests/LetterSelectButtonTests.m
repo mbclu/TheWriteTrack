@@ -65,4 +65,33 @@
     XCTAssertEqualPoints(theCNode.position, expectedPoint);
 }
 
+- (void)testUserInteractionIsDisabledForTheLetterNodes {
+    XCTAssertFalse(theANode.isUserInteractionEnabled);
+    XCTAssertFalse(theBNode.isUserInteractionEnabled);
+    XCTAssertFalse(theCNode.isUserInteractionEnabled);
+}
+
+- (void)testThatUserInteractionIsEnabledForTheThisButton {
+    XCTAssertTrue(theSelectButton.isUserInteractionEnabled);
+}
+
+- (void)testWhenTheButtonIsCreatedThenItHasAWidthEqualToTheSumOfTheABCLettersWidthAndPadding {
+    float xPaddingSum = 2 * LETTER_SELECT_BUTTON_X_PADDING;
+    float letterWidthSum = theANode.frame.size.width + theBNode.frame.size.width + theCNode.frame.size.width;
+    XCTAssertEqualWithAccuracy(theSelectButton.frame.size.width, letterWidthSum + xPaddingSum, 0.01);
+}
+
+- (void)testWhenTheButtonIsCreatedThenItHasAHeightGreaterThanTheDifferenceOfTheLowestAndHighestABCLetters {
+    float expectedHeight = [self findGreatestHeight] - [self findLowestY];
+    XCTAssertGreaterThan(theSelectButton.frame.size.height, expectedHeight);
+}
+
+- (float)findLowestY {
+    return MIN(MIN(theANode.frame.origin.y, theBNode.frame.origin.y), theCNode.frame.origin.y);
+}
+
+- (float) findGreatestHeight {
+    return MAX(MAX(theANode.frame.size.height, theBNode.frame.size.height), theCNode.frame.size.height);
+}
+
 @end

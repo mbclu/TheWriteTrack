@@ -84,9 +84,7 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
         [self addChild:previousButton];
     }
     
-    LetterSelectButton *lsButton = [self createLetterSelectButton];
-    [self addChild:lsButton];
-    letterSelectButton = [self createOverlayForButton:lsButton];
+    letterSelectButton = [self createLetterSelectButton];
     [self addChild:letterSelectButton];
     
     [self connectSceneTransitions];
@@ -113,6 +111,10 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     button.position = CGPointMake(self.frame.origin.x + NextButtonXPadding,
                                   HALF_OF((self.size.height - button.size.height)));
     button.zPosition = LetterSceneButtonZPosition;
+    
+    button.isAccessibilityElement = YES;
+    button.accessibilityLabel = @"Previous Button";
+    
     return button;
 }
 
@@ -122,26 +124,11 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     CGPoint position = self.position;
     INCREMENT_POINT_BY_POINT(position, CGPointMake(20, 20));
     button.position = position;
-    button.zPosition = LetterSceneButtonZPosition - 1;
-    return button;
-}
-
-- (GenericSpriteButton *)createOverlayForButton:(LetterSelectButton *)lsButton {
-    GenericSpriteButton *button = [[GenericSpriteButton alloc] init];
-    
-    button.size = CGSizeMake([[lsButton childNodeWithName:ANodeName] frame].origin.x +
-                             [[lsButton childNodeWithName:CNodeName] frame].origin.x +
-                             [[lsButton childNodeWithName:CNodeName] frame].size.width,
-                             [[lsButton childNodeWithName:ANodeName] frame].origin.y +
-                             [[lsButton childNodeWithName:BNodeName] frame].origin.y +
-                             [[lsButton childNodeWithName:BNodeName] frame].size.height);
-
-    button.name = LetterSelectButtonName;
-    CGPoint position = self.position;
-    INCREMENT_POINT_BY_POINT(position, CGPointMake(20, 20));
-    button.position = position;
     button.zPosition = LetterSceneButtonZPosition;
-    button.color = [SKColor clearColor];
+    
+    button.isAccessibilityElement = YES;
+    button.accessibilityLabel = @"Letter Select Button";
+    
     return button;
 }
 

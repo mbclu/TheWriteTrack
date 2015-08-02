@@ -59,6 +59,7 @@
 		C7554D9A1B373B1000E13027 /* LetterSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554D991B373B1000E13027 /* LetterSelectButton.m */; };
 		C75D0E0E1B0C2A08006A71C8 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = C75D0E0D1B0C2A08006A71C8 /* Train.m */; };
 		C76529FA1B1B722E0075456A /* PathSegmentDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C76529F91B1B722E0075456A /* PathSegmentDictionary.m */; };
+		C7732BCD1B6A4456000849ED /* LetterSceneUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7732BCC1B6A4456000849ED /* LetterSceneUITests.m */; };
 		C77347371AE72936005C2950 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = C77347351AE72936005C2950 /* Smoke.sks */; };
 		C77347451AE733F5005C2950 /* TitleTrain.m in Sources */ = {isa = PBXBuildFile; fileRef = C77347441AE733F5005C2950 /* TitleTrain.m */; };
 		C78C6F7F1AA257930077DE74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78C6F7E1AA257930077DE74 /* CoreGraphics.framework */; };
@@ -146,6 +147,7 @@
 		C75D0E0D1B0C2A08006A71C8 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Train.m; path = TheWriteTrack/Train.m; sourceTree = SOURCE_ROOT; };
 		C76529F81B1B722E0075456A /* PathSegmentDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathSegmentDictionary.h; path = TheWriteTrack/PathSegmentDictionary.h; sourceTree = SOURCE_ROOT; };
 		C76529F91B1B722E0075456A /* PathSegmentDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegmentDictionary.m; path = TheWriteTrack/PathSegmentDictionary.m; sourceTree = SOURCE_ROOT; };
+		C7732BCC1B6A4456000849ED /* LetterSceneUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetterSceneUITests.m; sourceTree = "<group>"; };
 		C77347351AE72936005C2950 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Smoke.sks; path = TheWriteTrack/Smoke.sks; sourceTree = SOURCE_ROOT; };
 		C77347431AE733F5005C2950 /* TitleTrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleTrain.h; path = TheWriteTrack/TitleTrain.h; sourceTree = SOURCE_ROOT; };
 		C77347441AE733F5005C2950 /* TitleTrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleTrain.m; path = TheWriteTrack/TitleTrain.m; sourceTree = SOURCE_ROOT; };
@@ -307,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				C78E25121B54987E00158C23 /* TitleSceneUITests.m */,
+				C7732BCC1B6A4456000849ED /* LetterSceneUITests.m */,
 				C73CC2DF1B52FE5200EC097A /* Supporting Files */,
 			);
 			path = AcceptanceTests;
@@ -805,6 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7732BCD1B6A4456000849ED /* LetterSceneUITests.m in Sources */,
 				C78E25131B54987E00158C23 /* TitleSceneUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

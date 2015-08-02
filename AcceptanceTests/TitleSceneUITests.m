@@ -46,9 +46,7 @@
 - (void)testWhenTheSignalLightAreaIsTappedThenThenTheASceneIsLoaded {
     [tester waitForViewWithAccessibilityLabel:@"Title Screen"];
     SKNode *signalLightNode = [theTitleScene childNodeWithName:@"SignalLight"];
-    CGPoint pointToTap = signalLightNode.position;
-    NSLog(@"Signal Light Node position: %@", NSStringFromCGPoint(pointToTap));
-    [tester tapScreenAtPoint:pointToTap];
+    [tester tapScreenAtPoint:signalLightNode.position];
     [tester waitForViewWithAccessibilityLabel:@"A"];
 }
 

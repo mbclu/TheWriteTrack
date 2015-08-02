@@ -31,12 +31,35 @@
     [super tearDown];
 }
 
-- (void)testWhenLetterSelectButtonIsTappedThenLetterSelectSceneIsLoaded {
+- (void)navigateToASceneAndWaitForAnimationsToFinish {
     [tester tapViewWithAccessibilityLabel:@"Title Screen"];
     [tester waitForViewWithAccessibilityLabel:@"A"];
     [tester waitForAnimationsToFinishWithTimeout:5.0];
+}
+
+- (void)navigateToBSceneAndWaitForAnimationsToFinish {
+    [self navigateToASceneAndWaitForAnimationsToFinish];
+    [tester tapViewWithAccessibilityLabel:@"Next Button"];
+    [tester waitForViewWithAccessibilityLabel:@"B"];
+    [tester waitForAnimationsToFinishWithTimeout:5.0];
+}
+
+- (void)testWhenLetterSelectButtonIsTappedThenLetterSelectSceneIsLoaded {
+    [self navigateToASceneAndWaitForAnimationsToFinish];
     [tester tapViewWithAccessibilityLabel:@"Letter Select Button"];
     [tester waitForViewWithAccessibilityLabel:@"Letter Select Screen"];
+}
+
+- (void)testGivenTheASceneWhenTheNextButtonIsTappedThenTheBSceneIsLoaded {
+    [self navigateToASceneAndWaitForAnimationsToFinish];
+    [tester tapViewWithAccessibilityLabel:@"Next Button"];
+    [tester waitForViewWithAccessibilityLabel:@"B"];
+}
+
+- (void)testGivenTheBSceneWhenThePreviousButtonIsTappedThenTheASceneIsLoaded {
+    [self navigateToBSceneAndWaitForAnimationsToFinish];
+    [tester tapViewWithAccessibilityLabel:@"Previous Button"];
+    [tester waitForViewWithAccessibilityLabel:@"A"];
 }
 
 @end

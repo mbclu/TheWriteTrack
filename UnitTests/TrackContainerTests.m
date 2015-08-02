@@ -332,4 +332,13 @@
     XCTAssertEqual(theTrain.physicsBody.contactTestBitMask, 0);
 }
 
+- (void)testWhenTheSceneIsNotifiedOfTheLastWaypointRemovalThenItTransitionsToTheNextScene {
+    theTrackContainer = [[TrackContainer alloc] initWithLetterKey:@"A" andPathSegments:nil];
+    LetterScene *scene = [[LetterScene alloc] initWithSize:CGSizeMake(100, 100) andLetter:@"A"];
+    [scene addChild:theTrackContainer];
+    id mockScene = OCMPartialMock(scene);
+    [theTrackContainer notifyLastWaypointWasRemoved];
+    OCMVerify([mockScene transitionToNextScene]);
+}
+
 @end

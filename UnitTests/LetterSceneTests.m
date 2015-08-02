@@ -117,12 +117,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToNextScene)]);
 }
 
-- (void)testPressingTheNextButtonSendsAMessageToTheTransitionToNextSceneAction {
-    id mockScene = OCMPartialMock(theScene);
-    [theScene.nextButtonProperty evaluateTouchAtPoint:theScene.nextButtonProperty.position];
-    OCMVerify([mockScene transitionToNextScene]);
-}
-
 - (void)testWhenTheLetterIsCapitalZThenNoNextButtonIsAvailable {
     LetterScene *zScene = [[LetterScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"Z"];
     XCTAssertNil([zScene childNodeWithName:NextButtonName]);
@@ -159,12 +153,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToPreviousScene)]);
 }
 
-- (void)testPressingThePrevButtonSendsAMessageToTheTransitionToPrevSceneAction {
-    id mockScene = OCMPartialMock(theScene);
-    [theScene.previousButtonProperty evaluateTouchAtPoint:theScene.previousButtonProperty.position];
-    OCMVerify([mockScene transitionToPreviousScene]);
-}
-
 - (void)testWhenTheLetterIsCapitalAThenNoPrevButtonIsAvailable {
     LetterScene *zScene = [[LetterScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"A"];
     XCTAssertNil([zScene childNodeWithName:PreviousButtonNodeName]);
@@ -189,12 +177,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 - (void)testForZeroGravity {
     XCTAssertEqual(theScene.physicsWorld.gravity.dx, 0.0);
     XCTAssertEqual(theScene.physicsWorld.gravity.dy, 0.0);
-}
-
-- (void)testWhenTheSceneIsNotifiedOfTheLastWaypointRemovalThenItTransitionsToTheNextScene {
-    id mockScene = OCMPartialMock(theScene);
-    [theContainerNode notifyLastWaypointWasRemoved];
-    OCMVerify([mockScene transitionToNextScene]);
 }
 
 - (void)testWhenFirstEnteringASceneThenTrackContainerIsAskedToPerformADemonstration {
@@ -222,12 +204,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     [theScene setLetterSelectButtonProperty:mockButton];
     [theScene connectSceneTransitions];
     OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToLetterSelectScene)]);
-}
-
-- (void)testGivenTouchesEndedWhenTheLocationIsTheLetterSelectButtonThenATransitionToTheLetterSelectSceneIsMade {
-    id mockScene = OCMPartialMock(theScene);
-    [theScene.letterSelectButtonProperty evaluateTouchAtPoint:theScene.letterSelectButtonProperty.position];
-    OCMVerify([mockScene transitionToLetterSelectScene]);
 }
 
 @end

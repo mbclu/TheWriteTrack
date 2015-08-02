@@ -108,7 +108,7 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
 }
 
 - (void)notifyLastWaypointWasRemoved {
-    if ([_letterKey  isEqual: @"Z"]) {
+    if ([_letterKey isEqual: @"Z"]) {
         [(LetterScene *)self.parent performSelector:@selector(transitionToLetterSelectScene)];
     } else {
         [(LetterScene *)self.parent performSelector:@selector(transitionToNextScene)];

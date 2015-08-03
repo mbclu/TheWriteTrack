@@ -12,6 +12,8 @@
 #import <KIF/KIF.h>
 #import <XCTest/XCTest.h>
 
+static const NSTimeInterval animationCompletionTimeout = 5.0;
+
 @interface LetterSceneUITests : KIFTestCase {
     LetterScene *theLetterScene;
 }
@@ -34,14 +36,14 @@
 - (void)navigateToASceneAndWaitForAnimationsToFinish {
     [tester tapViewWithAccessibilityLabel:@"Title Screen"];
     [tester waitForViewWithAccessibilityLabel:@"A"];
-    [tester waitForAnimationsToFinishWithTimeout:5.0];
+    [tester waitForAnimationsToFinishWithTimeout:animationCompletionTimeout];
 }
 
 - (void)navigateToBSceneAndWaitForAnimationsToFinish {
     [self navigateToASceneAndWaitForAnimationsToFinish];
     [tester tapViewWithAccessibilityLabel:@"Next Button"];
     [tester waitForViewWithAccessibilityLabel:@"B"];
-    [tester waitForAnimationsToFinishWithTimeout:5.0];
+    [tester waitForAnimationsToFinishWithTimeout:animationCompletionTimeout];
 }
 
 - (void)testWhenLetterSelectButtonIsTappedThenLetterSelectSceneIsLoaded {

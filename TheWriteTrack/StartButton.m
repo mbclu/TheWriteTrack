@@ -7,6 +7,11 @@
 //
 
 #import "StartButton.h"
+#import "LayoutMath.h"
+
+static const CGFloat LIGHT_CIRCLE_RADIUS = 9.0;
+static const CGFloat LIGHT_LINE_WIDTH = 1.0;
+static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
 
 @implementation StartButton
 
@@ -40,12 +45,12 @@
 }
 
 - (void)addLightWithColor:(UIColor *)color andName:(NSString *)name {
-    SKShapeNode *light = [SKShapeNode shapeNodeWithCircleOfRadius:9.0];
+    SKShapeNode *light = [SKShapeNode shapeNodeWithCircleOfRadius:LIGHT_CIRCLE_RADIUS];
     light.name = name;
     light.fillColor = color;
     light.strokeColor = color;
-    light.lineWidth = 1.0;
-    light.glowWidth = 2.0;
+    light.lineWidth = LIGHT_LINE_WIDTH;
+    light.glowWidth = LIGHT_GLOW_WIDTH;
     
     [[self getTopHalf] addChild:light];
 }
@@ -57,10 +62,12 @@
     SKNode *yellowLight = [self getYellowLight];
     SKNode *greenLight = [self getGreenLight];
     
-    top.position = CGPointMake(0, bottom.frame.size.height - 4);
-    greenLight.position = CGPointMake(-2, top.frame.size.height * +0.33);
-    yellowLight.position = CGPointMake(-2, 0);
-    redLight.position = CGPointMake(-2, top.frame.size.height * -0.33);
+    const CGFloat xStart = -2;
+    const CGFloat topHeightOffsetToMakeItLineUpWithBottom = -4;
+    top.position = CGPointMake(0, bottom.frame.size.height + topHeightOffsetToMakeItLineUpWithBottom);
+    greenLight.position = CGPointMake(xStart, ONE_THIRD_OF(top.frame.size.height));
+    yellowLight.position = CGPointMake(xStart, 0);
+    redLight.position = CGPointMake(xStart, -1 * ONE_THIRD_OF(top.frame.size.height));
 }
 
 - (SKSpriteNode *)getTopHalf {

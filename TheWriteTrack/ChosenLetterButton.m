@@ -12,6 +12,8 @@
 #import "LayoutMath.h"
 #import "LetterConverter.h"
 
+static const CGFloat CHOSEN_LETTER_LINE_WIDTH = 0.5;
+
 @implementation ChosenLetterButton
 
 - (instancetype)initWithLetter:(unichar)letter {
@@ -43,7 +45,7 @@
     node.name = name;
     node.userInteractionEnabled = NO;
     node.strokeColor = [UIColor colorWithWhite:0.2 alpha:0.8];
-    node.lineWidth = 0.5;
+    node.lineWidth = CHOSEN_LETTER_LINE_WIDTH;
     return node;
 }
 

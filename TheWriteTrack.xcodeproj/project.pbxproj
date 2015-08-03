@@ -393,11 +393,11 @@
 			isa = PBXGroup;
 			children = (
 				C73CC2DE1B52FE5200EC097A /* AcceptanceTests */,
+				C7CED0711A86B9DA00A4DCC3 /* UnitTests */,
+				C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */,
 				9DA64499BB4D4962B0368B47 /* Frameworks */,
 				011576BBE50EDA8894D40229 /* Pods */,
 				C7CED0511A86B9DA00A4DCC3 /* Products */,
-				C7CED0521A86B9DA00A4DCC3 /* TheWriteTrack */,
-				C7CED0711A86B9DA00A4DCC3 /* UnitTests */,
 			);
 			sourceTree = "<group>";
 		};

@@ -13,6 +13,12 @@ static const CGFloat LIGHT_CIRCLE_RADIUS = 9.0;
 static const CGFloat LIGHT_LINE_WIDTH = 1.0;
 static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
 
+static NSString *RED_LIGHT_NAME = @"RedLight";
+static NSString *YELLOW_LIGHT_NAME = @"YellowLight";
+static NSString *GREEN_LIGHT_NAME = @"GreenLight";
+static NSString *SIGNAL_TOP_HALF_NAME = @"SignalLightTop";
+static NSString *SIGNAL_BOTTOM_HALF_NAME = @"SignalLightBottom";
+
 @implementation StartButton
 
 - (instancetype)init {
@@ -20,10 +26,6 @@ static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
     
     [self addTopHalfSignalLight];
     [self addBottomHalfSignalLight];
-    
-    [self addLightWithColor:[SKColor redColor] andName:@"RedLight"];
-    [self addLightWithColor:[SKColor yellowColor] andName:@"YellowLight"];
-    [self addLightWithColor:[SKColor greenColor] andName:@"GreenLight"];
     
     [self positionLights];
     
@@ -33,15 +35,21 @@ static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
 }
 
 - (void)addTopHalfSignalLight {
-    SKSpriteNode *top = [SKSpriteNode spriteNodeWithImageNamed:@"SignalLightTop"];
-    top.name = @"SignalTopHalf";
-    [self addChild:top];
+    [self addSpriteWithImageNamed:SIGNAL_TOP_HALF_NAME];
+    
+    [self addLightWithColor:[SKColor redColor] andName:RED_LIGHT_NAME];
+    [self addLightWithColor:[SKColor yellowColor] andName:YELLOW_LIGHT_NAME];
+    [self addLightWithColor:[SKColor greenColor] andName:GREEN_LIGHT_NAME];
 }
 
 - (void)addBottomHalfSignalLight {
-    SKSpriteNode *bottom = [SKSpriteNode spriteNodeWithImageNamed:@"SignalLightBottom"];
-    bottom.name = @"SignalBottomHalf";
-    [self addChild:bottom];
+    [self addSpriteWithImageNamed:SIGNAL_BOTTOM_HALF_NAME];
+}
+
+- (void)addSpriteWithImageNamed:(NSString *)name {
+    SKSpriteNode *top = [SKSpriteNode spriteNodeWithImageNamed:name];
+    top.name = name;
+    [self addChild:top];
 }
 
 - (void)addLightWithColor:(UIColor *)color andName:(NSString *)name {
@@ -52,15 +60,15 @@ static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
     light.lineWidth = LIGHT_LINE_WIDTH;
     light.glowWidth = LIGHT_GLOW_WIDTH;
     
-    [[self getTopHalf] addChild:light];
+    [[self signalTopHalfNode] addChild:light];
 }
 
 - (void)positionLights {
-    SKNode *bottom = [self childNodeWithName:@"SignalBottomHalf"];
-    SKNode *top = [self getTopHalf];
-    SKNode *redLight = [self getRedLight];
-    SKNode *yellowLight = [self getYellowLight];
-    SKNode *greenLight = [self getGreenLight];
+    SKNode *bottom = [self signalBottomHalfNode];
+    SKNode *top = [self signalTopHalfNode];
+    SKNode *redLight = [self redLightNode];
+    SKNode *yellowLight = [self yellowLightNode];
+    SKNode *greenLight = [self greenLightNode];
     
     const CGFloat xStart = -2;
     const CGFloat topHeightOffsetToMakeItLineUpWithBottom = -4;
@@ -70,20 +78,24 @@ static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
     redLight.position = CGPointMake(xStart, -1 * ONE_THIRD_OF(top.frame.size.height));
 }
 
-- (SKSpriteNode *)getTopHalf {
-    return (SKSpriteNode *)[self childNodeWithName:@"SignalTopHalf"];
+- (SKSpriteNode *)signalBottomHalfNode {
+    return (SKSpriteNode *)[self childNodeWithName:SIGNAL_BOTTOM_HALF_NAME];
 }
 
-- (SKShapeNode *)getRedLight {
-    return (SKShapeNode *)[[self getTopHalf] childNodeWithName:@"RedLight"];
+- (SKSpriteNode *)signalTopHalfNode {
+    return (SKSpriteNode *)[self childNodeWithName:SIGNAL_TOP_HALF_NAME];
 }
 
-- (SKShapeNode *)getYellowLight {
-    return (SKShapeNode *)[[self getTopHalf] childNodeWithName:@"YellowLight"];
+- (SKShapeNode *)redLightNode {
+    return (SKShapeNode *)[[self signalTopHalfNode] childNodeWithName:RED_LIGHT_NAME];
 }
 
-- (SKShapeNode *)getGreenLight {
-    return (SKShapeNode *)[[self getTopHalf] childNodeWithName:@"GreenLight"];
+- (SKShapeNode *)yellowLightNode {
+    return (SKShapeNode *)[[self signalTopHalfNode] childNodeWithName:YELLOW_LIGHT_NAME];
+}
+
+- (SKShapeNode *)greenLightNode {
+    return (SKShapeNode *)[[self signalTopHalfNode] childNodeWithName:GREEN_LIGHT_NAME];
 }
 
 @end

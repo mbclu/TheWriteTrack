@@ -10,8 +10,10 @@
 
 @interface StartButton : GenericSpriteButton
 
-- (SKShapeNode *)getRedLight;
-- (SKShapeNode *)getYellowLight;
-- (SKShapeNode *)getGreenLight;
+- (SKSpriteNode *)signalBottomHalfNode;
+- (SKSpriteNode *)signalTopHalfNode;
+- (SKShapeNode *)redLightNode;
+- (SKShapeNode *)yellowLightNode;
+- (SKShapeNode *)greenLightNode;
 
 @end

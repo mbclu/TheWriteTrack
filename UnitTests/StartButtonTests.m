@@ -12,7 +12,6 @@
 
 @interface StartButtonTests : XCTestCase {
     StartButton *theStartButton;
-    SKSpriteNode *topHalf;
 }
 
 @end
@@ -22,7 +21,6 @@
 - (void)setUp {
     [super setUp];
     theStartButton = [[StartButton alloc] init];
-    topHalf = (SKSpriteNode *)[theStartButton childNodeWithName:@"SignalTopHalf"];
 }
 
 - (void)tearDown {
@@ -30,12 +28,13 @@
 }
 
 - (void)testTheStartButtonUsesTheSignalLightTopImage {
-    XCTAssertNotNil(topHalf);
-    XCTAssertTrue([topHalf.texture.description containsString:@"SignalLightTop"]);
+    SKSpriteNode* top = (SKSpriteNode *)theStartButton.signalTopHalfNode;
+    XCTAssertNotNil(top);
+    XCTAssertTrue([top.texture.description containsString:@"SignalLightTop"]);
 }
 
 - (void)testTheStartButtonUsesTheSignalLightBottomImage {
-    SKSpriteNode *bottom = (SKSpriteNode *)[theStartButton childNodeWithName:@"SignalBottomHalf"];
+    SKSpriteNode *bottom = (SKSpriteNode *)theStartButton.signalBottomHalfNode;
     XCTAssertNotNil(bottom);
     XCTAssertTrue([bottom.texture.description containsString:@"SignalLightBottom"]);
 }
@@ -45,9 +44,28 @@
 }
 
 - (void)testTheTopHalfHasAGreenYellowAndRedLight {
-    XCTAssertNotNil([topHalf childNodeWithName:@"GreenLight"]);
-    XCTAssertNotNil([topHalf childNodeWithName:@"YellowLight"]);
-    XCTAssertNotNil([topHalf childNodeWithName:@"RedLight"]);
+    XCTAssertEqual(theStartButton.redLightNode.parent, theStartButton.signalTopHalfNode);
+    XCTAssertEqual(theStartButton.yellowLightNode.parent, theStartButton.signalTopHalfNode);
+    XCTAssertEqual(theStartButton.greenLightNode.parent, theStartButton.signalTopHalfNode);
+}
+
+- (void)testEachLightHasTheSameXPosition {
+    XCTAssertEqual(theStartButton.redLightNode.frame.origin.x, theStartButton.yellowLightNode.frame.origin.x);
+    XCTAssertEqual(theStartButton.yellowLightNode.frame.origin.x, theStartButton.greenLightNode.frame.origin.x);
+}
+
+- (void)testTheYellowLightIsPositionedInTheCenterOfTheTopHalfOfTheSignalLight {
+    CGPoint convertedPoint = [theStartButton.signalTopHalfNode convertPoint:theStartButton.yellowLightNode.position
+                                                                     toNode:theStartButton.signalTopHalfNode];
+    XCTAssertEqual(theStartButton.yellowLightNode.position.y, convertedPoint.y);
+}
+
+- (void)testTheGreenLightIsPositionedAboveTheYellowNode {
+    XCTAssertGreaterThan(theStartButton.greenLightNode.position.y, theStartButton.yellowLightNode.frame.size.height);
+}
+
+- (void)testTheRedLightIsPositionedBelowTheYellowNode {
+    XCTAssertLessThan(theStartButton.redLightNode.position.y, theStartButton.yellowLightNode.frame.size.height);
 }
 
 @end

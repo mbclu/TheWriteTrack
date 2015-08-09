@@ -103,10 +103,10 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
     
     StartButton *signal = (StartButton *)[self childNodeWithName:@"SignalLight"];
     [signal runAction:[SKAction customActionWithDuration:SceneActionTimeInSeconds actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-        [self flashLight:[signal getRedLight] on:0.5 off:1.0 glow:8.0 elapsed:elapsedTime];
-        [self flashLight:[signal getYellowLight] on:1.0 off:1.5 glow:8.0 elapsed:elapsedTime];
-        [self flashLight:[signal getGreenLight] on:1.5 off:2.0 glow:8.0 elapsed:elapsedTime];
-        [self flashLight:[signal getGreenLight] on:2.5 off:(SceneActionTimeInSeconds + 1) glow:15.0 elapsed:elapsedTime];
+        [self flashLight:[signal redLightNode] on:0.5 off:1.0 glow:8.0 elapsed:elapsedTime];
+        [self flashLight:[signal yellowLightNode] on:1.0 off:1.5 glow:8.0 elapsed:elapsedTime];
+        [self flashLight:[signal greenLightNode] on:1.5 off:2.0 glow:8.0 elapsed:elapsedTime];
+        [self flashLight:[signal greenLightNode] on:2.5 off:(SceneActionTimeInSeconds + 1) glow:15.0 elapsed:elapsedTime];
     }] withKey:@"FlashyLights"];
 }
 

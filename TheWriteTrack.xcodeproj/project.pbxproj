@@ -50,6 +50,7 @@
 		C731D66F1B549B7C00A8BBFF /* TitleSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25261B5498B600158C23 /* TitleSceneTests.m */; };
 		C731D6701B549B7C00A8BBFF /* TitleTrainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25271B5498B600158C23 /* TitleTrainTests.m */; };
 		C731D6711B549B7C00A8BBFF /* TrackContainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C78E25281B5498B600158C23 /* TrackContainerTests.m */; };
+		C731ED761B91159F0009AC2D /* TrackContainerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C731ED751B91159F0009AC2D /* TrackContainerUITests.m */; };
 		C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */ = {isa = PBXBuildFile; fileRef = C73700151AB7D4E40035C4A3 /* LayoutMath.m */; };
 		C73CC2D51B52AFE400EC097A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C73CC2D41B52AFE400EC097A /* libPods.a */; };
 		C73FEA551B5B30E800F293CA /* AccessibilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73FEA541B5B30E800F293CA /* AccessibilityHelper.m */; };
@@ -130,6 +131,8 @@
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
 		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
 		C73018291B148FD400266CB9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = TheWriteTrack/Constants.m; sourceTree = SOURCE_ROOT; };
+		C731ED741B910E870009AC2D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = SOURCE_ROOT; };
+		C731ED751B91159F0009AC2D /* TrackContainerUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackContainerUITests.m; sourceTree = "<group>"; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
 		C73CC2D41B52AFE400EC097A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
@@ -293,6 +296,7 @@
 		C73700131AB7D49A0035C4A3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C731ED741B910E870009AC2D /* Colors.h */,
 				C73018281B148FD400266CB9 /* Constants.h */,
 				C73018291B148FD400266CB9 /* Constants.m */,
 				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,
@@ -310,6 +314,7 @@
 			children = (
 				C78E25121B54987E00158C23 /* TitleSceneUITests.m */,
 				C7732BCC1B6A4456000849ED /* LetterSceneUITests.m */,
+				C731ED751B91159F0009AC2D /* TrackContainerUITests.m */,
 				C73CC2DF1B52FE5200EC097A /* Supporting Files */,
 			);
 			path = AcceptanceTests;
@@ -808,6 +813,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C731ED761B91159F0009AC2D /* TrackContainerUITests.m in Sources */,
 				C7732BCD1B6A4456000849ED /* LetterSceneUITests.m in Sources */,
 				C78E25131B54987E00158C23 /* TitleSceneUITests.m in Sources */,
 			);

@@ -87,7 +87,7 @@
 
 + (CGFloat)interpolateLineWithStep:(const CGFloat)step start:(const CGFloat)start end:(const CGFloat)end {
     const CGFloat difference = (end - start);
-    return start + difference * (1.0 - step);
+    return start + difference * STEP_SIZE_IN_PERCENT(step);
 }
 
 + (CGFloat)slopeOfLineWithStartPoint:(const CGPoint)start endPoint:(const CGPoint)end {
@@ -95,20 +95,20 @@
 }
 
 + (CGFloat)interpolateQuadBezierAtStep:(const CGFloat)step start:(const CGFloat)start control:(const CGFloat)control end:(const CGFloat)end {
-    const CGFloat percent = (1.0 - step);
+    const CGFloat percent = STEP_SIZE_IN_PERCENT(step);
     const CGFloat percentSquared = percent * percent;
     const CGFloat stepSquared = step * step;
     
     return start * percentSquared
-    + 2.0 *  control * percent * step
+    + DOUBLE_THE(control) * percent * step
     + end * stepSquared;
 }
 
 + (CGFloat)tangentQuadBezierAtStep:(const CGFloat)step start:(const CGFloat)start control:(const CGFloat)control end:(const CGFloat)end {
-    const CGFloat percent = (1.0 - step);
+    const CGFloat percent = STEP_SIZE_IN_PERCENT(step);
     
-    return 2.0 * percent * (control - start)
-    + 2.0 * step * (end - control);
+    return DOUBLE_THE(percent) * (control - start)
+    + DOUBLE_THE(step) * (end - control);
 }
 
 @end

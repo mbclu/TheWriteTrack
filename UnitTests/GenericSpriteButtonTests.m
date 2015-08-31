@@ -53,3 +53,37 @@
 }
 
 @end
+
+@interface GenericSpriteButtonStaticTests : XCTestCase {
+    GenericSpriteButton *genericButton;
+}
+@end
+
+@implementation GenericSpriteButtonStaticTests
+
+- (void)setUp {
+    [super setUp];
+    genericButton = [GenericSpriteButton buttonWithImageNamed:@"foo"];
+}
+
+- (void)testGivenAnImageNameWhenCreatedWithStaticAllocationThenTheButtonHasSameNameAsTheImage {
+    XCTAssertEqual(genericButton.name, @"foo");
+}
+
+- (void)testGivenAnImageWhenCreatedWithStaticAllocationThenTheButtonTextureUsesThatImage {
+    XCTAssertTrue([genericButton.texture.description containsString:@"foo"]);
+}
+
+- (void)testWhenCreatedWithStaticAllocationThenTheButtonIsAnchoredAtZero {
+    XCTAssertEqualPoints(genericButton.anchorPoint, CGPointZero);
+}
+
+- (void)testWhenCreatedWithStaticAllocationThenTheButtonIsAnAccessibilityComponent {
+    XCTAssertTrue(genericButton.isAccessibilityElement);
+}
+
+- (void)testWhenCreatedWithStaticAllocationThenTheButtonAccessibilityLabelIsTheSameAsTheButtonName {
+    XCTAssertEqual(genericButton.accessibilityLabel, genericButton.name);
+}
+
+@end

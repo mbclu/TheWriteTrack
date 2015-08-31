@@ -13,6 +13,7 @@
 #import "LayoutMath.h"
 #import "LetterSelectScene.h"
 #import "Constants.h"
+#import "Colors.h"
 #import "Train.h"
 #import "TitleScene.h"
 #import "AccessibilityHelper.h"
@@ -20,11 +21,15 @@
 
 static DDLogLevel ddLogLevel = DDLogLevelAll;
 
+static int const LETTER_SCENE_MARGIN_DEFAULT = 20;
+static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
+
 @implementation LetterScene
 
 @synthesize nextButtonProperty = nextButton;
 @synthesize previousButtonProperty = previousButton;
 @synthesize letterSelectButtonProperty = letterSelectButton;
+@synthesize skipDemoButtonProperty = skipDemoButton;
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter {
     if (self = [super initWithSize:size]) {
@@ -87,43 +92,44 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     letterSelectButton = [self createLetterSelectButton];
     [self addChild:letterSelectButton];
     
+    skipDemoButton = [self createSkipDemoButton];
+    [self addChild:skipDemoButton];
+    
     [self connectSceneTransitions];
 }
 
 - (GenericSpriteButton *)createNextButton {
-    GenericSpriteButton *button = [[GenericSpriteButton alloc] initWithImageNamed:NextButtonName];
-    button.name = NextButtonName;
-    button.anchorPoint = CGPointZero;
-    button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding,
-                                  HALF_OF((self.size.height - button.size.height)));
-    button.zPosition = LetterSceneButtonZPosition;
-
-    button.isAccessibilityElement = YES;
-    button.accessibilityLabel = @"Next Button";
-    
+    GenericSpriteButton *button = [self createButtonWithImage:NEXT_BUTTON_NAME];
+    button.position = CGPointMake(self.size.width - button.size.width - NextButtonXPadding, HALF_OF((self.size.height - button.size.height)));
     return button;
 }
 
 - (GenericSpriteButton *)createPreviousButton {
-    GenericSpriteButton *button = [[GenericSpriteButton alloc] initWithImageNamed:PreviousButtonName];
-    button.name = PreviousButtonName;
-    button.anchorPoint = CGPointZero;
-    button.position = CGPointMake(self.frame.origin.x + NextButtonXPadding,
-                                  HALF_OF((self.size.height - button.size.height)));
+    GenericSpriteButton *button = [self createButtonWithImage:PREVIOUS_BUTTON_NAME];
+    button.position = CGPointMake(self.frame.origin.x + NextButtonXPadding, HALF_OF((self.size.height - button.size.height)));
+    return button;
+}
+
+- (GenericSpriteButton *)createSkipDemoButton {
+    GenericSpriteButton *button = [self createButtonWithImage:SKIP_BUTTON_NAME];
+    button.position = CGPointMake(LETTER_SCENE_MARGIN_DEFAULT, self.size.height - button.size.height - LETTER_SCENE_MARGIN_DEFAULT);
+    return button;
+}
+
+- (GenericSpriteButton *)createButtonWithImage:(NSString *)name {
+    GenericSpriteButton *button = [GenericSpriteButton buttonWithImageNamed:name];
     button.zPosition = LetterSceneButtonZPosition;
-    
-    button.isAccessibilityElement = YES;
-    button.accessibilityLabel = @"Previous Button";
-    
     return button;
 }
 
 - (LetterSelectButton *)createLetterSelectButton {
     LetterSelectButton *button = [[LetterSelectButton alloc] init];
     button.name = LetterSelectButtonName;
+    
     CGPoint position = self.position;
-    INCREMENT_POINT_BY_POINT(position, CGPointMake(20, 20));
+    INCREMENT_POINT_BY_POINT(position, CGPointMake(LETTER_SCENE_MARGIN_DEFAULT, LETTER_SCENE_MARGIN_DEFAULT));
     button.position = position;
+    
     button.zPosition = LetterSceneButtonZPosition;
     
     button.isAccessibilityElement = YES;
@@ -140,6 +146,14 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     return transition;
 }
 
+- (void)transitionToNextScene {
+    [self transitionToSceneWithLetter:[self nextLetterString]];
+}
+
+- (void)transitionToPreviousScene {
+    [self transitionToSceneWithLetter:[self previousLetterString]];
+}
+
 - (void)transitionToSceneWithLetter:(NSString *)letter {
     DDLogInfo(@"Transitioning to the %@ scene", letter);
     
@@ -150,14 +164,6 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     [self.view setAccessibilityIdentifier:nextScene.name];
 }
 
-- (void)transitionToNextScene {
-    [self transitionToSceneWithLetter:[self nextLetterString]];
-}
-
-- (void)transitionToPreviousScene {
-    [self transitionToSceneWithLetter:[self previousLetterString]];
-}
-
 - (void)transitionToLetterSelectScene {
     DDLogInfo(@"Transitioning to the Letter Selection scene");
     
@@ -166,9 +172,8 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
 }
 
 - (void)transitionToScene:(SKScene *)scene {
-    UIColor *const FadeColorDarkGray = [UIColor colorWithRed:0.26 green:0.26 blue:0.26 alpha:0.9];
-    NSTimeInterval const FadeDurationHalfSecond = 0.50;
-    [self.view presentScene:scene transition:[SKTransition fadeWithColor:FadeColorDarkGray duration:FadeDurationHalfSecond]];
+    [self.view presentScene:scene transition:
+     [SKTransition fadeWithColor:DARK_GREY_COLOR_SCENE_TRANSITION duration:FADE_DURATION_IN_SECONDS]];
 }
 
 - (void)connectSceneTransitions {

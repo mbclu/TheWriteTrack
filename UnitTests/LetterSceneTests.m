@@ -23,8 +23,6 @@ CGFloat const GapCheckAccuracy = 1.0;
 CGFloat const ArbitrarySceneWidth = 400;
 CGFloat const ArbitrarySceneHeight = 400;
 NSString *const BackgroundName = @"RockyBackground";
-NSString *const NextButtonNodeName = @"NextButton";
-NSString *const PreviousButtonNodeName = @"PreviousButton";
 NSString *const ContainerNodeName = @"TrackContainerNode";
 NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
@@ -37,6 +35,7 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     SKSpriteNode *theNextButtonNode;
     SKSpriteNode *thePrevButtonNode;
     SKNode *theLetterSelectButton;
+    SKSpriteNode *theSkipDemoButton;
 }
 
 @end
@@ -50,9 +49,10 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     theScene = [[LetterScene alloc]initWithSize:arbitrarySceneSize andLetter:letterForTest];
     theBackgroundNode = (SKSpriteNode *)[theScene childNodeWithName:BackgroundName];
     theContainerNode = (TrackContainer *)[theScene childNodeWithName:ContainerNodeName];
-    theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NextButtonNodeName];
-    thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PreviousButtonNodeName];
+    theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NEXT_BUTTON_NAME];
+    thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PREVIOUS_BUTTON_NAME];
     theLetterSelectButton = [theScene childNodeWithName:LetterSelectNodeName];
+    theSkipDemoButton = (SKSpriteNode *)[theScene childNodeWithName:SKIP_BUTTON_NAME];
 }
 
 - (void)tearDown {
@@ -88,14 +88,7 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testForANextLetterButton {
     XCTAssertNotNil(theNextButtonNode);
-}
-
-- (void)testTheNextButtonIsComprisedOfTheNextButtonImage {
-    XCTAssertTrue([theNextButtonNode.texture.description containsString:NextButtonName]);
-}
-
-- (void)testTheNextButtonIsAnchoredAtZero {
-    XCTAssertEqualPoints(theNextButtonNode.anchorPoint, CGPointZero);
+    XCTAssertTrue([theNextButtonNode isKindOfClass:[GenericSpriteButton class]]);
 }
 
 - (void)testTheNextButtonsXPositionIsAtTenLessThanTheDifferenceInWidth {
@@ -104,10 +97,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testTheNextButtonIsVerticallyCentered {
     XCTAssertEqual(theNextButtonNode.position.y, (theScene.size.height - theNextButtonNode.size.height) * 0.5);
-}
-
-- (void)testTheNextButtonIsDerivedOfTheGenericSpriteButton {
-    XCTAssertTrue([theNextButtonNode isKindOfClass:[GenericSpriteButton class]]);
 }
 
 - (void)testTheNextButtonTouchesUpIsHookedToTheNextSceneTransition {
@@ -119,19 +108,12 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testWhenTheLetterIsCapitalZThenNoNextButtonIsAvailable {
     LetterScene *zScene = [[LetterScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"Z"];
-    XCTAssertNil([zScene childNodeWithName:NextButtonName]);
+    XCTAssertNil([zScene childNodeWithName:NEXT_BUTTON_NAME]);
 }
 
 - (void)testForAPreviousLetterButton {
     XCTAssertNotNil(thePrevButtonNode);
-}
-
-- (void)testThePreviousButtonIsComprisedOfThePreviousButtonImage {
-    XCTAssertTrue([thePrevButtonNode.texture.description containsString:PreviousButtonNodeName]);
-}
-
-- (void)testThePrevButtonIsAnchoredAtZero {
-    XCTAssertEqualPoints(thePrevButtonNode.anchorPoint, CGPointZero);
+    XCTAssertTrue([thePrevButtonNode isKindOfClass:[GenericSpriteButton class]]);
 }
 
 - (void)testThePrevButtonsXPositionIsAtTenMoreThanTheSceneXOrigin {
@@ -140,10 +122,6 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testThePrevButtonIsVerticallyCentered {
     XCTAssertEqual(thePrevButtonNode.position.y, (theScene.size.height - thePrevButtonNode.size.height) * 0.5);
-}
-
-- (void)testThePrevButtonIsDerivedOfTheGenericSpriteButton {
-    XCTAssertTrue([thePrevButtonNode isKindOfClass:[GenericSpriteButton class]]);
 }
 
 - (void)testThePrevButtonTouchesUpIsHookedToThePreviousSceneTransition {
@@ -155,7 +133,17 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testWhenTheLetterIsCapitalAThenNoPrevButtonIsAvailable {
     LetterScene *zScene = [[LetterScene alloc] initWithSize:CGSizeMake(ArbitrarySceneWidth, ArbitrarySceneHeight) andLetter:@"A"];
-    XCTAssertNil([zScene childNodeWithName:PreviousButtonNodeName]);
+    XCTAssertNil([zScene childNodeWithName:PREVIOUS_BUTTON_NAME]);
+}
+
+- (void)testForASkipDemoButtonProperty {
+    XCTAssertNotNil(theScene.skipDemoButtonProperty);
+    XCTAssertNotNil(theSkipDemoButton);
+    XCTAssertTrue([theSkipDemoButton isKindOfClass:[GenericSpriteButton class]]);
+}
+
+- (void)testTheSkipButtonIsPlacedInTheUpperLeftCorner {
+    XCTAssertEqualPoints(theSkipDemoButton.frame.origin, CGPointMake(20, theScene.frame.size.height - theSkipDemoButton.size.height - 20));
 }
 
 - (void)testTheBackgroundIsDrawnBeforeTheTrackContainer {
@@ -168,6 +156,10 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testTheBackgroundIsDrawnBeforeThePreviousButton {
     XCTAssertLessThan(theBackgroundNode.zPosition, thePrevButtonNode.zPosition);
+}
+
+- (void)testTheBackgroundIsDrawnBeforeTheSkipDemoButton {
+    XCTAssertLessThan(theBackgroundNode.zPosition, theSkipDemoButton.zPosition);
 }
 
 - (void)testTheTrackContainerIsTheContactDelegate {

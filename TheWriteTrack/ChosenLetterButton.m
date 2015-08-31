@@ -9,6 +9,7 @@
 #import "ChosenLetterButton.h"
 
 #import "Constants.h"
+#import "Colors.h"
 #import "LayoutMath.h"
 #import "LetterConverter.h"
 
@@ -34,7 +35,7 @@ static const CGFloat CHOSEN_LETTER_LINE_WIDTH = 0.5;
 - (SKShapeNode *)createLetterNode {
     SKShapeNode *node = [self createNodeNamed:ChosenLetterNode withLetter:_letterAsString];
     node.position = CGPointZero;
-    node.fillColor = [UIColor colorWithRed:0.96 green:0.37 blue:0.37 alpha:1.0];
+    node.fillColor = SALMON_COLOR_FOR_LETTERS;
     
     return node;
 }
@@ -44,7 +45,7 @@ static const CGFloat CHOSEN_LETTER_LINE_WIDTH = 0.5;
     SKShapeNode *node = [SKShapeNode shapeNodeWithPath:path];
     node.name = name;
     node.userInteractionEnabled = NO;
-    node.strokeColor = [UIColor colorWithWhite:0.2 alpha:0.8];
+    node.strokeColor = WHITE_COLOR_FOR_LETTER_OUTLINE;
     node.lineWidth = CHOSEN_LETTER_LINE_WIDTH;
     return node;
 }

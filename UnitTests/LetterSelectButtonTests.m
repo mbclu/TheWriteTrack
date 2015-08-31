@@ -76,7 +76,7 @@
 }
 
 - (void)testWhenTheButtonIsCreatedThenItHasAWidthEqualToTheSumOfTheABCLettersWidthAndPadding {
-    float xPaddingSum = 2 * LETTER_SELECT_BUTTON_X_PADDING;
+    float xPaddingSum = DOUBLE_THE(LETTER_SELECT_BUTTON_X_PADDING);
     float letterWidthSum = theANode.frame.size.width + theBNode.frame.size.width + theCNode.frame.size.width;
     XCTAssertEqualWithAccuracy(theSelectButton.frame.size.width, letterWidthSum + xPaddingSum, 0.01);
 }

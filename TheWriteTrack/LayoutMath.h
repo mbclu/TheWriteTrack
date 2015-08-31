@@ -16,6 +16,8 @@
 
 #define HALF_OF(value)              ((value) * 0.5)
 #define ONE_THIRD_OF(value)         ((value) * 0.33)
+#define DOUBLE_THE(value)           ((value) * 2.0)
+#define STEP_SIZE_IN_PERCENT(value) (1.0 - (value))
 
 #define INCREMENT_POINT_BY_POINT(firstPoint, incrementPoint)    (firstPoint).x += (incrementPoint).x;   \
                                                                 (firstPoint).y += (incrementPoint).y

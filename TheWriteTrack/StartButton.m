@@ -12,6 +12,7 @@
 static const CGFloat LIGHT_CIRCLE_RADIUS = 9.0;
 static const CGFloat LIGHT_LINE_WIDTH = 1.0;
 static const CGFloat LIGHT_GLOW_WIDTH = 2.0;
+static const CGFloat LIGHT_X_START_POSITION = -2;
 
 static NSString *RED_LIGHT_NAME = @"RedLight";
 static NSString *YELLOW_LIGHT_NAME = @"YellowLight";
@@ -69,13 +70,12 @@ static NSString *SIGNAL_BOTTOM_HALF_NAME = @"SignalLightBottom";
     SKNode *redLight = [self redLightNode];
     SKNode *yellowLight = [self yellowLightNode];
     SKNode *greenLight = [self greenLightNode];
-    
-    const CGFloat xStart = -2;
+
     const CGFloat topHeightOffsetToMakeItLineUpWithBottom = -4;
     top.position = CGPointMake(0, bottom.frame.size.height + topHeightOffsetToMakeItLineUpWithBottom);
-    greenLight.position = CGPointMake(xStart, ONE_THIRD_OF(top.frame.size.height));
-    yellowLight.position = CGPointMake(xStart, 0);
-    redLight.position = CGPointMake(xStart, -1 * ONE_THIRD_OF(top.frame.size.height));
+    greenLight.position = CGPointMake(LIGHT_X_START_POSITION, ONE_THIRD_OF(top.frame.size.height));
+    yellowLight.position = CGPointMake(LIGHT_X_START_POSITION, 0);
+    redLight.position = CGPointMake(LIGHT_X_START_POSITION, -1 * ONE_THIRD_OF(top.frame.size.height));
 }
 
 - (SKSpriteNode *)signalBottomHalfNode {

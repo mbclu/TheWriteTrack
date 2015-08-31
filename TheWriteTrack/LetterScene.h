@@ -23,12 +23,14 @@ typedef NS_ENUM(NSUInteger, ELetterSceneZOrder) {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;
     GenericSpriteButton *letterSelectButton;
+    GenericSpriteButton *skipDemoButton;
 }
 
 @property unichar letter;
 @property GenericSpriteButton *nextButtonProperty;
 @property GenericSpriteButton *previousButtonProperty;
 @property GenericSpriteButton *letterSelectButtonProperty;
+@property GenericSpriteButton *skipDemoButtonProperty;
 
 - (instancetype)initWithSize:(CGSize)size andLetter:(NSString *)letter;
 - (void)transitionToNextScene;

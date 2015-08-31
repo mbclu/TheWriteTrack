@@ -33,19 +33,6 @@ static const NSTimeInterval animationCompletionTimeout = 5.0;
     [super tearDown];
 }
 
-- (void)navigateToASceneAndWaitForAnimationsToFinish {
-    [tester tapViewWithAccessibilityLabel:@"Title Screen"];
-    [tester waitForViewWithAccessibilityLabel:@"A"];
-    [tester waitForAnimationsToFinishWithTimeout:animationCompletionTimeout];
-}
-
-- (void)navigateToBSceneAndWaitForAnimationsToFinish {
-    [self navigateToASceneAndWaitForAnimationsToFinish];
-    [tester tapViewWithAccessibilityLabel:@"Next Button"];
-    [tester waitForViewWithAccessibilityLabel:@"B"];
-    [tester waitForAnimationsToFinishWithTimeout:animationCompletionTimeout];
-}
-
 - (void)testWhenLetterSelectButtonIsTappedThenLetterSelectSceneIsLoaded {
     [self navigateToASceneAndWaitForAnimationsToFinish];
     [tester tapViewWithAccessibilityLabel:@"Letter Select Button"];
@@ -63,5 +50,17 @@ static const NSTimeInterval animationCompletionTimeout = 5.0;
     [tester tapViewWithAccessibilityLabel:@"Previous Button"];
     [tester waitForViewWithAccessibilityLabel:@"A"];
 }
+
+- (void)navigateToASceneAndWaitForAnimationsToFinish {
+    [tester tapViewWithAccessibilityLabel:@"Title Screen"];
+    [tester waitForViewWithAccessibilityLabel:@"A"];
+    [tester waitForAnimationsToFinishWithTimeout:animationCompletionTimeout];
+}
+
+- (void)navigateToBSceneAndWaitForAnimationsToFinish {
+    [self navigateToASceneAndWaitForAnimationsToFinish];
+    [tester tapViewWithAccessibilityLabel:@"Next Button"];
+    [tester waitForViewWithAccessibilityLabel:@"B"];
+    [tester waitForAnimationsToFinishWithTimeout:animationCompletionTimeout];
 
 @end

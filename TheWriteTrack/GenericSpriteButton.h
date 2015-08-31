@@ -13,6 +13,7 @@
 @property (nonatomic, readonly) SEL actionTouchUpInside;
 @property (nonatomic, readonly, weak) id targetTouchUpInside;
 
++ (instancetype)buttonWithImageNamed:(NSString *)name;
 - (void)setTouchUpInsideTarget:(id)target action:(SEL)action;
 - (void)evaluateTouchAtPoint:(CGPoint)touchPoint;
 

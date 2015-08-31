@@ -20,6 +20,15 @@ static DDLogLevel ddLogLevel = DDLogLevelAll;
     return self;
 }
 
++ (instancetype)buttonWithImageNamed:(NSString *)name {
+    GenericSpriteButton *genericButton = [[GenericSpriteButton alloc] initWithImageNamed:name];
+    genericButton.name = name;
+    genericButton.anchorPoint = CGPointZero;
+    genericButton.isAccessibilityElement = YES;
+    genericButton.accessibilityLabel = name;
+    return genericButton;
+}
+
 - (void)setTouchUpInsideTarget:(id)target action:(SEL)action {
     _targetTouchUpInside = target;
     _actionTouchUpInside = action;

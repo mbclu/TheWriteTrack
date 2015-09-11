@@ -341,4 +341,9 @@
     OCMVerify([mockScene transitionToNextScene]);
 }
 
+- (void)testWhenSkipDemoIsCalledThenIsDemoingIsFalse {
+    [theTrackContainer skipDemo];
+    XCTAssertFalse([theTrackContainer isDemoing]);
+}
+
 @end

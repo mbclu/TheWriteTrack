@@ -37,5 +37,6 @@ typedef NS_ENUM(NSUInteger, ELetterSceneZOrder) {
 - (void)transitionToPreviousScene;
 - (void)transitionToLetterSelectScene;
 - (void)connectSceneTransitions;
+- (void)connectSkipDemoAction;
 
 @end

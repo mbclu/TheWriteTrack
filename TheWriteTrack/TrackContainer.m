@@ -279,4 +279,8 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
     return [[self children] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.name == %@", WaypointNodeName]];
 }
 
+- (void)skipDemo {
+    _isDemoing = NO;
+}
+
 @end

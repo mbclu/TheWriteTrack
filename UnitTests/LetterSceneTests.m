@@ -52,7 +52,7 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     theNextButtonNode = (SKSpriteNode *)[theScene childNodeWithName:NEXT_BUTTON_NAME];
     thePrevButtonNode = (SKSpriteNode *)[theScene childNodeWithName:PREVIOUS_BUTTON_NAME];
     theLetterSelectButton = [theScene childNodeWithName:LetterSelectNodeName];
-    theSkipDemoButton = (SKSpriteNode *)[theScene childNodeWithName:SKIP_BUTTON_NAME];
+    theSkipDemoButton = (SKSpriteNode *)[theScene childNodeWithName:SKIP_DEMO_BUTTON_NAME];
 }
 
 - (void)tearDown {
@@ -136,7 +136,7 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     XCTAssertNil([zScene childNodeWithName:PREVIOUS_BUTTON_NAME]);
 }
 
-- (void)testForASkipDemoButtonProperty {
+- (void)testWhenLoadedThenAGenericButtonIsCreatedForSkippingTheDemo {
     XCTAssertNotNil(theScene.skipDemoButtonProperty);
     XCTAssertNotNil(theSkipDemoButton);
     XCTAssertTrue([theSkipDemoButton isKindOfClass:[GenericSpriteButton class]]);
@@ -191,11 +191,18 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     XCTAssertEqualPoints(theLetterSelectButton.position, expectedPosition);
 }
 
-- (void)testWhenTheLetterSelectButtonAddedToTheSceneThenItIsConfiguredToNotifyTheLetterSelectSceneOfTransitionEvents {
+- (void)testWhenTheLetterSelectButtonIsAddedToTheSceneThenItIsConfiguredToNotifyTheLetterSelectSceneOfTransitionEvents {
     id mockButton = OCMClassMock([GenericSpriteButton class]);
     [theScene setLetterSelectButtonProperty:mockButton];
     [theScene connectSceneTransitions];
     OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToLetterSelectScene)]);
+}
+
+- (void)testWhenTheSkipDemoButtonIsAddedToTheSceneThenItIsConfiguredToNotifyTheTrackContainerOfButtonPressEvents {
+    id mockButton = OCMClassMock([GenericSpriteButton class]);
+    [theScene setSkipDemoButtonProperty:mockButton];
+    [theScene connectSkipDemoAction];
+    OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(skipDemo)]);
 }
 
 @end

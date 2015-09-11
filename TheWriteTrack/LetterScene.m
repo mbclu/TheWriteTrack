@@ -46,6 +46,8 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
         [self setupTrackContainerAndPhysics];
 
         [self addNavigationButtons];
+
+        [self addSkipDemoButton];
     }
     return self;
 }
@@ -92,10 +94,14 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
     letterSelectButton = [self createLetterSelectButton];
     [self addChild:letterSelectButton];
     
+    [self connectSceneTransitions];
+}
+
+- (void)addSkipDemoButton {
     skipDemoButton = [self createSkipDemoButton];
     [self addChild:skipDemoButton];
-    
-    [self connectSceneTransitions];
+
+    [self connectSkipDemoAction];
 }
 
 - (GenericSpriteButton *)createNextButton {
@@ -111,7 +117,7 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
 }
 
 - (GenericSpriteButton *)createSkipDemoButton {
-    GenericSpriteButton *button = [self createButtonWithImage:SKIP_BUTTON_NAME];
+    GenericSpriteButton *button = [self createButtonWithImage:SKIP_DEMO_BUTTON_NAME];
     button.position = CGPointMake(LETTER_SCENE_MARGIN_DEFAULT, self.size.height - button.size.height - LETTER_SCENE_MARGIN_DEFAULT);
     return button;
 }
@@ -124,7 +130,7 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
 
 - (LetterSelectButton *)createLetterSelectButton {
     LetterSelectButton *button = [[LetterSelectButton alloc] init];
-    button.name = LetterSelectButtonName;
+    button.name = LETTER_SELECT_BUTTON_NAME;
     
     CGPoint position = self.position;
     INCREMENT_POINT_BY_POINT(position, CGPointMake(LETTER_SCENE_MARGIN_DEFAULT, LETTER_SCENE_MARGIN_DEFAULT));
@@ -133,7 +139,7 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
     button.zPosition = LetterSceneButtonZPosition;
     
     button.isAccessibilityElement = YES;
-    button.accessibilityLabel = @"Letter Select Button";
+    button.accessibilityLabel = LETTER_SELECT_BUTTON_NAME;
     
     return button;
 }
@@ -182,6 +188,10 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
     [letterSelectButton setTouchUpInsideTarget:self action:@selector(transitionToLetterSelectScene)];
 }
 
+- (void) connectSkipDemoAction {
+    [skipDemoButton setTouchUpInsideTarget:self action:@selector(skipDemo)];
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInNode:self.parent];
@@ -195,6 +205,7 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
     [self.nextButtonProperty touchesEnded:touches withEvent:event];
     [self.previousButtonProperty touchesEnded:touches withEvent:event];
     [self.letterSelectButtonProperty touchesEnded:touches withEvent:event];
+    [self.skipDemoButtonProperty touchesEnded:touches withEvent:event];
 }
 
 - (NSString *)stringFromSceneUnicharLetter {
@@ -209,6 +220,10 @@ static NSTimeInterval const FADE_DURATION_IN_SECONDS = 0.5;
 - (NSString *)previousLetterString {
     unichar previousCharacter = (unichar)(_letter - 1);
     return [NSString stringWithCharacters:&previousCharacter length:SingleLetterLength];
+}
+
+- (void)skipDemo {
+    [(TrackContainer *)[self childNodeWithName:LetterSceneTrackContainerNodeName] skipDemo];
 }
 
 @end

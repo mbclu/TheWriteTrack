@@ -7,10 +7,10 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.1):
     - CocoaLumberjack/Default
-  - KIF (3.2.3):
-    - KIF/XCTest (= 3.2.3)
-  - KIF/XCTest (3.2.3)
-  - OCMock (3.1.2)
+  - KIF (3.3.0):
+    - KIF/Core (= 3.3.0)
+  - KIF/Core (3.3.0)
+  - OCMock (3.1.5)
 
 DEPENDENCIES:
   - CocoaLumberjack
@@ -19,7 +19,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
-  KIF: a94bffe9c97e449e44f8fa481c53243d21309e1e
-  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  KIF: 0a82046d06f3648799cac522d2d0f7934214caac
+  OCMock: 4c2925291f80407c3738dd1db14d21d0cc278864
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.38.2

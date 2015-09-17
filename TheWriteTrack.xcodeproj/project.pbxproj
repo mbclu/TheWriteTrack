@@ -130,7 +130,6 @@
 		C73018251B148E5600266CB9 /* PathSegments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathSegments.m; path = TheWriteTrack/PathSegments.m; sourceTree = SOURCE_ROOT; };
 		C73018281B148FD400266CB9 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = TheWriteTrack/Constants.h; sourceTree = SOURCE_ROOT; };
 		C73018291B148FD400266CB9 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = TheWriteTrack/Constants.m; sourceTree = SOURCE_ROOT; };
-		C731ED741B910E870009AC2D /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = SOURCE_ROOT; };
 		C73700141AB7D4E40035C4A3 /* LayoutMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutMath.h; path = TheWriteTrack/LayoutMath.h; sourceTree = SOURCE_ROOT; };
 		C73700151AB7D4E40035C4A3 /* LayoutMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LayoutMath.m; path = TheWriteTrack/LayoutMath.m; sourceTree = SOURCE_ROOT; };
 		C73CC2D41B52AFE400EC097A /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
@@ -201,6 +200,7 @@
 		C7D081911A8A322A00DE5ECC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TheWriteTrack/Info.plist; sourceTree = SOURCE_ROOT; };
 		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
+		C7FDAE101BAADF8900259ED2 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colors.h; path = TheWriteTrack/Colors.h; sourceTree = SOURCE_ROOT; };
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CCE25A996CEA4B7C8B7FBC33 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,7 +294,7 @@
 		C73700131AB7D49A0035C4A3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				C731ED741B910E870009AC2D /* Colors.h */,
+				C7FDAE101BAADF8900259ED2 /* Colors.h */,
 				C73018281B148FD400266CB9 /* Constants.h */,
 				C73018291B148FD400266CB9 /* Constants.m */,
 				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,

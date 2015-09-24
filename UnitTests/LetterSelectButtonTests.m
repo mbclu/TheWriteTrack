@@ -53,16 +53,12 @@
     XCTAssertEqualPoints(theANode.position, CGPointZero);
 }
 
-- (void)testThe_B_NodeIsPositioned_5_PixelsRightAnd_10_PixelsUpFromThe_A_Node {
-    CGPoint expectedPoint = theANode.position;
-    INCREMENT_POINT_BY_POINT(expectedPoint, CGPointMake(theANode.frame.size.width + 5, 10));
-    XCTAssertEqualPoints(theBNode.position, expectedPoint);
+- (void)testTheBNodeDoesNotOverlapTheANode {
+    XCTAssertGreaterThan(theBNode.position.x, theANode.frame.size.width);
 }
 
-- (void)testThe_C_NodeIsPositioned_5_PixelsRightAnd_5_PixelsDownFromThe_B_Node {
-    CGPoint expectedPoint = theBNode.position;
-    INCREMENT_POINT_BY_POINT(expectedPoint, CGPointMake(theBNode.frame.size.width + 5, -5));
-    XCTAssertEqualPoints(theCNode.position, expectedPoint);
+- (void)testTheCNodeDoesNotOverlapTheBNode {
+    XCTAssertGreaterThan(theCNode.position.x, theBNode.frame.size.width);
 }
 
 - (void)testUserInteractionIsDisabledForTheLetterNodes {

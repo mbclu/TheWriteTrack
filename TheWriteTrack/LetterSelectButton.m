@@ -21,8 +21,11 @@ static const double LINE_WIDTH_FOR_LETTER = 0.5;
 
 - (instancetype)init {
     self = [super init];
+    
     letterConverter = [[LetterConverter alloc] init];
+    
     [self add_ABC_Children];
+    
     return self;
 }
 

@@ -577,7 +577,7 @@
 		C7CED0481A86B9DA00A4DCC3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Mitch Clutter";
 				TargetAttributes = {
 					C73CC2DC1B52FE5200EC097A = {
@@ -905,6 +905,7 @@
 					"\"$(SRCROOT)/calabash.framework/calabash\"",
 					"-lstdc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
@@ -932,6 +933,7 @@
 					"\"$(SRCROOT)/calabash.framework/calabash\"",
 					"-lstdc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
@@ -956,6 +958,7 @@
 				INFOPLIST_FILE = AcceptanceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 			};
@@ -976,6 +979,7 @@
 				INFOPLIST_FILE = AcceptanceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 			};
@@ -1001,6 +1005,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1079,6 +1084,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
@@ -1097,6 +1103,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TheWriteTrack;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
@@ -1130,6 +1137,7 @@
 					XCTest,
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TheWriteTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";
@@ -1159,6 +1167,7 @@
 					XCTest,
 					"-ObjC",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.VirtualDisruption.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = TheWriteTrackTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheWriteTrack.app/TheWriteTrack";
 				USER_HEADER_SEARCH_PATHS = "${PODS_HEADERS_SEARCH_PATHS}";

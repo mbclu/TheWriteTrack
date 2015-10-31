@@ -10,6 +10,9 @@ Pods/
 images/raw
 images/sketches
 
+#raw audio files
+audio/raw
+
 # irb
 .irb-history
 

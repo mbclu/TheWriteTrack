@@ -61,7 +61,7 @@ static const NSTimeInterval ANIMATION_COMPLETION_TIMEOUT = 5.0;
 }
 
 - (void)navigateToASceneAndWaitForAnimationsToFinish {
-    [self tapViewWithLabel:@"Title Screen" andWaitForAnimationsToFinishOnViewWithLabel:@"A"];
+    [self tapViewWithLabel:TITLE_SCENE_ACCESSIBILITY_LABEL andWaitForAnimationsToFinishOnViewWithLabel:@"A"];
 }
 
 - (void)navigateToBSceneAndWaitForAnimationsToFinish {

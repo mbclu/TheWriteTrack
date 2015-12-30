@@ -26,7 +26,7 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 
 - (instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        [self setName:@"TitleScene"];
+        [self setName:TITLE_SCENE_NAME];
         [self setScaleMode:SKSceneScaleModeAspectFill];
         [self addBackground];
         [self addTrack];
@@ -38,7 +38,7 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 }
 
 - (void)didMoveToView:(SKView *)view {
-    [AccessibilityHelper setAccessibilityName:@"Title Screen" forView:view];
+    [AccessibilityHelper setAccessibilityName:TITLE_SCENE_ACCESSIBILITY_LABEL forView:view];
     [self runTrainActions];
 }
 
@@ -72,7 +72,7 @@ NSTimeInterval const SceneActionTimeInSeconds = 3;
 
 - (void)addSignalLight {
     StartButton *startButton = [[StartButton alloc] init];
-    startButton.name = @"SignalLight";
+    startButton.name = SIGNAL_LIGHT_NAME;
     startButton.zPosition = SignalLightZOrder;
     startButton.position = CGPointMake(self.size.width * 0.85, self.size.height * 0.45);
     

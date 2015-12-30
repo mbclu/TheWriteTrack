@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <KIF/KIF.h>
 #import <SpriteKit/SpriteKit.h>
+#import "Constants.h"
 
 @interface TitleSceneUITests : KIFTestCase {
     TitleScene *theTitleScene;
@@ -32,7 +33,7 @@
 }
 
 - (void)testWhenTitleSceneTappedThenASceneIsLoaded {
-    [tester tapViewWithAccessibilityLabel:@"Title Screen"];
+    [tester tapViewWithAccessibilityLabel:TITLE_SCENE_ACCESSIBILITY_LABEL];
     [tester waitForViewWithAccessibilityLabel:@"A"];
 }
 
@@ -44,8 +45,8 @@
 // Also NOTE: A smaller custom size for the title scene will cause this to pass (assume rounding issue on the signal light point)
 // End Novel
 - (void)testWhenTheSignalLightAreaIsTappedThenThenTheASceneIsLoaded {
-    [tester waitForViewWithAccessibilityLabel:@"Title Screen"];
-    SKNode *signalLightNode = [theTitleScene childNodeWithName:@"SignalLight"];
+    [tester waitForViewWithAccessibilityLabel:TITLE_SCENE_ACCESSIBILITY_LABEL];
+    SKNode *signalLightNode = [theTitleScene childNodeWithName:SIGNAL_LIGHT_NAME];
     [tester tapScreenAtPoint:signalLightNode.position];
     [tester waitForViewWithAccessibilityLabel:@"A"];
 }

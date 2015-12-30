@@ -8,6 +8,13 @@
 
 #import "Constants.h"
 
+// Accessibility Labels
+NSString *const TITLE_SCENE_ACCESSIBILITY_LABEL = @"Title Screen";
+
+// Naming Constants
+NSString *const TITLE_SCENE_NAME = @"TitleScene";
+NSString *const SIGNAL_LIGHT_NAME = @"SignalLight";
+
 CGFloat const LetterLineWidth = 10;
 NSString *const TrainNodeName = @"TrainNode";
 NSString *const LetterOutlineName = @"LetterOutlineNode";
@@ -16,6 +23,7 @@ NSString *const NEXT_BUTTON_NAME = @"NextButton";
 NSString *const PREVIOUS_BUTTON_NAME = @"PreviousButton";
 NSString *const SKIP_DEMO_BUTTON_NAME = @"SkipButton";
 NSString *const LETTER_SELECT_BUTTON_NAME = @"LetterSelectButton";
+
 NSString *const TrackTextureName = @"TrackTexture";
 NSString *const EnvelopeTextureName = @"Envelope";
 NSString *const LetterSceneTrackContainerNodeName = @"TrackContainerNode";

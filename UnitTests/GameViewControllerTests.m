@@ -10,6 +10,7 @@
 #import <XCTest/XCTest.h>
 #import "GameViewController.h"
 #import "TitleScene.h"
+#import "Constants.h"
 
 @interface GameViewControllerTests : XCTestCase
 
@@ -40,8 +41,8 @@
 }
 
 - (void)testTheGameViewControllerPresentsTheTitleScene {
-    XCTAssertEqualObjects([titleView scene].name, @"TitleScene",
-                          @"Name mismsatch: %@ != %@", [titleView scene].name, @"TitleScene");
+    XCTAssertEqualObjects([titleView scene].name, TITLE_SCENE_NAME,
+                          @"Name mismsatch: %@ != %@", [titleView scene].name, TITLE_SCENE_NAME);
 }
 
 - (void)testTheTitleSceneIsPresentedTheSameSizeAsTheMainScreen {

@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+// Accessibility Labels
+FOUNDATION_EXPORT NSString *const TITLE_SCENE_ACCESSIBILITY_LABEL;
+
+// Naming Constants
+FOUNDATION_EXPORT NSString *const TITLE_SCENE_NAME;
+FOUNDATION_EXPORT NSString *const SIGNAL_LIGHT_NAME;
+
 FOUNDATION_EXPORT CGFloat const LetterLineWidth;
 FOUNDATION_EXPORT NSString *const TrainNodeName;
 FOUNDATION_EXPORT NSString *const LetterOutlineName;
@@ -17,6 +24,7 @@ FOUNDATION_EXPORT NSString *const NEXT_BUTTON_NAME;
 FOUNDATION_EXPORT NSString *const PREVIOUS_BUTTON_NAME;
 FOUNDATION_EXPORT NSString *const SKIP_DEMO_BUTTON_NAME;
 FOUNDATION_EXPORT NSString *const LETTER_SELECT_BUTTON_NAME;
+
 FOUNDATION_EXPORT NSString *const TrackTextureName;
 FOUNDATION_EXPORT NSString *const EnvelopeTextureName;
 FOUNDATION_EXPORT NSString *const LetterSceneTrackContainerNodeName;

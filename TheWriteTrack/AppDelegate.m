@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CocoaLumberjack.h"
+#import "SettingsKeys.h"
 
 @interface AppDelegate ()
 
@@ -38,7 +39,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self EnableLumberjackWithColors];
+    
+    [self initializeUserDefaults];
+    
     return YES;
+}
+
+// http://www.idev101.com/code/Objective-C/Saving_Data/NSUserDefaults.html
+- (void)initializeUserDefaults {
+    if ((NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:DATE_KEY] == nil)
+    {
+        NSDictionary *appDefaults  = [NSDictionary dictionaryWithObjectsAndKeys:[NSDate date], DATE_KEY, nil];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:DEFAULT_VALUE_SHOULD_SKIP_DEMO forKey:USER_SETTINGS_BOOL_KEY_SHOULD_SKIP_DEMO];
+        
+        [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:DATE_KEY];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

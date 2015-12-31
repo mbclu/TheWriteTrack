@@ -11,6 +11,7 @@
 #import "LayoutMath.h"
 #import "Train.h"
 #import "LetterScene.h"
+#import "SettingsKeys.h"
 
 #if (DEBUG)
 NSTimeInterval const defaultTrainMoveIntervalInSeconds = 0.2;
@@ -43,7 +44,10 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
         _pathSegments = [[PathSegments alloc] init];
     }
     _currentWaypointArrayIndex = 0;
-    _isDemoing = YES;
+    _shouldDemo = YES;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:USER_SETTINGS_BOOL_KEY_SHOULD_SKIP_DEMO]) {
+        _shouldDemo = NO;
+    }
     _shouldResetTrain = NO;
     _shouldChangeScenes = NO;
     _sceneTransitionWaitInSeconds = defaultSceneTransitionWaitInSeconds;
@@ -133,7 +137,7 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
     if ([self getWaypointChildren].count > 0) {
         CGPoint position = [(SKSpriteNode *)[[self getWaypointChildren] objectAtIndex:0] position];
         train.position = position;
-        if (_isDemoing) {
+        if (_shouldDemo) {
             [self beginDemonstration];
         }
     }
@@ -268,7 +272,8 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
 }
 
 - (void)beginDemonstrationWithDuration:(NSTimeInterval)seconds andCompletionHandler:(demoCompletion) completionHandler {
-    if (_isDemoing) {
+    if (_shouldDemo) {
+        _isDemoing = YES;
         Train *train = (Train *)[self childNodeWithName:TrainNodeName];
         train.physicsBody.contactTestBitMask = WAYPOINT_CATEGORY;
         [train runAction:[self createDemonstrationActionSequenceWithDuration:defaultTrainMoveIntervalInSeconds] completion:completionHandler];
@@ -280,7 +285,7 @@ NSTimeInterval const defaultSceneTransitionWaitInSeconds = 0.55;
 }
 
 - (void)skipDemo {
-    _isDemoing = NO;
+    _shouldDemo = NO;
 }
 
 @end

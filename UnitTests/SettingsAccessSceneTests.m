@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "SettingsAccessScene.h"
 #import "GenericSpriteButton.h"
 #import "Constants.h"
@@ -44,6 +45,13 @@
     XCTAssertEqual(settingsAccessButton.position.y, 10);
     XCTAssertEqual(settingsAccessButton.position.x,
                    theScene.frame.size.width - settingsAccessButton.frame.size.width - 10);
+}
+
+- (void)testTheSettingsButtonTouchesUpIsHookedToTheSettingsController {
+    id mockButton = OCMClassMock([GenericSpriteButton class]);
+    [theScene setSettingsButtonProperty:mockButton];
+    [theScene connectSceneTransitions];
+    OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(transitionToSettings)]);
 }
 
 @end

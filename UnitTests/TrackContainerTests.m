@@ -12,6 +12,7 @@
 #import "LetterScene.h"
 #import "PathSegmentsIndeces.h"
 #import "Train.h"
+#import "SettingsKeys.h"
 
 #import "CGMatchers.h"
 
@@ -43,6 +44,8 @@
 }
 
 - (void)tearDown {
+    [[NSUserDefaults standardUserDefaults] setBool:DEFAULT_VALUE_SHOULD_SKIP_DEMO
+                                            forKey:USER_SETTINGS_BOOL_KEY_SHOULD_SKIP_DEMO];
     [super tearDown];
 }
 
@@ -252,10 +255,6 @@
     OCMVerify([mockScene transitionToLetterSelectScene]);
 }
 
-- (void)testWhenInitializedThenTrackContainerIsDemonstratingHowToMoveTheTrain {
-    XCTAssertTrue(theTrackContainer.isDemoing);
-}
-
 - (void)testGivenTheDemoIsActiveWhenTheLastWaypointIsRemovedThenTheSceneIsNOTNotifiedOfTheLastWaypointRemoval {
     theTrackContainer.isDemoing = YES;
     id mockTrackContainer = OCMPartialMock(theTrackContainer);
@@ -317,7 +316,7 @@
 //}
 
 - (void)testWhenTheDemoBeginsThenTheTrainsPhysicsBodyDoesContactTestForWaypoints {
-    theTrackContainer.isDemoing = YES;
+    theTrackContainer.shouldDemo = YES;
     [theTrackContainer beginDemonstration];
     
     XCTAssertEqual(theTrain.physicsBody.contactTestBitMask, WAYPOINT_CATEGORY);
@@ -341,9 +340,21 @@
     OCMVerify([mockScene transitionToNextScene]);
 }
 
-- (void)testWhenSkipDemoIsCalledThenIsDemoingIsFalse {
+- (void)testWhenSkipDemoUserSettingIsTrueThenShouldDemoIsFalse {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:USER_SETTINGS_BOOL_KEY_SHOULD_SKIP_DEMO];
+    theTrackContainer = [self createTrackContainerWithTestSegmentDictionary];
+    XCTAssertFalse([theTrackContainer shouldDemo]);
+}
+
+- (void)testWhenSkipDemoUserSettingIsFalseThenShouldDemoIsTrue {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:USER_SETTINGS_BOOL_KEY_SHOULD_SKIP_DEMO];
+    theTrackContainer = [self createTrackContainerWithTestSegmentDictionary];
+    XCTAssertTrue([theTrackContainer shouldDemo]);
+}
+
+- (void)testWhenSkipDemoIsCalledThenShouldDemoIsFalse {
     [theTrackContainer skipDemo];
-    XCTAssertFalse([theTrackContainer isDemoing]);
+    XCTAssertFalse([theTrackContainer shouldDemo]);
 }
 
 @end

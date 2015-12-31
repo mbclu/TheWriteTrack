@@ -7,7 +7,15 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "GenericSpriteButton.h"
 
-@interface SettingsAccessScene : SKScene
+@interface SettingsAccessScene : SKScene {
+    GenericSpriteButton *settingsButton;
+}
+
+@property GenericSpriteButton *settingsButtonProperty;
+
+- (void) connectSceneTransitions;
+- (void) transitionToSettings;
 
 @end

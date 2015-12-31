@@ -86,6 +86,8 @@
 		C7F8DE431C356DC2009DAD75 /* SettingsAccessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */; };
 		C7F8DE441C356DC2009DAD75 /* SettingsAccessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */; };
 		C7F8DE461C356DDC009DAD75 /* SettingsAccessButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE451C356DDC009DAD75 /* SettingsAccessButtonTests.m */; };
+		C7F8DE491C35936A009DAD75 /* SettingsKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE481C35936A009DAD75 /* SettingsKeys.m */; };
+		C7F8DE4A1C35936A009DAD75 /* SettingsKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE481C35936A009DAD75 /* SettingsKeys.m */; };
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		afa0cc75e92a6af74094b721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
 		d1716fe68d0d36ba4dde1d29 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06e84e33b57bee0211ce863b /* calabash.framework */; };
@@ -212,6 +214,8 @@
 		C7F8DE411C356DC2009DAD75 /* SettingsAccessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsAccessButton.h; path = TheWriteTrack/SettingsAccessButton.h; sourceTree = SOURCE_ROOT; };
 		C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsAccessButton.m; path = TheWriteTrack/SettingsAccessButton.m; sourceTree = SOURCE_ROOT; };
 		C7F8DE451C356DDC009DAD75 /* SettingsAccessButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsAccessButtonTests.m; path = UnitTests/SettingsAccessButtonTests.m; sourceTree = SOURCE_ROOT; };
+		C7F8DE471C3592F6009DAD75 /* SettingsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsKeys.h; path = TheWriteTrack/SettingsKeys.h; sourceTree = SOURCE_ROOT; };
+		C7F8DE481C35936A009DAD75 /* SettingsKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsKeys.m; path = TheWriteTrack/SettingsKeys.m; sourceTree = SOURCE_ROOT; };
 		C7FDAE101BAADF8900259ED2 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colors.h; path = TheWriteTrack/Colors.h; sourceTree = SOURCE_ROOT; };
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -307,8 +311,10 @@
 			isa = PBXGroup;
 			children = (
 				C7FDAE101BAADF8900259ED2 /* Colors.h */,
-				C73018281B148FD400266CB9 /* Constants.h */,
+				C7F8DE481C35936A009DAD75 /* SettingsKeys.m */,
+				C7F8DE471C3592F6009DAD75 /* SettingsKeys.h */,
 				C73018291B148FD400266CB9 /* Constants.m */,
+				C73018281B148FD400266CB9 /* Constants.h */,
 				C710AB611A9ECA43002E7B79 /* LetterConverter.h */,
 				C710AB621A9ECA43002E7B79 /* LetterConverter.m */,
 				C73700141AB7D4E40035C4A3 /* LayoutMath.h */,
@@ -886,6 +892,7 @@
 				5243005a2024919ad66514a4 /* Constants.m in Sources */,
 				dd0ad2563ba06d2cfb10beed /* AppDelegate.m in Sources */,
 				dae5b958d65efd95ab10c391 /* LayoutMath.m in Sources */,
+				C7F8DE4A1C35936A009DAD75 /* SettingsKeys.m in Sources */,
 				C7F8DE3E1C3565BE009DAD75 /* SettingsAccessScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -925,6 +932,7 @@
 				C730182A1B148FD400266CB9 /* Constants.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
+				C7F8DE491C35936A009DAD75 /* SettingsKeys.m in Sources */,
 				C7F8DE3D1C3565BE009DAD75 /* SettingsAccessScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

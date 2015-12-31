@@ -28,6 +28,7 @@ typedef void(^demoCompletion)(void);
 @property NSString *letterKey;
 @property NSUInteger currentWaypointArrayIndex;
 @property BOOL isDemoing;
+@property BOOL shouldDemo;
 @property BOOL shouldResetTrain;
 @property BOOL shouldChangeScenes;
 @property NSTimeInterval sceneTransitionWaitInSeconds;

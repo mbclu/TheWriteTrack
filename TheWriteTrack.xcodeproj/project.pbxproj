@@ -80,6 +80,12 @@
 		C7D081871A8A312700DE5ECC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D0817E1A8A312700DE5ECC /* Images.xcassets */; };
 		C7D081881A8A312700DE5ECC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7D0817F1A8A312700DE5ECC /* main.m */; };
 		C7D081CC1A8A35E200DE5ECC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */; };
+		C7F8DE3D1C3565BE009DAD75 /* SettingsAccessScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE3C1C3565BE009DAD75 /* SettingsAccessScene.m */; };
+		C7F8DE3E1C3565BE009DAD75 /* SettingsAccessScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE3C1C3565BE009DAD75 /* SettingsAccessScene.m */; };
+		C7F8DE401C3566B1009DAD75 /* SettingsAccessSceneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE3F1C3566B1009DAD75 /* SettingsAccessSceneTests.m */; };
+		C7F8DE431C356DC2009DAD75 /* SettingsAccessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */; };
+		C7F8DE441C356DC2009DAD75 /* SettingsAccessButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */; };
+		C7F8DE461C356DDC009DAD75 /* SettingsAccessButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F8DE451C356DDC009DAD75 /* SettingsAccessButtonTests.m */; };
 		C7FDF20B1ACB5ABB0094BBE9 /* PathInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */; };
 		afa0cc75e92a6af74094b721 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C78C6F8F1AA3A8BC0077DE74 /* Main.storyboard */; };
 		d1716fe68d0d36ba4dde1d29 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06e84e33b57bee0211ce863b /* calabash.framework */; };
@@ -200,6 +206,12 @@
 		C7D081CA1A8A35E200DE5ECC /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = TheWriteTrack/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		C7D29A1D1AA3BC7500A45D83 /* libPods-OCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMock.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMock.a"; sourceTree = "<group>"; };
 		C7E2DFC11BDDA76300596F3A /* TheWriteTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheWriteTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7F8DE3B1C3565BE009DAD75 /* SettingsAccessScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsAccessScene.h; path = TheWriteTrack/SettingsAccessScene.h; sourceTree = SOURCE_ROOT; };
+		C7F8DE3C1C3565BE009DAD75 /* SettingsAccessScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsAccessScene.m; path = TheWriteTrack/SettingsAccessScene.m; sourceTree = SOURCE_ROOT; };
+		C7F8DE3F1C3566B1009DAD75 /* SettingsAccessSceneTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsAccessSceneTests.m; path = UnitTests/SettingsAccessSceneTests.m; sourceTree = SOURCE_ROOT; };
+		C7F8DE411C356DC2009DAD75 /* SettingsAccessButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsAccessButton.h; path = TheWriteTrack/SettingsAccessButton.h; sourceTree = SOURCE_ROOT; };
+		C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsAccessButton.m; path = TheWriteTrack/SettingsAccessButton.m; sourceTree = SOURCE_ROOT; };
+		C7F8DE451C356DDC009DAD75 /* SettingsAccessButtonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsAccessButtonTests.m; path = UnitTests/SettingsAccessButtonTests.m; sourceTree = SOURCE_ROOT; };
 		C7FDAE101BAADF8900259ED2 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colors.h; path = TheWriteTrack/Colors.h; sourceTree = SOURCE_ROOT; };
 		C7FDF20A1ACB5ABB0094BBE9 /* PathInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PathInfo.m; path = TheWriteTrack/PathInfo.m; sourceTree = SOURCE_ROOT; };
 		CAE4FA6F5F79F8B264B4D5DC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -328,6 +340,9 @@
 		C7554D8F1B364B1D00E13027 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				C7F8DE3B1C3565BE009DAD75 /* SettingsAccessScene.h */,
+				C7F8DE3C1C3565BE009DAD75 /* SettingsAccessScene.m */,
+				C7F8DE3F1C3566B1009DAD75 /* SettingsAccessSceneTests.m */,
 				C77347351AE72936005C2950 /* Smoke.sks */,
 				C79E71C11B2AFF6A00F46EC8 /* TitleScene.h */,
 				C79E71C21B2AFF6A00F46EC8 /* TitleScene.m */,
@@ -350,6 +365,9 @@
 				C7554D991B373B1000E13027 /* LetterSelectButton.m */,
 				C7A627AB1B3C1ABB00E966EF /* ChosenLetterButton.h */,
 				C7A627AC1B3C1ABB00E966EF /* ChosenLetterButton.m */,
+				C7F8DE411C356DC2009DAD75 /* SettingsAccessButton.h */,
+				C7F8DE421C356DC2009DAD75 /* SettingsAccessButton.m */,
+				C7F8DE451C356DDC009DAD75 /* SettingsAccessButtonTests.m */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -863,10 +881,12 @@
 				086ae2a657151f13f7edf819 /* PathSegments.m in Sources */,
 				f07cde99be2adac0af8d1fca /* LetterSelectButton.m in Sources */,
 				1048fbffdb2bfe1eee9fe382 /* main.m in Sources */,
+				C7F8DE441C356DC2009DAD75 /* SettingsAccessButton.m in Sources */,
 				5db1633444ba82c3fde98e78 /* LetterScene.m in Sources */,
 				5243005a2024919ad66514a4 /* Constants.m in Sources */,
 				dd0ad2563ba06d2cfb10beed /* AppDelegate.m in Sources */,
 				dae5b958d65efd95ab10c391 /* LayoutMath.m in Sources */,
+				C7F8DE3E1C3565BE009DAD75 /* SettingsAccessScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,10 +920,12 @@
 				C73018261B148E5600266CB9 /* PathSegments.m in Sources */,
 				C7554D9A1B373B1000E13027 /* LetterSelectButton.m in Sources */,
 				C7D081881A8A312700DE5ECC /* main.m in Sources */,
+				C7F8DE431C356DC2009DAD75 /* SettingsAccessButton.m in Sources */,
 				C7C4B8AA1A8C2C4F009FA11B /* LetterScene.m in Sources */,
 				C730182A1B148FD400266CB9 /* Constants.m in Sources */,
 				C7D081821A8A312700DE5ECC /* AppDelegate.m in Sources */,
 				C73700161AB7D4E40035C4A3 /* LayoutMath.m in Sources */,
+				C7F8DE3D1C3565BE009DAD75 /* SettingsAccessScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,6 +940,8 @@
 				C731D6661B549B7C00A8BBFF /* LayoutMathTestsSetup.m in Sources */,
 				C731D6611B549B7500A8BBFF /* TrainTests.m in Sources */,
 				C731D6691B549B7C00A8BBFF /* LetterSelectButtonTests.m in Sources */,
+				C7F8DE401C3566B1009DAD75 /* SettingsAccessSceneTests.m in Sources */,
+				C7F8DE461C356DDC009DAD75 /* SettingsAccessButtonTests.m in Sources */,
 				C731D66C1B549B7C00A8BBFF /* PathSegmentDictionaryTest.m in Sources */,
 				C731D66E1B549B7C00A8BBFF /* StartButtonTests.m in Sources */,
 				C731D6601B549B6500A8BBFF /* FakeTargetScene.m in Sources */,

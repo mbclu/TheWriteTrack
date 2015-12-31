@@ -12,6 +12,7 @@
 #import <XCTest/XCTest.h>
 
 #import "CGMatchers.h"
+#import "Constants.h"
 
 @interface LetterSelectSceneTest : XCTestCase {
     LetterSelectScene *theLetterSelectScene;
@@ -40,6 +41,17 @@
 
 - (void)testBlendModeIsAlpha {
     XCTAssertEqual(theLetterSelectScene.blendMode, SKBlendModeAlpha);
+}
+
+- (void)testIsASettingsAccessScreenWithSettingsAccessButtonOnTop {
+    XCTAssertTrue([theLetterSelectScene isKindOfClass:[SettingsAccessScene class]]);
+    
+    SKNode *settingsButton = [theLetterSelectScene childNodeWithName:SettingsAccessNode];
+    XCTAssertNotNil(settingsButton);
+    
+    for (SKNode *node in [theLetterSelectScene children]) {
+        XCTAssertLessThanOrEqual(node.zPosition, settingsButton.zPosition);
+    }
 }
 
 @end

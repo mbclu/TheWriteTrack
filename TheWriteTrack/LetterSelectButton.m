@@ -82,8 +82,4 @@ static const double LINE_WIDTH_FOR_LETTER = 0.5;
     return node;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-}
-
 @end

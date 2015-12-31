@@ -35,6 +35,9 @@ FOUNDATION_EXPORT CGFloat const TransitionLengthInSeconds;
 FOUNDATION_EXPORT NSUInteger const SingleLetterLength;
 FOUNDATION_EXPORT CFStringRef const DefaultLetterFont;
 
+/* Images */
+FOUNDATION_EXPORT NSString *const SettingsButtonImageName;
+
 /* Buttons */
 /* Letter Select Button */
 FOUNDATION_EXPORT NSString *const ANodeName;
@@ -43,6 +46,10 @@ FOUNDATION_EXPORT NSString *const CNodeName;
 
 /* Chosen Letter Button */
 FOUNDATION_EXPORT NSString *const ChosenLetterNode;
+
+/* Settings Access Button */
+FOUNDATION_EXPORT NSString *const SettingsAccessNode;
+FOUNDATION_EXPORT NSString *const SettingsAccessLabel;
 
 /* Scenes */
 /* Letter Select Scene */

@@ -173,7 +173,8 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
 
 - (void)testWhenFirstEnteringASceneThenTrackContainerIsAskedToPerformADemonstration {
     id mockContainer = OCMPartialMock(theContainerNode);
-    [theScene didMoveToView:nil];
+    SKView *dummyView;
+    [theScene didMoveToView:dummyView];
     OCMVerify([mockContainer beginDemonstration]);
 }
 
@@ -203,6 +204,17 @@ NSString *const LetterSelectNodeName = @"LetterSelectButton";
     [theScene setSkipDemoButtonProperty:mockButton];
     [theScene connectSkipDemoAction];
     OCMVerify([mockButton setTouchUpInsideTarget:theScene action:@selector(skipDemo)]);
+}
+
+- (void)testIsASettingsAccessScreenWithSettingsAccessButtonOnTop {
+    XCTAssertTrue([theScene isKindOfClass:[SettingsAccessScene class]]);
+    
+    SKNode *settingsButton = [theScene childNodeWithName:SettingsAccessNode];
+    XCTAssertNotNil(settingsButton);
+    
+    for (SKNode *node in [theScene children]) {
+        XCTAssertLessThanOrEqual(node.zPosition, settingsButton.zPosition);
+    }
 }
 
 @end

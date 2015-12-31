@@ -7,9 +7,10 @@
 //
 
 #import "GenericSpriteButton.h"
+#import "SettingsAccessScene.h"
 #import <SpriteKit/SpriteKit.h>
 
-@interface LetterSelectScene : SKScene {
+@interface LetterSelectScene : SettingsAccessScene {
     GenericSpriteButton *chosenLetterButton;
 }
 

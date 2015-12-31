@@ -6,8 +6,9 @@
 //  Copyright (c) 2015 Mitch Clutter. All rights reserved.
 //
 
-#import "AttributedStringPath.h"
 #import <SpriteKit/SpriteKit.h>
+#import "AttributedStringPath.h"
+#import "SettingsAccessScene.h"
 
 typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
     BackgroundZOrder,
@@ -16,7 +17,7 @@ typedef NS_ENUM(NSInteger, ETitleSceneZOrder) {
     TrainZOrder
 };
 
-@interface TitleScene : SKScene
+@interface TitleScene : SettingsAccessScene
 
 @property SKAction *moveLeftToRightAction;
 @property SKAction *scaleUpAction;

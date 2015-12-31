@@ -11,6 +11,7 @@
 #import "AttributedStringPath.h"
 #import "StartButton.h"
 #import "TitleTrain.h"
+#import "Constants.h"
 
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
@@ -77,13 +78,13 @@
     XCTAssertEqualPoints(trainNode.position, CGPointMake(-trainNode.size.width * 0.5, trackNode.frame.size.height));
 }
 
-- (void)testAnActionCanMoveTheTrainWithDurationFourSeconds {
+- (void)testAnActionCanMoveTheTrainForAGivenDuration {
     XCTAssertNotNil(theTitleScene.moveLeftToRightAction);
     XCTAssertNotEqual([theTitleScene.moveLeftToRightAction.description rangeOfString:@"SKMove"].location, NSNotFound);
     XCTAssertEqual(theTitleScene.moveLeftToRightAction.duration, 3);
 }
 
-- (void)testAnActionCanCauseAnObjectToGrowLargerOverFourSeconds {
+- (void)testAnActionCanCauseAnObjectToGrowLargerOverAGivenDuration {
     XCTAssertNotNil(theTitleScene.scaleUpAction);
     XCTAssertNotEqual([theTitleScene.scaleUpAction.description rangeOfString:@"SKScale"].location, NSNotFound);
     XCTAssertEqual(theTitleScene.scaleUpAction.duration, 3);
@@ -120,8 +121,20 @@
 
 - (void)testPressingAnywhereOnTheSreenHooksToATransitionToTheAScene {
     id mockTitleScene = OCMPartialMock(theTitleScene);
-    [theTitleScene touchesEnded:nil withEvent:nil];
+    NSSet *emptySet;
+    [theTitleScene touchesEnded:emptySet withEvent:nil];
     OCMVerify([mockTitleScene transitionToAScene]);
+}
+
+- (void)testIsASettingsAccessScreenWithSettingsAccessButtonOnTop {
+    XCTAssertTrue([theTitleScene isKindOfClass:[SettingsAccessScene class]]);
+    
+    SKNode *settingsButton = [theTitleScene childNodeWithName:SettingsAccessNode];
+    XCTAssertNotNil(settingsButton);
+
+    for (SKNode *node in [theTitleScene children]) {
+        XCTAssertLessThanOrEqual(node.zPosition, settingsButton.zPosition);
+    }
 }
 
 @end

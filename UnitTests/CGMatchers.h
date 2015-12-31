@@ -29,4 +29,16 @@
     XCTAssertEqual(rect1.size.width, rect2.size.width);     \
 }
 
+#define XCTAssertEqualRGBColors(color1, color2)                                     \
+{                                                                                   \
+    CGFloat red1, green1, blue1, alpha1;                                            \
+    CGFloat red2, green2, blue2, alpha2;                                            \
+    XCTAssertTrue([color1 getRed:&red1 green:&green1 blue:&blue1 alpha:&alpha1]);   \
+    XCTAssertTrue([color2 getRed:&red2 green:&green2 blue:&blue2 alpha:&alpha2]);   \
+    XCTAssertEqualWithAccuracy(red1, red2, FLT_EPSILON);                            \
+    XCTAssertEqualWithAccuracy(green1, green2, FLT_EPSILON);                        \
+    XCTAssertEqualWithAccuracy(blue1, blue2, FLT_EPSILON);                          \
+    XCTAssertEqualWithAccuracy(alpha1, alpha2, FLT_EPSILON);                        \
+}
+
 #endif

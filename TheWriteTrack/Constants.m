@@ -34,6 +34,9 @@ CGFloat const TransitionLengthInSeconds = 0.6;
 NSUInteger const SingleLetterLength = 1;
 CFStringRef const DefaultLetterFont = (CFStringRef)@"Thonburi";
 
+/* Images */
+NSString *const SettingsButtonImageName = @"SettingsButton";
+
 /* Buttons */
 /* Letter Select Button */
 NSString *const ANodeName = @"ANode";
@@ -42,6 +45,10 @@ NSString *const CNodeName = @"CNode";
 
 /* Chosen Letter Button */
 NSString *const ChosenLetterNode = @"LetterNode";
+
+/* Settings Access Button */
+NSString *const SettingsAccessNode = @"SettingsAccessNode";
+NSString *const SettingsAccessLabel = @"Settings Access Button";
 
 /* Scenes */
 /* Letter Select Scene */

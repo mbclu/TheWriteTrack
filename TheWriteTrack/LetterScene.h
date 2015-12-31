@@ -11,6 +11,7 @@
 #import "PathSegments.h"
 #import "LetterSelectButton.h"
 #import "TrackContainer.h"
+#import "SettingsAccessScene.h"
 #import <SpriteKit/SpriteKit.h>
 
 typedef NS_ENUM(NSUInteger, ELetterSceneZOrder) {
@@ -19,7 +20,7 @@ typedef NS_ENUM(NSUInteger, ELetterSceneZOrder) {
     LetterSceneButtonZPosition
 };
 
-@interface LetterScene : SKScene {
+@interface LetterScene : SettingsAccessScene {
     GenericSpriteButton *nextButton;
     GenericSpriteButton *previousButton;
     GenericSpriteButton *letterSelectButton;
